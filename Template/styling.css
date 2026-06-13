@@ -343,24 +343,24 @@
   -------------------------------------------- */
   /* Text Colors */
   --text-light:                        oklch(10% 0.02 260);
-  --light-devoiced-color:             oklch(55.98% 0.1882 266.4);
-  --light-highlight:                   oklch(60% 0.175 260);
-  --freq-text-light:                  oklch(52.08% 0.0 89.88 / 0.3);
+  --light-devoiced-color:             oklch(36% 0.1882 266.4);
+  --light-highlight:                   oklch(45.6% 0.175 260);
+  --freq-text-light:                  oklch(20% 0.0 89.88 / 0.78);
   --freq-text-hover-light:            oklch(10% 0.02 260);
-  --tag-color-light:                  oklch(52.08% 0.0 89.88 / 0.26);
+  --tag-color-light:                  oklch(20% 0.0 89.88 / 0.78);
   --tag-color-hover-light:            oklch(96% 0.018 92);
-  --misc-info-text-light:             oklch(52.08% 0.0 89.88 / 0.26);
+  --misc-info-text-light:             oklch(20% 0.0 89.88 / 0.78);
   --misc-info-text-hover-light:       oklch(96% 0.018 92);
 
   /* Pitch Colors */
-  --pitch-red-light:                   oklch(56.96% 0.2068 22.57);
-  --pitch-blue-light:                  oklch(59.92% 0.2174 262.93);
-  --pitch-orange-light:                oklch(70.63% 0.1979 45.96);
-  --pitch-green-light:                 oklch(67.26% 0.1333 162.98);
-  --pitch-purple-light:                oklch(59.09% 0.1875 296.01);
+  --pitch-red-light:                   oklch(55.5% 0.2068 22.57);
+  --pitch-blue-light:                  oklch(47.6% 0.2174 262.93);
+  --pitch-orange-light:                oklch(51.9% 0.1979 45.96);
+  --pitch-green-light:                 oklch(41.1% 0.1333 162.98);
+  --pitch-purple-light:                oklch(46.1% 0.1875 296.01);
 
   /* Icon Colors */
-  --svg-color-light:                  oklch(52.08% 0.0 89.88 / 0.3);
+  --svg-color-light:                  oklch(20% 0.0 89.88 / 0.78);
   --svg-hover-light:                  oklch(96% 0.018 92);
 
   /* Background Colors */
@@ -387,25 +387,25 @@
   /* Dark Theme
   -------------------------------------------- */
   /* Text Colors */
-  --text:                              oklch(96% 0.018 92);
-  --dark-devoiced-color:              oklch(67.46% 0.1414 261.34);
-  --dark-highlight:                    oklch(60% 0.175 260);
-  --freq-text:                        oklch(96% 0.018 92 / 0.2);
+  --text:                              oklch(96.3% 0.018 92);
+  --dark-devoiced-color:              oklch(99.6% 0.1414 261.34);
+  --dark-highlight:                    oklch(73% 0.175 260);
+  --freq-text:                        oklch(96.3% 0.018 92);
   --freq-text-hover:                  oklch(96% 0.018 92);
-  --tag-color:                        oklch(96% 0.018 92 / 0.21);
+  --tag-color:                        oklch(96.3% 0.018 92);
   --tag-color-hover:                  oklch(96% 0.018 92);
-  --misc-info-text:                   oklch(96% 0.018 92 / 0.21);
+  --misc-info-text:                   oklch(96.3% 0.018 92);
   --misc-info-text-hover:             oklch(96% 0.018 92);
 
   /* Pitch Colors */
-  --pitch-red:                         oklch(65.32% 0.2135 11.9);
+  --pitch-red:                         oklch(82.7% 0.2135 11.9);
   --pitch-blue:                        oklch(76.61% 0.1429 233.43);
   --pitch-orange:                      oklch(78.59% 0.1674 70.04);
   --pitch-green:                       oklch(78.11% 0.1407 167.78);
   --pitch-purple:                      oklch(75.96% 0.1318 289.28);
 
   /* Icon Colors */
-  --svg-color:                        oklch(96% 0.018 92 / 0.2);
+  --svg-color:                        oklch(96% 0.018 92 / 0.7);
   --svg-hover:                        oklch(96% 0.018 92);
 
   /* Background Colors */
