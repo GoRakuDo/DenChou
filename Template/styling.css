@@ -5906,10 +5906,6 @@ li.is-new-card:not(:hover) .related-word {
     --button-shadow-dark: none;
     --lightbox-shadow: none;
   }
-
-  img {
-    filter: none !important;
-  }
 }
 
 /* Dict Colors */

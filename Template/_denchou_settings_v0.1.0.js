@@ -2088,21 +2088,21 @@
   }
 
   function applyAutoOptimize() {
-    const autoOpt = localStorage.getItem("denchou_--ankidroid-auto-optimize");
-    if (autoOpt === "false") {
-      document.documentElement.style.setProperty("--ankidroid-lite", "false");
-      return;
-    }
-
-    const isSmallScreen = window.innerWidth <= 600;
-    document.documentElement.style.setProperty("--ankidroid-lite", isSmallScreen ? "true" : "false");
+    try {
+      const autoOpt = localStorage.getItem("denchou_--ankidroid-auto-optimize");
+      if (autoOpt === "false") {
+        document.documentElement.style.setProperty("--ankidroid-lite", "false");
+        return;
+      }
+      const isSmallScreen = window.innerWidth <= 600;
+      document.documentElement.style.setProperty("--ankidroid-lite", isSmallScreen ? "true" : "false");
+    } catch (e) {}
   }
 
+  let resizeTimer;
   window.addEventListener("resize", () => {
-    const autoOpt = localStorage.getItem("denchou_--ankidroid-auto-optimize");
-    if (autoOpt === "false") return;
-    const isSmallScreen = window.innerWidth <= 600;
-    document.documentElement.style.setProperty("--ankidroid-lite", isSmallScreen ? "true" : "false");
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyAutoOptimize, 150);
   });
 
   init();

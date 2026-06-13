@@ -210,6 +210,7 @@
   },
   "AnkiDroid Lite": {
     "--ankidroid-lite": "true",
+    "--ankidroid-auto-optimize": "false",
     "--enable-animations": "true"
   },
   "_active": "Default"

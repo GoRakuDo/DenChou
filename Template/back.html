@@ -2298,6 +2298,14 @@
     window.IS_MOBILE = document.documentElement.classList.contains('mobile') ||
       document.body.classList.contains('mobile');
 
+    // Auto-optimize: apply lite mode immediately on small screens
+    // (settings JS is lazy-loaded, so applyAutoOptimize() runs too late)
+    try {
+      if (localStorage.getItem("denchou_--ankidroid-auto-optimize") !== "false" && window.innerWidth <= 600) {
+        document.documentElement.style.setProperty("--ankidroid-lite", "true");
+      }
+    } catch (e) {}
+
     const delayedFunctions = window.requestIdleCallback ||
       function (cb) { return setTimeout(cb, 200); };
 
