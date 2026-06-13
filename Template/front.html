@@ -865,7 +865,9 @@
       };
       document.body.appendChild(script);
     }
-    window.denchouInitMenu = denchouInitMenu;
+    if (!window.denchouInitMenu) {
+      window.denchouInitMenu = denchouInitMenu;
+    }
 
     function init() {
       darkMode();
