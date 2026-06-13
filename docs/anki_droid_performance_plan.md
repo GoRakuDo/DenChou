@@ -252,6 +252,13 @@ Keep:
 
 Note: OKLCH support depends on the Android System WebView version. Keep OKLCH as the DenChou standard, but test the Lite preset on the target AnkiDroid/WebView version before release.
 
+**Implementation:**
+
+- `--ankidroid-lite: false` CSS variable controls the mode.
+- `--ankidroid-auto-optimize: true` automatically applies lite mode when `window.innerWidth ≤ 600px`.
+- Preferences toggle: Card Behavior → General Settings → Auto Optimize.
+- Resize listener updates dynamically.
+
 **Expected result:**
 
 Users can choose speed without losing the DenChou feel.
@@ -280,13 +287,13 @@ Cleaner normal review path and less CSS parsing.
 
 ## Suggested Implementation Order
 
-1. Lazy-load Preferences JS/CSS from the gear button.
-2. Remove Font Awesome CDN and replace icons with inline Lucide SVG.
-3. Add an optional mobile-light font profile, following the CDN fallback caveat in Plan #3.
-4. Lazy-initialize Lightbox after image tap.
-5. Replace `Date.now()` preset cache busting with a version key.
-6. Gate desktop-style Jitendex hover on mobile.
-7. Add an AnkiDroid Lite visual preset.
+1. ~~Lazy-load Preferences JS/CSS from the gear button.~~ ✅ `e7b6a64`
+2. ~~Remove Font Awesome CDN and replace icons with inline Lucide SVG.~~ ✅ `0340935`
+3. ~~Add an optional mobile-light font profile, following the CDN fallback caveat in Plan #3.~~ ✅ `2940208`
+4. ~~Lazy-initialize Lightbox after image tap.~~ ✅ `30cb6ca`
+5. ~~Replace `Date.now()` preset cache busting with a version key.~~ ✅ `568f046`
+6. ~~Gate desktop-style Jitendex hover on mobile.~~ ✅ `737e721`
+7. ~~Add an AnkiDroid Lite visual preset + Auto Optimize toggle.~~ ✅ `18c24ac`
 8. Re-check CSS size and remove dead or duplicate rules, including old Font Awesome selectors such as `.fas` and `.fa-*`.
 
 ## Verification Checklist
@@ -306,6 +313,8 @@ After each step, test on both Anki Desktop and AnkiDroid.
 - Offline mode still falls back to local/system fonts.
 - Kanji hover tooltip still works on desktop.
 - Settings panel still opens and renders correctly on AnkiDroid Lite.
+- Auto Optimize toggle works (ON: lite mode on small screens, OFF: no auto).
+- Lite mode reduces shadows and blur correctly on AnkiDroid.
 
 ## Non-goals
 
