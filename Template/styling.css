@@ -125,8 +125,8 @@
   /* Dictionary Title Styles */
   --dict-size:                        0.5rem;
   --dict-display:                     inline-block;
-  --light-dict-color:                 rgba(0, 0, 0, 0.4);
-  --dict-color-dark:                  rgba(255, 255, 255, 0.4);
+  --light-dict-color:                 oklch(10% 0.02 260 / 0.4);
+  --dict-color-dark:                  oklch(96% 0.018 92 / 0.4);
 
   /* Dictionary Counter */
   --dictionary-counter-visibility:    1;       /* "1" to always, "0" to show after toggle */
@@ -280,92 +280,92 @@
   /* Light Theme
   -------------------------------------------- */
   /* Text Colors */
-  --text-light:                       #020202;
-  --light-devoiced-color:             RoyalBlue;
-  --light-highlight:                  #E20033;
-  --freq-text-light:                  rgba(105, 105, 105, 0.3);
-  --freq-text-hover-light:            rgba(0, 0, 0, 1);
-  --tag-color-light:                  rgba(105, 105, 105, 0.26);
-  --tag-color-hover-light:            rgba(255, 255, 255, 1);
-  --misc-info-text-light:             rgba(105, 105, 105, 0.26);
-  --misc-info-text-hover-light:       rgba(255, 255, 255, 1);
+  --text-light:                        oklch(10% 0.02 260);
+  --light-devoiced-color:             oklch(55.98% 0.1882 266.4);
+  --light-highlight:                   oklch(57.64% 0.2322 22.0);
+  --freq-text-light:                  oklch(52.08% 0.0 89.88 / 0.3);
+  --freq-text-hover-light:            oklch(10% 0.02 260);
+  --tag-color-light:                  oklch(52.08% 0.0 89.88 / 0.26);
+  --tag-color-hover-light:            oklch(96% 0.018 92);
+  --misc-info-text-light:             oklch(52.08% 0.0 89.88 / 0.26);
+  --misc-info-text-hover-light:       oklch(96% 0.018 92);
 
   /* Pitch Colors */
-  --pitch-red-light:                  #D62839;
-  --pitch-blue-light:                 #3474FF;
-  --pitch-orange-light:               #FF6E03;
-  --pitch-green-light:                #2BAF7E;
-  --pitch-purple-light:               #8A5EDE;
+  --pitch-red-light:                   oklch(56.96% 0.2068 22.57);
+  --pitch-blue-light:                  oklch(59.92% 0.2174 262.93);
+  --pitch-orange-light:                oklch(70.63% 0.1979 45.96);
+  --pitch-green-light:                 oklch(67.26% 0.1333 162.98);
+  --pitch-purple-light:                oklch(59.09% 0.1875 296.01);
 
   /* Icon Colors */
-  --svg-color-light:                  rgba(105, 105, 105, 0.3);
-  --svg-hover-light:                  rgba(255, 255, 255, 1);
+  --svg-color-light:                  oklch(52.08% 0.0 89.88 / 0.3);
+  --svg-hover-light:                  oklch(96% 0.018 92);
 
   /* Background Colors */
-  --background-light:                 #f5f5f5;
-  --card-bg-light:                    rgba(255, 255, 255, 0.4);
-  --card-shadow-light:                rgba(0, 0, 0, 0.05);
-  --word-bg-light:                    rgba(0, 0, 0, 0.03);
-  --pitch-position-bg-light:          rgba(255, 255, 255, 0.8);
-  --picture-bg-light:                 rgba(0, 0, 0, 0.03);
-  --notes-bg-light:                   rgba(0, 0, 0, 0.03);
-  --definition-bg-light:              rgba(0, 0, 0, 0.03);
-  --dictionary-collapse-fade-light:   linear-gradient(to bottom, rgba(245,245,245,0), rgba(245,245,245,0.9));
-  --buttons-bg-light:                 rgba(0, 0, 0, 0.03);
-  --buttons-bg-hover-light:           rgba(0, 0, 0, 0.63);
-  --lightbox-bg-light:                rgba(0, 0, 0, 0.8);
-  --frequency-bg-light:               rgba(255, 255, 255, 0.8);
-  --tag-bg-light:                     rgba(0, 0, 0, 0.03);
-  --tag-bg-hover-light:               rgba(0, 0, 0, 0.63);
-  --external-links-bg-light:          rgba(0, 0, 0, 0.1);
-  --external-links-bg-hover-light:    rgba(255, 255, 255, 0.4);
-  --misc-info-bg-light:               rgba(0, 0, 0, 0.03);
-  --misc-info-bg-hover-light:         rgba(0, 0, 0, 0.63);
+  --background-light:                  oklch(96% 0.018 92);
+  --card-bg-light:                    oklch(96% 0.018 92 / 0.4);
+  --card-shadow-light:                oklch(10% 0.02 260 / 0.05);
+  --word-bg-light:                    oklch(10% 0.02 260 / 0.03);
+  --pitch-position-bg-light:          oklch(96% 0.018 92 / 0.8);
+  --picture-bg-light:                 oklch(10% 0.02 260 / 0.03);
+  --notes-bg-light:                   oklch(10% 0.02 260 / 0.03);
+  --definition-bg-light:              oklch(10% 0.02 260 / 0.03);
+  --dictionary-collapse-fade-light:   linear-gradient(to bottom, oklch(96% 0.018 92 / 0.0), oklch(96% 0.018 92 / 0.9));
+  --buttons-bg-light:                 oklch(10% 0.02 260 / 0.03);
+  --buttons-bg-hover-light:           oklch(10% 0.02 260 / 0.63);
+  --lightbox-bg-light:                oklch(10% 0.02 260 / 0.8);
+  --frequency-bg-light:               oklch(96% 0.018 92 / 0.8);
+  --tag-bg-light:                     oklch(10% 0.02 260 / 0.03);
+  --tag-bg-hover-light:               oklch(10% 0.02 260 / 0.63);
+  --external-links-bg-light:          oklch(10% 0.02 260 / 0.1);
+  --external-links-bg-hover-light:    oklch(96% 0.018 92 / 0.4);
+  --misc-info-bg-light:               oklch(10% 0.02 260 / 0.03);
+  --misc-info-bg-hover-light:         oklch(10% 0.02 260 / 0.63);
 
   /* Dark Theme
   -------------------------------------------- */
   /* Text Colors */
-  --text:                             #fcfcfc;
-  --dark-devoiced-color:              cornflowerBlue;
-  --dark-highlight:                   #FCFF61;
-  --freq-text:                        rgba(255, 255, 255, 0.2);
-  --freq-text-hover:                  rgba(255, 255, 255, 1);
-  --tag-color:                        rgba(255, 255, 255, 0.21);
-  --tag-color-hover:                  rgba(255, 255, 255, 1);
-  --misc-info-text:                   rgba(255, 255, 255, 0.21);
-  --misc-info-text-hover:             rgba(255, 255, 255, 1);
+  --text:                              oklch(96% 0.018 92);
+  --dark-devoiced-color:              oklch(67.46% 0.1414 261.34);
+  --dark-highlight:                    oklch(96.95% 0.1756 110.31);
+  --freq-text:                        oklch(96% 0.018 92 / 0.2);
+  --freq-text-hover:                  oklch(96% 0.018 92);
+  --tag-color:                        oklch(96% 0.018 92 / 0.21);
+  --tag-color-hover:                  oklch(96% 0.018 92);
+  --misc-info-text:                   oklch(96% 0.018 92 / 0.21);
+  --misc-info-text-hover:             oklch(96% 0.018 92);
 
   /* Pitch Colors */
-  --pitch-red:                        #F5436D;
-  --pitch-blue:                       #39C1FF;
-  --pitch-orange:                     #fca311;
-  --pitch-green:                      #40D4A6;
-  --pitch-purple:                     #afa2ff;
+  --pitch-red:                         oklch(65.32% 0.2135 11.9);
+  --pitch-blue:                        oklch(76.61% 0.1429 233.43);
+  --pitch-orange:                      oklch(78.59% 0.1674 70.04);
+  --pitch-green:                       oklch(78.11% 0.1407 167.78);
+  --pitch-purple:                      oklch(75.96% 0.1318 289.28);
 
   /* Icon Colors */
-  --svg-color:                        rgba(255, 255, 255, 0.2);
-  --svg-hover:                        rgba(255, 255, 255, 1);
+  --svg-color:                        oklch(96% 0.018 92 / 0.2);
+  --svg-hover:                        oklch(96% 0.018 92);
 
   /* Background Colors */
-  --background:                       #2c2c2c;
-  --card-bg:                          rgba(0, 0, 0, 0.4);
-  --card-shadow:                      rgba(0, 0, 0, 0.3);
-  --word-bg:                          rgba(0, 0, 0, 0.3);
-  --pitch-position-bg:                rgba(0, 0, 0, 0.2);
-  --picture-bg:                       rgba(0, 0, 0, 0.3);
-  --notes-bg:                         rgba(0, 0, 0, 0.3);
-  --definition-bg:                    rgba(0, 0, 0, 0.3);
-  --dictionary-collapse-fade:         linear-gradient(to bottom, rgba(44, 44, 44, 0), rgba(26, 26, 26, 9));
-  --buttons-bg:                       rgba(0, 0, 0, 0.1);
-  --buttons-bg-hover:                 rgba(0, 0, 0, 0.63);
-  --lightbox-bg:                      rgba(0, 0, 0, 0.8);
-  --frequency-bg:                     rgba(0, 0, 0, 0.63);
-  --tag-bg:                           rgba(0, 0, 0, 0.1);
-  --tag-bg-hover:                     rgba(0, 0, 0, 0.3);
-  --external-links-bg:                rgba(0, 0, 0, 0.4);
-  --external-links-bg-hover:          rgba(0, 0, 0, 0.63);
-  --misc-info-bg:                     rgba(0, 0, 0, 0.1);
-  --misc-info-bg-hover:               rgba(0, 0, 0, 0.3);
+  --background:                        oklch(29.31% 0.0 89.88);
+  --card-bg:                          oklch(10% 0.02 260 / 0.4);
+  --card-shadow:                      oklch(10% 0.02 260 / 0.3);
+  --word-bg:                          oklch(10% 0.02 260 / 0.3);
+  --pitch-position-bg:                oklch(10% 0.02 260 / 0.2);
+  --picture-bg:                       oklch(10% 0.02 260 / 0.3);
+  --notes-bg:                         oklch(10% 0.02 260 / 0.3);
+  --definition-bg:                    oklch(10% 0.02 260 / 0.3);
+  --dictionary-collapse-fade:         linear-gradient(to bottom, oklch(29.31% 0.0 89.88 / 0.0), oklch(21.78% 0.0 89.88));
+  --buttons-bg:                       oklch(10% 0.02 260 / 0.1);
+  --buttons-bg-hover:                 oklch(10% 0.02 260 / 0.63);
+  --lightbox-bg:                      oklch(10% 0.02 260 / 0.8);
+  --frequency-bg:                     oklch(10% 0.02 260 / 0.63);
+  --tag-bg:                           oklch(10% 0.02 260 / 0.1);
+  --tag-bg-hover:                     oklch(10% 0.02 260 / 0.3);
+  --external-links-bg:                oklch(10% 0.02 260 / 0.4);
+  --external-links-bg-hover:          oklch(10% 0.02 260 / 0.63);
+  --misc-info-bg:                     oklch(10% 0.02 260 / 0.1);
+  --misc-info-bg-hover:               oklch(10% 0.02 260 / 0.3);
 
 
   /* DIMENSIONS & SPACING
@@ -421,9 +421,9 @@
   --fast-transition:                  0.2s ease;
 
   /* Shadows */
-  --button-shadow:                    0 0 5px 2.5px rgba(0, 0, 0, 0.1);
-  --button-shadow-dark:               0 0 5px 2.5px rgba(255, 255, 255, 0.1);
-  --lightbox-shadow:                  0 1px 8px rgba(0, 0, 0, 0.15);
+  --button-shadow:                    0 0 5px 2.5px oklch(10% 0.02 260 / 0.1);
+  --button-shadow-dark:               0 0 5px 2.5px oklch(96% 0.018 92 / 0.1);
+  --lightbox-shadow:                  0 1px 8px oklch(10% 0.02 260 / 0.15);
 
   /* Z-Index Layers */
   --z-index-base:                     3;
@@ -626,12 +626,12 @@ body {
 :is(html.custom-dark-mode .card)
 :is(#wordAudio, #sentenceAudio):hover {
   box-shadow: var(--button-shadow-dark);
-  background: white !important;
+  background: oklch(96% 0.018 92) !important;
 }
 
 html.custom-dark-mode .card 
 :is(#wordAudio, #sentenceAudio):hover .playImage path {
-  fill: black !important; 
+  fill: oklch(10% 0.02 260) !important; 
 }
 
 #wordAudio circle, #sentenceAudio circle {
@@ -639,7 +639,7 @@ html.custom-dark-mode .card
 }
 
 .front .playImage path {
-  fill: rgba(105, 105, 105, 0.6) !important;
+  fill: oklch(52.08% 0.0 89.88 / 0.6) !important;
 }
 
 /* ===== BACK ===== */
@@ -703,8 +703,8 @@ a {
 
 /* Custom Dark Mode */
 .custom-dark-mode body {
-  background: black !important;
-  color: white !important;
+  background: oklch(10% 0.02 260) !important;
+  color: oklch(96% 0.018 92) !important;
 }
 
 /* Audio Hint Toggle */
@@ -755,8 +755,8 @@ a {
 
 .custom-dark-mode .audio-hint:hover {
   box-shadow: var(--button-shadow-dark) !important;
-  background: white !important;
-  color: black !important;
+  background: oklch(96% 0.018 92) !important;
+  color: oklch(10% 0.02 260) !important;
 }
 
 /* Hint Button */
@@ -802,8 +802,8 @@ a {
 
 .custom-dark-mode .hint-btn:hover {
   box-shadow: var(--button-shadow-dark) !important;
-  background: white !important;
-  color: black !important;
+  background: oklch(96% 0.018 92) !important;
+  color: oklch(10% 0.02 260) !important;
 }
 
 #hint-content {
@@ -857,8 +857,8 @@ a {
 
 .custom-dark-mode .toggle-custom-dark-mode.dark-mode:hover {
   box-shadow: var(--button-shadow-dark);
-  background: white;
-  color: black;
+  background: oklch(96% 0.018 92);
+  color: oklch(10% 0.02 260);
 }
 
 /* Settings Toggle */
@@ -903,8 +903,8 @@ a {
 
 .custom-dark-mode .toggle-settings-btn:hover {
   box-shadow: var(--button-shadow-dark);
-  background: white;
-  color: black;
+  background: oklch(96% 0.018 92);
+  color: oklch(10% 0.02 260);
 }
 
 /* Word + Grid Settings */
@@ -1148,7 +1148,7 @@ img {
   width: 50px;
   height: 100%;
   border-radius: var(--border-radius-ms);
-  background: rgba(0, 0, 0, 0.5);
+  background: oklch(10% 0.02 260 / 0.5);
   cursor: pointer;
   opacity: 0;
   transition: opacity var(--base-transition);
@@ -1165,14 +1165,14 @@ img {
 
 .nav-arrow.left {
   left: 0;
-  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to right, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
+  mask-image: linear-gradient(to right, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
 }
 
 .nav-arrow.right {
   right: 0;
-  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to left, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
+  mask-image: linear-gradient(to left, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
 }
 
 /* Lightbox Navigation */
@@ -1180,7 +1180,7 @@ img {
   position: absolute;
   width: var(--lightbox-nav-width);
   height: 100%;
-  background: rgba(255,255,255,0.05);
+  background: oklch(96% 0.018 92 / 0.05);
   cursor: pointer;
   opacity: 0;
   transition: opacity var(--base-transition);
@@ -1196,14 +1196,14 @@ img {
 
 .lightbox .lightbox-nav.left {
   left: 0;
-  -webkit-mask-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to right, oklch(96% 0.018 92), oklch(10% 0.02 260 / 0.0));
+  mask-image: linear-gradient(to right, oklch(96% 0.018 92), oklch(10% 0.02 260 / 0.0));
 }
 
 .lightbox .lightbox-nav.right {
   right: 0;
-  -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to left, oklch(96% 0.018 92), oklch(10% 0.02 260 / 0.0));
+  mask-image: linear-gradient(to left, oklch(96% 0.018 92), oklch(10% 0.02 260 / 0.0));
 }
 
 /* Lightbox Grid Toggle */
@@ -1213,8 +1213,8 @@ img {
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 20px;
-  background: rgba(0,0,0,0.2);
-  color: rgba(255,255,255,0.4);
+  background: oklch(10% 0.02 260 / 0.2);
+  color: oklch(96% 0.018 92 / 0.4);
   border: none;
   cursor: pointer;
   z-index: 1001;
@@ -1223,8 +1223,8 @@ img {
 }
 
 .lightbox-grid-toggle:hover {
-  color: white;
-  background: rgba(0,0,0,0.7);
+  color: oklch(96% 0.018 92);
+  background: oklch(10% 0.02 260 / 0.7);
   border: none;
 }
 
@@ -1327,8 +1327,8 @@ img {
 
 .custom-dark-mode .toggle-image-visibility.show-btn:hover {
   box-shadow: var(--button-shadow);
-  background: white;
-  color: black;
+  background: oklch(96% 0.018 92);
+  color: oklch(10% 0.02 260);
 }
 
 .toggle-image-visibility.hide-btn {
@@ -1337,8 +1337,8 @@ img {
   left: 0;
   right: 0;
   height: 25px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
-  color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to bottom, oklch(10% 0.02 260 / 0.4), transparent);
+  color: oklch(96% 0.018 92 / 0.5);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1375,7 +1375,7 @@ img {
       left: auto !important;
       right: auto !important;
       width: 250px;
-      background: radial-gradient(ellipse at top, rgba(0,0,0,0.4) 0%, 
+      background: radial-gradient(ellipse at top, oklch(10% 0.02 260 / 0.4) 0%, 
                   transparent 70%);
     }
   }
@@ -1579,13 +1579,13 @@ img {
   font-size: 0.5rem !important;
   padding: 2px 4px !important;;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: oklch(10% 0.02 260 / 0.6);
+  color: oklch(96% 0.018 92);
   font-weight: bold;
 }
 
 :is(.card.nightMode, .custom-dark-mode) .pos-info-header [data-sc-content="part-of-speech-info"] {
-  background: rgba(255, 255, 255, 0.15);
+  background: oklch(96% 0.018 92 / 0.15);
 }
 
 .glossary-box:has([data-dictionary*="Jitendex"][style*="display: block"]) .pos-info-header,
@@ -1607,12 +1607,12 @@ img {
 }
 
 .toggle-area:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: oklch(10% 0.02 260 / 0.8);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 .toggle-area:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: oklch(96% 0.018 92 / 0.8);
   transition: background-color var(--base-transition);
 }
 
@@ -1629,28 +1629,28 @@ img {
 
 .toggle-area.left-larger {
   left: -20px;
-  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to right, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
+  mask-image: linear-gradient(to right, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
   transition: background-color var(--base-transition);
 }
 
 .toggle-area.right-larger {
   right: -20px;
-  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to left, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
+  mask-image: linear-gradient(to left, oklch(10% 0.02 260), oklch(10% 0.02 260 / 0.0));
   transition: background-color var(--base-transition);
 }
 
 .toggle-area.left-larger:hover ~ .toggle-area.left:not(.left-larger):not(.right-larger),
 .toggle-area.right-larger:hover ~ .toggle-area.right:not(.left-larger):not(.right-larger) {
-  background: rgba(0, 0, 0, 0.8);
+  background: oklch(10% 0.02 260 / 0.8);
   transition: background-color var(--base-transition);
 }
 
 :is(.card.nightMode, .custom-dark-mode)
 :is(.toggle-area.left-larger:hover ~ .toggle-area.left:not(.left-larger):not(.right-larger),
     .toggle-area.right-larger:hover ~ .toggle-area.right:not(.left-larger):not(.right-larger)) {
-      background: rgba(255, 255, 255, 0.8);
+      background: oklch(96% 0.018 92 / 0.8);
       transition: background-color var(--base-transition);
 }
 
@@ -1720,8 +1720,8 @@ html.custom-dark-mode .card
 .audio:hover .playImage path,
 .sentenceaudio:hover .playImage path) {
   box-shadow: var(--button-shadow-dark);
-  background: white !important;
-  fill: black !important;
+  background: oklch(96% 0.018 92) !important;
+  fill: oklch(10% 0.02 260) !important;
 }
 
 .audio circle, .sentenceaudio circle {
@@ -1849,7 +1849,7 @@ svg.playImage path {
 
 .custom-dark-mode .toggle-notes:hover {
   box-shadow: var(--button-shadow-dark);
-  background-color: white !important;
+  background-color: oklch(96% 0.018 92) !important;
 }
 
 .toggle-notes:hover .toggle-notes-svg {
@@ -1861,7 +1861,7 @@ svg.playImage path {
 }
 
 .custom-dark-mode .toggle-notes:hover .toggle-notes-svg {
-  background-color: black !important;
+  background-color: oklch(10% 0.02 260) !important;
 }
 
 /* Pitch Accent Colors */
@@ -2058,27 +2058,27 @@ svg.playImage path {
 .pronunciation.kifuku { --pronunciation-annotation-color: var(--pitch-purple); }
 
 /* Nasal Mora */
-span[style*="border:1.5px solid #c83c28"] {
-  border: 0.1em solid #FF4936 !important;
+span[style*="border:1.5px solid  oklch(55.99% 0.18 31.21)"] {
+  border: 0.1em solid  oklch(66.65% 0.221 29.92) !important;
   margin: 2px 0px;
   width: 0.30rem !important;
   height: 0.30rem !important;
 }
 
 /* Devoiced Mora */
-span[style*="border:1.5px dotted #c83c28"] {
+span[style*="border:1.5px dotted  oklch(55.99% 0.18 31.21)"] {
   display: none !important;
 }
 
 span[style*="display:inline-block;position:relative;"] > 
-span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) {
+span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.99% 0.18 31.21)"]) {
   color: var(--light-devoiced-color) !important;
 }
 
 .card.nightMode span[style*="display:inline-block;position:relative;"] > 
-span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]),
+span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.99% 0.18 31.21)"]),
 .custom-dark-mode span[style*="display:inline-block;position:relative;"] > 
-span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) {
+span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.99% 0.18 31.21)"]) {
   color: var(--dark-devoiced-color) !important;
 }
 
@@ -2086,7 +2086,6 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
 #position {
   font-family: var(--sans);
   font-weight: bold;
-  color: white;
   position: absolute;
   top: 0;
   left: 100%;
@@ -2149,8 +2148,8 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
   opacity: 1;
   visibility: visible;
   transform: scaleX(1);
-  background: rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 1);
+  background: oklch(10% 0.02 260);
+  color: oklch(96% 0.018 92);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
@@ -2158,8 +2157,8 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
 #position:hover + #categories,
 #categories:hover,
 #categories:hover) {
-  background: rgba(255, 255, 255, 1);
-  color: rgba(0, 0, 0, 1);
+  background: oklch(96% 0.018 92);
+  color: oklch(10% 0.02 260);
   opacity: 1 !important;
   visibility: visible !important;
   transform: scaleX(1);
@@ -2177,11 +2176,11 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
   transform: translateX(-50%);
   font-size: var(--picture-counter-size);
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 2px 0 1px rgba(0,0,0,0.1),
-               -2px 0 1px rgba(0,0,0,0.1),
-               0 2px 1px rgba(0,0,0,0.1),
-               0 -2px 1px rgba(0,0,0,0.1),
+  color: oklch(96% 0.018 92 / 0.9);
+  text-shadow: 2px 0 1px oklch(10% 0.02 260 / 0.1),
+               -2px 0 1px oklch(10% 0.02 260 / 0.1),
+               0 2px 1px oklch(10% 0.02 260 / 0.1),
+               0 -2px 1px oklch(10% 0.02 260 / 0.1),
                0 0 4px rgba(0, 0, 0, var(--picture-counter-shadow-intensity));
   background-color: rgba(0, 0, 0, var(--picture-counter-bg-opacity));
   padding: 4px 8px;
@@ -2392,23 +2391,23 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
 }
 
 [data-sc-content="example-sentence"] {
-  border-color: rgba(3, 3, 3, 0.5) !important;
+  border-color: oklch(10% 0.02 260 / 0.5) !important;
   transition: border-color var(--base-transition), 
               opacity var(--base-transition);
 }
 
 [data-sc-content="example-sentence"]:hover {
-  border-color: rgba(3, 3, 3, 0.8) !important;
+  border-color: oklch(10% 0.02 260 / 0.8) !important;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 [data-sc-content="example-sentence"] {
-  border-color: rgba(252, 252, 252, 0.5) !important;
+  border-color: oklch(96% 0.018 92 / 0.5) !important;
 }
 
 .card.nightMode [data-sc-content="example-sentence"]:hover,
 .custom-dark-mode [data-sc-content="example-sentence"]:hover {
-  border-color: rgba(252, 252, 252, 0.8) !important;
+  border-color: oklch(96% 0.018 92 / 0.8) !important;
 }
 
 [data-sc-content="example-sentence"].sentence-active {
@@ -2435,13 +2434,13 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
 
 [data-sc-content="glossary"] li:not(:last-child)::after {
   content: "|";
-  color: rgba(105, 105, 105, 0.3);
+  color: oklch(52.08% 0.0 89.88 / 0.3);
   margin: 0 var(--spacing-ms);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 [data-sc-content="glossary"] li:not(:last-child)::after {
-  color: rgba(255, 255, 255, 0.5);
+  color: oklch(96% 0.018 92 / 0.5);
 }
 
 [data-sc-content="example-sentence"] rt {
@@ -2453,7 +2452,7 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted #c83c28"]) 
   opacity: 1;
 }
 
-span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] {
+span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, oklch(86.64% 0.2948 142.5)"] {
   color: var(--light-highlight) !important;
   text-decoration: none !important;
 }
@@ -2468,7 +2467,7 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
   .glossary-box
 ) li[data-dictionary] :is(
   span[data-sc-content="example-keyword"],
-  span[style*="color-mix(in srgb, lime"]
+  span[style*="color-mix(in srgb, oklch(86.64% 0.2948 142.5)"]
 ) {
   color: color-mix(in srgb,
       var(--light-highlight),
@@ -2483,7 +2482,7 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
     .glossary-box
   ) li[data-dictionary] :is(
     span[data-sc-content="example-keyword"],
-    span[style*="color-mix(in srgb, lime"]
+    span[style*="color-mix(in srgb, oklch(86.64% 0.2948 142.5)"]
   ) {
     color: color-mix(in srgb,
         var(--dark-highlight),
@@ -2512,7 +2511,7 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
   padding: 0.2em 0.3em;
   vertical-align: text-bottom;
   word-break: keep-all;
-  color: white;
+  color: oklch(96% 0.018 92);
 }
 
 #selectionText {
@@ -2739,7 +2738,7 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
 
 #glossary.yomitan-glossary .yomitan-word {
   font-weight: bold;
-  color: #333;
+  color:  oklch(32.11% 0.0 89.88);
 }
 
 #glossary.yomitan-glossary .accent {
@@ -2769,15 +2768,15 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
 #glossary.yomitan-glossary .example {
   margin-left: 1.5em;
   font-size: 0.9em;
-  color: #555;
+  color:  oklch(44.95% 0.0 89.88);
 }
 
-[style="font-weight: bold; color: red;"] {
+[style="font-weight: bold; color: oklch(62.8% 0.2577 29.23);"] {
   color: var(--light-highlight) !important;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
-[style="font-weight: bold; color: red;"] {
+[style="font-weight: bold; color: oklch(62.8% 0.2577 29.23);"] {
   color: var(--dark-highlight) !important;
   font-weight: normal !important;
 }
@@ -2801,16 +2800,16 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
 
 /* 大辞泉 */
 [data-dictionary*="大辞泉"] {
-  --daijisen-black: #ffffff;
-  --daijisen-white: #000000;
-  --daijisen-blue: #4a8ade;
-  --daijisen-header-djs: #B65058;
-  --daijisen-header-djsp: #999999;
-  --daijisen-header-text: #FFFFFF;
-  --daijisen-logo-color: black;
-  --daijisen-background-l3: black;
-  --daijisen-accent-mark: #CC0000;
-  --daijisen-accent-slash: #808080;
+  --daijisen-black:  oklch(96% 0.018 92);
+  --daijisen-white:  oklch(10% 0.02 260);
+  --daijisen-blue:  oklch(63.06% 0.1433 256.04);
+  --daijisen-header-djs:  oklch(56.35% 0.1325 17.58);
+  --daijisen-header-djsp:  oklch(68.3% 0.0 89.88);
+  --daijisen-header-text:  oklch(96% 0.018 92);
+  --daijisen-logo-color: oklch(10% 0.02 260);
+  --daijisen-background-l3: oklch(10% 0.02 260);
+  --daijisen-accent-mark:  oklch(53.08% 0.2178 29.23);
+  --daijisen-accent-slash:  oklch(59.99% 0.0 89.88);
 }
 
 [data-sc-class="bold FM"], [data-sc-class="IM"], [data-sc-class="FM"] {
@@ -2819,14 +2818,14 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
 
 :is(.card.nightMode, .custom-dark-mode) 
 [data-dictionary*="大辞泉"] {
-  --daijisen-blue: #00aaff;
-  --daijisen-header-djs: #a0484f;
-  --daijisen-header-djsp: #7a7a7a;
-  --daijisen-header-text: #000000;
-  --daijisen-logo-color: #606060;
-  --daijisen-background-l3: #606060;
-  --daijisen-accent-mark: #ff6666;
-  --daijisen-accent-slash: #a0a0a0;
+  --daijisen-blue:  oklch(70.72% 0.1679 242.04);
+  --daijisen-header-djs:  oklch(51.67% 0.117 17.22);
+  --daijisen-header-djsp:  oklch(57.95% 0.0 89.88);
+  --daijisen-header-text:  oklch(10% 0.02 260);
+  --daijisen-logo-color:  oklch(48.91% 0.0 89.88);
+  --daijisen-background-l3:  oklch(48.91% 0.0 89.88);
+  --daijisen-accent-mark:  oklch(70.44% 0.1872 23.19);
+  --daijisen-accent-slash:  oklch(70.58% 0.0 89.88);
 }
 
 .yomitan-glossary [data-dictionary="大辞泉 第二版"] div[data-sc-meaning][data-sc-c] {
@@ -2835,7 +2834,7 @@ span[data-sc-content="example-keyword"], span[style*="color-mix(in srgb, lime"] 
 
 :is([data-dictionary*="大辞泉"]) 
 span[data-sc補足ロゴ], span[data-sc-rect][data-sc-l3] {
- color: white !important;
+ color: oklch(96% 0.018 92) !important;
 }
 
 @container style(--dictionary-colorizer: 1) {
@@ -2852,24 +2851,24 @@ div[data-sc-m-accent-audio-g] {
 
 /* 小学館例解学習国語 */
 li[data-dictionary*="小学館例解学習国語"] {
-	--rgko12-light-blue: #7fb4f3;
-	--rgko12-light-light-blue: #DDEEFF;
-	--rgko12-light-light-purple: #EEDDFF;
-	--rgko12-cream: #FFFFDD;
-	--rgko12-spring: #DDFFEE;
-	--rgko12-summer: #DDFFEE;
-	--rgko12-autumn: #FFEECC;
-	--rgko12-winter: #CCEEFF;
-	--rgko12-travel: #DDFFEE;
-	--rgko12-romance: #EEDDFF;
-	--rgko12-other: #FFFFCC;
-	--rgko12-red: #e84a4a;
-	--rgko12-orange: #FF9900;
-	--rgko12-light-orange: #FFCC99;
-	--rgko12-pink: #FF0099;
-	--rgko12-gray: rgba(0, 0, 0, 0.05);
-	--rgko12-brown: #976B33;
-	--rgko12-light-brown: #696158;
+	--rgko12-light-blue:  oklch(75.76% 0.1071 253.37);
+	--rgko12-light-light-blue:  oklch(94.16% 0.0293 248.14);
+	--rgko12-light-light-purple:  oklch(92.15% 0.049 307.87);
+	--rgko12-cream:  oklch(96% 0.018 92);
+	--rgko12-spring:  oklch(97.11% 0.0417 163.96);
+	--rgko12-summer:  oklch(97.11% 0.0417 163.96);
+	--rgko12-autumn:  oklch(95.4% 0.048 84.56);
+	--rgko12-winter:  oklch(93.0% 0.0424 229.44);
+	--rgko12-travel:  oklch(97.11% 0.0417 163.96);
+	--rgko12-romance:  oklch(92.15% 0.049 307.87);
+	--rgko12-other:  oklch(98.75% 0.0654 107.54);
+	--rgko12-red:  oklch(63.21% 0.1948 24.64);
+	--rgko12-orange:  oklch(77.2% 0.1738 64.55);
+	--rgko12-light-orange:  oklch(87.82% 0.0877 66.27);
+	--rgko12-pink:  oklch(65.33% 0.2684 354.75);
+	--rgko12-gray: oklch(10% 0.02 260 / 0.05);
+	--rgko12-brown:  oklch(56.19% 0.0917 70.53);
+	--rgko12-light-brown:  oklch(49.73% 0.0173 70.68);
 	--rgko12-light-light-brown: ;
 	--rgko12-blue: ;
 	--rgko12-green: ;
@@ -2877,17 +2876,17 @@ li[data-dictionary*="小学館例解学習国語"] {
 
 :is(.card.nightMode, .custom-dark-mode)
  li[data-dictionary*="小学館例解学習国語"] {
-	--rgko12-red: #d65252;
+	--rgko12-red:  oklch(61.38% 0.1668 23.38);
 	--rgko12-blue: ;
-	--rgko12-light-blue: #7dc9ef;
-	--rgko12-light-light-blue: #003366;
-	--rgko12-light-light-purple: #330033;
-	--rgko12-light-orange: #663300;
-	--rgko12-gray: rgba(255, 255, 255, 0.1);
-	--rgko12-brown: #885522;
-	--rgko12-light-brown: #696158;
+	--rgko12-light-blue:  oklch(80.04% 0.0926 231.26);
+	--rgko12-light-light-blue:  oklch(32.33% 0.1025 253.89);
+	--rgko12-light-light-purple:  oklch(22.53% 0.1035 328.36);
+	--rgko12-light-orange:  oklch(38.04% 0.0922 56.8);
+	--rgko12-gray: oklch(96% 0.018 92 / 0.1);
+	--rgko12-brown:  oklch(49.72% 0.0941 62.31);
+	--rgko12-light-brown:  oklch(49.73% 0.0173 70.68);
 	--rgko12-light-light-brown: ;
-	--rgko12-cream: #333300;
+	--rgko12-cream:  oklch(31.08% 0.0678 109.77);
 	--rgko12-green: ;
 }
 
@@ -2909,11 +2908,11 @@ li[data-dictionary*="小学館例解学習国語"] [data-sc-num] {
 }
 
 .yomitan-glossary [data-dictionary="小学館例解学習国語 第十二版"] [data-sc-blue] {
-  color: black !important;
+  color: oklch(10% 0.02 260) !important;
 }
 
 .card.nightMode .yomitan-glossary [data-dictionary="小学館例解学習国語 第十二版"] [data-sc-blue] {
-  color: white !important;
+  color: oklch(96% 0.018 92) !important;
 }
 
 li[data-dictionary="小学館例解学習国語 第十二版"] span[style*="padding-top"] {
@@ -2983,7 +2982,7 @@ li[data-dictionary="小学館例解学習国語 第十二版"] table[data-sc使�
 
 li[data-dictionary="小学館例解学習国語 第十二版"] table[data-sc使い分け] td[data-sc-td] {
     display: table-cell !important;
-    border: 1px solid #666 !important;
+    border: 1px solid  oklch(51.03% 0.0 89.88) !important;
     padding: 4px 8px !important;
     vertical-align: middle !important;
     width: auto !important;
@@ -3017,13 +3016,13 @@ li[data-dictionary="小学館例解学習国語 第十二版"] table[data-sc使�
     --rgko12-travel:            color-mix(in srgb, var(--dict-color), transparent 93%);
     --rgko12-romance:           color-mix(in srgb, var(--dict-color), transparent 93%);
     --rgko12-other:             color-mix(in srgb, var(--dict-color), transparent 95%);
-    --rgko12-red:               black;
-    --rgko12-orange:            #FF9900;
-    --rgko12-light-orange:      #FFCC99;
-    --rgko12-pink:              #FF0099;
-    --rgko12-gray:              rgba(0, 0, 0, 0.05);
-    --rgko12-brown:             #008B9C;
-    --rgko12-light-brown:       #445054;
+    --rgko12-red:               oklch(10% 0.02 260);
+    --rgko12-orange:             oklch(77.2% 0.1738 64.55);
+    --rgko12-light-orange:       oklch(87.82% 0.0877 66.27);
+    --rgko12-pink:               oklch(65.33% 0.2684 354.75);
+    --rgko12-gray:              oklch(10% 0.02 260 / 0.05);
+    --rgko12-brown:              oklch(58.33% 0.1008 209.82);
+    --rgko12-light-brown:        oklch(42.23% 0.0166 219.89);
     --rgko12-light-light-brown: ;
     --rgko12-blue: ;
     --rgko12-green: ;
@@ -3031,11 +3030,11 @@ li[data-dictionary="小学館例解学習国語 第十二版"] table[data-sc使�
 
   .card.nightMode li[data-dictionary*="小学館例解学習国語"],
   .custom-dark-mode li[data-dictionary*="小学館例解学習国語"] {
-    --rgko12-red:               white !important;
-    --rgko12-gray:              rgba(255, 255, 255, 0.1);
-    --rgko12-light-orange:      #663300;
-    --rgko12-brown:             #227088;
-    --rgko12-light-brown:       #445054;
+    --rgko12-red:               oklch(96% 0.018 92) !important;
+    --rgko12-gray:              oklch(96% 0.018 92 / 0.1);
+    --rgko12-light-orange:       oklch(38.04% 0.0922 56.8);
+    --rgko12-brown:              oklch(50.95% 0.0822 222.73);
+    --rgko12-light-brown:        oklch(42.23% 0.0166 219.89);
     --rgko12-light-light-brown: ;
     --rgko12-cream:             color-mix(in srgb, var(--dict-color), transparent 95%);
     --rgko12-green: ;
@@ -3055,23 +3054,23 @@ li[data-dictionary="小学館例解学習国語 第十二版"] table[data-sc使�
 
   [data-dictionary="小学館例解学習国語 第十二版"] summary {
     font-weight: normal !important;
-    color: black !important;
+    color: oklch(10% 0.02 260) !important;
     background-color: var(--dict-color) !important;
   }
 }
 
 /* 明鏡国語辞典 */
 .card.nightMode, .custom-dark-mode {
-  --meikyo-white: #000000;
-  --meikyo-black: #cccccc;
-  --meikyo-blue: #33ccff;
-  --meikyo-red: #ff3333;
-  --meikyo-gray: #bbbbbb;
-  --meikyo-pink: #cc6666;
-  --meikyo-dark-red: #993333;
-  --meikyo-fbox-white: #ffffff;
-  --meikyo-fbox-gray: #cccccc;
-  --meikyo-box-gray: #663333;
+  --meikyo-white:  oklch(10% 0.02 260);
+  --meikyo-black:  oklch(84.52% 0.0 89.88);
+  --meikyo-blue:  oklch(79.02% 0.1401 226.17);
+  --meikyo-red:  oklch(64.89% 0.237 26.97);
+  --meikyo-gray:  oklch(79.21% 0.0 89.88);
+  --meikyo-pink:  oklch(63.08% 0.1298 21.44);
+  --meikyo-dark-red:  oklch(47.08% 0.1367 24.0);
+  --meikyo-fbox-white:  oklch(96% 0.018 92);
+  --meikyo-fbox-gray:  oklch(84.52% 0.0 89.88);
+  --meikyo-box-gray:  oklch(38.75% 0.0733 21.01);
 }
 
 li[data-dictionary*="明鏡国語辞典"] [data-sc-body] {
@@ -3099,7 +3098,7 @@ li[data-dictionary="明鏡国語辞典 第三版"] [data-sc-img] img {
 :is(.card.nightMode, .custom-dark-mode) 
 li[data-dictionary="明鏡国語辞典 第三版"] [data-sc-img] span[style*="--image"] {
   display: block !important;
-  background-color: white !important;
+  background-color: oklch(96% 0.018 92) !important;
   width: 100% !important;
   height: 100% !important;
   position: absolute;
@@ -3144,29 +3143,29 @@ li[data-dictionary="明鏡国語辞典 第三版"] [data-sc-img] span[style*="--
   }
 
   [data-dictionary="明鏡国語辞典 第三版"] span[data-sc-fbox] {
-    background-color: rgb(0,0,0,0) !important;
+    background-color: oklch(10% 0.02 260 / 0.0) !important;
     border-color: var(--dict-color) !important;
     color: var(--dict-color) !important;
   }
 
   [data-dictionary="明鏡国語辞典 第三版"] div[data-sc-class="hinkaku"] {
-    background-color: rgb(0,0,0,0.02) !important;
+    background-color: oklch(10% 0.02 260 / 0.02) !important;
   }
 
   .card.nightMode
   [data-dictionary="明鏡国語辞典 第三版"] div[data-sc-class="hinkaku"] {
-    background-color: rgb(255,255,255,0.02) !important;
+    background-color: oklch(96% 0.018 92 / 0.02) !important;
   }
 
   [data-dictionary="明鏡国語辞典 第三版"] span[data-sc-fbox][data-sc-class="書き方"] {
-    color: black !important;
+    color: oklch(10% 0.02 260) !important;
     background-color: transparent !important;
     border-color: var(--dict-color) !important;
   }
 
   .card.nightMode
   [data-dictionary="明鏡国語辞典 第三版"] span[data-sc-fbox][data-sc-class="書き方"] {
-    color: white !important;
+    color: oklch(96% 0.018 92) !important;
   }
 }
 
@@ -3175,7 +3174,7 @@ li[data-dictionary="明鏡国語辞典 第三版"] [data-sc-img] span[style*="--
   color: inherit !important;
 }
 
-[style="color: rgb(229, 0, 127);"]::before {
+[style="color: oklch(59.89% 0.2439 358.09);"]::before {
   content: "\A";
   white-space: pre;
 }
@@ -3233,7 +3232,7 @@ li[data-dictionary="旺文社国語辞典 第十一版"] a[href*="yomitan_dictio
 
 li[data-dictionary="旺文社国語辞典 第十一版"] a[href*="yomitan_dictionary_media"][href$=".png"]:has(> span > img)::before {
   content: "stroke order";
-  color: black;
+  color: oklch(10% 0.02 260);
   font-size: 0.7rem;
   position: absolute;
   top: 50%;
@@ -3303,14 +3302,14 @@ li[data-dictionary="漢検漢字辞典　第二版"] table th[lang="ja"]:has(br)
 
 /* hr.consolidated-entry-separator */
 #glossary .glossary-box hr.consolidated-entry-separator {
-  background: rgba(0,0,0,0.2);
+  background: oklch(10% 0.02 260 / 0.2);
   border: none;
   height: 1px;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 #glossary .glossary-box hr.consolidated-entry-separator {
-  background: rgba(255,255,255,0.15);
+  background: oklch(96% 0.018 92 / 0.15);
 }
 
 /* Manatan Settings */
@@ -3361,13 +3360,13 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 
 .frequency-box:hover .freqbt {
   color: var(--freq-text-hover-light);
-  text-shadow: 0 0 5px white;
+  text-shadow: 0 0 5px oklch(96% 0.018 92);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 .frequency-box:hover .freqbt {
   color: var(--freq-text-hover);
-  text-shadow: 0 0 5px black;
+  text-shadow: 0 0 5px oklch(10% 0.02 260);
 }
 
 .frequency-content {
@@ -3402,12 +3401,12 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   justify-content: space-between;
   gap: 15px;
   padding: 4px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.05);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 .frequency-content li {
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: oklch(96% 0.018 92 / 0.05);
 }
 
 .frequency-content li:last-child {
@@ -3744,37 +3743,37 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 #kanji-tooltip {
   position: absolute;
   display: none;
-  background: rgba(255, 255, 255, 0.9);
+  background: oklch(96% 0.018 92 / 0.9);
   border-radius: 6px;
   padding: 10px 15px;
   z-index: 999;
   width: max-content;
   max-width: 500px;
   line-height: 1.4;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-  color: #111;
+  box-shadow: 0 3px 8px oklch(10% 0.02 260 / 0.3);
+  color:  oklch(17.76% 0.0 89.88);
   --tooltip-arrow-left: 10px;
   margin-top: 10px;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 #kanji-tooltip {
-  background: rgba(0, 0, 0, 0.9);
-  color: #eee;
+  background: oklch(10% 0.02 260 / 0.9);
+  color:  oklch(94.91% 0.0 89.88);
 }
 
 #kanji-tooltip::before {
   content: '';
   position: absolute;
   bottom: 100%;
-  color: rgba(255, 255, 255, 0.8);
+  color: oklch(96% 0.018 92 / 0.8);
   left: var(--tooltip-arrow-left);
   margin-left: -7px;
   width: 0;
   height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 7px solid oklch(96% 0.018 92 / 0.9);
 }
 
 #kanji-tooltip::after {
@@ -3787,13 +3786,13 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 8px solid rgba(0, 0, 0, 0.1); /* Shadow color */
+  border-bottom: 8px solid oklch(10% 0.02 260 / 0.1); /* Shadow color */
   z-index: -1;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 #kanji-tooltip::before {
-  border-bottom: 7px solid rgba(0, 0, 0, 0.9);
+  border-bottom: 7px solid oklch(10% 0.02 260 / 0.9);
 }
 
 .kanji-highlight {
@@ -3813,12 +3812,12 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 
 #kanji-tooltip li {
   padding: 10px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.1);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 #kanji-tooltip li {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid oklch(96% 0.018 92 / 0.1);
 }
 
 #kanji-tooltip li:last-child {
@@ -3861,9 +3860,9 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 }
 
 .show-more-btn {
-  background: rgba(0,0,0,0.02); 
+  background: oklch(10% 0.02 260 / 0.02); 
   border: none; 
-  color: black; 
+  color: oklch(10% 0.02 260); 
   padding: 5px 10px; 
   cursor: pointer; 
   width: 100%; 
@@ -3874,19 +3873,19 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 }
 
 .show-more-btn:hover { 
-  background: rgba(0,0,0,0.04); 
+  background: oklch(10% 0.02 260 / 0.04); 
   border: none; 
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 .show-more-btn {
-  background: rgba(255,255,255,0.02); 
-  color: white;
+  background: oklch(96% 0.018 92 / 0.02); 
+  color: oklch(96% 0.018 92);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 .show-more-btn:hover { 
-  background: rgba(255,255,255,0.03); 
+  background: oklch(96% 0.018 92 / 0.03); 
 }
 
 #kanji-tooltip .position {
@@ -3930,7 +3929,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   font-size: 0.5rem;
   padding: 5px 5px 5px 5px;
   border-radius: var(--border-radius-sm);
-  color: rgba(105, 105, 105, 0.3);
+  color: oklch(52.08% 0.0 89.88 / 0.3);
   z-index: var(--z-index-base);
   text-align: center;
   line-height: 16px;
@@ -3949,15 +3948,15 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   opacity: 1;
   visibility: visible;
   transform: scaleX(1);
-  background: rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 1);
+  background: oklch(10% 0.02 260);
+  color: oklch(96% 0.018 92);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 :is(#kanji-tooltip .position:hover + .categories,
     #kanji-tooltip .categories:hover) {
-  background: rgba(255, 255, 255, 1);
-  color: rgba(0, 0, 0, 1);
+  background: oklch(96% 0.018 92);
+  color: oklch(10% 0.02 260);
   opacity: 1 !important;
   visibility: visible !important;
   transform: scaleX(1);
@@ -3982,8 +3981,8 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 }
 
 /* Tooltip Nasal Mora */
-#kanji-tooltip span[style*="border:1.5px solid #c83c28"] {
-  border: 1px solid #FF4936 !important;
+#kanji-tooltip span[style*="border:1.5px solid  oklch(55.99% 0.18 31.21)"] {
+  border: 1px solid  oklch(66.65% 0.221 29.92) !important;
   margin: 3px 1px !important;
   width: 0.20rem !important;
   height: 0.20rem !important;
@@ -4013,8 +4012,8 @@ li.is-new-card:not(:hover) .highlight,
 li.is-new-card:not(:hover) .pitch-number,
 li.is-new-card:not(:hover) span[style*="border-color"],
 li.is-new-card:not(:hover) .pronunciation-mora[data-pitch="high"] .pronunciation-mora-line {
-  color: #999 !important;
-  border-color: #999 !important;
+  color:  oklch(68.3% 0.0 89.88) !important;
+  border-color:  oklch(68.3% 0.0 89.88) !important;
 }
 
 li.is-new-card:hover {
@@ -4023,7 +4022,7 @@ li.is-new-card:hover {
 
 /* Clickable Word */
 li.is-new-card:not(:hover) .related-word {
-  border-bottom-color: rgba(0, 0, 0, 0) !important;
+  border-bottom-color: oklch(10% 0.02 260 / 0.0) !important;
 }
 
 .related-word.clickable-word {
@@ -4035,7 +4034,7 @@ li.is-new-card:not(:hover) .related-word {
 
 .related-word.clickable-word:hover {
   color: var(--light-highlight);
-  border-bottom-color: rgba(150, 150, 150, 0.5);
+  border-bottom-color: oklch(67.31% 0.0 89.88 / 0.5);
 }
 
 :is(.card.nightMode, .custom-dark-mode) .related-word.clickable-word:hover {
@@ -4277,7 +4276,7 @@ li.is-new-card:not(:hover) .related-word {
     border-color: var(--dict-color);
   }
 
-  span[style="font-size: 0.85em; color: rgb(204, 0, 0); vertical-align: text-bottom; border-style: solid; border-radius: 0.18em; border-width: 0.03em; margin-right: 0.25em; padding: 0.1em 0.25em 0em 0.2em; cursor: default;"] {
+  span[style="font-size: 0.85em; color: oklch(53.08% 0.2178 29.23); vertical-align: text-bottom; border-style: solid; border-radius: 0.18em; border-width: 0.03em; margin-right: 0.25em; padding: 0.1em 0.25em 0em 0.2em; cursor: default;"] {
     color: var(--dict-color) !important;
   }
 }
@@ -4823,7 +4822,7 @@ li.is-new-card:not(:hover) .related-word {
 }
 
 .custom-dark-mode .fade-to-show-more {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000) !important;
+  background: linear-gradient(to bottom, oklch(10% 0.02 260 / 0.0),  oklch(10% 0.02 260)) !important;
 }
 
 .fade-to-show-more::before {
@@ -4834,13 +4833,13 @@ li.is-new-card:not(:hover) .related-word {
   right: 0;
   bottom: 0;
   opacity: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
+  background: linear-gradient(to bottom, transparent, oklch(10% 0.02 260 / 0.02));
   transition: opacity var(--base-transition);
 }
 
 .card.nightMode .fade-to-show-more::before,
 .custom-dark-mode .fade-to-show-more::before {
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03));
+  background: linear-gradient(to bottom, transparent, oklch(96% 0.018 92 / 0.03));
 }
 
 .fade-to-show-more:hover::before {
@@ -4868,23 +4867,23 @@ li.is-new-card:not(:hover) .related-word {
 
 .sentence-nav.left {
   left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
+  background: linear-gradient(to right, oklch(10% 0.02 260), transparent);
 }
 
 .sentence-nav.right {
   right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
+  background: linear-gradient(to left, oklch(10% 0.02 260), transparent);
 }
 
 :is(.card.nightMode, .custom-dark-mode) {
   .sentence-nav.left {
     left: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
+    background: linear-gradient(to right, oklch(96% 0.018 92), transparent);
   }
 
   .sentence-nav.right {
     right: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
+    background: linear-gradient(to left, oklch(96% 0.018 92), transparent);
   }
 }
 
@@ -4956,11 +4955,11 @@ li.is-new-card:not(:hover) .related-word {
 
   @container style(--main-bg-shadow-visibility: 1) {
     .front::before, .back::before {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px var(--card-shadow-light);
+      box-shadow: 0 10px 25px oklch(10% 0.02 260 / 0.1), 0 5px 10px var(--card-shadow-light);
     }
 
     :is(.card.nightMode, .custom-dark-mode) :is(.front, .back)::before {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 5px 10px var(--card-shadow);
+      box-shadow: 0 10px 25px oklch(10% 0.02 260 / 0.5), 0 5px 10px var(--card-shadow);
     }
   }
 
@@ -5161,11 +5160,11 @@ li.is-new-card:not(:hover) .related-word {
 
   @container style(--main-bg-shadow-1050-visibility: 1) {
     .front::before, .back::before {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px var(--card-shadow-light);
+      box-shadow: 0 10px 25px oklch(10% 0.02 260 / 0.1), 0 5px 10px var(--card-shadow-light);
     }
 
     :is(.card.nightMode, .custom-dark-mode) :is(.front, .back)::before {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 5px 10px var(--card-shadow);
+      box-shadow: 0 10px 25px oklch(10% 0.02 260 / 0.5), 0 5px 10px var(--card-shadow);
     }
   }
 
@@ -5461,8 +5460,8 @@ li.is-new-card:not(:hover) .related-word {
 
   @container style(--card-background-fade: 1) {
     .picture-container img {
-      -webkit-mask-image: linear-gradient(to bottom, black var(--card-fade-strength), transparent 100%);
-      mask-image: linear-gradient(to bottom, black var(--card-fade-strength), transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, oklch(10% 0.02 260) var(--card-fade-strength), transparent 100%);
+      mask-image: linear-gradient(to bottom, oklch(10% 0.02 260) var(--card-fade-strength), transparent 100%);
     }
   }
 
@@ -5614,11 +5613,11 @@ li.is-new-card:not(:hover) .related-word {
       font-weight: bold;
       border-radius: var(--border-radius-ms);
       background-color: rgba(0, 0, 0, var(--picture-counter-bg-opacity));
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 2px 0 1px rgba(0,0,0,0.1),
-                   -2px 0 1px rgba(0,0,0,0.1),
-                   0 2px 1px rgba(0,0,0,0.1),
-                   0 -2px 1px rgba(0,0,0,0.1),
+      color: oklch(96% 0.018 92 / 0.9);
+      text-shadow: 2px 0 1px oklch(10% 0.02 260 / 0.1),
+                   -2px 0 1px oklch(10% 0.02 260 / 0.1),
+                   0 2px 1px oklch(10% 0.02 260 / 0.1),
+                   0 -2px 1px oklch(10% 0.02 260 / 0.1),
                    0 0 4px rgba(0, 0, 0, var(--picture-counter-shadow-intensity));
       transition: opacity var(--fast-transition);
       opacity: 0; 
@@ -5694,8 +5693,8 @@ li.is-new-card:not(:hover) .related-word {
 
     @container style(--word-background-fade: 1) {
       .picture-container {
-        -webkit-mask-image: linear-gradient(to bottom, black var(--word-fade-strength), transparent 100%);
-        mask-image: linear-gradient(to bottom, black var(--word-fade-strength), transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, oklch(10% 0.02 260) var(--word-fade-strength), transparent 100%);
+        mask-image: linear-gradient(to bottom, oklch(10% 0.02 260) var(--word-fade-strength), transparent 100%);
       }
     }
 
@@ -5830,173 +5829,173 @@ li.is-new-card:not(:hover) .related-word {
 
 /* Dict Colors */
 :root {
-  --selection-text-color-light:             #009688;
+  --selection-text-color-light:              oklch(60.45% 0.1074 183.38);
   --selection-text-color-rgb-light:         0, 150, 136;
-  --selection-text-color-dark:              #4DB6AC;
+  --selection-text-color-dark:               oklch(71.24% 0.0977 186.68);
   --selection-text-color-dark-rgb:          77, 182, 172;
-  --jmdict-color-light:                     #007ACC;
+  --jmdict-color-light:                      oklch(56.7% 0.1546 248.52);
   --jmdict-color-rgb-light:                 0, 122, 204;
-  --jmdict-color-dark:                      #4AB5FF;
+  --jmdict-color-dark:                       oklch(74.33% 0.1445 242.64);
   --jmdict-color-dark-rgb:                  74, 181, 255;
-  --shinmeikai-color-light:                 #C80000;
+  --shinmeikai-color-light:                  oklch(52.3% 0.2146 29.23);
   --shinmeikai-color-rgb-light:             200, 0, 0;
-  --shinmeikai-color-dark:                  #FF0000;
+  --shinmeikai-color-dark:                   oklch(62.8% 0.2577 29.23);
   --shinmeikai-color-dark-rgb:              255, 0, 0;
-  --daijirin-color-light:                   #8A5AB8;
+  --daijirin-color-light:                    oklch(56.07% 0.1468 305.78);
   --daijirin-color-rgb-light:               138, 90, 184;
-  --daijirin-color-dark:                    #B388DD;
+  --daijirin-color-dark:                     oklch(70.0% 0.1287 306.61);
   --daijirin-color-dark-rgb:                179, 136, 221;
-  --digital-daijisen-color-light:           #D83A3A;
+  --digital-daijisen-color-light:            oklch(58.74% 0.1951 25.56);
   --digital-daijisen-color-rgb-light:       216, 58, 58;
-  --digital-daijisen-color-dark:            #FF5252;
+  --digital-daijisen-color-dark:             oklch(67.86% 0.2095 24.66);
   --digital-daijisen-color-dark-rgb:        255, 82, 82;
-  --gendai-kokugo-reikai-color-light:       #B5282F;
+  --gendai-kokugo-reikai-color-light:        oklch(50.85% 0.1768 23.94);
   --gendai-kokugo-reikai-color-rgb-light:   181, 40, 47;
-  --gendai-kokugo-reikai-color-dark:        #E3323A;
+  --gendai-kokugo-reikai-color-dark:         oklch(59.99% 0.2117 24.44);
   --gendai-kokugo-reikai-color-dark-rgb:    227, 50, 58;
-  --iwanami-kokugo-jiten-color-light:       #4CAF50;
+  --iwanami-kokugo-jiten-color-light:        oklch(67.31% 0.1624 144.21);
   --iwanami-kokugo-jiten-color-rgb-light:   76, 175, 80;
-  --iwanami-kokugo-jiten-color-dark:        #79C879;
+  --iwanami-kokugo-jiten-color-dark:         oklch(76.22% 0.1354 144.1);
   --iwanami-kokugo-jiten-color-dark-rgb:    121, 200, 121;
-  --koujien-color-light:                    #D94A23;
+  --koujien-color-light:                     oklch(60.32% 0.186 35.53);
   --koujien-color-rgb-light:                217, 74, 35;
-  --koujien-color-dark:                     #FD5629;
+  --koujien-color-dark:                      oklch(67.53% 0.2106 35.36);
   --koujien-color-dark-rgb:                 253, 86, 41;
-  --meikyo-kokugo-jiten-color-light:        #4967E6;
+  --meikyo-kokugo-jiten-color-light:         oklch(56.36% 0.195 269.17);
   --meikyo-kokugo-jiten-color-rgb-light:    73, 103, 230;
-  --meikyo-kokugo-jiten-color-dark:         #6B85FF;
+  --meikyo-kokugo-jiten-color-dark:          oklch(65.7% 0.1821 271.51);
   --meikyo-kokugo-jiten-color-dark-rgb:     107, 133, 255;
-  --obunsha-kokugo-jiten-color-light:       #008080;
+  --obunsha-kokugo-jiten-color-light:        oklch(54.31% 0.0927 194.77);
   --obunsha-kokugo-jiten-color-rgb-light:   0, 128, 128;
-  --obunsha-kokugo-jiten-color-dark:        #BBFFFF;
+  --obunsha-kokugo-jiten-color-dark:         oklch(95.51% 0.0673 196.08);
   --obunsha-kokugo-jiten-color-dark-rgb:    187, 255, 255;
-  --sanseido-kokugo-jiten-color-light:      #B8562D;
+  --sanseido-kokugo-jiten-color-light:       oklch(56.83% 0.1383 41.88);
   --sanseido-kokugo-jiten-color-rgb-light:  184, 86, 45;
-  --sanseido-kokugo-jiten-color-dark:       #E56B39;
+  --sanseido-kokugo-jiten-color-dark:        oklch(66.67% 0.1648 41.48);
   --sanseido-kokugo-jiten-color-dark-rgb:   229, 107, 57;
-  --shinsen-kokugo-color-light:             #B80065;
+  --shinsen-kokugo-color-light:              oklch(50.85% 0.2071 358.04);
   --shinsen-kokugo-color-rgb-light:         184, 0, 101;
-  --shinsen-kokugo-color-dark:              #E5007F;
+  --shinsen-kokugo-color-dark:               oklch(59.89% 0.2439 358.09);
   --shinsen-kokugo-color-dark-rgb:          229, 0, 127;
-  --seisenban-color-light:                  #A8A88A;
+  --seisenban-color-light:                   oklch(72.35% 0.0418 107.4);
   --seisenban-color-rgb-light:              168, 168, 138;
-  --seisenban-color-dark:                   #EEEECB;
+  --seisenban-color-dark:                    oklch(94.01% 0.0459 107.25);
   --seisenban-color-dark-rgb:               238, 238, 204;
-  --hybrid-shin-jirin-color-light:          #AAB0D5;
+  --hybrid-shin-jirin-color-light:           oklch(76.49% 0.0533 277.83);
   --hybrid-shin-jirin-color-rgb-light:      170, 176, 213;
-  --hybrid-shin-jirin-color-dark:           #DDDDFA;
+  --hybrid-shin-jirin-color-dark:            oklch(90.65% 0.0394 285.59);
   --hybrid-shin-jirin-color-dark-rgb:       221, 221, 238;
-  --new-saitou-waei-color-light:            #B590C8;
+  --new-saitou-waei-color-light:             oklch(70.7% 0.0896 313.96);
   --new-saitou-waei-color-rgb-light:        181, 144, 200;
-  --new-saitou-waei-color-dark:             #F4E1FE;
+  --new-saitou-waei-color-dark:              oklch(94.5% 0.05 300);
   --new-saitou-waei-color-dark-rgb:         244, 225, 254;
-  --shin-waei-color-light:                  #3E8E60;
+  --shin-waei-color-light:                   oklch(58.4% 0.1064 155.72);
   --shin-waei-color-rgb-light:              62, 142, 96;
-  --shin-waei-color-dark:                   #5DBB87;
+  --shin-waei-color-dark:                    oklch(72.04% 0.1186 157.32);
   --shin-waei-color-dark-rgb:               93, 187, 135;
-  --kanjigen-color-light:                   #9E7648;
+  --kanjigen-color-light:                    oklch(59.52% 0.0801 69.15);
   --kanjigen-color-rgb-light:               158, 118, 72;
-  --kanjigen-color-dark:                    #C9955D;
+  --kanjigen-color-dark:                     oklch(70.76% 0.0961 67.27);
   --kanjigen-color-dark-rgb:                201, 149, 93;
-  --kanjipedia-doukun-igi-color-light:      #757575;
+  --kanjipedia-doukun-igi-color-light:       oklch(56.24% 0.0 89.88);
   --kanjipedia-doukun-igi-color-rgb-light:  117, 117, 117;
-  --kanjipedia-doukun-igi-color-dark:       #B7B7B7;
+  --kanjipedia-doukun-igi-color-dark:        oklch(77.94% 0.0 89.88);
   --kanjipedia-doukun-igi-color-dark-rgb:   183, 183, 183;
-  --kanken-kanji-jiten-color-light:         #B9872E;
+  --kanken-kanji-jiten-color-light:          oklch(65.69% 0.1191 77.86);
   --kanken-kanji-jiten-color-rgb-light:     185, 135, 46;
-  --kanken-kanji-jiten-color-dark:          #E7A93A;
+  --kanken-kanji-jiten-color-dark:           oklch(77.48% 0.1416 77.85);
   --kanken-kanji-jiten-color-dark-rgb:      231, 169, 58;
-  --gakken-yojijukugo-color-light:          #8D9A75;
+  --gakken-yojijukugo-color-light:           oklch(66.58% 0.0547 123.6);
   --gakken-yojijukugo-color-rgb-light:      141, 154, 117;
-  --gakken-yojijukugo-color-dark:           #B4C098;
+  --gakken-yojijukugo-color-dark:            oklch(78.8% 0.0562 121.26);
   --gakken-yojijukugo-color-dark-rgb:       180, 192, 152;
-  --gogen-yurai-jiten-color-light:          #A38625;
+  --gogen-yurai-jiten-color-light:           oklch(63.02% 0.1159 91.38);
   --gogen-yurai-jiten-color-rgb-light:      163, 134, 37;
-  --gogen-yurai-jiten-color-dark:           #CEA92F;
+  --gogen-yurai-jiten-color-dark:            oklch(74.78% 0.1387 90.99);
   --gogen-yurai-jiten-color-dark-rgb:       206, 169, 47;
-  --koji-kotowaza-no-jiten-color-light:     #8E7270;
+  --koji-kotowaza-no-jiten-color-light:      oklch(57.85% 0.0356 23.0);
   --koji-kotowaza-no-jiten-color-rgb-light: 142, 114, 112;
-  --koji-kotowaza-no-jiten-color-dark:      #B18F8D;
+  --koji-kotowaza-no-jiten-color-dark:       oklch(68.09% 0.0414 22.16);
   --koji-kotowaza-no-jiten-color-dark-rgb:  177, 143, 141;
-  --nihongo-zokugo-jisho-color-light:       #D450CF;
+  --nihongo-zokugo-jisho-color-light:        oklch(65.19% 0.2191 329.28);
   --nihongo-zokugo-jisho-color-rgb-light:   212, 80, 207;
-  --nihongo-zokugo-jisho-color-dark:        #FF69FA;
+  --nihongo-zokugo-jisho-color-dark:         oklch(75.73% 0.2432 328.98);
   --nihongo-zokugo-jisho-color-dark-rgb:    255, 105, 250;
-  --ruigo-jiten-online-color-light:         #C06E5B;
+  --ruigo-jiten-online-color-light:          oklch(62.53% 0.1087 33.98);
   --ruigo-jiten-online-color-rgb-light:     192, 110, 91;
-  --ruigo-jiten-online-color-dark:          #E88B74;
+  --ruigo-jiten-online-color-dark:           oklch(72.96% 0.119 34.73);
   --ruigo-jiten-online-color-dark-rgb:      232, 139, 116;
-  --shingo-jiji-yougo-color-light:          #638CAF;
+  --shingo-jiji-yougo-color-light:           oklch(62.36% 0.0699 245.01);
   --shingo-jiji-yougo-color-rgb-light:      99, 140, 175;
-  --shingo-jiji-yougo-color-dark:           #8EB8DE;
+  --shingo-jiji-yougo-color-dark:            oklch(76.59% 0.0709 246.19);
   --shingo-jiji-yougo-color-dark-rgb:       142, 184, 222;
-  --donna-toki-dou-tsukau-color-light:      #5C84C0;
+  --donna-toki-dou-tsukau-color-light:       oklch(60.97% 0.1022 258.28);
   --donna-toki-dou-tsukau-color-rgb-light:  92, 132, 192;
-  --donna-toki-dou-tsukau-color-dark:       #7EA8E8;
+  --donna-toki-dou-tsukau-color-dark:        oklch(72.65% 0.1044 258.6);
   --donna-toki-dou-tsukau-color-dark-rgb:   126, 168, 232;
-  --e-de-wakaru-kanyouku-color-light:        #3DA98E;
+  --e-de-wakaru-kanyouku-color-light:         oklch(66.57% 0.1064 173.28);
   --e-de-wakaru-kanyouku-color-rgb-light:    61, 169, 142;
-  --e-de-wakaru-kanyouku-color-dark:         #4CCFAD;
+  --e-de-wakaru-kanyouku-color-dark:          oklch(77.36% 0.1248 172.52);
   --e-de-wakaru-kanyouku-color-dark-rgb:     76, 207, 173;
-  --e-de-wakaru-nihongo-color-light:        #A93D58;
+  --e-de-wakaru-nihongo-color-light:         oklch(51.8% 0.1429 8.32);
   --e-de-wakaru-nihongo-color-rgb-light:    169, 61, 88;
-  --e-de-wakaru-nihongo-color-dark:         #CF4C6E;
+  --e-de-wakaru-nihongo-color-dark:          oklch(60.19% 0.167 7.77);
   --e-de-wakaru-nihongo-color-dark-rgb:     207, 76, 110;
-  --jlpt-bunpou-kaisetsu-color-light:       #D32F2F;
+  --jlpt-bunpou-kaisetsu-color-light:        oklch(56.8% 0.2002 26.41);
   --jlpt-bunpou-kaisetsu-color-rgb-light:   211, 47, 47;
-  --jlpt-bunpou-kaisetsu-color-dark:        #F44236;
+  --jlpt-bunpou-kaisetsu-color-dark:         oklch(64.18% 0.2161 28.61);
   --jlpt-bunpou-kaisetsu-color-dark-rgb:    244, 66, 54;
-  --mainichi-nonbiri-color-light:           #EAA6B9;
+  --mainichi-nonbiri-color-light:            oklch(79.51% 0.0835 0.84);
   --mainichi-nonbiri-color-rgb-light:       234, 166, 185;
-  --mainichi-nonbiri-color-dark:            #FFD8E4;
+  --mainichi-nonbiri-color-dark:             oklch(91.84% 0.046 357.58);
   --mainichi-nonbiri-color-dark-rgb:        255, 216, 228;
-  --nihongo-bunpou-jiten-color-light:       #465DDB;
+  --nihongo-bunpou-jiten-color-light:        oklch(53.47% 0.1934 270.58);
   --nihongo-bunpou-jiten-color-rgb-light:   70, 93, 219;
-  --nihongo-bunpou-jiten-color-dark:        #687EFF;
+  --nihongo-bunpou-jiten-color-dark:         oklch(64.19% 0.1916 272.59);
   --nihongo-bunpou-jiten-color-dark-rgb:    104, 126, 255;
-  --tsukaikata-no-wakaru-color-light:       #C06E5B;
+  --tsukaikata-no-wakaru-color-light:        oklch(62.53% 0.1087 33.98);
   --tsukaikata-no-wakaru-color-rgb-light:   192, 110, 91;
-  --tsukaikata-no-wakaru-color-dark:        #E88B74;
+  --tsukaikata-no-wakaru-color-dark:         oklch(72.96% 0.119 34.73);
   --tsukaikata-no-wakaru-color-dark-rgb:    232, 139, 116;
-  --kids-japonica-color-light:              #D98E00;
+  --kids-japonica-color-light:               oklch(70.59% 0.1511 72.05);
   --kids-japonica-color-rgb-light:          217, 142, 0;
-  --kids-japonica-color-dark:               #FFA500;
+  --kids-japonica-color-dark:                oklch(79.27% 0.171 70.67);
   --kids-japonica-color-dark-rgb:           255, 165, 0;
-  --reikai-gakushuu-kokugo-color-light:     #D28A22;
+  --reikai-gakushuu-kokugo-color-light:      oklch(69.12% 0.1397 69.88);
   --reikai-gakushuu-kokugo-color-rgb-light: 210, 138, 34;
-  --reikai-gakushuu-kokugo-color-dark:      #FAA72F;
+  --reikai-gakushuu-kokugo-color-dark:       oklch(79.18% 0.1574 70.41);
   --reikai-gakushuu-kokugo-color-dark-rgb:  250, 167, 47;
-  --jiten-online-color-light:               #EBC258;
+  --jiten-online-color-light:                oklch(83.01% 0.1319 87.99);
   --jiten-online-color-rgb-light:           235, 194, 88;
-  --jiten-online-color-dark:                #FFE37C;
+  --jiten-online-color-dark:                 oklch(91.82% 0.1268 94.51);
   --jiten-online-color-dark-rgb:            255, 227, 124;
-  --jitsuyou-nihongo-color-light:           #848DA7;
+  --jitsuyou-nihongo-color-light:            oklch(64.51% 0.0403 270.2);
   --jitsuyou-nihongo-color-rgb-light:       132, 141, 167;
-  --jitsuyou-nihongo-color-dark:            #A6B0CF;
+  --jitsuyou-nihongo-color-dark:             oklch(75.97% 0.0459 271.19);
   --jitsuyou-nihongo-color-dark-rgb:        166, 176, 207;
-  --pixiv-color-light:                      #0078D4;
+  --pixiv-color-light:                       oklch(56.77% 0.1665 251.31);
   --pixiv-color-rgb-light:                  0, 120, 212;
-  --pixiv-color-dark:                       #33A1FF;
+  --pixiv-color-dark:                        oklch(69.3% 0.1686 249.09);
   --pixiv-color-dark-rgb:                   51, 161, 255;
-  --sozai-jiten-color-light:                #4A8B95;
+  --sozai-jiten-color-light:                 oklch(59.76% 0.0681 208.43);
   --sozai-jiten-color-rgb-light:            74, 139, 149;
-  --sozai-jiten-color-dark:                 #65B3BF;
+  --sozai-jiten-color-dark:                  oklch(72.11% 0.0788 208.34);
   --sozai-jiten-color-dark-rgb:             101, 179, 191;
-  --wikipedia-color-light:                  #4674C3;
+  --wikipedia-color-light:                   oklch(56.47% 0.1328 260.52);
   --wikipedia-color-rgb-light:              70, 116, 195;
-  --wikipedia-color-dark:                   #6495ED;
+  --wikipedia-color-dark:                    oklch(67.46% 0.1414 261.34);
   --wikipedia-color-dark-rgb:               100, 149, 237;
-  --goiryoku-nijijukugo-color-light:        #2A9D8F;
+  --goiryoku-nijijukugo-color-light:         oklch(63.04% 0.1013 183.03);
   --goiryoku-nijijukugo-color-rgb-light:    42, 157, 143;
-  --goiryoku-nijijukugo-color-dark:         #48D1BF;
+  --goiryoku-nijijukugo-color-dark:          oklch(78.27% 0.1197 182.76);
   --goiryoku-nijijukugo-color-dark-rgb:     72, 209, 191;
-  --shogakukan-reikai-12-color-light:       #00ACC1;
+  --shogakukan-reikai-12-color-light:        oklch(68.21% 0.118 210.05);
   --shogakukan-reikai-12-color-rgb-light:   0, 172, 193;
-  --shogakukan-reikai-12-color-dark:        #4DD0E1;
+  --shogakukan-reikai-12-color-dark:         oklch(79.31% 0.1145 207.31);
   --shogakukan-reikai-12-color-dark-rgb:    77, 208, 225;
-  --weblio-kogo-jiten-color-light:          #385499;
+  --weblio-kogo-jiten-color-light:           oklch(46.02% 0.1172 265.44);
   --weblio-kogo-jiten-color-rgb-light:      56, 84, 153;
-  --weblio-kogo-jiten-color-dark:           #8DA7E6;
+  --weblio-kogo-jiten-color-dark:            oklch(73.28% 0.0964 266.79);
   --weblio-kogo-jiten-color-dark-rgb:       141, 167, 230;
 }
 

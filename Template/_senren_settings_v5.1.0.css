@@ -13,7 +13,7 @@
 #senren-settings-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: oklch(10% 0.02 260 / 0.6);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -31,14 +31,14 @@
 }
 
 .senren-dialog {
-  background: #fff;
-  color: #333;
+  background:  oklch(96% 0.018 92);
+  color:  oklch(32.11% 0.0 89.88);
   width: 1200px;
   height: 750px;
   max-width: 98vw;
   max-height: 95vh;
   border-radius: 8px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 25px 50px oklch(10% 0.02 260 / 0.4);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -46,13 +46,13 @@
 
 .card.nightMode .senren-dialog,
 .custom-dark-mode .senren-dialog {
-  background: #1e1e1e;
-  color: #e4e4e4;
+  background:  oklch(23.5% 0.0 89.88);
+  color:  oklch(91.89% 0.0 89.88);
 }
 
 .senren-header {
   padding: 12px 24px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,7 +61,7 @@
 
 .card.nightMode .senren-header,
 .custom-dark-mode .senren-header {
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: oklch(96% 0.018 92 / 0.08);
 }
 
 .senren-header h2 {
@@ -86,7 +86,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color:  oklch(68.3% 0.0 89.88);
   transition: background-color 0.2s ease, 
               color 0.2s ease;
 }
@@ -101,19 +101,19 @@
 }
 
 .senren-icon-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #333;
+  background-color: oklch(10% 0.02 260 / 0.05);
+  color:  oklch(32.11% 0.0 89.88);
 }
 
 .card.nightMode .senren-icon-btn,
 .custom-dark-mode .senren-icon-btn {
-  color: #888;
+  color:  oklch(62.68% 0.0 89.88);
 }
 
 .card.nightMode .senren-icon-btn:hover,
 .custom-dark-mode .senren-icon-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: oklch(96% 0.018 92 / 0.1);
+  color:  oklch(96% 0.018 92);
 }
 
 .senren-body {
@@ -124,8 +124,8 @@
 
 .senren-sidebar {
   width: 200px;
-  background: #f8f8f8;
-  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  background:  oklch(96% 0.018 92);
+  border-right: 1px solid oklch(10% 0.02 260 / 0.06);
   overflow-y: auto;
   padding: 12px 8px;
   flex-shrink: 0;
@@ -133,8 +133,8 @@
 
 .card.nightMode .senren-sidebar,
 .custom-dark-mode .senren-sidebar {
-  background: #252525;
-  border-right-color: rgba(255, 255, 255, 0.06);
+  background:  oklch(26.45% 0.0 89.88);
+  border-right-color: oklch(96% 0.018 92 / 0.06);
 }
 
 .senren-nav-item {
@@ -142,7 +142,7 @@
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
-  color: #666;
+  color:  oklch(51.03% 0.0 89.88);
   border-left: none;
   border-radius: 6px;
   text-align: left;
@@ -174,25 +174,25 @@
 
 .card.nightMode .senren-nav-item,
 .custom-dark-mode .senren-nav-item {
-  color: #aaa;
+  color:  oklch(73.8% 0.0 89.88);
 }
 
 .senren-nav-item:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: #222;
+  background: oklch(10% 0.02 260 / 0.04);
+  color:  oklch(25.2% 0.0 89.88);
 }
 
 .card.nightMode .senren-nav-item:hover,
 .custom-dark-mode .senren-nav-item:hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: #fff;
+  background: oklch(96% 0.018 92 / 0.04);
+  color:  oklch(96% 0.018 92);
 }
 
 .senren-nav-item.active {
-  background: #fff;
-  color: #000;
+  background:  oklch(96% 0.018 92);
+  color:  oklch(10% 0.02 260);
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px oklch(10% 0.02 260 / 0.05);
 }
 
 .senren-nav-item.active::before {
@@ -202,8 +202,8 @@
 
 .card.nightMode .senren-nav-item.active,
 .custom-dark-mode .senren-nav-item.active {
-  background: #333;
-  color: #fff;
+  background:  oklch(32.11% 0.0 89.88);
+  color:  oklch(96% 0.018 92);
   box-shadow: none;
 }
 
@@ -240,13 +240,13 @@
   font-size: 16px;
   font-weight: 600;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.06);
   text-align: left;
 }
 
 .card.nightMode .senren-panel h3,
 .custom-dark-mode .senren-panel h3 {
-  border-bottom-color: rgba(255, 255, 255, 0.06);
+  border-bottom-color: oklch(96% 0.018 92 / 0.06);
 }
 
 .senren-panel-header {
@@ -254,13 +254,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.06);
   padding-bottom: 8px;
 }
 
 .card.nightMode .senren-panel-header,
 .custom-dark-mode .senren-panel-header {
-  border-bottom-color: rgba(255, 255, 255, 0.06);
+  border-bottom-color: oklch(96% 0.018 92 / 0.06);
 }
 
 .senren-panel-header h3 {
@@ -273,31 +273,31 @@
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
-  color: #888;
+  color:  oklch(62.68% 0.0 89.88);
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
   border-radius: 6px;
-  background: rgba(0, 0, 0, 0.03);
+  background: oklch(10% 0.02 260 / 0.03);
   transition: all 0.2s;
 }
 
 .card.nightMode .senren-btn-browse,
 .custom-dark-mode .senren-btn-browse {
-  background: rgba(255, 255, 255, 0.03);
-  color: #aaa;
+  background: oklch(96% 0.018 92 / 0.03);
+  color:  oklch(73.8% 0.0 89.88);
 }
 
 .senren-btn-browse:hover {
   background: var(--light-highlight);
-  color: #fff !important;
+  color:  oklch(96% 0.018 92) !important;
 }
 
 .card.nightMode .senren-btn-browse:hover,
 .custom-dark-mode .senren-btn-browse:hover {
   background: var(--dark-highlight);
-  color: #1e1e1e !important;
+  color:  oklch(23.5% 0.0 89.88) !important;
 }
 
 /* GRID SYSTEM
@@ -347,8 +347,8 @@
 }
 
 .senren-grid-card {
-  background: rgba(0, 0, 0, 0.025);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: oklch(10% 0.02 260 / 0.03);
+  border: 1px solid oklch(10% 0.02 260 / 0.06);
   border-radius: 6px;
   padding: 12px 16px;
   display: flex;
@@ -357,8 +357,8 @@
 
 .card.nightMode .senren-grid-card,
 .custom-dark-mode .senren-grid-card {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.05);
+  background: oklch(96% 0.018 92 / 0.03);
+  border-color: oklch(96% 0.018 92 / 0.05);
 }
 
 .senren-group-header {
@@ -367,16 +367,16 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;
-  color: #888;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color:  oklch(62.68% 0.0 89.88);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.1);
   padding-bottom: 4px;
   text-align: left;
 }
 
 .card.nightMode .senren-group-header,
 .custom-dark-mode .senren-group-header {
-  color: #aaa;
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  color:  oklch(73.8% 0.0 89.88);
+  border-bottom-color: oklch(96% 0.018 92 / 0.1);
 }
 
 .senren-sub-header {
@@ -385,16 +385,16 @@
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-weight: 600;
-  color: #aaa;
+  color:  oklch(73.8% 0.0 89.88);
   padding-top: 5px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid oklch(10% 0.02 260 / 0.05);
   text-align: left;
 }
 
 .card.nightMode .senren-sub-header,
 .custom-dark-mode .senren-sub-header {
-  color: #888;
-  border-top-color: rgba(255, 255, 255, 0.05);
+  color:  oklch(62.68% 0.0 89.88);
+  border-top-color: oklch(96% 0.018 92 / 0.05);
 }
 
 /* FORM ELEMENTS
@@ -426,7 +426,7 @@
 .senren-panel[data-group="Picture"] .senren-grid-card .senren-row {
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.05);
   padding: 8px 0;
 }
 
@@ -446,7 +446,7 @@
 .custom-dark-mode .senren-panel[data-group="Deck Links"] .senren-grid-card .senren-row,
 .card.nightMode .senren-panel[data-group="Picture"] .senren-grid-card .senren-row,
 .custom-dark-mode .senren-panel[data-group="Picture"] .senren-grid-card .senren-row {
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: oklch(96% 0.018 92 / 0.05);
 }
 
 .senren-panel[data-group="Dictionary"] .senren-grid-card .senren-row:last-child,
@@ -487,23 +487,23 @@
 
 .senren-grid-card .senren-label-main {
   font-size: 13px;
-  color: #555;
+  color:  oklch(44.95% 0.0 89.88);
   font-weight: 600;
 }
 
 .card.nightMode .senren-grid-card .senren-label-main,
 .custom-dark-mode .senren-grid-card .senren-label-main {
-  color: #ccc;
+  color:  oklch(84.52% 0.0 89.88);
 }
 
 .senren-row.standard {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.05);
   padding: 12px 0;
 }
 
 .card.nightMode .senren-row.standard,
 .custom-dark-mode .senren-row.standard {
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: oklch(96% 0.018 92 / 0.05);
 }
 
 .senren-label-group {
@@ -537,7 +537,7 @@
   flex: 1;
   cursor: pointer;
   height: 4px;
-  background: #ddd;
+  background:  oklch(89.75% 0.0 89.88);
   border-radius: 5px;
   appearance: none;
   -webkit-appearance: none;
@@ -546,7 +546,7 @@
 
 .card.nightMode .senren-range,
 .custom-dark-mode .senren-range {
-  background: #444;
+  background:  oklch(38.67% 0.0 89.88);
 }
 
 /* Slider Thumb */
@@ -554,11 +554,11 @@
   -webkit-appearance: none;
   width: 14px;
   height: 14px;
-  background: var(--light-highlight, #007bff);
+  background: var(--light-highlight,  oklch(60.48% 0.2166 257.21));
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 2px solid  oklch(96% 0.018 92);
+  box-shadow: 0 1px 2px oklch(10% 0.02 260 / 0.2);
   margin-top: -5px;
 }
 
@@ -569,8 +569,8 @@
 
 .card.nightMode .senren-range::-webkit-slider-thumb,
 .custom-dark-mode .senren-range::-webkit-slider-thumb {
-  background: var(--dark-highlight, #007bff);
-  border-color: #333;
+  background: var(--dark-highlight,  oklch(60.48% 0.2166 257.21));
+  border-color:  oklch(32.11% 0.0 89.88);
 }
 
 .senren-range-value {
@@ -583,9 +583,9 @@
 
 /* Text Inputs */
 .senren-input {
-  background: rgba(0, 0, 0, 0.03);
+  background: oklch(10% 0.02 260 / 0.03);
   border: 1px solid transparent;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid  oklch(73.8% 0.0 89.88);
   color: inherit;
   text-align: center;
   font-size: 13px;
@@ -604,13 +604,13 @@
 
 .card.nightMode .senren-input,
 .custom-dark-mode .senren-input {
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(96% 0.018 92 / 0.05);
 }
 
 .senren-input:focus {
   outline: none;
   border-bottom-color: var(--light-highlight);
-  background: rgba(0, 0, 0, 0.01);
+  background: oklch(10% 0.02 260 / 0.01);
 }
 
 .card.nightMode .senren-input:focus,
@@ -630,7 +630,7 @@
   width: 28px;
   height: 28px;
   padding: 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid oklch(10% 0.02 260 / 0.1);
   border-radius: 4px;
   background: none;
   cursor: pointer;
@@ -662,14 +662,14 @@
 /* Segmented Buttons */
 .senren-segment-group {
   display: flex;
-  background: #eee;
+  background:  oklch(94.91% 0.0 89.88);
   padding: 2px;
   border-radius: 4px;
 }
 
 .card.nightMode .senren-segment-group,
 .custom-dark-mode .senren-segment-group {
-  background: #333;
+  background:  oklch(32.11% 0.0 89.88);
 }
 
 .senren-segment-btn {
@@ -693,16 +693,16 @@
 }
 
 .senren-segment-btn.active {
-  background: #fff;
-  color: #000;
+  background:  oklch(96% 0.018 92);
+  color:  oklch(10% 0.02 260);
   opacity: 1;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px oklch(10% 0.02 260 / 0.1);
 }
 
 .card.nightMode .senren-segment-btn.active,
 .custom-dark-mode .senren-segment-btn.active {
-  background: #555;
-  color: #fff;
+  background:  oklch(44.95% 0.0 89.88);
+  color:  oklch(96% 0.018 92);
 }
 
 /* On/Off Toggle Switches */
@@ -724,14 +724,14 @@
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: #ddd;
+  background-color:  oklch(89.75% 0.0 89.88);
   border-radius: 20px;
   transition: background-color 0.3s;
 }
 
 .card.nightMode .senren-slider,
 .custom-dark-mode .senren-slider {
-  background-color: #444;
+  background-color:  oklch(38.67% 0.0 89.88);
 }
 
 .senren-slider:before {
@@ -741,9 +741,9 @@
   width: 16px;
   left: 2px;
   bottom: 2px;
-  background-color: white;
+  background-color: oklch(96% 0.018 92);
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px oklch(10% 0.02 260 / 0.15);
   transition: background-color 0.3s, 
               transform 0.3s;
 }
@@ -759,7 +759,7 @@ input:checked+.senren-slider {
 
 .card.nightMode input:checked+.senren-slider:before,
 .custom-dark-mode input:checked+.senren-slider:before {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: oklch(10% 0.02 260 / 0.9);
 }
 
 input:checked+.senren-slider:before {
@@ -770,8 +770,8 @@ input:checked+.senren-slider:before {
 ========================================================================== */
 .senren-footer {
   padding: 12px 24px;
-  background: #f9f9f9;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  background:  oklch(96% 0.018 92);
+  border-top: 1px solid oklch(10% 0.02 260 / 0.06);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -782,8 +782,8 @@ input:checked+.senren-slider:before {
 
 .card.nightMode .senren-footer,
 .custom-dark-mode .senren-footer {
-  background: #202020;
-  border-top-color: rgba(255, 255, 255, 0.06);
+  background:  oklch(24.35% 0.0 89.88);
+  border-top-color: oklch(96% 0.018 92 / 0.06);
 }
 
 .senren-footer-left {
@@ -802,7 +802,7 @@ input:checked+.senren-slider:before {
 /* Base Button Style */
 .senren-btn {
   background: transparent;
-  border: 1px solid #ccc;
+  border: 1px solid  oklch(84.52% 0.0 89.88);
   color: inherit;
   padding: 6px 16px;
   border-radius: 4px !important;
@@ -819,19 +819,19 @@ input:checked+.senren-slider:before {
 
 .card.nightMode .senren-btn,
 .custom-dark-mode .senren-btn {
-  border-color: #555;
+  border-color:  oklch(44.95% 0.0 89.88);
 }
 
 .senren-btn:hover {
   opacity: 1;
-  border-color: #999;
-  background: rgba(0, 0, 0, 0.02);
+  border-color:  oklch(68.3% 0.0 89.88);
+  background: oklch(10% 0.02 260 / 0.02);
 }
 
 .card.nightMode .senren-btn:hover,
 .custom-dark-mode .senren-btn:hover {
-  border-color: #888;
-  background: rgba(255, 255, 255, 0.05);
+  border-color:  oklch(62.68% 0.0 89.88);
+  background: oklch(96% 0.018 92 / 0.05);
 }
 
 /* Primary Action Button ("Save to Anki") */
@@ -850,14 +850,14 @@ input:checked+.senren-slider:before {
 
 .senren-btn-primary:hover {
   background: var(--light-highlight) !important;
-  color: white !important;
+  color: oklch(96% 0.018 92) !important;
   border-color: var(--light-highlight) !important;
 }
 
 .card.nightMode .senren-btn-primary:hover,
 .custom-dark-mode .senren-btn-primary:hover {
   background: var(--dark-highlight) !important;
-  color: black !important;
+  color: oklch(10% 0.02 260) !important;
   border-color: var(--dark-highlight) !important;
 }
 
@@ -875,7 +875,7 @@ input:checked+.senren-slider:before {
   width: 100%;
   padding: 5.5px 12px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid  oklch(84.52% 0.0 89.88);
   background: transparent;
   cursor: pointer;
   display: flex;
@@ -891,19 +891,19 @@ input:checked+.senren-slider:before {
 
 .card.nightMode .senren-select-trigger,
 .custom-dark-mode .senren-select-trigger {
-  border-color: #555;
+  border-color:  oklch(44.95% 0.0 89.88);
 }
 
 .senren-select-trigger:hover {
   opacity: 1;
-  border-color: #999;
-  background: rgba(0, 0, 0, 0.02);
+  border-color:  oklch(68.3% 0.0 89.88);
+  background: oklch(10% 0.02 260 / 0.02);
 }
 
 .card.nightMode .senren-select-trigger:hover,
 .custom-dark-mode .senren-select-trigger:hover {
-  border-color: #888;
-  background: rgba(255, 255, 255, 0.05);
+  border-color:  oklch(62.68% 0.0 89.88);
+  background: oklch(96% 0.018 92 / 0.05);
 }
 
 /* Split Button Group (Save Preset + Arrow) */
@@ -922,7 +922,7 @@ input:checked+.senren-slider:before {
 .senren-btn-split-main {
   border-radius: 4px 0 0 4px !important;
   padding: 6px 12px;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid oklch(10% 0.02 260 / 0.1);
 }
 
 /* Right side (Arrow) */
@@ -935,7 +935,7 @@ input:checked+.senren-slider:before {
 .senren-btn-split-main:hover,
 .senren-btn-split-menu:hover {
   z-index: 2;
-  border-right-color: #999;
+  border-right-color:  oklch(68.3% 0.0 89.88);
 }
 
 /* Popup Menu (Dropdown list) */
@@ -943,10 +943,10 @@ input:checked+.senren-slider:before {
 .senren-popup-menu {
   position: absolute;
   bottom: 110%;
-  background: #f8f8f8;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background:  oklch(96% 0.018 92);
+  border: 1px solid oklch(10% 0.02 260 / 0.1);
   border-radius: 6px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px oklch(10% 0.02 260 / 0.2);
   display: none;
   max-height: 300px;
   overflow-y: auto;
@@ -977,8 +977,8 @@ input:checked+.senren-slider:before {
 .custom-dark-mode .senren-custom-options,
 .card.nightMode .senren-popup-menu,
 .custom-dark-mode .senren-popup-menu {
-  background: #2b2b2b;
-  border-color: rgba(255, 255, 255, 0.1);
+  background:  oklch(28.91% 0.0 89.88);
+  border-color: oklch(96% 0.018 92 / 0.1);
 }
 
 .senren-custom-select.active .senren-custom-options,
@@ -1041,36 +1041,36 @@ input:checked+.senren-slider:before {
 }
 
 .senren-menu-item:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: oklch(10% 0.02 260 / 0.08);
 }
 
 .card.nightMode .senren-menu-item:hover,
 .custom-dark-mode .senren-menu-item:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: oklch(96% 0.018 92 / 0.12);
 }
 
 .senren-option:hover,
 .senren-menu-item:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: oklch(10% 0.02 260 / 0.04);
 }
 
 .card.nightMode .senren-option:hover,
 .custom-dark-mode .senren-option:hover,
 .card.nightMode .senren-menu-item:hover,
 .custom-dark-mode .senren-menu-item:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: oklch(96% 0.018 92 / 0.04);
 }
 
 .senren-option.selected {
   font-weight: 700;
   color: inherit;
-  background: #fff;
+  background:  oklch(96% 0.018 92);
 }
 
 .card.nightMode .senren-option.selected,
 .custom-dark-mode .senren-option.selected {
   color: inherit;
-  background: rgba(255, 255, 255, 0.05);
+  background: oklch(96% 0.018 92 / 0.05);
 }
 
 .senren-option.selected::before {
@@ -1078,18 +1078,18 @@ input:checked+.senren-slider:before {
 }
 
 .senren-menu-item.danger {
-  color: #d9534f;
+  color:  oklch(61.92% 0.1694 25.05);
 }
 
 .senren-menu-item.danger:hover {
-  background: #d9534f !important;
-  color: white;
+  background:  oklch(61.92% 0.1694 25.05) !important;
+  color: oklch(96% 0.018 92);
 }
 
 .senren-menu-divider,
 .senren-menu-spacer {
   height: 1px;
-  background: rgba(0, 0, 0, 0.1);
+  background: oklch(10% 0.02 260 / 0.1);
   margin: 4px 6px;
 }
 
@@ -1097,7 +1097,7 @@ input:checked+.senren-slider:before {
 .custom-dark-mode .senren-menu-divider,
 .card.nightMode .senren-menu-spacer,
 .custom-dark-mode .senren-menu-spacer {
-  background: rgba(255, 255, 255, 0.1);
+  background: oklch(96% 0.018 92 / 0.1);
 }
 
 @keyframes fadeUpSmall {
@@ -1151,7 +1151,7 @@ input:checked+.senren-slider:before {
     display: flex;
     overflow-x: auto;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid oklch(10% 0.02 260 / 0.1);
     padding: 0;
     scrollbar-width: none;
   }
@@ -1228,7 +1228,7 @@ input:checked+.senren-slider:before {
 #senren-prompt-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: oklch(10% 0.02 260 / 0.5);
   z-index: 10000;
   display: flex;
   justify-content: center;
@@ -1243,13 +1243,13 @@ input:checked+.senren-slider:before {
 }
 
 .senren-prompt-box {
-  background: #fff;
+  background:  oklch(96% 0.018 92);
   padding: 24px;
   width: 380px;
   display: flex;
   flex-direction: column;
   border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px oklch(10% 0.02 260 / 0.2);
   transform: scale(0.95);
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -1260,9 +1260,9 @@ input:checked+.senren-slider:before {
 
 .card.nightMode .senren-prompt-box,
 .custom-dark-mode .senren-prompt-box {
-  background: #1e1e1e;
-  border: 1px solid #333;
-  color: #e4e4e4;
+  background:  oklch(23.5% 0.0 89.88);
+  border: 1px solid  oklch(32.11% 0.0 89.88);
+  color:  oklch(91.89% 0.0 89.88);
 }
 
 /* Header Row */
@@ -1287,7 +1287,7 @@ input:checked+.senren-slider:before {
 
 .card.nightMode .senren-prompt-title,
 .custom-dark-mode .senren-prompt-title {
-  color: #fff;
+  color:  oklch(96% 0.018 92);
 }
 
 /* Close Button */
@@ -1295,18 +1295,18 @@ input:checked+.senren-slider:before {
   cursor: pointer;
   font-size: 30px;
   line-height: 1;
-  color: #999;
+  color:  oklch(68.3% 0.0 89.88);
   padding: 4px;
   transition: color 0.2s;
 }
 
 .senren-prompt-close:hover {
-  color: #333;
+  color:  oklch(32.11% 0.0 89.88);
 }
 
 .card.nightMode .senren-prompt-close:hover,
 .custom-dark-mode .senren-prompt-close:hover {
-  color: #fff;
+  color:  oklch(96% 0.018 92);
 }
 
 /* Input Field */
@@ -1316,10 +1316,10 @@ input:checked+.senren-slider:before {
   margin: 0 0 0 0 !important;
   padding: 12px 16px;
   font-size: 15px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid  oklch(90.67% 0.0 89.88);
   border-radius: 12px;
-  background: #fff;
-  color: #333;
+  background:  oklch(96% 0.018 92);
+  color:  oklch(32.11% 0.0 89.88);
   box-sizing: border-box !important;
   transition: border-color 0.2s, 
               box-shadow 0.2s;
@@ -1327,15 +1327,15 @@ input:checked+.senren-slider:before {
 
 .card.nightMode .senren-prompt-input,
 .custom-dark-mode .senren-prompt-input {
-  background: #252526;
-  border-color: #3e3e3e;
-  color: #fff;
+  background:  oklch(26.49% 0.0018 286.27);
+  border-color:  oklch(36.39% 0.0 89.88);
+  color:  oklch(96% 0.018 92);
 }
 
 .senren-prompt-input:focus {
   outline: none;
   border-color: var(--light-highlight);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 3px oklch(10% 0.02 260 / 0.05);
 }
 
 .card.nightMode .senren-prompt-input:focus,
@@ -1380,28 +1380,28 @@ input:checked+.senren-slider:before {
 
 /* Cancel Button */
 #prompt-cancel {
-  background: #fff;
-  border: 2px solid #d0d0d0;
+  background:  oklch(96% 0.018 92);
+  border: 2px solid  oklch(85.76% 0.0 89.88);
   border-radius: 12px;
-  color: #555;
+  color:  oklch(44.95% 0.0 89.88);
 }
 
 .card.nightMode #prompt-cancel,
 .custom-dark-mode #prompt-cancel {
   background: transparent;
-  border-color: #444;
-  color: #aaa;
+  border-color:  oklch(38.67% 0.0 89.88);
+  color:  oklch(73.8% 0.0 89.88);
 }
 
 #prompt-cancel:hover {
-  background: #f5f5f5;
-  border-color: #bbb;
+  background:  oklch(96% 0.018 92);
+  border-color:  oklch(79.21% 0.0 89.88);
 }
 
 .card.nightMode #prompt-cancel:hover,
 .custom-dark-mode #prompt-cancel:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  background: oklch(96% 0.018 92 / 0.05);
+  color:  oklch(96% 0.018 92);
 }
 
 /* Save Button */
@@ -1423,15 +1423,15 @@ input:checked+.senren-slider:before {
 
 #prompt-ok:hover {
   opacity: 1;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px oklch(10% 0.02 260 / 0.15);
   background: var(--light-highlight);
-  color: #fff;
+  color:  oklch(96% 0.018 92);
 }
 
 .card.nightMode #prompt-ok:hover,
 .custom-dark-mode #prompt-ok:hover {
   background: var(--dark-highlight);
-  color: #1e1e1e;
+  color:  oklch(23.5% 0.0 89.88);
 }
 
 #senren-prompt-overlay * {
@@ -1460,8 +1460,8 @@ input:checked+.senren-slider:before {
   max-height: 100vh;
   border-radius: 0;
   margin: 0;
-  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(127, 127, 127, 0.2);
+  box-shadow: 5px 0 15px oklch(10% 0.02 260 / 0.1);
+  border-right: 1px solid oklch(59.65% 0.0 89.88 / 0.2);
   display: flex;
   flex-direction: column;
 }
@@ -1723,10 +1723,10 @@ body.senren-docked-mode .back {
   display: block !important;
   width: 100% !important;
   height: 50vh !important;
-  background: #1e1e1e !important;
-  color: #d4d4d4 !important;
+  background:  oklch(23.5% 0.0 89.88) !important;
+  color:  oklch(86.99% 0.0 89.88) !important;
   padding: 15px !important;
-  border: 1px solid #333 !important;
+  border: 1px solid  oklch(32.11% 0.0 89.88) !important;
   border-radius: 5px !important;
   text-align: left !important;
   white-space: pre !important;

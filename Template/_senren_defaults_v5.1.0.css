@@ -108,8 +108,8 @@
   /* Dictionary Title Styles */
   --dict-size:                        0.5rem;
   --dict-display:                     inline-block;
-  --light-dict-color:                 rgba(0, 0, 0, 0.4);
-  --dict-color-dark:                  rgba(255, 255, 255, 0.4);
+  --light-dict-color:                 oklch(10% 0.02 260 / 0.4);
+  --dict-color-dark:                  oklch(96% 0.018 92 / 0.4);
 
   /* Dictionary Counter */
   --dictionary-counter-visibility:    1;       /* "1" to always, "0" to show after toggle */
@@ -263,92 +263,92 @@
   /* Light Theme
   -------------------------------------------- */
   /* Text Colors */
-  --text-light:                       #020202;
-  --light-devoiced-color:             RoyalBlue;
-  --light-highlight:                  #E20033;
-  --freq-text-light:                  rgba(105, 105, 105, 0.3);
-  --freq-text-hover-light:            rgba(0, 0, 0, 1);
-  --tag-color-light:                  rgba(105, 105, 105, 0.26);
-  --tag-color-hover-light:            rgba(255, 255, 255, 1);
-  --misc-info-text-light:             rgba(105, 105, 105, 0.26);
-  --misc-info-text-hover-light:       rgba(255, 255, 255, 1);
+  --text-light:                        oklch(10% 0.02 260);
+  --light-devoiced-color:             oklch(55.98% 0.1882 266.4);
+  --light-highlight:                   oklch(57.64% 0.2322 22.0);
+  --freq-text-light:                  oklch(52.08% 0.0 89.88 / 0.3);
+  --freq-text-hover-light:            oklch(10% 0.02 260);
+  --tag-color-light:                  oklch(52.08% 0.0 89.88 / 0.26);
+  --tag-color-hover-light:            oklch(96% 0.018 92);
+  --misc-info-text-light:             oklch(52.08% 0.0 89.88 / 0.26);
+  --misc-info-text-hover-light:       oklch(96% 0.018 92);
 
   /* Pitch Colors */
-  --pitch-red-light:                  #D62839;
-  --pitch-blue-light:                 #3474FF;
-  --pitch-orange-light:               #FF6E03;
-  --pitch-green-light:                #2BAF7E;
-  --pitch-purple-light:               #8A5EDE;
+  --pitch-red-light:                   oklch(56.96% 0.2068 22.57);
+  --pitch-blue-light:                  oklch(59.92% 0.2174 262.93);
+  --pitch-orange-light:                oklch(70.63% 0.1979 45.96);
+  --pitch-green-light:                 oklch(67.26% 0.1333 162.98);
+  --pitch-purple-light:                oklch(59.09% 0.1875 296.01);
 
   /* Icon Colors */
-  --svg-color-light:                  rgba(105, 105, 105, 0.3);
-  --svg-hover-light:                  rgba(255, 255, 255, 1);
+  --svg-color-light:                  oklch(52.08% 0.0 89.88 / 0.3);
+  --svg-hover-light:                  oklch(96% 0.018 92);
 
   /* Background Colors */
-  --background-light:                 #f5f5f5;
-  --card-bg-light:                    rgba(255, 255, 255, 0.4);
-  --card-shadow-light:                rgba(0, 0, 0, 0.05);
-  --word-bg-light:                    rgba(0, 0, 0, 0.03);
-  --pitch-position-bg-light:          rgba(255, 255, 255, 0.8);
-  --picture-bg-light:                 rgba(0, 0, 0, 0.03);
-  --notes-bg-light:                   rgba(0, 0, 0, 0.03);
-  --definition-bg-light:              rgba(0, 0, 0, 0.03);
-  --dictionary-collapse-fade-light:   linear-gradient(to bottom, rgba(245,245,245,0), rgba(245,245,245,0.9));
-  --buttons-bg-light:                 rgba(0, 0, 0, 0.03);
-  --buttons-bg-hover-light:           rgba(0, 0, 0, 0.63);
-  --lightbox-bg-light:                rgba(0, 0, 0, 0.8);
-  --frequency-bg-light:               rgba(255, 255, 255, 0.8);
-  --tag-bg-light:                     rgba(0, 0, 0, 0.03);
-  --tag-bg-hover-light:               rgba(0, 0, 0, 0.63);
-  --external-links-bg-light:          rgba(0, 0, 0, 0.1);
-  --external-links-bg-hover-light:    rgba(255, 255, 255, 0.4);
-  --misc-info-bg-light:               rgba(0, 0, 0, 0.03);
-  --misc-info-bg-hover-light:         rgba(0, 0, 0, 0.63);
+  --background-light:                  oklch(96% 0.018 92);
+  --card-bg-light:                    oklch(96% 0.018 92 / 0.4);
+  --card-shadow-light:                oklch(10% 0.02 260 / 0.05);
+  --word-bg-light:                    oklch(10% 0.02 260 / 0.03);
+  --pitch-position-bg-light:          oklch(96% 0.018 92 / 0.8);
+  --picture-bg-light:                 oklch(10% 0.02 260 / 0.03);
+  --notes-bg-light:                   oklch(10% 0.02 260 / 0.03);
+  --definition-bg-light:              oklch(10% 0.02 260 / 0.03);
+  --dictionary-collapse-fade-light:   linear-gradient(to bottom, oklch(96% 0.018 92 / 0.0), oklch(96% 0.018 92 / 0.9));
+  --buttons-bg-light:                 oklch(10% 0.02 260 / 0.03);
+  --buttons-bg-hover-light:           oklch(10% 0.02 260 / 0.63);
+  --lightbox-bg-light:                oklch(10% 0.02 260 / 0.8);
+  --frequency-bg-light:               oklch(96% 0.018 92 / 0.8);
+  --tag-bg-light:                     oklch(10% 0.02 260 / 0.03);
+  --tag-bg-hover-light:               oklch(10% 0.02 260 / 0.63);
+  --external-links-bg-light:          oklch(10% 0.02 260 / 0.1);
+  --external-links-bg-hover-light:    oklch(96% 0.018 92 / 0.4);
+  --misc-info-bg-light:               oklch(10% 0.02 260 / 0.03);
+  --misc-info-bg-hover-light:         oklch(10% 0.02 260 / 0.63);
 
   /* Dark Theme
   -------------------------------------------- */
   /* Text Colors */
-  --text:                             #fcfcfc;
-  --dark-devoiced-color:              cornflowerBlue;
-  --dark-highlight:                   #FCFF61;
-  --freq-text:                        rgba(255, 255, 255, 0.2);
-  --freq-text-hover:                  rgba(255, 255, 255, 1);
-  --tag-color:                        rgba(255, 255, 255, 0.21);
-  --tag-color-hover:                  rgba(255, 255, 255, 1);
-  --misc-info-text:                   rgba(255, 255, 255, 0.21);
-  --misc-info-text-hover:             rgba(255, 255, 255, 1);
+  --text:                              oklch(96% 0.018 92);
+  --dark-devoiced-color:              oklch(67.46% 0.1414 261.34);
+  --dark-highlight:                    oklch(96.95% 0.1756 110.31);
+  --freq-text:                        oklch(96% 0.018 92 / 0.2);
+  --freq-text-hover:                  oklch(96% 0.018 92);
+  --tag-color:                        oklch(96% 0.018 92 / 0.21);
+  --tag-color-hover:                  oklch(96% 0.018 92);
+  --misc-info-text:                   oklch(96% 0.018 92 / 0.21);
+  --misc-info-text-hover:             oklch(96% 0.018 92);
 
   /* Pitch Colors */
-  --pitch-red:                        #F5436D;
-  --pitch-blue:                       #39C1FF;
-  --pitch-orange:                     #fca311;
-  --pitch-green:                      #40D4A6;
-  --pitch-purple:                     #afa2ff;
+  --pitch-red:                         oklch(65.32% 0.2135 11.9);
+  --pitch-blue:                        oklch(76.61% 0.1429 233.43);
+  --pitch-orange:                      oklch(78.59% 0.1674 70.04);
+  --pitch-green:                       oklch(78.11% 0.1407 167.78);
+  --pitch-purple:                      oklch(75.96% 0.1318 289.28);
 
   /* Icon Colors */
-  --svg-color:                        rgba(255, 255, 255, 0.2);
-  --svg-hover:                        rgba(255, 255, 255, 1);
+  --svg-color:                        oklch(96% 0.018 92 / 0.2);
+  --svg-hover:                        oklch(96% 0.018 92);
 
   /* Background Colors */
-  --background:                       #2c2c2c;
-  --card-bg:                          rgba(0, 0, 0, 0.4);
-  --card-shadow:                      rgba(0, 0, 0, 0.3);
-  --word-bg:                          rgba(0, 0, 0, 0.3);
-  --pitch-position-bg:                rgba(0, 0, 0, 0.2);
-  --picture-bg:                       rgba(0, 0, 0, 0.3);
-  --notes-bg:                         rgba(0, 0, 0, 0.3);
-  --definition-bg:                    rgba(0, 0, 0, 0.3);
-  --dictionary-collapse-fade:         linear-gradient(to bottom, rgba(44, 44, 44, 0), rgba(26, 26, 26, 9));
-  --buttons-bg:                       rgba(0, 0, 0, 0.1);
-  --buttons-bg-hover:                 rgba(0, 0, 0, 0.63);
-  --lightbox-bg:                      rgba(0, 0, 0, 0.8);
-  --frequency-bg:                     rgba(0, 0, 0, 0.63);
-  --tag-bg:                           rgba(0, 0, 0, 0.1);
-  --tag-bg-hover:                     rgba(0, 0, 0, 0.3);
-  --external-links-bg:                rgba(0, 0, 0, 0.4);
-  --external-links-bg-hover:          rgba(0, 0, 0, 0.63);
-  --misc-info-bg:                     rgba(0, 0, 0, 0.1);
-  --misc-info-bg-hover:               rgba(0, 0, 0, 0.3);
+  --background:                        oklch(29.31% 0.0 89.88);
+  --card-bg:                          oklch(10% 0.02 260 / 0.4);
+  --card-shadow:                      oklch(10% 0.02 260 / 0.3);
+  --word-bg:                          oklch(10% 0.02 260 / 0.3);
+  --pitch-position-bg:                oklch(10% 0.02 260 / 0.2);
+  --picture-bg:                       oklch(10% 0.02 260 / 0.3);
+  --notes-bg:                         oklch(10% 0.02 260 / 0.3);
+  --definition-bg:                    oklch(10% 0.02 260 / 0.3);
+  --dictionary-collapse-fade:         linear-gradient(to bottom, oklch(29.31% 0.0 89.88 / 0.0), oklch(21.78% 0.0 89.88));
+  --buttons-bg:                       oklch(10% 0.02 260 / 0.1);
+  --buttons-bg-hover:                 oklch(10% 0.02 260 / 0.63);
+  --lightbox-bg:                      oklch(10% 0.02 260 / 0.8);
+  --frequency-bg:                     oklch(10% 0.02 260 / 0.63);
+  --tag-bg:                           oklch(10% 0.02 260 / 0.1);
+  --tag-bg-hover:                     oklch(10% 0.02 260 / 0.3);
+  --external-links-bg:                oklch(10% 0.02 260 / 0.4);
+  --external-links-bg-hover:          oklch(10% 0.02 260 / 0.63);
+  --misc-info-bg:                     oklch(10% 0.02 260 / 0.1);
+  --misc-info-bg-hover:               oklch(10% 0.02 260 / 0.3);
 
 
   /* DIMENSIONS & SPACING
@@ -404,9 +404,9 @@
   --fast-transition:                  0.2s ease;
 
   /* Shadows */
-  --button-shadow:                    0 0 5px 2.5px rgba(0, 0, 0, 0.1);
-  --button-shadow-dark:               0 0 5px 2.5px rgba(255, 255, 255, 0.1);
-  --lightbox-shadow:                  0 1px 8px rgba(0, 0, 0, 0.15);
+  --button-shadow:                    0 0 5px 2.5px oklch(10% 0.02 260 / 0.1);
+  --button-shadow-dark:               0 0 5px 2.5px oklch(96% 0.018 92 / 0.1);
+  --lightbox-shadow:                  0 1px 8px oklch(10% 0.02 260 / 0.15);
 
   /* Z-Index Layers */
   --z-index-base:                     3;
