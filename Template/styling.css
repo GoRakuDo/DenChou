@@ -1056,23 +1056,6 @@ a {
   background: var(--word-bg);
 }
 
-/* Scene Indicator */
-.scene-indicator {
-  position: absolute;
-  bottom: 5px;
-  right: 11px;
-  font-size: 20px;
-  color: var(--svg-color-light);
-  opacity: 0.6;
-  pointer-events: none;
-  z-index: 5;
-  display: none;
-}
-
-:is(.card.nightMode, .custom-dark-mode) .scene-indicator {
-  color: var(--svg-color);
-}
-
 @container style(--reading-position: below) {
   #word ruby {
     ruby-position: under !important;
@@ -5486,10 +5469,6 @@ li.is-new-card:not(:hover) .related-word {
 
 /* Backdrop Layout */
 @container style(--enable-backdrop-layout: 1) {
-  .scene-indicator {
-    display: none !important;
-  }
-
   .grid-container {
     display: initial;
   }

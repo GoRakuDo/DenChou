@@ -64,7 +64,6 @@
           <div id="categories" class="tappable">{{pitchCategories}}</div>
         </span>
       </div>
-      <div class="scene-indicator"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></div>
     </div>
 
     <!-- Picture -->
@@ -1801,7 +1800,6 @@
       }
       updateDisplay(true);
       updatePictureCounter();
-      updateSceneIndicator();
     };
 
     const handleSceneShortcuts = (e) => {
@@ -1948,7 +1946,6 @@
       }
 
       updatePictureCounter();
-      updateSceneIndicator();
     }
 
     newArrows.forEach(arrow => {
@@ -1975,13 +1972,6 @@
     });
 
     window.denchouRefreshScenes = () => updateDisplay(false);
-
-    function updateSceneIndicator() {
-      const indicator = ELS.sceneIndicator;
-      if (!indicator) return;
-
-      indicator.style.display = (totalSlides > 1) ? 'block' : 'none';
-    }
 
     updateDisplay(false);
 
@@ -2205,8 +2195,7 @@
         audioContainer: document.querySelector('.sentenceaudio'),
         hiddenReading: document.getElementById('hiddenReading'),
         position: document.getElementById('position'),
-        wordAudioBtn: document.querySelector('.audio .soundLink, .audio .replaybutton'),
-        sceneIndicator: document.querySelector('.scene-indicator')
+        wordAudioBtn: document.querySelector('.audio .soundLink, .audio .replaybutton')
       };
 
       const style = getComputedStyle(document.documentElement);
