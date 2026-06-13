@@ -1108,7 +1108,7 @@ a {
   grid-template-columns: minmax(var(--grid-column-min-width), 1fr) auto;
 }
 
-.grid-container:not(:has(> .picture-container > img)) {
+.grid-container:not(:has(> .picture-container > :is(img, video))) {
   grid-template-columns: repeat(1, 1fr);
   gap: unset;
 }
@@ -1151,12 +1151,17 @@ img {
   user-select: none;
 }
 
-.lightbox img {
+.lightbox :is(img, video) {
   position: relative;
   max-width: 80%;
   max-height: 80%;
   box-shadow: var(--lightbox-shadow);
   transition: transform var(--base-transition);
+}
+
+.lightbox video {
+  width: auto;
+  height: auto;
 }
 
 .lightbox {
@@ -1200,7 +1205,7 @@ img {
   background: var(--picture-bg);
 }
 
-.picture-container img {
+.picture-container :is(img, video) {
   display: none;
   max-width: 100%;
   max-height: var(--picture-height);
@@ -1210,7 +1215,11 @@ img {
   user-select: none;
 }
 
-.picture-container img:first-of-type {
+.picture-container video {
+  width: 100%;
+}
+
+.picture-container :is(img, video):first-child {
   display: block;
 }
 
@@ -1313,7 +1322,7 @@ img {
   overflow: hidden;
 }
 
-.lightbox-grid img {
+.lightbox-grid :is(img, video) {
   max-width: 100%;
   max-height: 150px;
   width: auto;
@@ -1323,7 +1332,7 @@ img {
   transition: transform var(--fast-transition);
 }
 
-.lightbox-grid img:hover {
+.lightbox-grid :is(img, video):hover {
   transform: scale(1.05);
 }
 
@@ -1334,12 +1343,12 @@ img {
     border-radius: var(--border-radius-md); 
   }
 
-  [class*=" nsfw" i] img {
+  [class*=" nsfw" i] :is(img, video) {
     filter: blur(20px);
     transition: filter var(--base-transition);
   }
 
-  [class*=" nsfw" i] img.clicked {
+  [class*=" nsfw" i] :is(img, video).clicked {
     filter: blur(0);
   }
 }
@@ -5456,7 +5465,7 @@ li.is-new-card:not(:hover) .related-word {
       max-height: var(--picture-height-small);
     }
 
-    .picture-container img {
+    .picture-container :is(img, video) {
       max-height: var(--picture-max-height-small);
     }
   }
@@ -5515,7 +5524,7 @@ li.is-new-card:not(:hover) .related-word {
     border-radius: var(--border-radius-lg);
   }
 
-  .picture-container img {
+  .picture-container :is(img, video) {
     width: 100%;
     height: auto !important;
     min-height: var(--backdrop-background-height);
@@ -5531,7 +5540,7 @@ li.is-new-card:not(:hover) .related-word {
   }
 
   @container style(--card-background-fade: 1) {
-    .picture-container img {
+    .picture-container :is(img, video) {
       -webkit-mask-image: linear-gradient(to bottom, oklch(10% 0.02 260) var(--card-fade-strength), transparent 100%);
       mask-image: linear-gradient(to bottom, oklch(10% 0.02 260) var(--card-fade-strength), transparent 100%);
     }
@@ -5659,7 +5668,7 @@ li.is-new-card:not(:hover) .related-word {
     }
 
     @media (max-width: 768px) {
-      .picture-container, .picture-container img {
+      .picture-container, .picture-container :is(img, video) {
         border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg) !important;  
       }
     }
@@ -5757,7 +5766,7 @@ li.is-new-card:not(:hover) .related-word {
     }
 
     @container style(--card-background-fade: 1) {
-      .picture-container img {
+      .picture-container :is(img, video) {
         -webkit-mask-image: none;
         mask-image: none;
       }
@@ -5780,7 +5789,7 @@ li.is-new-card:not(:hover) .related-word {
       border-radius: var(--border-radius-ms);
     }
 
-    .picture-container img {
+    .picture-container :is(img, video) {
       z-index: -1 !important;
       position: relative !important;
       pointer-events: auto !important;
@@ -5822,7 +5831,7 @@ li.is-new-card:not(:hover) .related-word {
         display: flex;
       }
 
-      .picture-container img {
+      .picture-container :is(img, video) {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
@@ -5869,7 +5878,7 @@ li.is-new-card:not(:hover) .related-word {
 /* Fix Fade on Mobile */
 @media (max-width: 624px) {
   @container style(--enable-backdrop-layout: 1) {
-    .picture-container img {
+    .picture-container :is(img, video) {
       max-height: inherit !important;
     }
   } 

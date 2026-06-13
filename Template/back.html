@@ -85,6 +85,7 @@
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <img id="lightbox-img">
+    <video id="lightbox-video" autoplay muted controls playsinline></video>
     <a href="#" class="close tappable"></a>
     <div class="lightbox-nav left tappable"></div>
     <div class="lightbox-nav right tappable"></div>
@@ -900,9 +901,9 @@
     if (denchouConfig.blurNsfwPicture === 'true') {
       document.querySelectorAll('.picture-container').forEach(container => {
         if (container.classList.contains('nsfw')) {
-          container.querySelectorAll('img').forEach(img => {
-            img.addEventListener('click', () => {
-              img.classList.add('clicked');
+          container.querySelectorAll(':is(img, video)').forEach(media => {
+            media.addEventListener('click', () => {
+              media.classList.add('clicked');
             });
           });
         }
@@ -2094,14 +2095,14 @@
 
   // Updates the picture counter
   function updatePictureCounter() {
-    const images = document.querySelectorAll('.picture-container img');
+    const mediaItems = document.querySelectorAll('.picture-container :is(img, video)');
     const counters = document.querySelectorAll('.picture-counter');
     const back = document.querySelector('.back');
     const visibility = denchouConfig.pictureCounterVisibility;
 
     if (counters.length === 0) return;
 
-    if (images.length === 0 || (images.length === 1 && visibility === '3')) {
+    if (mediaItems.length === 0 || (mediaItems.length === 1 && visibility === '3')) {
       counters.forEach(counter => {
         counter.textContent = '';
         counter.style.display = 'none';
@@ -2111,17 +2112,17 @@
     }
 
     if (back) {
-      if (images.length > 1) back.classList.add('has-multiple-images');
+      if (mediaItems.length > 1) back.classList.add('has-multiple-images');
       else back.classList.remove('has-multiple-images');
     }
 
-    const visibleIndex = Array.from(images).findIndex(img => {
-      return window.getComputedStyle(img).display !== 'none';
+    const visibleIndex = Array.from(mediaItems).findIndex(media => {
+      return window.getComputedStyle(media).display !== 'none';
     });
 
     const actualIndex = visibleIndex !== -1 ? visibleIndex : 0;
     counters.forEach(counter => {
-      counter.textContent = `${actualIndex + 1} / ${images.length}`;
+      counter.textContent = `${actualIndex + 1} / ${mediaItems.length}`;
       counter.style.display = 'block';
     });
   }

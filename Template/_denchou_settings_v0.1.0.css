@@ -1585,7 +1585,7 @@ body.denchou-docked-mode.denchou-bd-card .picture-container {
   pointer-events: auto !important;
 }
 
-body.denchou-docked-mode.denchou-bd-card .picture-container img {
+body.denchou-docked-mode.denchou-bd-card .picture-container :is(img, video) {
   position: relative !important;
   top: auto;
   left: auto;
@@ -1629,7 +1629,7 @@ body.denchou-docked-mode.denchou-bd-word .picture-container {
   pointer-events: auto !important;
 }
 
-body.denchou-docked-mode.denchou-bd-word .picture-container img {
+body.denchou-docked-mode.denchou-bd-word .picture-container :is(img, video) {
   position: absolute !important;
   height: auto !important;
   width: 100% !important;
