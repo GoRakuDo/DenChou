@@ -382,33 +382,54 @@
     ]
   };
 
-  // CONVERT ANY COLOR TO HEX
+  // CONVERT ANY COLOR TO OKLCH
   // =========================================================================
-  function getSafeHexColor(str) {
-    if (!str) return '#000000';
+  function hexToOklch(hex) {
+    if (!hex || hex === 'transparent') return 'oklch(10% 0.02 260)';
+    let c = hex.replace('#', '');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    if (c.length !== 6) return 'oklch(10% 0.02 260)';
+    const r = parseInt(c.substring(0,2),16)/255;
+    const g = parseInt(c.substring(2,4),16)/255;
+    const b = parseInt(c.substring(4,6),16)/255;
+    const linR = r <= 0.04045 ? r/12.92 : Math.pow((r+0.055)/1.055, 2.4);
+    const linG = g <= 0.04045 ? g/12.92 : Math.pow((g+0.055)/1.055, 2.4);
+    const linB = b <= 0.04045 ? b/12.92 : Math.pow((b+0.055)/1.055, 2.4);
+    const l_ = 0.4122214708*linR + 0.5363325363*linG + 0.0514459929*linB;
+    const m_ = 0.2119034982*linR + 0.6806995451*linG + 0.1073969566*linB;
+    const s_ = 0.0883024619*linR + 0.2817188376*linG + 0.6299787005*linB;
+    const l = Math.cbrt(l_), m = Math.cbrt(m_), s = Math.cbrt(s_);
+    const L = 0.2104542553*l + 0.7936177850*m - 0.0040720468*s;
+    const a = 1.9779984951*l - 2.4285922050*m + 0.4505937099*s;
+    const b2 = 0.0259040371*l + 0.7827717662*m - 0.8086757660*s;
+    const C = Math.sqrt(a*a + b2*b2);
+    let h = Math.atan2(b2, a) * 180 / Math.PI;
+    if (h < 0) h += 360;
+    return 'oklch(' + (L*100).toFixed(1) + '% ' + C.toFixed(3) + ' ' + h.toFixed(1) + ')';
+  }
+
+  function rgbaToOklch(r, g, b, a) {
+    const hex = '#' + [r,g,b].map(function(v){ return v.toString(16).padStart(2,'0'); }).join('');
+    const oklch = hexToOklch(hex);
+    if (a !== undefined && a !== null && parseFloat(a) < 1) {
+      return oklch.replace(')', ' / ' + parseFloat(a).toFixed(2) + ')');
+    }
+    return oklch;
+  }
+
+  function getSafeOklchColor(str) {
+    if (!str) return 'oklch(10% 0.02 260)';
 
     str = str.trim();
 
-    if (/^#[0-9A-F]{6}$/i.test(str)) return str;
-    if (/^#[0-9A-F]{3}$/i.test(str)) {
-      return '#' + str[1] + str[1] + str[2] + str[2] + str[3] + str[3];
-    }
+    if (/^oklch\(/i.test(str)) return str;
+    if (/^#[0-9A-F]{3,8}$/i.test(str)) return hexToOklch(str);
 
-    const rgba = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
-    if (rgba) {
-      const r = parseInt(rgba[1]).toString(16).padStart(2, '0');
-      const g = parseInt(rgba[2]).toString(16).padStart(2, '0');
-      const b = parseInt(rgba[3]).toString(16).padStart(2, '0');
-      return `#${r}${g}${b}`;
-    }
+    const rgba = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([0-9.]+))?\s*\)/i);
+    if (rgba) return rgbaToOklch(+rgba[1], +rgba[2], +rgba[3], rgba[4]);
 
     const triplet = str.match(/^(\d+)\s*,\s*(\d+)\s*,\s*(\d+)$/);
-    if (triplet) {
-      const r = parseInt(triplet[1]).toString(16).padStart(2, '0');
-      const g = parseInt(triplet[2]).toString(16).padStart(2, '0');
-      const b = parseInt(triplet[3]).toString(16).padStart(2, '0');
-      return `#${r}${g}${b}`;
-    }
+    if (triplet) return rgbaToOklch(+triplet[1], +triplet[2], +triplet[3]);
 
     const d = document.createElement("div");
     d.style.color = str;
@@ -418,10 +439,10 @@
     document.body.removeChild(d);
 
     if (computed && computed !== str && computed !== 'rgba(0, 0, 0, 0)') {
-      return getSafeHexColor(computed);
+      return getSafeOklchColor(computed);
     }
 
-    return '#000000';
+    return 'oklch(10% 0.02 260)';
   }
 
   function utf8_to_b64(str) {
@@ -526,25 +547,35 @@
       if (denchou) return denchou;
 
       return new Promise((resolve, reject) => {
+        const isDark = document.body.classList.contains('nightMode') || document.documentElement.classList.contains('custom-dark-mode');
+        const bg = isDark ? 'oklch(23.5% 0.0 89.88)' : 'oklch(96% 0.018 92)';
+        const fg = isDark ? 'oklch(91.89% 0.0 89.88)' : 'oklch(32.11% 0.0 89.88)';
+        const muted = isDark ? 'oklch(62.68% 0.0 89.88)' : 'oklch(68.3% 0.0 89.88)';
+        const border = isDark ? 'oklch(44.95% 0.0 89.88)' : 'oklch(84.52% 0.0 89.88)';
+        const hoverBg = isDark ? 'oklch(96% 0.018 92 / 0.08)' : 'oklch(10% 0.02 260 / 0.04)';
+        const shadow = '0 25px 50px oklch(10% 0.02 260 / 0.4)';
+
         const overlay = document.createElement("div");
-        overlay.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;";
+        overlay.style.cssText = `position:fixed;inset:0;background:oklch(10% 0.02 260 / 0.6);z-index:99999;display:flex;align-items:center;justify-content:center;`;
         const box = document.createElement("div");
-        box.style.cssText = "background:#1e1e2e;border:1px solid #45475a;border-radius:12px;padding:24px;min-width:300px;max-width:400px;color:#cdd6f4;font-family:inherit;";
-        box.innerHTML = '<div style="font-size:16px;font-weight:600;margin-bottom:12px;">Note Type?</div><div style="font-size:13px;color:#a6adc8;margin-bottom:16px;">Select the note type to save styling to:</div>';
+        box.style.cssText = `background:${bg};border:1px solid ${border};border-radius:8px;padding:24px;min-width:300px;max-width:400px;color:${fg};font-family:inherit;box-shadow:${shadow};`;
+        box.innerHTML = '<div style="font-size:16px;font-weight:600;margin-bottom:12px;">Note Type?</div><div style="font-size:13px;opacity:0.6;margin-bottom:16px;">Select the note type to save styling to:</div>';
         const list = document.createElement("div");
         list.style.cssText = "display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto;";
         models.forEach(name => {
           const btn = document.createElement("button");
           btn.textContent = name;
-          btn.style.cssText = "text-align:left;padding:10px 12px;border:1px solid #45475a;border-radius:8px;background:#313244;color:#cdd6f4;cursor:pointer;font-size:14px;font-family:inherit;";
-          btn.onmouseenter = () => btn.style.background = "#45475a";
-          btn.onmouseleave = () => btn.style.background = "#313244";
+          btn.style.cssText = `text-align:left;padding:10px 12px;border:1px solid ${border};border-radius:4px;background:transparent;color:${fg};cursor:pointer;font-size:14px;font-family:inherit;transition:background 0.15s,border-color 0.15s;`;
+          btn.onmouseenter = () => { btn.style.background = hoverBg; btn.style.borderColor = muted; };
+          btn.onmouseleave = () => { btn.style.background = 'transparent'; btn.style.borderColor = border; };
           btn.onclick = () => { overlay.remove(); resolve(name); };
           list.appendChild(btn);
         });
         const cancelBtn = document.createElement("button");
         cancelBtn.textContent = "Cancel";
-        cancelBtn.style.cssText = "margin-top:10px;padding:8px;border:1px solid #45475a;border-radius:8px;background:transparent;color:#a6adc8;cursor:pointer;font-size:13px;font-family:inherit;";
+        cancelBtn.style.cssText = `margin-top:10px;padding:6px 16px;border:1px solid ${border};border-radius:4px;background:transparent;color:${fg};cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;opacity:0.8;transition:opacity 0.15s,border-color 0.15s;`;
+        cancelBtn.onmouseenter = () => { cancelBtn.style.opacity = '1'; cancelBtn.style.borderColor = muted; };
+        cancelBtn.onmouseleave = () => { cancelBtn.style.opacity = '0.8'; cancelBtn.style.borderColor = border; };
         cancelBtn.onclick = () => { overlay.remove(); resolve(null); };
         box.appendChild(list);
         box.appendChild(cancelBtn);
@@ -648,9 +679,9 @@
       });
 
       statusBtn.innerText = "Saved!";
-      statusBtn.style.background = "#28a745";
-      statusBtn.style.borderColor = "#28a745";
-      statusBtn.style.color = "white";
+      statusBtn.style.background = "oklch(65% 0.19 145)";
+      statusBtn.style.borderColor = "oklch(65% 0.19 145)";
+      statusBtn.style.color = "oklch(96% 0.018 92)";
 
       setTimeout(() => {
         statusBtn.innerText = origText;
@@ -901,9 +932,9 @@
             input.checked = (savedVal === 'true' || savedVal === '1');
 
           } else if (item.type === 'color') {
-            input.value = savedVal || "#000000";
+            input.value = savedVal || "oklch(10% 0.02 260)";
             if (input.previousElementSibling && input.previousElementSibling.type === 'color') {
-              input.previousElementSibling.value = getSafeHexColor(savedVal || "#000000");
+              input.previousElementSibling.value = getSafeOklchColor(savedVal || "oklch(10% 0.02 260)");
             }
 
           } else if (item.type === 'textarea') {
@@ -1077,9 +1108,9 @@
 
       if (btn) {
         btn.innerText = "Saved!";
-        btn.style.background = "#28a745";
-        btn.style.borderColor = "#28a745";
-        btn.style.color = "white";
+        btn.style.background = "oklch(65% 0.19 145)";
+        btn.style.borderColor = "oklch(65% 0.19 145)";
+        btn.style.color = "oklch(96% 0.018 92)";
 
         setTimeout(() => {
           btn.innerText = origText;
@@ -1583,14 +1614,17 @@
           const b = parseInt(newHex.slice(5, 7), 16);
           const rgbaMatch = currentVal.match(/rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*([0-9.]+)\s*\)/i);
           const tripletMatch = currentVal.match(/^\s*\d+\s*,\s*\d+\s*,\s*\d+\s*$/);
+          const oklchAlphaMatch = currentVal.match(/^oklch\([^)]+\)\s*\/\s*([0-9.]+)\s*$/i);
 
-          if (rgbaMatch) {
+          if (oklchAlphaMatch) {
+            textInput.value = rgbaToOklch(r, g, b, oklchAlphaMatch[1]);
+          } else if (rgbaMatch) {
             const alpha = rgbaMatch[1];
-            textInput.value = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            textInput.value = rgbaToOklch(r, g, b, alpha);
           } else if (tripletMatch) {
-            textInput.value = `${r}, ${g}, ${b}`;
+            textInput.value = rgbaToOklch(r, g, b);
           } else {
-            textInput.value = newHex;
+            textInput.value = hexToOklch(newHex);
           }
 
           textInput.dispatchEvent(new Event('input'));
@@ -1621,9 +1655,19 @@
               const r = parseInt(rgbaMatch[1]).toString(16).padStart(2, '0');
               const g = parseInt(rgbaMatch[2]).toString(16).padStart(2, '0');
               const b = parseInt(rgbaMatch[3]).toString(16).padStart(2, '0');
-              input.previousElementSibling.value = `#${r}${g}${b}`;
+              input.previousElementSibling.value = '#' + r + g + b;
             } else if (/^#[0-9A-F]{6}$/i.test(newVal)) {
               input.previousElementSibling.value = newVal;
+            } else if (/^oklch\(/i.test(newVal)) {
+              const d = document.createElement('div');
+              d.style.color = newVal;
+              document.body.appendChild(d);
+              const computed = getComputedStyle(d).color;
+              document.body.removeChild(d);
+              const m = computed.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+              if (m) {
+                input.previousElementSibling.value = '#' + [+m[1],+m[2],+m[3]].map(v=>v.toString(16).padStart(2,'0')).join('');
+              }
             }
           }
         }
@@ -1713,7 +1757,7 @@
             `}).join('');
       controlHtml = `<div class="denchou-segment-group" data-var="${item.var}">${buttons}</div>`;
     } else if (item.type === 'color') {
-      let safeColor = getSafeHexColor(currentVal);
+      let safeColor = getSafeOklchColor(currentVal);
       controlHtml = `
                 <div class="denchou-color-wrapper">
                     <input type="color" class="denchou-color-picker" data-type="color" value="${safeColor}">
@@ -1952,7 +1996,7 @@
               } else if (item.type === 'color') {
                 input.value = defaultValue;
                 if (input.previousElementSibling && input.previousElementSibling.type === 'color') {
-                  input.previousElementSibling.value = getSafeHexColor(defaultValue);
+                  input.previousElementSibling.value = getSafeOklchColor(defaultValue);
                 }
               } else {
                 if (item.type === 'slider') {
@@ -1969,9 +2013,9 @@
 
       triggerUpdates();
       statusBtn.innerText = "Reset Complete!";
-      statusBtn.style.background = "#d9534f";
-      statusBtn.style.borderColor = "#d9534f";
-      statusBtn.style.color = "white";
+      statusBtn.style.background = "oklch(55% 0.2 25)";
+      statusBtn.style.borderColor = "oklch(55% 0.2 25)";
+      statusBtn.style.color = "oklch(96% 0.018 92)";
 
       setTimeout(() => {
         statusBtn.innerText = origText;
