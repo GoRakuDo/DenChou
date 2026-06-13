@@ -1,3 +1,13 @@
+/* Gen Interface JP CDN fallback must stay before any other CSS rules.
+   AnkiDroid can load these directly when collection.media does not contain
+   local font files. */
+@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/400.css");
+@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/500.css");
+@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/600.css");
+@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/display-600.css");
+@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/display-700.css");
+@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/display-800.css");
+
 /* MOBILE FONTS
 ============================================ */
 @font-face {
@@ -15,6 +25,9 @@
   src: url("_NotoSerifJP.ttf");
 }
 
+/* Gen Interface JP local faces — cascade winner (declared after @import above).
+   Local loads first; on 404 the earlier CDN face is tried; if both fail,
+   the font-family chain falls through to Hiragino / Noto / Segoe. */
 @font-face {
   font-family: "Gen Interface JP";
   src: url("_GenInterfaceJP-Regular.woff2") format("woff2");
