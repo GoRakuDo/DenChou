@@ -507,6 +507,57 @@
     return data.result;
   }
 
+  async function getModelName() {
+    if (window.IS_MOBILE) return null;
+
+    // Try guiCurrentCard first (works during review)
+    try {
+      const cardInfo = await invokeAnkiConnect('guiCurrentCard');
+      if (cardInfo && cardInfo.modelName) return cardInfo.modelName;
+    } catch (_) { /* not in review mode, fall through */ }
+
+    // Fallback: ask user to pick from model list
+    try {
+      const models = await invokeAnkiConnect('modelNames');
+      if (!models || models.length === 0) throw new Error("No note types found.");
+
+      return new Promise((resolve, reject) => {
+        const overlay = document.createElement("div");
+        overlay.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;";
+        const box = document.createElement("div");
+        box.style.cssText = "background:#1e1e2e;border:1px solid #45475a;border-radius:12px;padding:24px;min-width:300px;max-width:400px;color:#cdd6f4;font-family:inherit;";
+        box.innerHTML = '<div style="font-size:16px;font-weight:600;margin-bottom:12px;">Note Type?</div><div style="font-size:13px;color:#a6adc8;margin-bottom:16px;">Select the note type to save styling to:</div>';
+        const list = document.createElement("div");
+        list.style.cssText = "display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto;";
+        models.forEach(name => {
+          const btn = document.createElement("button");
+          btn.textContent = name;
+          btn.style.cssText = "text-align:left;padding:10px 12px;border:1px solid #45475a;border-radius:8px;background:#313244;color:#cdd6f4;cursor:pointer;font-size:14px;font-family:inherit;";
+          btn.onmouseenter = () => btn.style.background = "#45475a";
+          btn.onmouseleave = () => btn.style.background = "#313244";
+          btn.onclick = () => { overlay.remove(); resolve(name); };
+          list.appendChild(btn);
+        });
+        const cancelBtn = document.createElement("button");
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.style.cssText = "margin-top:10px;padding:8px;border:1px solid #45475a;border-radius:8px;background:transparent;color:#a6adc8;cursor:pointer;font-size:13px;font-family:inherit;";
+        cancelBtn.onclick = () => { overlay.remove(); resolve(null); };
+        box.appendChild(list);
+        box.appendChild(cancelBtn);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+        cancelBtn.focus();
+
+        const onKey = (e) => {
+          if (e.key === "Escape") { overlay.remove(); resolve(null); document.removeEventListener("keydown", onKey); }
+        };
+        document.addEventListener("keydown", onKey);
+      });
+    } catch (e) {
+      throw new Error("Could not determine note type: " + e.message);
+    }
+  }
+
   async function saveToAnki() {
     if (window.IS_MOBILE) return;
     const statusBtn = document.getElementById('denchou-save-btn');
@@ -515,9 +566,12 @@
     statusBtn.disabled = true;
 
     try {
-      const cardInfo = await invokeAnkiConnect('guiCurrentCard');
-      if (!cardInfo) throw new Error("Current card not found.");
-      const modelName = cardInfo.modelName;
+      const modelName = await getModelName();
+      if (!modelName) {
+        statusBtn.innerText = origText;
+        statusBtn.disabled = false;
+        return;
+      }
 
       const styleInfo = await invokeAnkiConnect('modelStyling', { modelName: modelName });
       let modifiedCss = styleInfo.css;
@@ -1750,9 +1804,12 @@
       if (!response.ok) throw new Error("File '_denchou_defaults_v0.1.0.css' not found in media folder.");
       const defaultsCss = await response.text();
 
-      const cardInfo = await invokeAnkiConnect('guiCurrentCard');
-      if (!cardInfo) throw new Error("Current card not found.");
-      const modelName = cardInfo.modelName;
+      const modelName = await getModelName();
+      if (!modelName) {
+        statusBtn.innerText = origText;
+        statusBtn.disabled = false;
+        return;
+      }
 
       const styleInfo = await invokeAnkiConnect('modelStyling', { modelName: modelName });
       let modifiedCss = styleInfo.css;
