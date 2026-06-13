@@ -2472,39 +2472,25 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.9
 }
 
 [data-sc-content="example-sentence"] {
-  border-left: none !important;
-  border-color: oklch(10% 0.02 260 / 0.5) !important;
-  transition: border-color var(--base-transition), 
-              opacity var(--base-transition);
-}
-
-[data-sc-content="example-sentence"]:hover {
-  border-color: oklch(10% 0.02 260 / 0.8) !important;
-}
-
-:is(.card.nightMode, .custom-dark-mode) 
-[data-sc-content="example-sentence"] {
-  border-color: oklch(96% 0.018 92 / 0.5) !important;
-}
-
-.card.nightMode [data-sc-content="example-sentence"]:hover,
-.custom-dark-mode [data-sc-content="example-sentence"]:hover {
-  border-color: oklch(96% 0.018 92 / 0.8) !important;
+  border: none !important;
+  transition: opacity var(--base-transition), outline-color var(--base-transition);
 }
 
 [data-sc-content="example-sentence"].sentence-active {
-  border-color: color-mix(in srgb,
-                var(--light-highlight),
-                var(--dict-color) calc(var(--dictionary-colorizer) * 100%)
-                ) !important;
+  outline: 2px solid color-mix(in srgb,
+              var(--light-highlight),
+              var(--dict-color) calc(var(--dictionary-colorizer) * 100%)
+              );
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
-:is(.card.nightMode, .custom-dark-mode) 
+:is(.card.nightMode, .custom-dark-mode)
 [data-sc-content="example-sentence"].sentence-active {
-  border-color: color-mix(in srgb,
-                var(--dark-highlight),
-                var(--dict-color) calc(var(--dictionary-colorizer) * 100%)
-                ) !important;
+  outline-color: color-mix(in srgb,
+              var(--dark-highlight),
+              var(--dict-color) calc(var(--dictionary-colorizer) * 100%)
+              );
 }
 
 [data-sc-content="glossary"] {
