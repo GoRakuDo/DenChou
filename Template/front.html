@@ -808,7 +808,7 @@
       // Already loaded: the modal exists and the gear's onclick is attached.
       // Trigger the existing onclick so renderPresetUI() also runs.
       if (document.getElementById('denchou-settings-modal')) {
-        btn.click();
+        window.denchouOpenSettings && window.denchouOpenSettings();
         return;
       }
 
@@ -819,7 +819,7 @@
         const wait = () => {
           if (document.getElementById('denchou-settings-modal')) {
             window.denchouMenuLoading = false;
-            btn.click();
+            window.denchouOpenSettings && window.denchouOpenSettings();
           } else if (++attempts >= 200) {
             window.denchouMenuLoading = false;
             console.error('Settings script loaded but menu did not appear');
@@ -834,7 +834,7 @@
       // Edge case: buildMenu is exported but the async init() hasn't run yet.
       if (window.denchouBuildMenu) {
         window.denchouBuildMenu();
-        btn.click();
+        window.denchouOpenSettings && window.denchouOpenSettings();
         return;
       }
 
@@ -849,7 +849,7 @@
         const wait = () => {
           if (document.getElementById('denchou-settings-modal')) {
             window.denchouMenuLoading = false;
-            btn.click();
+            window.denchouOpenSettings && window.denchouOpenSettings();
           } else if (++attempts >= 200) {
             window.denchouMenuLoading = false;
             console.error('Settings script loaded but buildMenu did not run');

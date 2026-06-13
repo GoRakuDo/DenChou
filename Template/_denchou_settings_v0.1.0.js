@@ -1413,11 +1413,7 @@
     const btn = document.querySelector('.toggle-settings-btn');
 
     if (btn) {
-      btn.onclick = () => {
-        const modal = document.getElementById('denchou-settings-modal');
-        if (modal) modal.classList.add('active');
-        renderPresetUI();
-      };
+      btn.onclick = window.denchouOpenSettings;
     }
 
     if (document.getElementById('denchou-settings-modal')) return;
@@ -2069,6 +2065,12 @@
   };
 
   window.denchouBuildMenu = buildMenu;
+
+  window.denchouOpenSettings = function () {
+    const modal = document.getElementById('denchou-settings-modal');
+    if (modal) modal.classList.add('active');
+    renderPresetUI();
+  };
 
   window.denchouToggleDock = function () {
     const modal = document.getElementById('denchou-settings-modal');
