@@ -30,6 +30,7 @@
       { type: "header", label: "General Settings" },
       { label: "Enable Animations", var: "--enable-animations", type: "switch-bool", desc: "Enable transition animations." },
       { label: "Auto Optimize", var: "--ankidroid-auto-optimize", type: "switch-bool", desc: "Automatically reduce shadows and blur on small screens." },
+      { label: "AnkiDroid Lite Mode", var: "--ankidroid-lite", type: "switch-bool", desc: "Force lite mode regardless of screen size." },
 
       { type: "header", label: "Front" },
       { label: "Expand Sentence (Word)", var: "--word-sentence-default-expanded", type: "switch-bool", desc: "Show sentence on word cards immediately." },
@@ -1675,6 +1676,7 @@
 
         document.documentElement.style.setProperty(varName, newVal);
         localStorage.setItem("denchou_" + varName, newVal);
+        if (varName === "--ankidroid-auto-optimize") applyAutoOptimize();
         triggerUpdates();
       };
       input.addEventListener('change', handler);
