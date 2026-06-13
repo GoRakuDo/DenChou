@@ -80,6 +80,7 @@
   ============================================ */
   /* General */
   --enable-animations:                true;    /* Enable transition animations */
+  --ankidroid-lite:                   false;   /* Lightweight mode for AnkiDroid */
 
   /* Front
   -------------------------------------------- */
@@ -5892,6 +5893,21 @@ li.is-new-card:not(:hover) .related-word {
     -moz-animation: none !important;
     -o-animation: none !important;
     animation: none !important;
+  }
+}
+
+/* AnkiDroid Lite — reduced shadows, blur, and transitions */
+@container style(--ankidroid-lite: true) {
+  :root {
+    --base-transition: 0.15s ease;
+    --fast-transition: 0.1s ease;
+    --button-shadow: none;
+    --button-shadow-dark: none;
+    --lightbox-shadow: none;
+  }
+
+  img {
+    filter: none !important;
   }
 }
 

@@ -207,5 +207,9 @@
     "--frequency-bg-light": "oklch(100.0% 0.000 89.9 / 0.80)",
     "--frequency-bg": "oklch(0.0% 0.000 0.0 / 0.63)"
   },
+  "AnkiDroid Lite": {
+    "--ankidroid-lite": "true",
+    "--enable-animations": "true"
+  },
   "_active": "Default"
 }
