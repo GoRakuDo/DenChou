@@ -680,7 +680,9 @@
 
   // Init
   function denchouInitDeferred() {
-    jitendexHover();
+    if (!window.IS_MOBILE) {
+      jitendexHover();
+    }
     enableImageSwitching();
     enableLightbox();
     if (!window.IS_MOBILE) {
