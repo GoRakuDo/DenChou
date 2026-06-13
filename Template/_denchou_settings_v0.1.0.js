@@ -521,6 +521,10 @@
       const models = await invokeAnkiConnect('modelNames');
       if (!models || models.length === 0) throw new Error("No note types found.");
 
+      // Auto-select DenChou if found
+      const denchou = models.find(m => m.toLowerCase().includes("denchou"));
+      if (denchou) return denchou;
+
       return new Promise((resolve, reject) => {
         const overlay = document.createElement("div");
         overlay.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;";
