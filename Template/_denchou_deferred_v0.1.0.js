@@ -217,6 +217,7 @@
     let scale = 1, translateX = 0, translateY = 0;
     let isPanning = false, startX = 0, startY = 0;
     let isGridView = false;
+    let heavyListenersSetup = false;
 
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
@@ -282,6 +283,13 @@
     }
 
     const showImage = (index) => {
+      // Heavy listeners are deferred until first open. The lightbox is still
+      // visibility:hidden here, so no wheel/touch event can fire before the
+      // .active class is added at the end of this function.
+      if (!heavyListenersSetup) {
+        setupHeavyListeners();
+        heavyListenersSetup = true;
+      }
       if (isGridView) hideGridView();
       currentIndex = index;
       lightboxImg.src = images[index].src;
@@ -355,128 +363,130 @@
       lightbox.dataset.hasShortcutsListener = 'true';
     }
 
-    if (!lightboxImg.dataset.hasWheelListener) {
-      lightboxImg.addEventListener("wheel", (e) => {
-        e.preventDefault();
-        const prevScale = scale;
-        scale = Math.min(Math.max(1, scale + e.deltaY * -0.001), 3);
-
-        if (scale === 1) {
-          resetTransform();
-          if (images.length > 1) showAll.style.display = "block";
-        } else {
-          const rect = lightboxImg.getBoundingClientRect();
-          const offsetX = (e.clientX - rect.left) / rect.width;
-          const offsetY = (e.clientY - rect.top) / rect.height;
-          translateX -= (offsetX - 0.5) * (scale - prevScale) * rect.width;
-          translateY -= (offsetY - 0.5) * (scale - prevScale) * rect.height;
-          updateTransform();
-          showAll.style.display = "none";
-        }
-      });
-      lightboxImg.dataset.hasWheelListener = 'true';
-    }
-
-    if (!lightboxImg.dataset.hasMousedownListener) {
-      lightboxImg.addEventListener("mousedown", (e) => {
-        if (scale === 1) return;
-        e.preventDefault();
-        isPanning = true;
-        startX = e.clientX - translateX;
-        startY = e.clientY - translateY;
-        lightboxImg.style.cursor = "grabbing";
-      });
-      lightboxImg.dataset.hasMousedownListener = 'true';
-    }
-
-    let initialDistance = null;
-
-    if (!lightboxImg.dataset.hasTouchListeners) {
-      lightboxImg.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 2) {
-          initialDistance = Math.hypot(
-            e.touches[0].pageX - e.touches[1].pageX,
-            e.touches[0].pageY - e.touches[1].pageY
-          );
-          isPanning = false;
-        } else if (e.touches.length === 1 && scale > 1) {
-          isPanning = true;
-          startX = e.touches[0].pageX - translateX;
-          startY = e.touches[0].pageY - translateY;
-          initialDistance = null;
-        } else {
-          isPanning = false;
-          initialDistance = null;
-        }
-      });
-
-      lightboxImg.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2 && initialDistance !== null) {
+    function setupHeavyListeners() {
+      if (!lightboxImg.dataset.hasWheelListener) {
+        lightboxImg.addEventListener("wheel", (e) => {
           e.preventDefault();
-          const newDistance = Math.hypot(
-            e.touches[0].pageX - e.touches[1].pageX,
-            e.touches[0].pageY - e.touches[1].pageY
-          );
-          const newScale = scale * (newDistance / initialDistance);
           const prevScale = scale;
+          scale = Math.min(Math.max(1, scale + e.deltaY * -0.001), 3);
 
-          scale = Math.min(Math.max(1, newScale), 3);
-
-          if (scale > 1) {
-            const rect = lightboxImg.getBoundingClientRect();
-            const touchCenterX = (e.touches[0].pageX + e.touches[1].pageX) / 2;
-            const touchCenterY = (e.touches[0].pageY + e.touches[1].pageY) / 2;
-
-            const offsetX = (touchCenterX - rect.left) / rect.width;
-            const offsetY = (touchCenterY - rect.top) / rect.height;
-
-            translateX -= (offsetX - 0.5) * (scale - prevScale) * rect.width;
-            translateY -= (offsetY - 0.5) * (scale - prevScale) * rect.height;
-
-            updateTransform();
-            showAll.style.display = "none";
-          } else {
+          if (scale === 1) {
             resetTransform();
             if (images.length > 1) showAll.style.display = "block";
+          } else {
+            const rect = lightboxImg.getBoundingClientRect();
+            const offsetX = (e.clientX - rect.left) / rect.width;
+            const offsetY = (e.clientY - rect.top) / rect.height;
+            translateX -= (offsetX - 0.5) * (scale - prevScale) * rect.width;
+            translateY -= (offsetY - 0.5) * (scale - prevScale) * rect.height;
+            updateTransform();
+            showAll.style.display = "none";
           }
-          initialDistance = newDistance;
+        });
+        lightboxImg.dataset.hasWheelListener = 'true';
+      }
 
-        } else if (e.touches.length === 1 && isPanning) {
+      if (!lightboxImg.dataset.hasMousedownListener) {
+        lightboxImg.addEventListener("mousedown", (e) => {
+          if (scale === 1) return;
           e.preventDefault();
-          translateX = e.touches[0].pageX - startX;
-          translateY = e.touches[0].pageY - startY;
-          updateTransform();
-        }
-      });
+          isPanning = true;
+          startX = e.clientX - translateX;
+          startY = e.clientY - translateY;
+          lightboxImg.style.cursor = "grabbing";
+        });
+        lightboxImg.dataset.hasMousedownListener = 'true';
+      }
 
-      lightboxImg.addEventListener('touchend', (e) => {
-        if (e.touches.length < 2) {
-          initialDistance = null;
-        }
-        if (e.touches.length < 1) {
+      let initialDistance = null;
+
+      if (!lightboxImg.dataset.hasTouchListeners) {
+        lightboxImg.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 2) {
+            initialDistance = Math.hypot(
+              e.touches[0].pageX - e.touches[1].pageX,
+              e.touches[0].pageY - e.touches[1].pageY
+            );
+            isPanning = false;
+          } else if (e.touches.length === 1 && scale > 1) {
+            isPanning = true;
+            startX = e.touches[0].pageX - translateX;
+            startY = e.touches[0].pageY - translateY;
+            initialDistance = null;
+          } else {
+            isPanning = false;
+            initialDistance = null;
+          }
+        });
+
+        lightboxImg.addEventListener('touchmove', (e) => {
+          if (e.touches.length === 2 && initialDistance !== null) {
+            e.preventDefault();
+            const newDistance = Math.hypot(
+              e.touches[0].pageX - e.touches[1].pageX,
+              e.touches[0].pageY - e.touches[1].pageY
+            );
+            const newScale = scale * (newDistance / initialDistance);
+            const prevScale = scale;
+
+            scale = Math.min(Math.max(1, newScale), 3);
+
+            if (scale > 1) {
+              const rect = lightboxImg.getBoundingClientRect();
+              const touchCenterX = (e.touches[0].pageX + e.touches[1].pageX) / 2;
+              const touchCenterY = (e.touches[0].pageY + e.touches[1].pageY) / 2;
+
+              const offsetX = (touchCenterX - rect.left) / rect.width;
+              const offsetY = (touchCenterY - rect.top) / rect.height;
+
+              translateX -= (offsetX - 0.5) * (scale - prevScale) * rect.width;
+              translateY -= (offsetY - 0.5) * (scale - prevScale) * rect.height;
+
+              updateTransform();
+              showAll.style.display = "none";
+            } else {
+              resetTransform();
+              if (images.length > 1) showAll.style.display = "block";
+            }
+            initialDistance = newDistance;
+
+          } else if (e.touches.length === 1 && isPanning) {
+            e.preventDefault();
+            translateX = e.touches[0].pageX - startX;
+            translateY = e.touches[0].pageY - startY;
+            updateTransform();
+          }
+        });
+
+        lightboxImg.addEventListener('touchend', (e) => {
+          if (e.touches.length < 2) {
+            initialDistance = null;
+          }
+          if (e.touches.length < 1) {
+            isPanning = false;
+          }
+        });
+        lightboxImg.dataset.hasTouchListeners = 'true';
+      }
+
+      const moveImage = (e) => {
+        if (!isPanning) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+      };
+
+      if (!lightbox.dataset.hasMouseMoveListeners) {
+        document.addEventListener("mousemove", (e) => {
+          if (isPanning) requestAnimationFrame(() => moveImage(e));
+        });
+
+        document.addEventListener("mouseup", () => {
           isPanning = false;
-        }
-      });
-      lightboxImg.dataset.hasTouchListeners = 'true';
-    }
-
-    const moveImage = (e) => {
-      if (!isPanning) return;
-      translateX = e.clientX - startX;
-      translateY = e.clientY - startY;
-      updateTransform();
-    };
-
-    if (!lightbox.dataset.hasMouseMoveListeners) {
-      document.addEventListener("mousemove", (e) => {
-        if (isPanning) requestAnimationFrame(() => moveImage(e));
-      });
-
-      document.addEventListener("mouseup", () => {
-        isPanning = false;
-        lightboxImg.style.cursor = "grab";
-      });
-      lightbox.dataset.hasMouseMoveListeners = 'true';
+          lightboxImg.style.cursor = "grab";
+        });
+        lightbox.dataset.hasMouseMoveListeners = 'true';
+      }
     }
 
     if (!lightbox.dataset.hasClickListeners) {
