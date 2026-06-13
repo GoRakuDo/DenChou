@@ -758,11 +758,13 @@ a {
 
 .highlight {
   color: var(--light-highlight);
+  font-weight: 500;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
 .highlight {
   color: var(--dark-highlight);
+  font-weight: 500;
 }
 
 @container style(--bold-highlight: 1) {
