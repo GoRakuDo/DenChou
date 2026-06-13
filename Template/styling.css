@@ -2472,6 +2472,7 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.9
 }
 
 [data-sc-content="example-sentence"] {
+  border-left: none !important;
   border-color: oklch(10% 0.02 260 / 0.5) !important;
   transition: border-color var(--base-transition), 
               opacity var(--base-transition);
