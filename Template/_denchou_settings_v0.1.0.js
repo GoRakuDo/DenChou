@@ -1385,9 +1385,8 @@
   restoreState();
 
   function buildMenu() {
-    const btn = document.querySelector('.toggle-settings-btn');
-
-    if (btn) {
+    const btns = document.querySelectorAll('.toggle-settings-btn');
+    for (const btn of btns) {
       btn.onclick = () => {
         const modal = document.getElementById('denchou-settings-modal');
         if (modal) modal.classList.add('active');
