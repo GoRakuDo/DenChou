@@ -13,7 +13,7 @@
     </span>
 
     <!-- Settings Toggle -->
-    <span class="toggle-settings-btn tappable">
+    <span class="toggle-settings-btn tappable" onclick="window.denchouInitMenu && window.denchouInitMenu()">
       <i class="fas fa-cog"></i>
     </span>
 
@@ -2304,6 +2304,79 @@
       function (cb) { return setTimeout(cb, 200); };
 
     // Initializes immediate functions
+    // Lazily loads the settings script on the first gear-icon tap and
+    // opens the menu. After the script is loaded, the gear's own onclick
+    // (attached by buildMenu) takes over, so subsequent taps are instant.
+    // The function caches itself on window.denchouInitMenu and is idempotent:
+    // safe to call multiple times, even before the script finishes loading.
+    function denchouInitMenu() {
+      const btn = document.querySelector('.toggle-settings-btn');
+      if (!btn) return;
+
+      // Already loaded: the modal exists and the gear's onclick is attached.
+      // Trigger the existing onclick so renderPresetUI() also runs.
+      if (document.getElementById('denchou-settings-modal')) {
+        btn.click();
+        return;
+      }
+
+      // Script load is in flight (user double-tapped). Wait for the modal
+      // with a timeout to avoid battery drain if init() hangs.
+      if (window.denchouMenuLoading) {
+        let attempts = 0;
+        const wait = () => {
+          if (document.getElementById('denchou-settings-modal')) {
+            window.denchouMenuLoading = false;
+            btn.click();
+          } else if (++attempts >= 200) {
+            window.denchouMenuLoading = false;
+            console.error('Settings script loaded but menu did not appear');
+          } else {
+            setTimeout(wait, 30);
+          }
+        };
+        wait();
+        return;
+      }
+
+      // Edge case: buildMenu is exported but the async init() hasn't run yet.
+      if (window.denchouBuildMenu) {
+        window.denchouBuildMenu();
+        btn.click();
+        return;
+      }
+
+      // First tap: load the script. The script's own async init() calls
+      // buildMenu(), which creates the modal and attaches onclick to the
+      // gear button. We poll for the modal, then trigger the click.
+      window.denchouMenuLoading = true;
+      const script = document.createElement('script');
+      script.src = "_denchou_settings_v0.1.0.js";
+      script.onload = () => {
+        let attempts = 0;
+        const wait = () => {
+          if (document.getElementById('denchou-settings-modal')) {
+            window.denchouMenuLoading = false;
+            btn.click();
+          } else if (++attempts >= 200) {
+            window.denchouMenuLoading = false;
+            console.error('Settings script loaded but buildMenu did not run');
+          } else {
+            setTimeout(wait, 30);
+          }
+        };
+        wait();
+      };
+      script.onerror = () => {
+        window.denchouMenuLoading = false;
+        console.error('Failed to load _denchou_settings_v0.1.0.js');
+      };
+      document.body.appendChild(script);
+    }
+    if (!window.denchouInitMenu) {
+      window.denchouInitMenu = denchouInitMenu;
+    }
+
     function init() {
       darkMode();
       nsfw();
@@ -2330,6 +2403,8 @@
     }
 
     // initializes deferred functions
+    // The settings script is no longer loaded here; it is lazy-loaded by
+    // denchouInitMenu() the first time the gear icon is tapped.
     function initDeferred() {
       delayedFunctions(() => {
         collectGlossaryImages(true);
@@ -2357,15 +2432,6 @@
                   script.src = "_denchou_kanji_hover_v0.1.0.js";
                   document.body.appendChild(script);
                 }
-              }
-
-              // Settings
-              if (window.denchouBuildMenu) {
-                window.denchouBuildMenu();
-              } else {
-                const script = document.createElement('script');
-                script.src = "_denchou_settings_v0.1.0.js";
-                document.body.appendChild(script);
               }
             }, 50);
           });
