@@ -16,6 +16,7 @@
     "--audio-header-visibility": "1",
     "--freq-header-visibility": "1",
     "--enable-animations": "true",
+    "--ankidroid-auto-optimize": "true",
     "--word-sentence-default-expanded": "false",
     "--audio-sentence-default-expanded": "false",
     "--notes-default-expanded": "false",

@@ -29,6 +29,7 @@
     "Card Behavior": [
       { type: "header", label: "General Settings" },
       { label: "Enable Animations", var: "--enable-animations", type: "switch-bool", desc: "Enable transition animations." },
+      { label: "Auto Optimize", var: "--ankidroid-auto-optimize", type: "switch-bool", desc: "Automatically reduce shadows and blur on small screens." },
 
       { type: "header", label: "Front" },
       { label: "Expand Sentence (Word)", var: "--word-sentence-default-expanded", type: "switch-bool", desc: "Show sentence on word cards immediately." },
@@ -2083,7 +2084,26 @@
     }
 
     buildMenu();
+    applyAutoOptimize();
   }
+
+  function applyAutoOptimize() {
+    const autoOpt = localStorage.getItem("denchou_--ankidroid-auto-optimize");
+    if (autoOpt === "false") {
+      document.documentElement.style.setProperty("--ankidroid-lite", "false");
+      return;
+    }
+
+    const isSmallScreen = window.innerWidth <= 600;
+    document.documentElement.style.setProperty("--ankidroid-lite", isSmallScreen ? "true" : "false");
+  }
+
+  window.addEventListener("resize", () => {
+    const autoOpt = localStorage.getItem("denchou_--ankidroid-auto-optimize");
+    if (autoOpt === "false") return;
+    const isSmallScreen = window.innerWidth <= 600;
+    document.documentElement.style.setProperty("--ankidroid-lite", isSmallScreen ? "true" : "false");
+  });
 
   init();
 })();

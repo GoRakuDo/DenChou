@@ -80,6 +80,7 @@
   ============================================ */
   /* General */
   --enable-animations:                true;    /* Enable transition animations */
+  --ankidroid-auto-optimize:          true;    /* Auto-reduce shadows/blur on small screens */
   --ankidroid-lite:                   false;   /* Lightweight mode for AnkiDroid */
 
   /* Front
