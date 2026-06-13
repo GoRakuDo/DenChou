@@ -410,6 +410,31 @@
     return 'oklch(' + (L*100).toFixed(1) + '% ' + C.toFixed(3) + ' ' + h.toFixed(1) + ')';
   }
 
+  function oklchToHex(oklchStr) {
+    if (!oklchStr) return '#0a0510';
+    const match = oklchStr.match(/oklch\(\s*([0-9.]+)%?\s+([0-9.]+)\s+([0-9.]+)/i);
+    if (!match) return '#0a0510';
+    const L = parseFloat(match[1]) / 100;
+    const C = parseFloat(match[2]);
+    const H = parseFloat(match[3]) * Math.PI / 180;
+    const a = C * Math.cos(H);
+    const b = C * Math.sin(H);
+    const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
+    const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
+    const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
+    const l = l_ * l_ * l_;
+    const m = m_ * m_ * m_;
+    const s = s_ * s_ * s_;
+    let r = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
+    let g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
+    let b2 = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
+    r = r <= 0.0031308 ? 12.92 * r : 1.055 * Math.pow(r, 1/2.4) - 0.055;
+    g = g <= 0.0031308 ? 12.92 * g : 1.055 * Math.pow(g, 1/2.4) - 0.055;
+    b2 = b2 <= 0.0031308 ? 12.92 * b2 : 1.055 * Math.pow(b2, 1/2.4) - 0.055;
+    const clamp = function(v) { return Math.max(0, Math.min(255, Math.round(v * 255))); };
+    return '#' + [r, g, b2].map(function(v) { return clamp(v).toString(16).padStart(2, '0'); }).join('');
+  }
+
   function rgbaToOklch(r, g, b, a) {
     const hex = '#' + [r,g,b].map(function(v){ return v.toString(16).padStart(2,'0'); }).join('');
     const oklch = hexToOklch(hex);
@@ -942,7 +967,7 @@
           } else if (item.type === 'color') {
             input.value = savedVal || "oklch(10% 0.02 260)";
             if (input.previousElementSibling && input.previousElementSibling.type === 'color') {
-              input.previousElementSibling.value = getSafeOklchColor(savedVal || "oklch(10% 0.02 260)");
+              input.previousElementSibling.value = oklchToHex(getSafeOklchColor(savedVal || "oklch(10% 0.02 260)"));
             }
 
           } else if (item.type === 'textarea') {
@@ -1768,7 +1793,7 @@
       let safeColor = getSafeOklchColor(currentVal);
       controlHtml = `
                 <div class="denchou-color-wrapper">
-                    <input type="color" class="denchou-color-picker" data-type="color" value="${safeColor}">
+                    <input type="color" class="denchou-color-picker" data-type="color" value="${oklchToHex(safeColor)}">
                     <input type="text" class="denchou-input denchou-color-text" data-var="${item.var}" data-type="${item.type}" value="${currentVal}">
                 </div>`;
 
