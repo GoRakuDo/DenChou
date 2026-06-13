@@ -65,15 +65,7 @@
           { label: "Custom", val: "var(--custom-font)" }
         ]
       },
-      {
-        label: "Word", var: "--word-font", type: "segment", desc: "Font for {{word}} field.", options: [
-          { label: "Noto Serif", val: '"Noto Serif CJK JP", notoserifjp, "Klee One", klee, "Hiragino Mincho ProN", serif' },
-          { label: "Klee", val: '"Klee One", klee, "Hiragino Mincho ProN", "Noto Serif CJK JP", notoserifjp, "Yu Mincho", serif' },
-          { label: "Hiragino Mincho", val: '"Hiragino Mincho ProN", "Klee One", klee, "Noto Serif CJK JP", notoserifjp, "Yu Mincho", serif' },
-          { label: "Sans", val: "var(--sans)" },
-          { label: "Custom", val: "var(--custom-font)" }
-        ]
-      },
+      
       { label: "Wrapped Sentence Alignment", var: "--sentence-alignment", type: "segment", options: [{ val: "left", label: "Left" }, { val: "center", label: "Center" }, { val: "right", label: "Right" }], desc: "Alignment for multi-line sentences." },
 
       { type: "sub-header", label: "Word Scaling" },
@@ -178,7 +170,7 @@
         { label: "Enable Kanji Hover", var: "--enable-kanji-hover", type: "switch-bool", desc: "Enable Kanji Hover." },
         { label: "Show Example Sentences", var: "--kanji-hover-sentence-visibility", type: "switch-int", desc: "Display context sentences within the hover tooltip." },
         { label: "Auto-Quote Example Sentences", var: "--kanji-hover-auto-quote", type: "switch-bool", desc: "Wrap the example sentences in quotation marks." },
-        { label: "Word Font", var: "--kanji-hover-word-font", type: "segment", options: [{ val: "var(--word-font)", label: "Word" }, { val: "var(--serif)", label: "Serif" }, { val: "var(--sans)", label: "Sans" }, { val: "var(--custom-font)", label: "Custom" }], desc: "Select the font style for the word." },
+        { label: "Word Font", var: "--kanji-hover-word-font", type: "segment", options: [{ val: "var(--serif)", label: "Serif" }, { val: "var(--sans)", label: "Sans" }, { val: "var(--custom-font)", label: "Custom" }], desc: "Select the font style for the word." },
         { label: "Word Size", var: "--kanji-hover-word-size", type: "slider", min: "1", max: "2", step: "0.1", unit: "rem", desc: "Adjust the scale of the word." },
         { label: "Reading Size", var: "--kanji-hover-word-reading-size", type: "slider", min: "0.65", max: "1.25", step: "0.1", unit: "rem", desc: "Adjust the scale of the reading." },
 

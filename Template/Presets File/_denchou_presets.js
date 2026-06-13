@@ -98,7 +98,7 @@
     "--kanji-hover-pitch-highlight": "true",
     "--kanji-hover-sentence-visibility": "1",
     "--kanji-hover-auto-quote": "true",
-    "--kanji-hover-word-font": "\"Klee One\", klee, \"Hiragino Mincho ProN\", \"Noto Serif CJK JP\", notoserifjp, \"Yu Mincho\", serif",
+    "--kanji-hover-word-font": "var(--serif)",
     "--kanji-hover-word-size": "1rem",
     "--kanji-hover-word-reading-size": "0.65rem",
     "--grid-gap": "20px",

@@ -140,7 +140,7 @@
   --custom-font:                      ;  /* Type your custom font name here */
   --serif:                            "Klee One", klee, "Hiragino Mincho ProN", "Noto Serif CJK JP", notoserifjp, "Yu Mincho", serif;
   --sans:                             "Gen Interface JP", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", notosansjp, "Segoe UI", sans-serif;
-  --word-font:                        "Noto Serif CJK JP", notoserifjp, "Klee One", klee, "Hiragino Mincho ProN", serif;
+
 
   /* Word Sizes (Dynamic Scaling) */
   --word-size-base:                   2.5rem;
@@ -224,7 +224,7 @@
   --enable-kanji-hover:               true;         /* Enable Kanji Hover */
   --kanji-hover-sentence-visibility:  1;            /* "0" to hide kanji hover sentences */
   --kanji-hover-auto-quote:           true;         /* Wrap the example sentences in quotation marks */
-  --kanji-hover-word-font:            var(--word-font); /* Select the font style for the word */
+  --kanji-hover-word-font:            var(--serif); /* Font family for the kanji-hover word */
   --kanji-hover-word-size:            1rem;         /* Adjust the scale of the word */
   --kanji-hover-word-reading-size:    0.65rem;      /* Adjust the scale of the reading */
 
@@ -988,7 +988,7 @@ a {
 
 #word {
   position: relative;
-  font-family: var(--word-font);
+  font-family: var(--serif);
   font-size: var(--word-size-base);
   text-align: center;
 }
