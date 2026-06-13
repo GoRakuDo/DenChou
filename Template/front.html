@@ -145,8 +145,8 @@
       if (currentDeck === lastDeck) return;
 
       try {
-        const linksRes = await fetch(`_denchou_deck_presets.js?t=${Date.now()}`);
-        const presetsRes = await fetch(`_denchou_presets.js?t=${Date.now()}`);
+        const linksRes = await fetch(`_denchou_deck_presets.js?v=0.1.0`);
+        const presetsRes = await fetch(`_denchou_presets.js?v=0.1.0`);
 
         if (linksRes.ok && presetsRes.ok) {
           const links = await linksRes.json();
