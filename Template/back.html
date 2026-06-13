@@ -884,30 +884,11 @@
     }
   }
 
-  // Enables NSFW options
+  // Mutes NSFW sentence audio
   function nsfw() {
-    if (denchouConfig.muteNsfwAudio !== 'true' && denchouConfig.blurNsfwPicture !== 'true') return;
-
-    if (!window.IS_NSFW) return;
-
-    if (denchouConfig.muteNsfwAudio === 'true') {
-      const wordAudioButton = document.querySelector(".audio .soundLink, .audio .replaybutton");
-      if (wordAudioButton) {
-        wordAudioButton.click();
-      }
-    }
-
-    if (denchouConfig.blurNsfwPicture === 'true') {
-      document.querySelectorAll('.picture-container').forEach(container => {
-        if (container.classList.contains('nsfw')) {
-          container.querySelectorAll(':is(img, video)').forEach(media => {
-            media.addEventListener('click', () => {
-              media.classList.add('clicked');
-            });
-          });
-        }
-      });
-    }
+    if (denchouConfig.muteNsfwAudio !== 'true' || !window.IS_NSFW) return;
+    const wordAudioButton = document.querySelector(".audio .soundLink, .audio .replaybutton");
+    wordAudioButton?.click();
   }
 
   // Mutes the sentence audio playback based on CSS variables

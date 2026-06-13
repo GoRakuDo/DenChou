@@ -1338,6 +1338,17 @@ img {
   [class*=" nsfw" i] :is(img, video).clicked {
     filter: blur(0);
   }
+
+  /* NSFW blur in lightbox */
+  .lightbox.nsfw :is(img, video) {
+    filter: blur(20px);
+    transition: filter var(--base-transition);
+    cursor: pointer;
+  }
+
+  .lightbox.nsfw :is(img, video).clicked {
+    filter: blur(0);
+  }
 }
 
 /* Image Toggle Styling  */

@@ -279,10 +279,12 @@
     const hideLightboxMedia = () => {
       lightboxImg.style.display = "none";
       lightboxImg.removeAttribute("src");
+      lightboxImg.classList.remove("clicked");
       lightboxVideo.pause();
       lightboxVideo.style.display = "none";
       lightboxVideo.removeAttribute("src");
       lightboxVideo.innerHTML = "";
+      lightboxVideo.classList.remove("clicked");
       lightboxVideo.load();
     };
 
@@ -371,6 +373,19 @@
 
       hideLightboxMedia();
 
+      // NSFW: sync blur state from picture container to lightbox
+      const isNSFW = window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true';
+      if (isNSFW) {
+        lightbox.classList.add("nsfw");
+        // Transfer .clicked state from picture media to lightbox media
+        if (media.classList.contains('clicked')) {
+          const target = isVideo ? lightboxVideo : lightboxImg;
+          target.classList.add('clicked');
+        }
+      } else {
+        lightbox.classList.remove("nsfw");
+      }
+
       if (isVideo) {
         const src = media.currentSrc || media.getAttribute("src");
         if (src) {
@@ -411,8 +426,7 @@
 
     getPictureMedia().forEach((media) => {
       if (!media.dataset.hasLightboxListener) {
-        const container = media.closest('.picture-container');
-        const isNSFW = container && container.className.toLowerCase().includes('nsfw');
+        const isNSFW = window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true';
         const openMedia = () => {
           const mediaItems = getPictureMedia();
           const mediaIndex = mediaItems.indexOf(media);
@@ -608,6 +622,15 @@
             lightbox.classList.remove("active");
           }
         }
+      });
+
+      // NSFW: click on lightbox media to unblur
+      [lightboxVideo, lightboxImg].forEach(el => {
+        el.addEventListener("click", () => {
+          if (lightbox.classList.contains("nsfw")) {
+            el.classList.add("clicked");
+          }
+        });
       });
 
       lightbox.addEventListener("touchend", (e) => {
