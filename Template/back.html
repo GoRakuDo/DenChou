@@ -201,7 +201,7 @@
 <div id="hiddenReading" style="display: none;">{{#pitchAccents}}{{pitchAccents}}{{/pitchAccents}}{{^pitchAccents}}{{reading}}{{/pitchAccents}}</div>
 
 <script>
-  var senrenConfig = {};
+  var denchouConfig = {};
 
   // Helper functions for shortcuts
   window.parseKeyConfig = function (configStr) {
@@ -290,7 +290,7 @@
 
   // Collect images from the glossary and add them to the picture container
   function collectGlossaryImages(deferred = false) {
-    if (senrenConfig.collectGlossaryImages !== 'true') return;
+    if (denchouConfig.collectGlossaryImages !== 'true') return;
 
     const glossaryItems = document.querySelectorAll("#glossary img, #definition img");
     const pictureContainer = ELS.pictureContainer;
@@ -345,8 +345,8 @@
 
       updatePictureCounter();
 
-      if (window.senrenRefreshImageNavigation) {
-        window.senrenRefreshImageNavigation();
+      if (window.denchouRefreshImageNavigation) {
+        window.denchouRefreshImageNavigation();
       }
     }
   }
@@ -359,7 +359,7 @@
     const glossary = ELS.glossary;
     const allGlossaryListItems = [
     ...document.querySelectorAll("#glossary > .glossary-box > span > div li[data-dictionary], #glossary > div > span > div > i"),
-    ...document.querySelectorAll('#glossary div[style*="margin-bottom: 12px"][style*="display: flex"]') 
+    ...document.querySelectorAll('#glossary div[style*="margin-bottom: 12px"][style*="display: flex"]')
     ];
 
     const dictionaryPreference = document.getElementById('dictionaryPreference')?.textContent.trim() || '';
@@ -674,7 +674,7 @@
       };
     });
 
-    window.senrenToggleDictionary = handleToggle;
+    window.denchouToggleDictionary = handleToggle;
   }
 
   // Enables interaction effects
@@ -796,7 +796,7 @@
     const sentenceEng = document.querySelector('#sentenceEng');
 
     if (notesElement) {
-      const expandByDefault = senrenConfig.notesDefaultExpanded;
+      const expandByDefault = denchouConfig.notesDefaultExpanded;
 
       if (expandByDefault === 'true') {
         if (notesElement.classList.contains('is-collapsed')) {
@@ -814,7 +814,7 @@
     }
 
     if (sentenceEng) {
-      const expandByDefault = senrenConfig.translationDefaultExpanded;
+      const expandByDefault = denchouConfig.translationDefaultExpanded;
 
       if (expandByDefault === 'true') {
         sentenceEng.style.transition = 'none';
@@ -835,8 +835,8 @@
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
     const pictureContainer = document.querySelector('.picture-container');
     const hasPicture = pictureContainer && pictureContainer.querySelector('img');
-    const backdropEnabled = senrenConfig.enableBackdropLayout === '1';
-    const backdropStyle = senrenConfig.backdropStyle;
+    const backdropEnabled = denchouConfig.enableBackdropLayout === '1';
+    const backdropStyle = denchouConfig.backdropStyle;
 
     let pictureHoverTriggerSelector;
 
@@ -854,7 +854,7 @@
         : ".picture-container";
     }
 
-    const miscExpanded = senrenConfig.miscInfoDefaultExpanded;
+    const miscExpanded = denchouConfig.miscInfoDefaultExpanded;
     const miscInfoEl = document.querySelector(".misc-info");
 
     if (miscInfoEl) {
@@ -888,18 +888,18 @@
 
   // Enables NSFW options
   function nsfw() {
-    if (senrenConfig.muteNsfwAudio !== 'true' && senrenConfig.blurNsfwPicture !== 'true') return;
+    if (denchouConfig.muteNsfwAudio !== 'true' && denchouConfig.blurNsfwPicture !== 'true') return;
 
     if (!window.IS_NSFW) return;
 
-    if (senrenConfig.muteNsfwAudio === 'true') {
+    if (denchouConfig.muteNsfwAudio === 'true') {
       const wordAudioButton = document.querySelector(".audio .soundLink, .audio .replaybutton");
       if (wordAudioButton) {
         wordAudioButton.click();
       }
     }
 
-    if (senrenConfig.blurNsfwPicture === 'true') {
+    if (denchouConfig.blurNsfwPicture === 'true') {
       document.querySelectorAll('.picture-container').forEach(container => {
         if (container.classList.contains('nsfw')) {
           container.querySelectorAll('img').forEach(img => {
@@ -914,9 +914,9 @@
 
   // Mutes the sentence audio playback based on CSS variables
   function muteSentence() {
-    if (senrenConfig.muteSentenceAudio !== 'true') return;
+    if (denchouConfig.muteSentenceAudio !== 'true') return;
 
-    const muteAudio = senrenConfig.muteSentenceAudio;
+    const muteAudio = denchouConfig.muteSentenceAudio;
 
     if (muteAudio === 'true') {
       const wordAudioButton = document.querySelector(".audio .soundLink, .audio .replaybutton");
@@ -989,9 +989,9 @@
 
     return resultType;
   }
-  window.senrenGetPitchType = getPitchType;
+  window.denchouGetPitchType = getPitchType;
 
-  // Format pitch accent positions and categories 
+  // Format pitch accent positions and categories
   function cleanPitchPositions() {
     const positionElements = document.querySelectorAll('#position');
     const rubyElement = document.querySelector("#word > span > ruby");
@@ -1280,16 +1280,16 @@
     const rootElement = document.documentElement;
     const wordElement = document.getElementById('word');
     if (wordElement) {
-      const pitchStyleValue = senrenConfig.pitchStyle;
+      const pitchStyleValue = denchouConfig.pitchStyle;
       wordElement.classList.toggle('alt', pitchStyleValue === 'alt');
 
-      const pitchColorsValue = senrenConfig.pitchColors;
+      const pitchColorsValue = denchouConfig.pitchColors;
       wordElement.classList.toggle('colors', pitchColorsValue === 'false');
     }
 
     const sentenceElement = document.getElementById("formattedSentence");
     if (sentenceElement) {
-      const sentenceHighlightValue = senrenConfig.sentencePitchHighlight;
+      const sentenceHighlightValue = denchouConfig.sentencePitchHighlight;
       sentenceElement.classList.toggle('alt-highlight', sentenceHighlightValue === 'true');
     }
   }
@@ -1500,7 +1500,7 @@
     const rubyElement = wordContainer.querySelector("ruby");
     if (!rubyElement) return;
 
-    const substituteSetting = senrenConfig.noDuplicateKana;
+    const substituteSetting = denchouConfig.noDuplicateKana;
     const shouldBeEnabled = (substituteSetting === 'true');
     const isCurrentlyEnabled = wordContainer.classList.contains('reading-is-word');
 
@@ -1557,7 +1557,7 @@
 
   // Collapses long dictionary entries and adds a clickable fade-out.
   function collapseDictionary(container) {
-    const isCollapsedEnabled = senrenConfig.dictionaryCollapse;
+    const isCollapsedEnabled = denchouConfig.dictionaryCollapse;
     if (isCollapsedEnabled !== '1') {
       return;
     }
@@ -1566,7 +1566,7 @@
       return;
     }
 
-    const maxHeight = parseInt(senrenConfig.dictionaryMaxHeight, 10);
+    const maxHeight = parseInt(denchouConfig.dictionaryMaxHeight, 10);
 
     const oldFade = container.querySelector('.fade-to-show-more');
     if (oldFade) oldFade.remove();
@@ -1769,7 +1769,7 @@
     };
 
     function playActiveAudio() {
-      if (senrenConfig.muteSentenceAudio === 'true') return;
+      if (denchouConfig.muteSentenceAudio === 'true') return;
       if (audioParts.length === 0) return;
 
       document.querySelectorAll('audio').forEach(a => {
@@ -1790,7 +1790,7 @@
 
     let replayTimeout;
 
-    window.senrenToggleScene = (direction) => {
+    window.denchouToggleScene = (direction) => {
       if (typeof initialPlayTimeout !== 'undefined') clearTimeout(initialPlayTimeout);
 
       if (direction === 'left') {
@@ -1808,7 +1808,7 @@
     const handleSceneShortcuts = (e) => {
       if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
-      const cssVal = senrenConfig.sceneReplayShortcutKey;
+      const cssVal = denchouConfig.sceneReplayShortcutKey;
 
       const replayConfig = parseKeyConfig(cssVal) || { key: 'w', ctrl: false, alt: false, shift: false, meta: false };
 
@@ -1975,7 +1975,7 @@
       });
     });
 
-    window.senrenRefreshScenes = () => updateDisplay(false);
+    window.denchouRefreshScenes = () => updateDisplay(false);
 
     function updateSceneIndicator() {
       const indicator = ELS.sceneIndicator;
@@ -1986,11 +1986,11 @@
 
     updateDisplay(false);
 
-    const muteNsfw = senrenConfig.muteNsfwAudio;
+    const muteNsfw = denchouConfig.muteNsfwAudio;
 
     if (muteNsfw !== 'true' || !window.IS_NSFW) {
       if (isPartEmptyGroup(audioParts[0])) {
-        if (senrenConfig.muteSentenceAudio !== 'true' && ELS.wordAudioBtn) {
+        if (denchouConfig.muteSentenceAudio !== 'true' && ELS.wordAudioBtn) {
           ELS.wordAudioBtn.click();
         }
         updateDisplay(true);
@@ -2010,7 +2010,7 @@
 
     if (!hideBtn || !showBtn || !backWrapper) return;
 
-    const savedState = localStorage.getItem("senrenImageHidden");
+    const savedState = localStorage.getItem("denchouImageHidden");
 
     if (savedState === "true") {
       backWrapper.classList.add('image-removed');
@@ -2024,7 +2024,7 @@
       backWrapper.classList.toggle('image-removed');
       const isHidden = backWrapper.classList.contains('image-removed');
 
-      localStorage.setItem("senrenImageHidden", isHidden ? "true" : "false");
+      localStorage.setItem("denchouImageHidden", isHidden ? "true" : "false");
 
       if (isHidden) {
         showBtn.style.setProperty('display', 'flex', 'important');
@@ -2061,9 +2061,9 @@
         return;
       }
 
-      const enabled = senrenConfig.enableBackdropLayout;
-      const dynamicHeight = senrenConfig.backdropDynamicHeight;
-      const backdropStyle = senrenConfig.backdropStyle;
+      const enabled = denchouConfig.enableBackdropLayout;
+      const dynamicHeight = denchouConfig.backdropDynamicHeight;
+      const backdropStyle = denchouConfig.backdropStyle;
 
       const isActive = (enabled === '1' && dynamicHeight === '1' && backdropStyle === '0');
 
@@ -2088,9 +2088,9 @@
 
     requestAnimationFrame(() => applyHeight());
 
-    if (!window._senren_height_init) {
+    if (!window._denchou_height_init) {
       window.addEventListener('resize', dynamicCardHeight);
-      window._senren_height_init = true;
+      window._denchou_height_init = true;
     }
   }
 
@@ -2099,7 +2099,7 @@
     const images = document.querySelectorAll('.picture-container img');
     const counters = document.querySelectorAll('.picture-counter');
     const back = document.querySelector('.back');
-    const visibility = senrenConfig.pictureCounterVisibility;
+    const visibility = denchouConfig.pictureCounterVisibility;
 
     if (counters.length === 0) return;
 
@@ -2111,7 +2111,7 @@
       if (back) back.classList.remove('has-multiple-images');
       return;
     }
-    
+
     if (back) {
       if (images.length > 1) back.classList.add('has-multiple-images');
       else back.classList.remove('has-multiple-images');
@@ -2129,7 +2129,7 @@
   }
 
   function initPOSHeader() {
-    const enabled = senrenConfig.posHeader === '1';
+    const enabled = denchouConfig.posHeader === '1';
 
     const existing = document.querySelectorAll('.pos-info-header');
     if (!enabled) {
@@ -2161,18 +2161,18 @@
 
   (function () {
     // Auto Advance Logic
-    window.senrenAutoAdvance = function() {
+    window.denchouAutoAdvance = function() {
       if (window.autoAdvanceTimer) clearTimeout(window.autoAdvanceTimer);
-      if (senrenConfig.autoAdvance === 'true' && typeof pycmd !== 'undefined') {
-        const delay = (senrenConfig.autoAdvanceDelay || 0) * 1000;
-        const ease = senrenConfig.autoAdvanceEase || '3';
+      if (denchouConfig.autoAdvance === 'true' && typeof pycmd !== 'undefined') {
+        const delay = (denchouConfig.autoAdvanceDelay || 0) * 1000;
+        const ease = denchouConfig.autoAdvanceEase || '3';
         window.autoAdvanceTimer = setTimeout(() => {
           pycmd(`ease${ease}`);
         }, delay);
       }
     };
 
-    window.senrenUpdateConfig = function (runLogic = false) {
+    window.denchouUpdateConfig = function (runLogic = false) {
       // Regex Cache
       window.REGEX = {
         MORA: /[きしちにひみりぎじぢびぴゔ][ゃゅょ]|[うくすつぬふむゆるぐずづぶゔ][ぁぃぅぇぉ]|[てで][ぃ]|[とど][ぅ]|[キシチニヒミリギジヂビピヴ][ャュョ]|[ウクスツヌフムユルグズヅブプヴ][ァィゥェォ]|[テデ][ィ]|[トド][ぅ]|[クグ][ヮ]|[フ][ォ]|[っッ]|ー|[んン]|[\u3041-\u3096\u30A1-\u4DBF\u3005\u3007]|[\u3041-\u3096\u30A1-\u30F6\u30FD\u30FE]|\S/g,
@@ -2214,65 +2214,65 @@
       const getVar = (prop) => style.getPropertyValue(prop).trim().toLowerCase();
 
       // Notes
-      senrenConfig.notesDefaultExpanded = getVar('--notes-default-expanded');
+      denchouConfig.notesDefaultExpanded = getVar('--notes-default-expanded');
 
       // Translation
-      senrenConfig.translationDefaultExpanded = getVar('--translation-default-expanded');
+      denchouConfig.translationDefaultExpanded = getVar('--translation-default-expanded');
 
       // Collect Glossary Images
-      senrenConfig.collectGlossaryImages = getVar('--collect-glossary-images');
+      denchouConfig.collectGlossaryImages = getVar('--collect-glossary-images');
 
       // Backdrop Layout
-      senrenConfig.enableBackdropLayout = getVar('--enable-backdrop-layout');
-      senrenConfig.backdropStyle = getVar('--backdrop-style');
-      senrenConfig.backdropDynamicHeight = getVar('--backdrop-dynamic-height');
+      denchouConfig.enableBackdropLayout = getVar('--enable-backdrop-layout');
+      denchouConfig.backdropStyle = getVar('--backdrop-style');
+      denchouConfig.backdropDynamicHeight = getVar('--backdrop-dynamic-height');
 
       // Misc Info
-      senrenConfig.miscInfoDefaultExpanded = getVar('--misc-info-default-expanded');
+      denchouConfig.miscInfoDefaultExpanded = getVar('--misc-info-default-expanded');
 
       // Audio
-      senrenConfig.muteNsfwAudio = getVar('--mute-nsfw-audio');
-      senrenConfig.muteSentenceAudio = getVar('--mute-sentence-audio');
-      senrenConfig.blurNsfwPicture = getVar('--blur-nsfw-picture');
+      denchouConfig.muteNsfwAudio = getVar('--mute-nsfw-audio');
+      denchouConfig.muteSentenceAudio = getVar('--mute-sentence-audio');
+      denchouConfig.blurNsfwPicture = getVar('--blur-nsfw-picture');
 
       // Kanji
-      senrenConfig.enableKanjiHover = getVar('--enable-kanji-hover');
-      senrenConfig.kanjiHoverAutoQuote = getVar('--kanji-hover-auto-quote');
-      senrenConfig.noDuplicateKana = getVar('--no-duplicate-kana');
+      denchouConfig.enableKanjiHover = getVar('--enable-kanji-hover');
+      denchouConfig.kanjiHoverAutoQuote = getVar('--kanji-hover-auto-quote');
+      denchouConfig.noDuplicateKana = getVar('--no-duplicate-kana');
 
       // Dictionary
-      senrenConfig.dictionaryCollapse = getVar('--dictionary-collapse');
-      senrenConfig.dictionaryMaxHeight = getVar('--dictionary-max-height');
-      senrenConfig.posHeader = getVar('--pos-header');
+      denchouConfig.dictionaryCollapse = getVar('--dictionary-collapse');
+      denchouConfig.dictionaryMaxHeight = getVar('--dictionary-max-height');
+      denchouConfig.posHeader = getVar('--pos-header');
 
       // Keys
-      senrenConfig.sceneReplayShortcutKey = getVar('--scene-replay-shortcut-key');
-      senrenConfig.toggleSettingsKey = getVar('--toggle-settings-key');
-      senrenConfig.togglePictureLightboxGridKey = getVar('--toggle-picture-lightbox-grid-key');
-      senrenConfig.togglePictureLightboxKey = getVar('--toggle-picture-lightbox-key');
-      senrenConfig.toggleCustomDarkModeKey = getVar('--toggle-custom-dark-mode-key');
-      senrenConfig.toggleImageKey = getVar('--toggle-image-key');
-      senrenConfig.toggleImageSwitchKey = getVar('--toggle-image-switch-key');
-      senrenConfig.toggleSceneSwitchKey = getVar('--toggle-scene-switch-key');
-      senrenConfig.toggleDictionarySwitchKey = getVar('--toggle-dictionary-switch-key');
+      denchouConfig.sceneReplayShortcutKey = getVar('--scene-replay-shortcut-key');
+      denchouConfig.toggleSettingsKey = getVar('--toggle-settings-key');
+      denchouConfig.togglePictureLightboxGridKey = getVar('--toggle-picture-lightbox-grid-key');
+      denchouConfig.togglePictureLightboxKey = getVar('--toggle-picture-lightbox-key');
+      denchouConfig.toggleCustomDarkModeKey = getVar('--toggle-custom-dark-mode-key');
+      denchouConfig.toggleImageKey = getVar('--toggle-image-key');
+      denchouConfig.toggleImageSwitchKey = getVar('--toggle-image-switch-key');
+      denchouConfig.toggleSceneSwitchKey = getVar('--toggle-scene-switch-key');
+      denchouConfig.toggleDictionarySwitchKey = getVar('--toggle-dictionary-switch-key');
 
       // Pitch
-      senrenConfig.pitchStyle = getVar('--pitch-style');
-      senrenConfig.pitchColors = getVar('--pitch-colors');
-      senrenConfig.sentencePitchHighlight = getVar('--sentence-pitch-highlight');
+      denchouConfig.pitchStyle = getVar('--pitch-style');
+      denchouConfig.pitchColors = getVar('--pitch-colors');
+      denchouConfig.sentencePitchHighlight = getVar('--sentence-pitch-highlight');
 
       // Picture Counter
-      senrenConfig.pictureCounterVisibility = getVar('--picture-counter-visibility');
+      denchouConfig.pictureCounterVisibility = getVar('--picture-counter-visibility');
 
       // Auto Advance
-      senrenConfig.autoAdvance = getVar('--auto-advance');
-      senrenConfig.autoAdvanceDelay = parseFloat(getVar('--auto-advance-delay')) || 0;
-      senrenConfig.autoAdvanceEase = getVar('--auto-advance-ease');
-      senrenConfig.enableFadeIn = getVar('--enable-fade-in');
+      denchouConfig.autoAdvance = getVar('--auto-advance');
+      denchouConfig.autoAdvanceDelay = parseFloat(getVar('--auto-advance-delay')) || 0;
+      denchouConfig.autoAdvanceEase = getVar('--auto-advance-ease');
+      denchouConfig.enableFadeIn = getVar('--enable-fade-in');
 
       // Apply Fade-in class
       if (ELS.back) {
-        if (senrenConfig.enableFadeIn === 'true') {
+        if (denchouConfig.enableFadeIn === 'true') {
           ELS.back.classList.add('fade-in');
         } else {
           ELS.back.classList.remove('fade-in');
@@ -2281,7 +2281,7 @@
 
       if (!runLogic) return;
 
-      senrenAutoAdvance();
+      denchouAutoAdvance();
 
       if (typeof window.dynamicCardHeight === 'function') {
         window.dynamicCardHeight();
@@ -2295,7 +2295,7 @@
     };
 
     // Initial load
-    window.senrenUpdateConfig();
+    window.denchouUpdateConfig();
 
     window.IS_MOBILE = document.documentElement.classList.contains('mobile') ||
       document.body.classList.contains('mobile');
@@ -2334,37 +2334,37 @@
       delayedFunctions(() => {
         collectGlossaryImages(true);
         initPOSHeader()
-        senrenAutoAdvance();
+        denchouAutoAdvance();
 
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             setTimeout(() => {
               // External deferred functions
-              if (window.senrenInitDeferred) {
-                window.senrenInitDeferred();
+              if (window.denchouInitDeferred) {
+                window.denchouInitDeferred();
               } else {
                 const script = document.createElement('script');
-                script.src = "_senren_deferred_v5.1.0.js";
+                script.src = "_denchou_deferred_v0.1.0.js";
                 document.body.appendChild(script);
               }
 
               // Kanji hover
               if (!window.IS_MOBILE) {
-                if (window.senrenInitKanjiHover) {
-                  window.senrenInitKanjiHover();
+                if (window.denchouInitKanjiHover) {
+                  window.denchouInitKanjiHover();
                 } else {
                   const script = document.createElement('script');
-                  script.src = "_senren_kanji_hover_v5.1.0.js";
+                  script.src = "_denchou_kanji_hover_v0.1.0.js";
                   document.body.appendChild(script);
                 }
               }
 
               // Settings
-              if (window.senrenBuildMenu) {
-                window.senrenBuildMenu();
+              if (window.denchouBuildMenu) {
+                window.denchouBuildMenu();
               } else {
                 const script = document.createElement('script');
-                script.src = "_senren_settings_v5.1.0.js";
+                script.src = "_denchou_settings_v0.1.0.js";
                 document.body.appendChild(script);
               }
             }, 50);

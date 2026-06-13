@@ -1,0 +1,1779 @@
+/* _denchou_settings_v0.1.0.css */
+#denchou-settings-modal * {
+  box-sizing: border-box;
+}
+
+/* Mobile Hidden Elements */
+.denchou-mobile-hidden {
+  display: none !important;
+}
+
+/* MODAL WINDOW
+========================================================================== */
+#denchou-settings-modal {
+  position: fixed;
+  inset: 0;
+  background: oklch(10% 0.02 260 / 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Gen Interface JP", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+#denchou-settings-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.denchou-dialog {
+  background:  oklch(96% 0.018 92);
+  color:  oklch(32.11% 0.0 89.88);
+  width: 1200px;
+  height: 750px;
+  max-width: 98vw;
+  max-height: 95vh;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px oklch(10% 0.02 260 / 0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card.nightMode .denchou-dialog,
+.custom-dark-mode .denchou-dialog {
+  background:  oklch(23.5% 0.0 89.88);
+  color:  oklch(91.89% 0.0 89.88);
+}
+
+.denchou-header {
+  padding: 12px 24px;
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.card.nightMode .denchou-header,
+.custom-dark-mode .denchou-header {
+  border-bottom-color: oklch(96% 0.018 92 / 0.08);
+}
+
+.denchou-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* HEADER ACTIONS (Right side icons)
+========================================================================== */
+.denchou-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.denchou-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:  oklch(68.3% 0.0 89.88);
+  transition: background-color 0.2s ease,
+              color 0.2s ease;
+}
+
+.denchou-icon-btn i {
+  font-size: 16px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+  display: block;
+}
+
+.denchou-icon-btn:hover {
+  background-color: oklch(10% 0.02 260 / 0.05);
+  color:  oklch(32.11% 0.0 89.88);
+}
+
+.card.nightMode .denchou-icon-btn,
+.custom-dark-mode .denchou-icon-btn {
+  color:  oklch(62.68% 0.0 89.88);
+}
+
+.card.nightMode .denchou-icon-btn:hover,
+.custom-dark-mode .denchou-icon-btn:hover {
+  background-color: oklch(96% 0.018 92 / 0.1);
+  color:  oklch(96% 0.018 92);
+}
+
+.denchou-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.denchou-sidebar {
+  width: 200px;
+  background:  oklch(96% 0.018 92);
+  border-right: 1px solid oklch(10% 0.02 260 / 0.06);
+  overflow-y: auto;
+  padding: 12px 8px;
+  flex-shrink: 0;
+}
+
+.card.nightMode .denchou-sidebar,
+.custom-dark-mode .denchou-sidebar {
+  background:  oklch(26.45% 0.0 89.88);
+  border-right-color: oklch(96% 0.018 92 / 0.06);
+}
+
+.denchou-nav-item {
+  padding: 8px 12px 8px 24px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color:  oklch(51.03% 0.0 89.88);
+  border-left: none;
+  border-radius: 6px;
+  text-align: left;
+  position: relative;
+  margin-bottom: 2px;
+  transition: background-color 0.2s,
+              color 0.2s;
+}
+
+.denchou-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 4px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--light-highlight);
+  opacity: 0;
+  transition: transform 0.2s ease,
+              opacity 0.2s;
+}
+
+.card.nightMode .denchou-nav-item::before,
+.custom-dark-mode .denchou-nav-item::before {
+  background: var(--dark-highlight);
+}
+
+.card.nightMode .denchou-nav-item,
+.custom-dark-mode .denchou-nav-item {
+  color:  oklch(73.8% 0.0 89.88);
+}
+
+.denchou-nav-item:hover {
+  background: oklch(10% 0.02 260 / 0.04);
+  color:  oklch(25.2% 0.0 89.88);
+}
+
+.card.nightMode .denchou-nav-item:hover,
+.custom-dark-mode .denchou-nav-item:hover {
+  background: oklch(96% 0.018 92 / 0.04);
+  color:  oklch(96% 0.018 92);
+}
+
+.denchou-nav-item.active {
+  background:  oklch(96% 0.018 92);
+  color:  oklch(10% 0.02 260);
+  font-weight: 600;
+  box-shadow: 0 1px 3px oklch(10% 0.02 260 / 0.05);
+}
+
+.denchou-nav-item.active::before {
+  transform: translateY(-50%) scaleY(1);
+  opacity: 1;
+}
+
+.card.nightMode .denchou-nav-item.active,
+.custom-dark-mode .denchou-nav-item.active {
+  background:  oklch(32.11% 0.0 89.88);
+  color:  oklch(96% 0.018 92);
+  box-shadow: none;
+}
+
+.denchou-content {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.denchou-panel {
+  display: none;
+  padding: 24px 32px;
+  animation: fadeUp 0.2s ease-out;
+}
+
+.denchou-panel.active {
+  display: block;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.denchou-panel h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.06);
+  text-align: left;
+}
+
+.card.nightMode .denchou-panel h3,
+.custom-dark-mode .denchou-panel h3 {
+  border-bottom-color: oklch(96% 0.018 92 / 0.06);
+}
+
+.denchou-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.06);
+  padding-bottom: 8px;
+}
+
+.card.nightMode .denchou-panel-header,
+.custom-dark-mode .denchou-panel-header {
+  border-bottom-color: oklch(96% 0.018 92 / 0.06);
+}
+
+.denchou-panel-header h3 {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.denchou-btn-browse {
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color:  oklch(62.68% 0.0 89.88);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: oklch(10% 0.02 260 / 0.03);
+  transition: all 0.2s;
+}
+
+.card.nightMode .denchou-btn-browse,
+.custom-dark-mode .denchou-btn-browse {
+  background: oklch(96% 0.018 92 / 0.03);
+  color:  oklch(73.8% 0.0 89.88);
+}
+
+.denchou-btn-browse:hover {
+  background: var(--light-highlight);
+  color:  oklch(96% 0.018 92) !important;
+}
+
+.card.nightMode .denchou-btn-browse:hover,
+.custom-dark-mode .denchou-btn-browse:hover {
+  background: var(--dark-highlight);
+  color:  oklch(23.5% 0.0 89.88) !important;
+}
+
+/* GRID SYSTEM
+========================================================================== */
+.denchou-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.denchou-panel[data-group="Grid Control"] .denchou-grid-wrapper {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.denchou-panel[data-group="Grid Control"] .denchou-grid-card:nth-child(1),
+.denchou-panel[data-group="Grid Control"] .denchou-grid-card:nth-child(2) {
+  grid-column: span 3;
+}
+
+.denchou-panel[data-group="Grid Control"] .denchou-grid-card:nth-child(n+3) {
+  grid-column: span 2;
+}
+
+.denchou-panel[data-group="Typography"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Advanced"] .denchou-grid-wrapper {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.denchou-panel[data-group="Dimensions"] .denchou-grid-wrapper {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.denchou-panel[data-group="Theme"] .denchou-grid-wrapper {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.denchou-panel[data-group="Dictionary"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Visibility"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Pitch Accent"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Backdrop Layout"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Kanji Hover"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Card Behavior"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Deck Links"] .denchou-grid-wrapper,
+.denchou-panel[data-group="Picture"] .denchou-grid-wrapper {
+  grid-template-columns: 1fr;
+}
+
+.denchou-grid-card {
+  background: oklch(10% 0.02 260 / 0.03);
+  border: 1px solid oklch(10% 0.02 260 / 0.06);
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card.nightMode .denchou-grid-card,
+.custom-dark-mode .denchou-grid-card {
+  background: oklch(96% 0.018 92 / 0.03);
+  border-color: oklch(96% 0.018 92 / 0.05);
+}
+
+.denchou-group-header {
+  margin: 0 0 12px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color:  oklch(62.68% 0.0 89.88);
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.1);
+  padding-bottom: 4px;
+  text-align: left;
+}
+
+.card.nightMode .denchou-group-header,
+.custom-dark-mode .denchou-group-header {
+  color:  oklch(73.8% 0.0 89.88);
+  border-bottom-color: oklch(96% 0.018 92 / 0.1);
+}
+
+.denchou-sub-header {
+  margin: 15px 0 8px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color:  oklch(73.8% 0.0 89.88);
+  padding-top: 5px;
+  border-top: 1px solid oklch(10% 0.02 260 / 0.05);
+  text-align: left;
+}
+
+.card.nightMode .denchou-sub-header,
+.custom-dark-mode .denchou-sub-header {
+  color:  oklch(62.68% 0.0 89.88);
+  border-top-color: oklch(96% 0.018 92 / 0.05);
+}
+
+/* FORM ELEMENTS
+========================================================================== */
+.denchou-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  gap: 12px;
+}
+
+.denchou-grid-card .denchou-row {
+  border-bottom: none;
+  padding: 6px 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.denchou-panel[data-group="Dictionary"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Visibility"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Pitch Accent"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Typography"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Backdrop Layout"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Kanji Hover"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Card Behavior"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Deck Links"] .denchou-grid-card .denchou-row,
+.denchou-panel[data-group="Picture"] .denchou-grid-card .denchou-row {
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.05);
+  padding: 8px 0;
+}
+
+.card.nightMode .denchou-panel[data-group="Dictionary"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Dictionary"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Visibility"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Visibility"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Pitch Accent"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Pitch Accent"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Typography"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Typography"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Backdrop Layout"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Backdrop Layout"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Kanji Hover"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Kanji Hover"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Deck Links"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Deck Links"] .denchou-grid-card .denchou-row,
+.card.nightMode .denchou-panel[data-group="Picture"] .denchou-grid-card .denchou-row,
+.custom-dark-mode .denchou-panel[data-group="Picture"] .denchou-grid-card .denchou-row {
+  border-bottom-color: oklch(96% 0.018 92 / 0.05);
+}
+
+.denchou-panel[data-group="Dictionary"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Visibility"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Pitch Accent"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Typography"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Backdrop Layout"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Kanji Hover"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Card Behavior"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Deck Links"] .denchou-grid-card .denchou-row:last-child,
+.denchou-panel[data-group="Picture"] .denchou-grid-card .denchou-row:last-child {
+  border-bottom: none;
+}
+
+.denchou-panel[data-group="Dictionary"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Visibility"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Pitch Accent"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Typography"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Backdrop Layout"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Kanji Hover"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Card Behavior"] .denchou-grid-card .denchou-input,
+.denchou-panel[data-group="Picture"] .denchou-grid-card .denchou-input {
+  width: 160px !important;
+  text-align: center;
+  padding: 4px;
+}
+
+.denchou-panel[data-group="Dictionary"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Visibility"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Pitch Accent"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Typography"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Backdrop Layout"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Kanji Hover"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Card Behavior"] .denchou-grid-card .denchou-label-main,
+.denchou-panel[data-group="Picture"] .denchou-grid-card .denchou-label-main {
+  margin-bottom: 0;
+}
+
+.denchou-grid-card .denchou-label-main {
+  font-size: 13px;
+  color:  oklch(44.95% 0.0 89.88);
+  font-weight: 600;
+}
+
+.card.nightMode .denchou-grid-card .denchou-label-main,
+.custom-dark-mode .denchou-grid-card .denchou-label-main {
+  color:  oklch(84.52% 0.0 89.88);
+}
+
+.denchou-row.standard {
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.05);
+  padding: 12px 0;
+}
+
+.card.nightMode .denchou-row.standard,
+.custom-dark-mode .denchou-row.standard {
+  border-bottom-color: oklch(96% 0.018 92 / 0.05);
+}
+
+.denchou-label-group {
+  flex: 1;
+  text-align: left;
+}
+
+.denchou-label-main {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+  color: inherit;
+}
+
+.denchou-label-desc {
+  display: block;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Range Sliders */
+.denchou-range-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.denchou-range {
+  flex: 1;
+  cursor: pointer;
+  height: 4px;
+  background:  oklch(89.75% 0.0 89.88);
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.card.nightMode .denchou-range,
+.custom-dark-mode .denchou-range {
+  background:  oklch(38.67% 0.0 89.88);
+}
+
+/* Slider Thumb */
+.denchou-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--light-highlight,  oklch(60.48% 0.2166 257.21));
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid  oklch(96% 0.018 92);
+  box-shadow: 0 1px 2px oklch(10% 0.02 260 / 0.2);
+  margin-top: -5px;
+}
+
+.denchou-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 5px;
+}
+
+.card.nightMode .denchou-range::-webkit-slider-thumb,
+.custom-dark-mode .denchou-range::-webkit-slider-thumb {
+  background: var(--dark-highlight,  oklch(60.48% 0.2166 257.21));
+  border-color:  oklch(32.11% 0.0 89.88);
+}
+
+.denchou-range-value {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  width: 50px;
+  opacity: 0.8;
+}
+
+/* Text Inputs */
+.denchou-input {
+  background: oklch(10% 0.02 260 / 0.03);
+  border: 1px solid transparent;
+  border-bottom: 1px solid  oklch(73.8% 0.0 89.88);
+  color: inherit;
+  text-align: center;
+  font-size: 13px;
+  width: 160px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: border-bottom-color 0.2s,
+              background-color 0.2s;
+}
+
+.denchou-grid-card .denchou-input {
+  width: 100% !important;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.card.nightMode .denchou-input,
+.custom-dark-mode .denchou-input {
+  background: oklch(96% 0.018 92 / 0.05);
+}
+
+.denchou-input:focus {
+  outline: none;
+  border-bottom-color: var(--light-highlight);
+  background: oklch(10% 0.02 260 / 0.01);
+}
+
+.card.nightMode .denchou-input:focus,
+.custom-dark-mode .denchou-input:focus {
+  border-bottom-color: var(--dark-highlight);
+}
+
+/* Color Pickers */
+.denchou-color-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.denchou-color-picker {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid oklch(10% 0.02 260 / 0.1);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.denchou-color-text {
+  flex: 1;
+  text-align: left;
+  padding-left: 8px;
+  font-size: 12px;
+  width: auto;
+}
+
+/* Color Pickers (Backdrop Layout) */
+.denchou-panel[data-group="Backdrop Layout"] .denchou-color-wrapper {
+  width: auto !important;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.denchou-panel[data-group="Backdrop Layout"] .denchou-color-wrapper .denchou-input {
+  width: 100px !important;
+  flex: none !important;
+  text-align: center !important;
+  padding-left: 4px !important;
+}
+
+/* Segmented Buttons */
+.denchou-segment-group {
+  display: flex;
+  background:  oklch(94.91% 0.0 89.88);
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.card.nightMode .denchou-segment-group,
+.custom-dark-mode .denchou-segment-group {
+  background:  oklch(32.11% 0.0 89.88);
+}
+
+.denchou-segment-btn {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: 500;
+  opacity: 0.7;
+  white-space: nowrap;
+  transition: background-color 0.2s,
+              color 0.2s,
+              opacity 0.2s,
+              box-shadow 0.2s;
+}
+
+.denchou-segment-btn:hover {
+  opacity: 1;
+}
+
+.denchou-segment-btn.active {
+  background:  oklch(96% 0.018 92);
+  color:  oklch(10% 0.02 260);
+  opacity: 1;
+  box-shadow: 0 1px 3px oklch(10% 0.02 260 / 0.1);
+}
+
+.card.nightMode .denchou-segment-btn.active,
+.custom-dark-mode .denchou-segment-btn.active {
+  background:  oklch(44.95% 0.0 89.88);
+  color:  oklch(96% 0.018 92);
+}
+
+/* On/Off Toggle Switches */
+.denchou-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.denchou-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.denchou-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color:  oklch(89.75% 0.0 89.88);
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.card.nightMode .denchou-slider,
+.custom-dark-mode .denchou-slider {
+  background-color:  oklch(38.67% 0.0 89.88);
+}
+
+.denchou-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: oklch(96% 0.018 92);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px oklch(10% 0.02 260 / 0.15);
+  transition: background-color 0.3s,
+              transform 0.3s;
+}
+
+input:checked+.denchou-slider {
+  background-color: var(--light-highlight);
+}
+
+.card.nightMode input:checked+.denchou-slider,
+.custom-dark-mode input:checked+.denchou-slider {
+  background-color: var(--dark-highlight);
+}
+
+.card.nightMode input:checked+.denchou-slider:before,
+.custom-dark-mode input:checked+.denchou-slider:before {
+  background-color: oklch(10% 0.02 260 / 0.9);
+}
+
+input:checked+.denchou-slider:before {
+  transform: translateX(16px);
+}
+
+/* FOOTER & BUTTONS
+========================================================================== */
+.denchou-footer {
+  padding: 12px 24px;
+  background:  oklch(96% 0.018 92);
+  border-top: 1px solid oklch(10% 0.02 260 / 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.card.nightMode .denchou-footer,
+.custom-dark-mode .denchou-footer {
+  background:  oklch(24.35% 0.0 89.88);
+  border-top-color: oklch(96% 0.018 92 / 0.06);
+}
+
+.denchou-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.denchou-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Base Button Style */
+.denchou-btn {
+  background: transparent;
+  border: 1px solid  oklch(84.52% 0.0 89.88);
+  color: inherit;
+  padding: 6px 16px;
+  border-radius: 4px !important;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-left: 0;
+  margin-right: 0;
+  transition: opacity 0.2s,
+              border-color 0.2s,
+              background-color 0.2s;
+}
+
+.card.nightMode .denchou-btn,
+.custom-dark-mode .denchou-btn {
+  border-color:  oklch(44.95% 0.0 89.88);
+}
+
+.denchou-btn:hover {
+  opacity: 1;
+  border-color:  oklch(68.3% 0.0 89.88);
+  background: oklch(10% 0.02 260 / 0.02);
+}
+
+.card.nightMode .denchou-btn:hover,
+.custom-dark-mode .denchou-btn:hover {
+  border-color:  oklch(62.68% 0.0 89.88);
+  background: oklch(96% 0.018 92 / 0.05);
+}
+
+/* Primary Action Button ("Save to Anki") */
+.denchou-btn-primary {
+  border-color: var(--light-highlight);
+  color: var(--light-highlight);
+  font-weight: 700;
+  opacity: 1;
+}
+
+.card.nightMode .denchou-btn-primary,
+.custom-dark-mode .denchou-btn-primary {
+  border-color: var(--dark-highlight);
+  color: var(--dark-highlight);
+}
+
+.denchou-btn-primary:hover {
+  background: var(--light-highlight) !important;
+  color: oklch(96% 0.018 92) !important;
+  border-color: var(--light-highlight) !important;
+}
+
+.card.nightMode .denchou-btn-primary:hover,
+.custom-dark-mode .denchou-btn-primary:hover {
+  background: var(--dark-highlight) !important;
+  color: oklch(10% 0.02 260) !important;
+  border-color: var(--dark-highlight) !important;
+}
+
+/* Custom Select Dropdown  */
+.denchou-custom-select {
+  position: relative;
+  min-width: 160px;
+  font-size: 13px;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.denchou-select-trigger {
+  width: 100%;
+  padding: 5.5px 12px;
+  border-radius: 4px;
+  border: 1px solid  oklch(84.52% 0.0 89.88);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  opacity: 0.8;
+  font-weight: 600;
+  transition: opacity 0.2s,
+              border-color 0.2s,
+              background-color 0.2s;
+}
+
+.card.nightMode .denchou-select-trigger,
+.custom-dark-mode .denchou-select-trigger {
+  border-color:  oklch(44.95% 0.0 89.88);
+}
+
+.denchou-select-trigger:hover {
+  opacity: 1;
+  border-color:  oklch(68.3% 0.0 89.88);
+  background: oklch(10% 0.02 260 / 0.02);
+}
+
+.card.nightMode .denchou-select-trigger:hover,
+.custom-dark-mode .denchou-select-trigger:hover {
+  border-color:  oklch(62.68% 0.0 89.88);
+  background: oklch(96% 0.018 92 / 0.05);
+}
+
+/* Split Button Group (Save Preset + Arrow) */
+.denchou-split-group {
+  display: flex;
+  align-items: center;
+  gap: 0 !important;
+}
+
+.denchou-split-group .denchou-btn {
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Left side (Save Preset) */
+.denchou-btn-split-main {
+  border-radius: 4px 0 0 4px !important;
+  padding: 6px 12px;
+  border-right: 1px solid oklch(10% 0.02 260 / 0.1);
+}
+
+/* Right side (Arrow) */
+.denchou-btn-split-menu {
+  border-radius: 0 4px 4px 0 !important;
+  padding: 6px 8px;
+  border-left: none !important;
+}
+
+.denchou-btn-split-main:hover,
+.denchou-btn-split-menu:hover {
+  z-index: 2;
+  border-right-color:  oklch(68.3% 0.0 89.88);
+}
+
+/* Popup Menu (Dropdown list) */
+.denchou-custom-options,
+.denchou-popup-menu {
+  position: absolute;
+  bottom: 110%;
+  background:  oklch(96% 0.018 92);
+  border: 1px solid oklch(10% 0.02 260 / 0.1);
+  border-radius: 6px;
+  box-shadow: 0 5px 15px oklch(10% 0.02 260 / 0.2);
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 101;
+}
+
+.denchou-custom-options {
+  left: 0;
+  right: 0;
+  padding: 6px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.denchou-popup-menu {
+  left: 170px;
+  width: max-content;
+  min-width: 100px;
+
+  padding: 5px;
+  gap: 2px;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card.nightMode .denchou-custom-options,
+.custom-dark-mode .denchou-custom-options,
+.card.nightMode .denchou-popup-menu,
+.custom-dark-mode .denchou-popup-menu {
+  background:  oklch(28.91% 0.0 89.88);
+  border-color: oklch(96% 0.018 92 / 0.1);
+}
+
+.denchou-custom-select.active .denchou-custom-options,
+.denchou-popup-menu.active {
+  display: flex;
+  flex-direction: column;
+  animation: fadeUpSmall 0.15s ease-out;
+}
+
+.denchou-popup-menu.active {
+  display: flex;
+}
+
+/* Dropdown Options */
+.denchou-option {
+  padding: 8px 12px 8px 24px;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+  color: inherit;
+  border-radius: 6px;
+  position: relative;
+  transition: background-color 0.1s;
+}
+
+/* Menu Items (Add/Rename/Remove) */
+.denchou-menu-item {
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+  color: inherit;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background-color 0.1s;
+}
+
+.denchou-option::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 4px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--light-highlight);
+  transition: transform 0.2s ease;
+}
+
+.card.nightMode .denchou-option::before,
+.custom-dark-mode .denchou-option::before {
+  background: var(--dark-highlight);
+}
+
+.denchou-menu-item {
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.1s;
+}
+
+.denchou-menu-item:hover {
+  background: oklch(10% 0.02 260 / 0.08);
+}
+
+.card.nightMode .denchou-menu-item:hover,
+.custom-dark-mode .denchou-menu-item:hover {
+  background: oklch(96% 0.018 92 / 0.12);
+}
+
+.denchou-option:hover,
+.denchou-menu-item:hover {
+  background: oklch(10% 0.02 260 / 0.04);
+}
+
+.card.nightMode .denchou-option:hover,
+.custom-dark-mode .denchou-option:hover,
+.card.nightMode .denchou-menu-item:hover,
+.custom-dark-mode .denchou-menu-item:hover {
+  background: oklch(96% 0.018 92 / 0.04);
+}
+
+.denchou-option.selected {
+  font-weight: 700;
+  color: inherit;
+  background:  oklch(96% 0.018 92);
+}
+
+.card.nightMode .denchou-option.selected,
+.custom-dark-mode .denchou-option.selected {
+  color: inherit;
+  background: oklch(96% 0.018 92 / 0.05);
+}
+
+.denchou-option.selected::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+.denchou-menu-item.danger {
+  color:  oklch(61.92% 0.1694 25.05);
+}
+
+.denchou-menu-item.danger:hover {
+  background:  oklch(61.92% 0.1694 25.05) !important;
+  color: oklch(96% 0.018 92);
+}
+
+.denchou-menu-divider,
+.denchou-menu-spacer {
+  height: 1px;
+  background: oklch(10% 0.02 260 / 0.1);
+  margin: 4px 6px;
+}
+
+.card.nightMode .denchou-menu-divider,
+.custom-dark-mode .denchou-menu-divider,
+.card.nightMode .denchou-menu-spacer,
+.custom-dark-mode .denchou-menu-spacer {
+  background: oklch(96% 0.018 92 / 0.1);
+}
+
+@keyframes fadeUpSmall {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE DESIGN
+========================================================================== */
+@media (max-width: 900px) {
+  .denchou-panel[data-group="Grid Control"] .denchou-grid-wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .denchou-panel[data-group="Grid Control"] .denchou-grid-card {
+    grid-column: span 1 !important;
+  }
+
+  .denchou-panel[data-group="Typography"] .denchou-grid-wrapper,
+  .denchou-panel[data-group="Dimensions"] .denchou-grid-wrapper,
+  .denchou-panel[data-group="Dictionary"] .denchou-grid-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .denchou-custom-select {
+    flex: 1;
+  }
+
+  .denchou-popup-menu {
+    left: auto;
+    right: 0;
+    bottom: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .denchou-body {
+    flex-direction: column;
+  }
+
+  .denchou-sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid oklch(10% 0.02 260 / 0.1);
+    padding: 0;
+    scrollbar-width: none;
+  }
+
+  .denchou-sidebar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .denchou-nav-item {
+    white-space: nowrap;
+    padding: 12px 16px;
+    text-align: center;
+    position: relative;
+    border: none !important;
+  }
+
+  .denchou-nav-item::before {
+    display: block !important;
+    top: auto;
+    left: 50%;
+    bottom: 3px;
+    width: 24px;
+    height: 4px;
+    transform: translateX(-50%) scaleX(0);
+    opacity: 0;
+    border-radius: 4px;
+  }
+
+  .denchou-nav-item.active::before {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 1;
+  }
+
+  .denchou-nav-item.active {
+    background: transparent;
+  }
+
+  .denchou-panel {
+    padding: 16px;
+  }
+
+  .denchou-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .denchou-label-group {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .denchou-input,
+  .denchou-segment-group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .denchou-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .denchou-footer-left,
+  .denchou-footer-right {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+/* CUSTOM PROMPT MODAL
+========================================================================== */
+#denchou-prompt-overlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(10% 0.02 260 / 0.5);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  transition: opacity 0.2s ease;
+}
+
+#denchou-prompt-overlay.active {
+  opacity: 1;
+}
+
+.denchou-prompt-box {
+  background:  oklch(96% 0.018 92);
+  padding: 24px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px oklch(10% 0.02 260 / 0.2);
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#denchou-prompt-overlay.active .denchou-prompt-box {
+  transform: scale(1);
+}
+
+.card.nightMode .denchou-prompt-box,
+.custom-dark-mode .denchou-prompt-box {
+  background:  oklch(23.5% 0.0 89.88);
+  border: 1px solid  oklch(32.11% 0.0 89.88);
+  color:  oklch(91.89% 0.0 89.88);
+}
+
+/* Header Row */
+.denchou-prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+  width: 100%;
+}
+
+.denchou-prompt-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-left: 2px !important;
+  text-align: left;
+  color: inherit;
+}
+
+.card.nightMode .denchou-prompt-title,
+.custom-dark-mode .denchou-prompt-title {
+  color:  oklch(96% 0.018 92);
+}
+
+/* Close Button */
+.denchou-prompt-close {
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 1;
+  color:  oklch(68.3% 0.0 89.88);
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.denchou-prompt-close:hover {
+  color:  oklch(32.11% 0.0 89.88);
+}
+
+.card.nightMode .denchou-prompt-close:hover,
+.custom-dark-mode .denchou-prompt-close:hover {
+  color:  oklch(96% 0.018 92);
+}
+
+/* Input Field */
+.denchou-prompt-input {
+  display: block;
+  width: 100% !important;
+  margin: 0 0 0 0 !important;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 2px solid  oklch(90.67% 0.0 89.88);
+  border-radius: 12px;
+  background:  oklch(96% 0.018 92);
+  color:  oklch(32.11% 0.0 89.88);
+  box-sizing: border-box !important;
+  transition: border-color 0.2s,
+              box-shadow 0.2s;
+}
+
+.card.nightMode .denchou-prompt-input,
+.custom-dark-mode .denchou-prompt-input {
+  background:  oklch(26.49% 0.0018 286.27);
+  border-color:  oklch(36.39% 0.0 89.88);
+  color:  oklch(96% 0.018 92);
+}
+
+.denchou-prompt-input:focus {
+  outline: none;
+  border-color: var(--light-highlight);
+  box-shadow: 0 0 0 3px oklch(10% 0.02 260 / 0.05);
+}
+
+.card.nightMode .denchou-prompt-input:focus,
+.custom-dark-mode .denchou-prompt-input:focus {
+  border-color: var(--dark-highlight);
+}
+
+/* Button Row Container */
+.denchou-prompt-buttons {
+  display: flex !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin: 12px 0 0 0 !important;
+  padding: 0 !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+}
+
+/* Base Button Styling */
+.denchou-prompt-btn {
+  flex: 1 1 0px !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 12px 0 !important;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box !important;
+  transition: background-color 0.2s,
+              border-color 0.2s,
+              color 0.2s,
+              opacity 0.2s;
+}
+
+/* Styles for Cancel/Save */
+#prompt-cancel,
+#prompt-ok {
+  margin: 0 !important;
+}
+
+/* Cancel Button */
+#prompt-cancel {
+  background:  oklch(96% 0.018 92);
+  border: 2px solid  oklch(85.76% 0.0 89.88);
+  border-radius: 12px;
+  color:  oklch(44.95% 0.0 89.88);
+}
+
+.card.nightMode #prompt-cancel,
+.custom-dark-mode #prompt-cancel {
+  background: transparent;
+  border-color:  oklch(38.67% 0.0 89.88);
+  color:  oklch(73.8% 0.0 89.88);
+}
+
+#prompt-cancel:hover {
+  background:  oklch(96% 0.018 92);
+  border-color:  oklch(79.21% 0.0 89.88);
+}
+
+.card.nightMode #prompt-cancel:hover,
+.custom-dark-mode #prompt-cancel:hover {
+  background: oklch(96% 0.018 92 / 0.05);
+  color:  oklch(96% 0.018 92);
+}
+
+/* Save Button */
+#prompt-ok {
+  background: transparent;
+  border: 2px solid var(--light-highlight);
+  color: var(--light-highlight);
+  flex: 1.5;
+  border-radius: 12px;
+  opacity: 0.9;
+}
+
+.card.nightMode #prompt-ok,
+.custom-dark-mode #prompt-ok {
+  background: transparent;
+  border-color: var(--dark-highlight);
+  color: var(--dark-highlight);
+}
+
+#prompt-ok:hover {
+  opacity: 1;
+  box-shadow: 0 4px 10px oklch(10% 0.02 260 / 0.15);
+  background: var(--light-highlight);
+  color:  oklch(96% 0.018 92);
+}
+
+.card.nightMode #prompt-ok:hover,
+.custom-dark-mode #prompt-ok:hover {
+  background: var(--dark-highlight);
+  color:  oklch(23.5% 0.0 89.88);
+}
+
+#denchou-prompt-overlay * {
+  box-sizing: border-box;
+}
+
+/* SIDE PANEL (DOCK)
+============================================ */
+#denchou-settings-modal.docked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 57.29vw;
+  height: 100vh;
+  background: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 10000;
+}
+
+#denchou-settings-modal.docked .denchou-dialog {
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: 5px 0 15px oklch(10% 0.02 260 / 0.1);
+  border-right: 1px solid oklch(59.65% 0.0 89.88 / 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+#denchou-settings-modal.docked .denchou-content {
+  overflow-y: auto;
+}
+
+body.denchou-docked-mode .back,
+body.denchou-docked-mode .front {
+  margin-left: 57.29vw !important;
+}
+
+body.denchou-docked-mode {
+  --horizontal-layout: var(--horizontal-grid-small);
+  --vertical-layout: var(--vertical-grid-small);
+}
+
+body.denchou-docked-mode .header {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+body.denchou-docked-mode .back .toggle-settings-btn {
+  position: unset;
+}
+
+body.denchou-docked-mode .back .toggle-image-visibility.show-btn {
+  position: unset;
+}
+
+body.denchou-docked-mode .back .toggle-custom-dark-mode {
+  position: unset;
+}
+
+body.denchou-docked-mode .back:not(:has(.audio)) .sentenceaudio {
+  top: 25px;
+  left: 25px;
+  position: unset;
+}
+
+body.denchou-docked-mode .toggle-notes,
+body.denchou-docked-mode #frequency {
+  position: unset;
+}
+
+body.denchou-docked-mode .freqbt {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 2;
+}
+
+body.denchou-docked-mode .frequency-content {
+  align-items: center;
+  position: absolute;
+  top: 61px;
+  right: 20px;
+  z-index: 2;
+}
+
+body.denchou-docked-mode .front::before,
+body.denchou-docked-mode .back::before {
+  border-radius: 0 !important;
+}
+
+body.denchou-docked-mode :is(.glossary-box, .definition-box) {
+  padding: var(--spacing-md);
+}
+
+body.denchou-docked-mode #selectionText .definition-box {
+  padding-left: calc(var(--spacing-md) + (var(--dictionary-colorizer) * var(--spacing-lg))) !important;
+}
+
+body.denchou-docked-mode .back .audio,
+body.denchou-docked-mode .back .sentenceaudio,
+body.denchou-docked-mode .back:not(:has(.audio)) .sentenceaudio {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+/* Backdrop Layout */
+/* CARD BG MODE */
+body.denchou-docked-mode.denchou-bd-card .back {
+  position: relative !important;
+  isolation: isolate;
+}
+
+body.denchou-docked-mode.denchou-bd-card .grid-container {
+  display: block !important;
+  position: static !important;
+  grid-template-areas: "word" !important;
+  grid-template-columns: auto !important;
+}
+
+body.denchou-docked-mode.denchou-bd-card .picture-container {
+  position: absolute !important;
+  top: 0;
+  bottom: auto !important;
+  right: 0;
+  left: 0;
+  width: auto !important;
+  height: 100% !important;
+  z-index: -1 !important;
+  border-radius: 0;
+  pointer-events: none;
+  margin: 0 !important;
+  background: transparent !important;
+  overflow: hidden;
+  pointer-events: auto !important;
+}
+
+body.denchou-docked-mode.denchou-bd-card .picture-container img {
+  position: relative !important;
+  top: auto;
+  left: auto;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover;
+  object-position: center top !important;
+  opacity: var(--backdrop-opacity) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+body.denchou-docked-mode.denchou-bd-card .background-box {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* WORD BG MODE */
+body.denchou-docked-mode.denchou-bd-word .grid-container {
+  display: grid !important;
+  grid-template-areas: "stack" !important;
+  position: relative !important;
+}
+
+body.denchou-docked-mode.denchou-bd-word .picture-container {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  grid-area: stack;
+  z-index: 0 !important;
+  border-radius: var(--border-radius-ms) !important;
+  margin: 0 !important;
+  overflow: hidden;
+  pointer-events: auto !important;
+}
+
+body.denchou-docked-mode.denchou-bd-word .picture-container img {
+  position: absolute !important;
+  height: auto !important;
+  width: 100% !important;
+  left: 0;
+  object-position: center top !important;
+  gap: 0 !important;
+  opacity: var(--backdrop-opacity) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  will-change: mask-image, -webkit-mask-image;
+  transform: translateZ(0);
+}
+
+body.denchou-docked-mode.denchou-bd-word .background-box {
+  grid-area: stack;
+  z-index: 2;
+}
+
+/* Prevent grid container from interfering with other elements */
+body.denchou-docked-mode .back .background-box {
+  pointer-events: none !important;
+}
+
+body.denchou-docked-mode .back .background-box>* {
+  pointer-events: auto !important;
+}
+
+body.denchou-docked-mode .grid-container {
+  pointer-events: none !important;
+}
+
+body.denchou-docked-mode .grid-container>* {
+  pointer-events: auto !important;
+}
+
+/* Conditional Word Background Box (Specific to Word Mode) */
+@container style(--word-background-box: 1) {
+
+  body.denchou-docked-mode.denchou-bd-word .background-box,
+  body.denchou-docked-mode.denchou-bd-card .background-box {
+    background: var(--word-bg-light) !important;
+  }
+
+  :is(.card.nightMode, .custom-dark-mode) body.denchou-docked-mode.denchou-bd-word .background-box,
+  body.denchou-docked-mode.denchou-bd-card .background-box {
+    background: var(--word-bg) !important;
+  }
+}
+
+/* Fix footer positioning in Preview when Dynamic Height is enabled */
+@container style(--backdrop-dynamic-height: 1) {
+  body.denchou-docked-mode.denchou-bd-card .back {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh;
+    padding-bottom: 20px !important;
+  }
+
+  body.denchou-docked-mode.denchou-bd-card .tags-and-links-wrapper {
+    position: relative !important;
+    margin-top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    z-index: 5;
+  }
+
+  body.denchou-docked-mode.denchou-bd-card .misc-info {
+    position: relative !important;
+    width: 100% !important;
+  }
+}
+
+/* Show scrollbar */
+#denchou-settings-modal ::-webkit-scrollbar {
+  display: initial;
+}
+
+/* Fix Enable Animations Slider */
+#denchou-settings-modal .denchou-slider,
+#denchou-settings-modal .denchou-slider:before {
+  transition: 0.3s !important;
+}
+
+/* Rearrange Misc Info Order */
+body.denchou-docked-mode .back {
+  display: flex;
+  flex-direction: column;
+  container-type: normal;
+}
+
+/* Clean Code Editor Look */
+.denchou-textarea {
+  display: block !important;
+  width: 100% !important;
+  height: 50vh !important;
+  background:  oklch(23.5% 0.0 89.88) !important;
+  color:  oklch(86.99% 0.0 89.88) !important;
+  padding: 15px !important;
+  border: 1px solid  oklch(32.11% 0.0 89.88) !important;
+  border-radius: 5px !important;
+  text-align: left !important;
+  white-space: pre !important;
+  tab-size: 4 !important;
+  resize: none;
+  outline: none !important;
+}
+
+/* Force Label above and Textarea to full width */
+.denchou-row-full {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+/* DECK PRESETS
+========================================================================== */
+.denchou-deck-links-empty {
+  opacity: 0.3;
+  padding: 30px;
+  text-align: center;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.denchou-deck-link-val {
+  opacity: 1;
+  font-weight: 500;
+}
+
+#denchou-deck-links-list {
+  padding-top: 0;
+}
+
+#denchou-deck-links-container button {
+  margin: 0;
+}
+
+/* Hide scrollbars on mobile */
+@media (max-width: 624px) {
+  .denchou-sidebar,
+  .denchou-content {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .denchou-sidebar::-webkit-scrollbar,
+  .denchou-content::-webkit-scrollbar {
+    display: none !important;
+  }
+}

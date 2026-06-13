@@ -20,7 +20,7 @@ Files inspected before setting this direction:
 
 1. `DenChou/README.md:1-2` is currently identical to `Senren/README.md:1-2`: both still use the `# Senren・洗練` title and the same feature-rich Senren description. DenChou has not been visually or textually re-identified yet.
 2. `DenChou/Template/styling.css:70-82` defines typography around Klee, Noto Sans CJK JP, Noto Serif CJK JP, Hiragino, Yu Mincho, and Segoe UI. There is no DenChou-specific default font identity yet.
-3. `DenChou/Template/_senren_defaults_v5.1.0.css:261-351` stores the main palette as HEX, named colors, and RGBA. This conflicts with the DenChou rule that all authored colors should use OKLCH and no pure black/white.
+3. `DenChou/Template/_denchou_defaults_v0.1.0.css` stores DenChou's default settings and palette tokens. DenChou-authored colors should stay in OKLCH and avoid pure black/white.
 4. `DenChou/docs/mobile.md:1-4` says the template is tested on AnkiDroid and AnkiMobile. Mobile is already a first-class target, so DenChou should sharpen that instead of treating desktop as the default mental model.
 5. `DenChou/docs/responsive_layout.md:5-8` defines breakpoints down to a one-column small-screen layout. The fork can build on this by designing the small-screen reading flow first.
 6. `DenChou/docs/Preferences.md:9-35` shows an in-review preferences system with temporary mobile settings and permanent PC/AnkiConnect saves. This is powerful, but DenChou should reduce the default need to open settings while reviewing.
