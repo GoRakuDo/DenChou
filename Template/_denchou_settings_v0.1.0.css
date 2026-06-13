@@ -904,6 +904,11 @@ input:checked+.denchou-slider:before {
   gap: 0 !important;
 }
 
+.denchou-split-group {
+  display: flex;
+  align-items: stretch;
+}
+
 .denchou-split-group .denchou-btn {
   margin: 0;
   border-radius: 0;
@@ -921,6 +926,13 @@ input:checked+.denchou-slider:before {
   border-radius: 0 4px 4px 0 !important;
   padding: 6px 8px;
   border-left: none !important;
+  display: flex;
+  align-items: center;
+}
+
+.denchou-btn-split-menu .lucide-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .denchou-btn-split-main:hover,
