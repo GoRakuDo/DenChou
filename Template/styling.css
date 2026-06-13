@@ -344,7 +344,7 @@
   /* Text Colors */
   --text-light:                        oklch(10% 0.02 260);
   --light-devoiced-color:             oklch(55.98% 0.1882 266.4);
-  --light-highlight:                   oklch(0.6 0.19 272);
+  --light-highlight:                   oklch(53% 0.175 260);
   --freq-text-light:                  oklch(52.08% 0.0 89.88 / 0.3);
   --freq-text-hover-light:            oklch(10% 0.02 260);
   --tag-color-light:                  oklch(52.08% 0.0 89.88 / 0.26);
@@ -389,7 +389,7 @@
   /* Text Colors */
   --text:                              oklch(96% 0.018 92);
   --dark-devoiced-color:              oklch(67.46% 0.1414 261.34);
-  --dark-highlight:                    oklch(0.6 0.19 272);
+  --dark-highlight:                    oklch(53% 0.175 260);
   --freq-text:                        oklch(96% 0.018 92 / 0.2);
   --freq-text-hover:                  oklch(96% 0.018 92);
   --tag-color:                        oklch(96% 0.018 92 / 0.21);

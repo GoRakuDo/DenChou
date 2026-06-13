@@ -545,7 +545,7 @@
   -webkit-appearance: none;
   width: 14px;
   height: 14px;
-  background: var(--light-highlight,  oklch(0.6 0.19 272));
+  background: var(--light-highlight,  oklch(53% 0.175 260));
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid  oklch(96% 0.018 92);
@@ -560,7 +560,7 @@
 
 .card.nightMode .denchou-range::-webkit-slider-thumb,
 .custom-dark-mode .denchou-range::-webkit-slider-thumb {
-  background: var(--dark-highlight,  oklch(0.6 0.19 272));
+  background: var(--dark-highlight,  oklch(53% 0.175 260));
   border-color:  oklch(32.11% 0.0 89.88);
 }
 
