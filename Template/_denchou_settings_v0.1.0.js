@@ -732,7 +732,8 @@
     if (!presets || Object.keys(presets).length === 0) {
       const cached = localStorage.getItem('denchou_presets_cache');
       if (cached) {
-        try { presets = JSON.parse(cached); } catch (e) { presets = {}; }
+        try { presets = JSON.parse(cached); }
+        catch (e) { console.warn('denchou_presets_cache parse failed, falling back to defaults:', e); presets = {}; }
       }
       if (!presets || Object.keys(presets).length === 0) {
         presets = { "Default": getCurrentSettings(), "_active": "Default" };
@@ -764,7 +765,10 @@
       }
     } catch (e) { }
     const cached = localStorage.getItem('denchou_deck_presets_cache');
-    if (cached) { try { return JSON.parse(cached); } catch (e) { } }
+    if (cached) {
+      try { return JSON.parse(cached); }
+      catch (e) { console.warn('denchou_deck_presets_cache parse failed:', e); }
+    }
     return {};
   }
 
