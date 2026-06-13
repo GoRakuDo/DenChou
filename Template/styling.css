@@ -1,12 +1,10 @@
 /* Gen Interface JP CDN fallback must stay before any other CSS rules.
    AnkiDroid can load these directly when collection.media does not contain
-   local font files. */
+   local font files. Only text weights (400, 500, 600) are included;
+   display weights are not used by any CSS rule. */
 @import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/400.css");
 @import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/500.css");
 @import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/600.css");
-@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/display-600.css");
-@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/display-700.css");
-@import url("https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/display-800.css");
 
 /* MOBILE FONTS
 ============================================ */
