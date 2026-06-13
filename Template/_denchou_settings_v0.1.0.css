@@ -91,15 +91,6 @@
               color 0.2s ease;
 }
 
-.denchou-icon-btn i {
-  font-size: 16px !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: static !important;
-  display: block;
-}
-
 .denchou-icon-btn:hover {
   background-color: oklch(10% 0.02 260 / 0.05);
   color:  oklch(32.11% 0.0 89.88);

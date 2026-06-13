@@ -602,6 +602,14 @@ body {
   cursor: pointer;
 }
 
+/* Lucide Icons (replacing Font Awesome) */
+.lucide-icon {
+  width: var(--button-size);
+  height: var(--button-size);
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
 /* Audio */
 .front:is(:has(#wordAudio), :has(#sentenceAudio)) :is(.highlight, b) {
   filter: blur(20px);
