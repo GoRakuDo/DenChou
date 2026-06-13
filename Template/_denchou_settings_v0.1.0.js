@@ -732,8 +732,9 @@
     if (!presets || Object.keys(presets).length === 0) {
       const cached = localStorage.getItem('denchou_presets_cache');
       if (cached) {
-        presets = JSON.parse(cached);
-      } else {
+        try { presets = JSON.parse(cached); } catch (e) { presets = {}; }
+      }
+      if (!presets || Object.keys(presets).length === 0) {
         presets = { "Default": getCurrentSettings(), "_active": "Default" };
         try { await savePresetsToFile(presets); } catch (e) { }
       }
@@ -763,7 +764,8 @@
       }
     } catch (e) { }
     const cached = localStorage.getItem('denchou_deck_presets_cache');
-    return cached ? JSON.parse(cached) : {};
+    if (cached) { try { return JSON.parse(cached); } catch (e) { } }
+    return {};
   }
 
   async function renderDeckLinksUI() {
@@ -2071,19 +2073,21 @@
     }
   };
   async function init() {
-    await loadPresetsFromFile();
-    await loadDeckLinksFromFile();
+    try { await loadPresetsFromFile(); } catch (e) { console.warn('loadPresetsFromFile failed:', e); }
+    try { await loadDeckLinksFromFile(); } catch (e) { console.warn('loadDeckLinksFromFile failed:', e); }
 
-    const presets = presetsCache;
-    let savedActive = presets["_active"];
-    if (!activePreset) {
-      if (savedActive && presets[savedActive]) activePreset = savedActive;
-      else {
-        const names = Object.keys(presets).filter(n => n !== "_active").sort();
-        if (names.includes("Default")) activePreset = "Default";
-        else if (names.length > 0) activePreset = names[0];
+    try {
+      const presets = presetsCache;
+      let savedActive = presets["_active"];
+      if (!activePreset) {
+        if (savedActive && presets[savedActive]) activePreset = savedActive;
+        else {
+          const names = Object.keys(presets).filter(n => n !== "_active").sort();
+          if (names.includes("Default")) activePreset = "Default";
+          else if (names.length > 0) activePreset = names[0];
+        }
       }
-    }
+    } catch (e) { console.warn('preset selection failed:', e); }
 
     buildMenu();
     applyAutoOptimize();
