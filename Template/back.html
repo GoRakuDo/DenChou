@@ -1640,19 +1640,26 @@
     let newArrows = [];
 
     if (backContainer) {
+      const pictureContainer = ELS.pictureContainer;
+      const targetParent = pictureContainer || backContainer;
+
       let arrowLeft = backContainer.querySelector('.sentence-nav.left');
       let arrowRight = backContainer.querySelector('.sentence-nav.right');
 
       if (!arrowLeft) {
         arrowLeft = document.createElement('div');
         arrowLeft.className = 'sentence-nav left';
-        backContainer.appendChild(arrowLeft);
+        targetParent.appendChild(arrowLeft);
+      } else if (arrowLeft.parentElement !== targetParent) {
+        targetParent.appendChild(arrowLeft);
       }
 
       if (!arrowRight) {
         arrowRight = document.createElement('div');
         arrowRight.className = 'sentence-nav right';
-        backContainer.appendChild(arrowRight);
+        targetParent.appendChild(arrowRight);
+      } else if (arrowRight.parentElement !== targetParent) {
+        targetParent.appendChild(arrowRight);
       }
 
       newArrows = [arrowLeft, arrowRight];
