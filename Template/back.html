@@ -1635,10 +1635,9 @@
     if (backContainer) {
       const pictureContainer = ELS.pictureContainer;
       const hasPictureMedia = !!pictureContainer?.querySelector('img, video');
-      // Keep scene switching inside the 16:9 image frame on non-backdrop image cards.
-      const sentenceNavParent = hasPictureMedia && denchouConfig.enableBackdropLayout !== '1'
-        ? pictureContainer
-        : backContainer;
+      // Scene switching lives inside the image frame only for non-backdrop picture cards.
+      const usePictureFrameForScenes = hasPictureMedia && denchouConfig.enableBackdropLayout !== '1';
+      const sentenceNavParent = usePictureFrameForScenes ? pictureContainer : backContainer;
 
       let arrowLeft = backContainer.querySelector('.sentence-nav.left');
       let arrowRight = backContainer.querySelector('.sentence-nav.right');
@@ -1752,6 +1751,18 @@
       totalSlides = audioParts.length;
     }
 
+    // Only runs for audioParts.length > 1 (early return at L1582); sentence-nav is never created for single-audio cards.
+    if (pictureContainer) {
+      const needsScenePush = totalSlides > 1 && usePictureFrameForScenes;
+      pictureContainer.classList.toggle('has-active-scene-nav', needsScenePush);
+    }
+    // Hide sentence-nav entirely when there's only one scene; when multiple exist,
+    // let the CSS class above handle nav-arrow offset instead.
+    if (totalSlides <= 1) {
+      if (arrowLeft) arrowLeft.style.display = 'none';
+      if (arrowRight) arrowRight.style.display = 'none';
+    }
+
     let currentIndex = 0;
 
     const isPartEmptyGroup = (part) => {
@@ -1839,9 +1850,7 @@
       const pictureContainer = ELS.pictureContainer;
       if (pictureContainer) {
         const pictureParts = Array.from(pictureContainer.children).filter(el =>
-          el.tagName !== 'BR' &&
-          !el.classList.contains('nav-arrow') &&
-          !el.classList.contains('toggle-image-visibility')
+          el.tagName === 'IMG' || el.tagName === 'VIDEO'
         );
 
         if (pictureParts.length > 0) {

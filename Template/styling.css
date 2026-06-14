@@ -5056,14 +5056,26 @@ li.is-new-card:not(:hover) .related-word {
 
 .picture-container > .sentence-nav {
   z-index: 3;
+  background: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* When scene switching is inside the image frame, keep image-only arrows reachable just inside it. */
-.picture-container:has(> .sentence-nav) > .nav-arrow.left {
+.picture-container > .sentence-nav:hover {
+  opacity: 0;
+}
+
+/* When active scene switching is inside the image frame, keep sentence-nav clickable and push nav-arrows inward. */
+.picture-container.has-active-scene-nav > .sentence-nav {
+  pointer-events: auto;
+}
+
+/* When active scene switching is inside the image frame, keep image-only arrows reachable just inside it. */
+.picture-container.has-active-scene-nav > .nav-arrow.left {
   left: min(7.2%, 80px);
 }
 
-.picture-container:has(> .sentence-nav) > .nav-arrow.right {
+.picture-container.has-active-scene-nav > .nav-arrow.right {
   right: min(7.2%, 80px);
 }
 
@@ -5077,6 +5089,10 @@ li.is-new-card:not(:hover) .related-word {
     right: 0;
     background: linear-gradient(to left, oklch(96% 0.018 92), transparent);
   }
+}
+
+:is(.card.nightMode, .custom-dark-mode) .picture-container > .sentence-nav {
+  background: none;
 }
 
 /* Hide scrollbar */
