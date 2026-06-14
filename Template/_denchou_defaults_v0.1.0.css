@@ -84,6 +84,8 @@
   /* Sentence Furigana */
   --sentence-furigana-display:        1;       /* "0" to disable furigana in sentences */
   --sentence-furigana-height:         0.0rem;  /* Negative value moves it UP (e.g., -0.05rem), Positive moves it DOWN */
+  --sentence-furigana-size:           0.45;    /* Furigana font-size ratio relative to sentence */
+  --sentence-furigana-gap:            24px;    /* Space reserved above sentence for furigana */
 
   /* Wrapped Text Alignment */
   --sentence-alignment:               center;  /* "left" or "right" to align wrapped sentences */

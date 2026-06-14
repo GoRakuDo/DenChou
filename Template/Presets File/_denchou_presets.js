@@ -44,6 +44,8 @@
     "--furigana-height": "0rem",
     "--sentence-furigana-display": "1",
     "--sentence-furigana-height": "0rem",
+    "--sentence-furigana-size": "0.45",
+    "--sentence-furigana-gap": "24px",
     "--sentence-size": "1.3rem",
     "--sentence-eng-size": "0.8rem",
     "--definition-size": "0.8rem",
