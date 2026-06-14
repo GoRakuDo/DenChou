@@ -1579,6 +1579,7 @@ img {
 
 #sentence,
 #sentence-audio {
+  font-family: var(--serif);
   font-size: var(--sentence-size);
   display: inline-block; 
   text-align: center;
