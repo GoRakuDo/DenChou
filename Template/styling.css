@@ -1614,10 +1614,20 @@ img {
   line-height: 1;
 }
 
+#sentence ruby {
+  position: relative;
+}
+
 #sentence rt {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 0.45em;
   line-height: 1;
+  white-space: nowrap;
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--fast-transition);
 }
 
