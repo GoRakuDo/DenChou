@@ -5058,22 +5058,14 @@ li.is-new-card:not(:hover) .related-word {
   background: linear-gradient(to left, oklch(10% 0.02 260), transparent);
 }
 
-/* Scene-switching bands inside the image frame. */
+/* Scene-switching bands inside the image frame.
+   Keep the gradient background from base .sentence-nav;
+   only control visibility and interactivity via pointer-events. */
 .picture-container > .sentence-nav {
   z-index: 3;
-  background: none;
-  opacity: 0;
   pointer-events: none;
 }
 
-.picture-container > .sentence-nav:hover {
-  opacity: 0;
-}
-
-/* When scene switching is active inside the image frame:
-   - show a subtle hover hint so the user knows where to click
-   - enable pointer events for scene navigation
-   - push image-only nav-arrows inward to avoid overlap */
 .picture-container.has-active-scene-nav > .sentence-nav {
   pointer-events: auto;
 }
@@ -5105,10 +5097,6 @@ li.is-new-card:not(:hover) .related-word {
     right: 0;
     background: linear-gradient(to left, oklch(96% 0.018 92), transparent);
   }
-}
-
-:is(.card.nightMode, .custom-dark-mode) .picture-container > .sentence-nav {
-  background: none;
 }
 
 /* Hide scrollbar */

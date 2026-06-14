@@ -1583,6 +1583,13 @@
       return;
     }
 
+    // Immediately hide non-current audio replay buttons to prevent Anki from
+    // auto-playing all audio on card load. Only the first audio stays visible
+    // until updateDisplay() switches to the correct scene.
+    audioParts.forEach((btn, i) => {
+      btn.style.setProperty('display', i === 0 ? 'inline-block' : 'none', 'important');
+    });
+
     const baseWaitTime = 100;
     const timePerChar = 150;
 
