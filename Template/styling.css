@@ -244,7 +244,7 @@
   --picture-counter-shadow-intensity: 0.8;     /* Opacity/Intensity of the shadow */
 
   /* Dimensions */
-  --picture-height:                   220px;
+  --picture-height:                   230px;
   --picture-height-small:             330px; /* Max picture container height */
   
 
@@ -438,11 +438,11 @@
   --spacing-ms:                       8px;
   --spacing-md:                       10px;
   --spacing-lg:                       15px;
-  --spacing-xl:                       20px;
+  --spacing-xl:                       18px;
   --spacing-xxl:                      24px;
   --spacing-xxml:                     27px;
   --spacing-xxxl:                     34px;
-  --base-padding:                     20px;
+  --base-padding:                     18px;
 
   /* Border Radius */
   --border-radius-sm:                 4px;
@@ -525,7 +525,7 @@ body {
 
 .front, .back {
   position: relative;
-  padding: var(--base-padding);
+  padding: clamp(14px, 2.4vw, var(--base-padding));
   max-width: var(--card-max-width);
   margin: 0 auto;
 }
@@ -535,6 +535,7 @@ body {
   top: var(--back-top-offset); 
   display: flex;
   flex-direction: column;
+  row-gap: clamp(8px, 1.8vw, 14px);
 }
 
 .front::before, .back::before {
@@ -570,9 +571,9 @@ body {
 .desktop-word-layout > #word {
   line-height: 0;
   margin-top: 2px;
-  margin-bottom: 12px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  margin-bottom: 14px;
+  padding-top: clamp(32px, 5vw, 40px);
+  padding-bottom: clamp(32px, 5vw, 40px);
 }
 
 #word-wrapper,
@@ -1037,7 +1038,7 @@ a {
 .background-box {
   position: relative;
   overflow: hidden;
-  padding: var(--spacing-ms);
+  padding: clamp(var(--spacing-ms), 1.6vw, var(--spacing-md));
   border-radius: var(--border-radius-ms);
   display: flex;
   justify-content: center;
@@ -1090,7 +1091,7 @@ a {
 .grid-container {
   display: grid;
   gap: var(--grid-gap);
-  align-items: stretch;
+  align-items: center;
   grid-template-areas: "word picture";
   grid-template-columns: minmax(var(--grid-column-min-width), 1fr) auto;
 }
@@ -1104,7 +1105,7 @@ a {
   .grid-container {
     display: grid;
     gap: var(--grid-gap);
-    align-items: stretch;
+    align-items: center;
     grid-template-areas: "picture word";
     grid-template-columns: auto minmax(var(--grid-column-min-width), 1fr);
   }
@@ -1114,7 +1115,7 @@ a {
   .grid-container {
     display: grid;
     gap: var(--grid-gap);
-    align-items: centerh;
+    align-items: center;
     grid-template-areas: "word" 
                          "picture";
     grid-template-columns: repeat(1, 1fr);
@@ -1125,7 +1126,7 @@ a {
   .grid-container {
     display: grid;
     gap: var(--grid-gap);
-    align-items: stretch;
+    align-items: center;
     grid-template-areas: "picture"
                          "word";
     grid-template-columns: repeat(1, 1fr);
@@ -1462,9 +1463,7 @@ img {
 
 /* Sentence */
 .sentence-container {
-  margin: 0.85rem 0;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: clamp(10px, 2vw, 16px) 5px;
 }
 
 .sentence-container .picture-counter {
@@ -1568,7 +1567,7 @@ img {
 /* Notes */
 .notes {
   position: relative;
-  padding: var(--spacing-lg); 
+  padding: clamp(var(--spacing-md), 2vw, var(--spacing-lg));
   border-radius: var(--border-radius-ms);
   background: var(--notes-bg-light);
   margin-bottom: 5px;
@@ -1622,7 +1621,7 @@ img {
 
 .glossary-box, .definition-box {
   position: relative;
-  padding: var(--spacing-lg); 
+  padding: clamp(var(--spacing-md), 2vw, var(--spacing-lg));
   border-radius: var(--border-radius-ms);
   text-align: left;
 }
@@ -5177,9 +5176,22 @@ li.is-new-card:not(:hover) .related-word {
 
   .header {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  .header :is(
+    .toggle-custom-dark-mode,
+    .toggle-settings-btn,
+    .audio-hint,
+    .toggle-notes,
+    .toggle-image-visibility.show-btn,
+    .frequency-box
+  ) {
+    min-width: 44px;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 
   .audio-hint {
@@ -5386,6 +5398,10 @@ li.is-new-card:not(:hover) .related-word {
   :root {
     --horizontal-layout: var(--horizontal-grid-small);
     --vertical-layout: var(--vertical-grid-small);
+    --base-padding: 14px;
+    --grid-gap: 12px;
+    --picture-height: 190px;
+    --picture-height-small: min(52vh, 300px);
   }
 
   .back.image-removed .grid-container {
@@ -5402,9 +5418,9 @@ li.is-new-card:not(:hover) .related-word {
 
   .front > .header {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   .sentence-front {
@@ -5461,7 +5477,17 @@ li.is-new-card:not(:hover) .related-word {
   }
 
   .grid-container {
-    gap: 10px;
+    gap: var(--grid-gap);
+  }
+
+  .sentence-container {
+    margin: 10px 3px;
+  }
+
+  .notes,
+  .glossary-box,
+  .definition-box {
+    padding: var(--spacing-md);
   }
 
   .desktop-word-layout {
@@ -5473,12 +5499,25 @@ li.is-new-card:not(:hover) .related-word {
   }
 
   .mobile-word-layout > .background-box {
-    padding-top: 23.5px;
-    padding-bottom: 27.5px;
+    padding-top: 20px;
+    padding-bottom: 22px;
   }
   .chrome:not(.win):not(.linux) .mobile-word-layout > .background-box {
-    padding-top: 25px;
-    padding-bottom: 29px;
+    padding-top: 21px;
+    padding-bottom: 23px;
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    --base-padding: 12px;
+    --grid-gap: 10px;
+    --picture-height: 170px;
+  }
+
+  .front,
+  .back {
+    padding: var(--base-padding);
   }
 }
 

@@ -166,7 +166,7 @@
   --picture-counter-shadow-intensity: 0.8;     /* Opacity/Intensity of the shadow */
 
   /* Dimensions */
-  --picture-height:                   220px;
+  --picture-height:                   230px;
   --picture-height-small:             330px; /* Max picture container height */
 
 
@@ -360,11 +360,11 @@
   --spacing-ms:                       8px;
   --spacing-md:                       10px;
   --spacing-lg:                       15px;
-  --spacing-xl:                       20px;
+  --spacing-xl:                       18px;
   --spacing-xxl:                      24px;
   --spacing-xxml:                     27px;
   --spacing-xxxl:                     34px;
-  --base-padding:                     20px;
+  --base-padding:                     18px;
 
   /* Border Radius */
   --border-radius-sm:                 4px;
