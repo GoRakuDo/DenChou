@@ -17,6 +17,8 @@
   --notes-default-expanded:           false;   /* Show notes immediately */
   --no-duplicate-kana:                false;   /* Replace kana-only word with its reading */
   --mute-sentence-audio:              false;   /* Mute any sentence audio */
+  --auto-play-video:                  true;    /* Auto-play videos on card load */
+  --mute-video:                       true;    /* Mute video audio */
 
   /* Misc Info */
   --misc-info-default-expanded:       false;   /* Show misc info immediately */

@@ -41,7 +41,9 @@
       { label: "Expand Translation", var: "--translation-default-expanded", type: "switch-bool", desc: "Show translation immediately." },
       { label: "Expand Notes", var: "--notes-default-expanded", type: "switch-bool", desc: "Show notes immediately." },
       { label: "No Duplicate Kana", var: "--no-duplicate-kana", type: "switch-bool", desc: "Hide the reading for words written entirely in kana." },
-      { label: "Mute Sentence Audio", var: "--mute-sentence-audio", type: "switch-bool", desc: "Disable automatic sentence audio playback." }
+      { label: "Mute Sentence Audio", var: "--mute-sentence-audio", type: "switch-bool", desc: "Disable automatic sentence audio playback." },
+      { label: "Auto Play Video", var: "--auto-play-video", type: "switch-bool", desc: "Automatically play videos when shown." },
+      { label: "Mute Video", var: "--mute-video", type: "switch-bool", desc: "Mute video audio playback." }
     ],
     "Typography": [
       { type: "header", label: "General Settings" },

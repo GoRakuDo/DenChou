@@ -1857,8 +1857,9 @@
             if (!shouldShow && part.tagName === 'VIDEO') {
               try { part.pause(); } catch (e) { }
             }
-            // Auto-play video when it becomes the active scene
-            if (shouldShow && part.tagName === 'VIDEO' && part.paused) {
+            // Auto-play video when it becomes the active scene (if enabled)
+            if (shouldShow && part.tagName === 'VIDEO' && part.paused && denchouConfig.autoPlayVideo !== 'false') {
+              part.muted = denchouConfig.muteVideo !== 'false';
               part.currentTime = 0;
               part.play().catch(() => { });
             }
@@ -2229,6 +2230,8 @@
       denchouConfig.muteNsfwAudio = getVar('--mute-nsfw-audio');
       denchouConfig.muteSentenceAudio = getVar('--mute-sentence-audio');
       denchouConfig.blurNsfwPicture = getVar('--blur-nsfw-picture');
+      denchouConfig.autoPlayVideo = getVar('--auto-play-video');
+      denchouConfig.muteVideo = getVar('--mute-video');
 
       // Kanji
       denchouConfig.enableKanjiHover = getVar('--enable-kanji-hover');

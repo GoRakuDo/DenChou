@@ -23,6 +23,8 @@
     "--collect-glossary-images": "false",
     "--no-duplicate-kana": "false",
     "--mute-sentence-audio": "false",
+    "--auto-play-video": "true",
+    "--mute-video": "true",
     "--base-size": "clamp(19px, 3vw, 24px)",
     "--base-line-height": "1.5",
     "--bold-highlight": "0",

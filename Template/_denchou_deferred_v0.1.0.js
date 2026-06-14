@@ -152,18 +152,23 @@
     const pictureContainer = document.querySelector('.picture-container');
     if (!pictureContainer) return;
 
+    const shouldAutoplay = denchouConfig.autoPlayVideo !== 'false';
+    const shouldMute = denchouConfig.muteVideo !== 'false';
+
     pictureContainer.querySelectorAll('video').forEach(video => {
-      // Autoplay once, no loop, no controls bar
+      // No loop, no controls bar
       video.removeAttribute('controls');
-      video.setAttribute('autoplay', '');
-      video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
 
-      video.autoplay = true;
+      video.autoplay = shouldAutoplay;
       video.loop = false;
-      video.muted = true;
+      video.muted = shouldMute;
       video.playsInline = true;
       video.preload = 'metadata';
+
+      if (!shouldAutoplay) {
+        video.removeAttribute('autoplay');
+      }
 
       // Click/tap: toggle play/pause; after ended, replay from start
       video.addEventListener('click', () => {
@@ -177,17 +182,19 @@
         }
       });
 
-      const playVideo = () => {
-        const playPromise = video.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(() => { });
-        }
-      };
+      if (shouldAutoplay) {
+        const playVideo = () => {
+          const playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => { });
+          }
+        };
 
-      if (video.readyState >= 2) {
-        playVideo();
-      } else {
-        video.addEventListener('loadedmetadata', playVideo, { once: true });
+        if (video.readyState >= 2) {
+          playVideo();
+        } else {
+          video.addEventListener('loadedmetadata', playVideo, { once: true });
+        }
       }
     });
   }
