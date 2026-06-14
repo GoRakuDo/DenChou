@@ -1612,6 +1612,9 @@ img {
   display: inline;
   white-space: nowrap;
   line-height: 1;
+}
+
+#sentence ruby {
   position: relative;
 }
 
