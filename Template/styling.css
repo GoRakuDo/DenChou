@@ -481,8 +481,8 @@
   /* EFFECTS & ANIMATION
   ============================================ */
   /* Transitions */
-  --base-transition:                  0.3s ease;
-  --fast-transition:                  0.2s ease;
+  --base-transition:                  0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  --fast-transition:                  0.2s cubic-bezier(0.23, 1, 0.32, 1);
 
   /* Shadows */
   --button-shadow:                    0 0 5px 2.5px oklch(10% 0.02 260 / 0.1);
@@ -589,10 +589,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: content-box;
-  transition: max-height 0.3s ease,
-              opacity 0.3s ease,
-              margin 0.3s ease,
-              padding 0.3s ease;
+  transition: max-height var(--base-transition),
+              opacity var(--base-transition),
+              margin var(--base-transition),
+              padding var(--base-transition);
 }
 
 #word-wrapper.expanded,
@@ -5012,7 +5012,7 @@ li.is-new-card:not(:hover) .related-word {
   right: 0;
   bottom: 0;
   background-color: transparent;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--fast-transition);
 }
 
 .card.nightMode .fade-to-show-more {
@@ -6097,8 +6097,8 @@ li.is-new-card:not(:hover) .related-word {
 /* AnkiDroid Lite — reduced shadows, blur, and transitions */
 @container style(--ankidroid-lite: true) {
   :root {
-    --base-transition: 0.15s ease;
-    --fast-transition: 0.1s ease;
+    --base-transition: 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+    --fast-transition: 0.1s cubic-bezier(0.23, 1, 0.32, 1);
     --button-shadow: none;
     --button-shadow-dark: none;
     --lightbox-shadow: none;
