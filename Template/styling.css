@@ -1615,6 +1615,8 @@ img {
 }
 
 #sentence rt {
+  font-size: 0.45em;
+  line-height: 0;
   transform: translateY(var(--sentence-furigana-height)) !important; 
   opacity: 0;
   transition: opacity var(--fast-transition);
@@ -1622,7 +1624,7 @@ img {
 
 @container style(--sentence-furigana-display: 0) {
   #sentence rb {
-    margin-top: 21px;
+    margin-top: 0.7em;
   }
 
   #sentence rt {
