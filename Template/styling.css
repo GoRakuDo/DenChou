@@ -1615,11 +1615,11 @@ img {
 }
 
 #sentence rt {
-  font-size: 0.45em;
+  font-size: 0;
   line-height: 0;
   transform: translateY(var(--sentence-furigana-height)) !important; 
   opacity: 0;
-  transition: opacity var(--fast-transition);
+  transition: opacity var(--fast-transition), font-size var(--fast-transition);
 }
 
 @container style(--sentence-furigana-display: 0) {
@@ -1633,6 +1633,7 @@ img {
 }
 
 #sentence ruby:hover rt {
+  font-size: 0.45em;
   opacity: 1;
 }
 
