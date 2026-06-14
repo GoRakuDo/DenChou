@@ -1649,19 +1649,31 @@ img {
 
 #sentenceEng {
   font-size: var(--sentence-eng-size);
-  display: flex;
-  justify-content: center;
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: max-height var(--base-transition);
+  transition: grid-template-rows var(--base-transition);
   visibility: visible;
-  text-align: center; 
+  text-align: center;
+}
+
+#sentenceEng > .sentence-eng-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+#sentenceEng:not(.is-collapsed) {
+  grid-template-rows: 1fr;
+}
+
+#sentenceEng.no-transition {
+  transition: none !important;
 }
 
 @container style(--sentence-alignment: left) {
   #sentenceEng {
     text-align: left;
-    justify-content: flex;
+    justify-content: flex-start;
     direction: ltr;
     unicode-bidi: normal;
   }
@@ -1670,15 +1682,14 @@ img {
 @container style(--sentence-alignment: right) {
   #sentenceEng {
     text-align: right;
-    justify-content: flex;
+    justify-content: flex-end;
     direction: ltr;
     unicode-bidi: normal;
   }
 }
 
-#sentenceEng:has(> b) {
+#sentenceEng:has(b) {
   text-align: center;
-  display: block;
 }
 
 #formattedSentence.is-clickable {
@@ -1688,29 +1699,39 @@ img {
 /* Notes */
 .notes {
   position: relative;
-  padding: clamp(var(--spacing-md), 2vw, var(--spacing-lg));
   border-radius: var(--border-radius-ms);
   background: var(--notes-bg-light);
-  margin-bottom: 5px;
-  max-height: 0;
-  overflow: hidden;
   font-size: var(--definition-size);
-  display: block;
-  justify-content: center;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
   direction: ltr;
   unicode-bidi: normal;
   text-align: left;
-  transition: max-height var(--base-transition), 
-              opacity var(--base-transition), 
-              margin var(--base-transition), 
-              padding var(--base-transition);
+  transition: grid-template-rows var(--base-transition),
+              opacity var(--base-transition);
+}
+
+.notes > .notes-inner {
+  overflow: hidden;
+  min-height: 0;
+  padding: clamp(var(--spacing-md), 2vw, var(--spacing-lg));
+  margin-bottom: 5px;
+}
+
+.notes:not(.is-collapsed) {
+  grid-template-rows: 1fr;
+}
+
+.notes.no-transition {
+  transition: none !important;
 }
 
 .notes.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  margin-bottom: 0;
   opacity: 0;
+}
+.notes.is-collapsed .notes-inner {
+  margin-bottom: 0;
 }
 
 .card.nightMode .notes {
@@ -3569,17 +3590,23 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 
 .frequency-content {
   opacity: 0;
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
   padding: 0 var(--spacing-lg);
   color: var(--freq-text-hover-light);
   background: var(--frequency-bg-light);
   border-radius: var(--border-radius-ms);
   font-size: var(--frequency-content-size);
   overflow: hidden;
-  will-change: opacity, max-height, padding;
-  transition: opacity var(--base-transition), 
-              max-height var(--base-transition), 
+  will-change: opacity, grid-template-rows;
+  transition: opacity var(--base-transition),
+              grid-template-rows var(--base-transition),
               padding var(--base-transition);
+}
+
+.frequency-content > .frequency-content-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
@@ -3613,7 +3640,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 
 .frequency-box:hover .frequency-content {
   opacity: 1;
-  max-height: var(--frequency-max-height);
+  grid-template-rows: 1fr;
   padding: var(--spacing-lg);
 }
 
@@ -3780,7 +3807,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   .misc-info {
     color: var(--misc-info-text-light) !important;
     background: var(--misc-info-bg-light) !important;
-    max-height: 500px !important;
+    grid-template-rows: 1fr !important;
     padding: var(--spacing-md) !important;
     margin-top: 5px !important;
     opacity: 1 !important;
@@ -3813,13 +3840,12 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   font-family: var(--sans);
   font-size: var(--misc-info-size);
   width: 100%;
-  display: flex;
-  justify-content: center;
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
   padding-bottom: 0;
   overflow: hidden;
-  will-change: max-height;
-  flex-wrap: wrap;
+  will-change: grid-template-rows;
   word-break: break-all;
   overflow-wrap: anywhere;
   padding-left: var(--spacing-lg); 
@@ -3830,15 +3856,28 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   box-sizing: border-box;
   background: var(--misc-info-bg-light);
   z-index: var(--z-index-base);
-  transition: max-height var(--base-transition), 
-              padding var(--base-transition), 
+  transition: grid-template-rows var(--base-transition),
+              padding var(--base-transition),
               opacity var(--base-transition),
               color var(--base-transition),
               margin-top var(--base-transition);
 }
 
+.misc-info > .misc-info-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
 .misc-info.has-content {
-  display: flex !important;
+  display: grid !important;
+}
+
+.misc-info.is-expanded {
+  grid-template-rows: 1fr;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 5px;
+  opacity: 1;
 }
 
 :is(.card.nightMode, .custom-dark-mode)
@@ -3858,7 +3897,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 @container style(--misc-info-alignment: left) {
   .misc-info {
     text-align: left;
-    justify-content: flex;
+    justify-content: flex-start;
     direction: ltr;
     unicode-bidi: normal;
   }
@@ -3867,15 +3906,14 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 @container style(--misc-info-alignment: right) {
   .misc-info {
     text-align: right;
-    justify-content: flex;
+    justify-content: flex-end;
     direction: ltr;
     unicode-bidi: normal;
   }
 }
 
-.misc-info:has(> b) {
+.misc-info:has(b) {
   text-align: center;
-  display: block;
 }
 
 .misc-info b {
@@ -6072,10 +6110,10 @@ li.is-new-card:not(:hover) .related-word {
 
 @supports (-webkit-touch-callout: none) {
   #sentenceEng {
-    max-height: 0.5px;
+    max-height: none;
   }
   .frequency-content {
-    max-height: 0.5px;
+    max-height: none;
   }
 }
 

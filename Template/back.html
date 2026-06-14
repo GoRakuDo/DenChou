@@ -44,7 +44,7 @@
         </label>
         {{#frequencies}}
         <div class="frequency-content">
-          {{frequencies}}
+          <div class="frequency-content-inner">{{frequencies}}</div>
         </div>
         {{/frequencies}}
       </div>
@@ -97,14 +97,14 @@
       <span id="formattedSentence" class="{{pitchCategories}} tappable"></span>
     </div>
     <div id="sentenceEng" class="is-collapsed">
-      {{sentenceTranslation}}
+      <div class="sentence-eng-inner">{{sentenceTranslation}}</div>
     </div>
     <div class="picture-counter"></div>
   </div>
 
   <!-- Notes -->
   {{#notes}}
-  <div class="notes is-collapsed">{{furigana:notes}}</div>
+  <div class="notes is-collapsed"><div class="notes-inner">{{furigana:notes}}</div></div>
   {{/notes}}
 
   <!-- Selection Text -->
@@ -187,7 +187,7 @@
   </div>
 
   <!-- Misc Info -->
-  <div class="misc-info">{{miscInfo}}</div>
+  <div class="misc-info"><div class="misc-info-inner">{{miscInfo}}</div></div>
   <!-- /FOOTER -->
 
   <div id="dictionaryPreference" style="display: none;">{{dictionaryPreference}}</div>
@@ -678,7 +678,7 @@
   // Enables interaction effects
   function enableInteractions() {
 
-    function applyClickToggleEffect(triggerSelector, targetSelector, extraPadding = 0) {
+    function applyClickToggleEffect(triggerSelector, targetSelector) {
       const trigger = document.querySelector(triggerSelector);
       const target = document.querySelector(targetSelector);
 
@@ -703,28 +703,17 @@
 
             if (isCollapsed) {
               target.classList.remove("is-collapsed");
-              target.style.maxHeight = target.scrollHeight + extraPadding + "px";
-              if (extraPadding) {
-                target.style.opacity = "1";
-                target.style.paddingTop = extraPadding + "px";
-              }
             } else {
               target.classList.add("is-collapsed");
-              target.style.maxHeight = "0";
-              if (extraPadding) {
-                target.style.opacity = "0";
-                target.style.paddingTop = "0px";
-              }
             }
           });
         });
       }
     }
 
-    function applyHoverEffect(containerSelector, targetSelector, extraPadding = 0) {
+    function applyHoverEffect(containerSelector, targetSelector) {
       const containers = document.querySelectorAll(containerSelector);
       const target = document.querySelector(targetSelector);
-      const marginTopValue = "5px";
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
       if (containers.length > 0 && target) {
@@ -739,26 +728,14 @@
           const expand = () => {
             requestAnimationFrame(() => {
               if (target.textContent.trim() !== "") {
-                target.style.maxHeight = target.scrollHeight + (extraPadding * 2) + "px";
-                if (extraPadding) {
-                  target.style.opacity = "1";
-                  target.style.paddingTop = extraPadding + "px";
-                  target.style.paddingBottom = extraPadding + "px";
-                  target.style.marginTop = marginTopValue;
-                }
+                target.classList.add('is-expanded');
               }
             });
           };
 
           const collapse = () => {
             requestAnimationFrame(() => {
-              target.style.maxHeight = "0";
-              if (extraPadding) {
-                target.style.opacity = "0";
-                target.style.paddingTop = "0px";
-                target.style.paddingBottom = "0px";
-                target.style.marginTop = "0px";
-              }
+              target.classList.remove('is-expanded');
             });
           };
 
@@ -778,7 +755,7 @@
                 return;
               }
 
-              const isCollapsed = !target.style.maxHeight || target.style.maxHeight === "0px";
+              const isCollapsed = !target.classList.contains('is-expanded');
               if (isCollapsed) {
                 expand();
               } else {
@@ -798,15 +775,10 @@
 
       if (expandByDefault === 'true') {
         if (notesElement.classList.contains('is-collapsed')) {
-          notesElement.style.transition = 'none';
+          notesElement.classList.add('no-transition');
           notesElement.classList.remove('is-collapsed');
-          notesElement.style.maxHeight = notesElement.scrollHeight + 'px';
-
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              notesElement.style.transition = '';
-            });
-          });
+          notesElement.offsetHeight; // force reflow
+          notesElement.classList.remove('no-transition');
         }
       }
     }
@@ -815,15 +787,10 @@
       const expandByDefault = denchouConfig.translationDefaultExpanded;
 
       if (expandByDefault === 'true') {
-        sentenceEng.style.transition = 'none';
+        sentenceEng.classList.add('no-transition');
         sentenceEng.classList.remove('is-collapsed');
-        sentenceEng.style.maxHeight = sentenceEng.scrollHeight + 'px';
-
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            sentenceEng.style.transition = '';
-          });
-        });
+        sentenceEng.offsetHeight; // force reflow
+        sentenceEng.classList.remove('no-transition');
       }
     }
 
@@ -864,7 +831,7 @@
     }
 
     if (miscExpanded !== 'true') {
-      applyHoverEffect(pictureHoverTriggerSelector, ".misc-info", 10);
+      applyHoverEffect(pictureHoverTriggerSelector, ".misc-info");
     }
   }
 
@@ -1690,13 +1657,14 @@
     // Sentence Eng Group
     const engContainer = ELS.sentenceEng;
     if (engContainer && !engContainer.getAttribute('data-split-done')) {
-      const allSpans = Array.from(engContainer.querySelectorAll('span'));
+      const engInner = engContainer.querySelector('.sentence-eng-inner') || engContainer;
+      const allSpans = Array.from(engInner.querySelectorAll('span'));
       const groupWrappers = allSpans.filter(el => {
         return el.className.split(/\s+/).some(c => /^group\d*$/.test(c));
       });
 
       if (groupWrappers.length > 0) {
-        engContainer.innerHTML = '';
+        engInner.innerHTML = '';
 
         groupWrappers.forEach((el) => {
           const div = document.createElement('div');
@@ -1709,7 +1677,7 @@
             div.setAttribute('data-target-index', parseInt(match[1], 10) - 1);
           }
 
-          engContainer.appendChild(div);
+          engInner.appendChild(div);
         });
         engContainer.setAttribute('data-split-done', 'true');
       }
@@ -1719,13 +1687,14 @@
     const miscInfoContainer = ELS.miscInfo;
 
     if (miscInfoContainer && !miscInfoContainer.getAttribute('data-split-done')) {
-      const allSpans = Array.from(miscInfoContainer.querySelectorAll('span'));
+      const miscInfoInner = miscInfoContainer.querySelector('.misc-info-inner') || miscInfoContainer;
+      const allSpans = Array.from(miscInfoInner.querySelectorAll('span'));
       const groupWrappers = allSpans.filter(el => {
         return el.className.split(/\s+/).some(c => /^group\d*$/.test(c));
       });
 
       if (groupWrappers.length > 0) {
-        miscInfoContainer.innerHTML = '';
+        miscInfoInner.innerHTML = '';
 
         groupWrappers.forEach((el) => {
           const div = document.createElement('div');
@@ -1738,7 +1707,7 @@
             div.setAttribute('data-target-index', parseInt(match[1], 10) - 1);
           }
 
-          miscInfoContainer.appendChild(div);
+          miscInfoInner.appendChild(div);
         });
         miscInfoContainer.setAttribute('data-split-done', 'true');
       }
@@ -1894,7 +1863,7 @@
           }
 
           if (shouldShow) {
-            part.style.setProperty('display', 'flex', 'important');
+            part.style.setProperty('display', 'block', 'important');
             isAnyChildVisible = true;
           } else {
             part.style.setProperty('display', 'none', 'important');
@@ -1902,13 +1871,16 @@
         });
 
         if (mainMiscContainer) {
-          const displayValue = isAnyChildVisible ? 'flex' : 'none';
-          mainMiscContainer.style.setProperty('display', displayValue, 'important');
+          if (isAnyChildVisible) {
+            mainMiscContainer.style.removeProperty('display');
+          } else {
+            mainMiscContainer.style.setProperty('display', 'none', 'important');
+          }
         }
 
       } else if (mainMiscContainer) {
         if (currentIndex === 0) {
-          mainMiscContainer.style.setProperty('display', 'flex', 'important');
+          mainMiscContainer.style.removeProperty('display');
         } else {
           mainMiscContainer.style.setProperty('display', 'none', 'important');
         }
@@ -1931,13 +1903,17 @@
             }
           }
 
-          part.style.display = shouldShow ? 'flex' : 'none';
+          part.style.display = shouldShow ? 'block' : 'none';
         });
 
-        if (mainEngContainer) mainEngContainer.style.display = 'flex';
+        if (mainEngContainer) mainEngContainer.style.removeProperty('display');
 
       } else if (mainEngContainer) {
-        mainEngContainer.style.display = (currentIndex === 0) ? 'flex' : 'none';
+        if (currentIndex === 0) {
+          mainEngContainer.style.removeProperty('display');
+        } else {
+          mainEngContainer.style.setProperty('display', 'none', 'important');
+        }
       }
 
       if (audioParts.length > 0) {
