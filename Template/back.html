@@ -1633,19 +1633,32 @@
     let newArrows = [];
 
     if (backContainer) {
+      const pictureContainer = ELS.pictureContainer;
+      const hasPictureMedia = !!pictureContainer?.querySelector('img, video');
+      // Keep scene switching inside the 16:9 image frame on non-backdrop image cards.
+      const sentenceNavParent = hasPictureMedia && denchouConfig.enableBackdropLayout !== '1'
+        ? pictureContainer
+        : backContainer;
+
       let arrowLeft = backContainer.querySelector('.sentence-nav.left');
       let arrowRight = backContainer.querySelector('.sentence-nav.right');
 
       if (!arrowLeft) {
         arrowLeft = document.createElement('div');
         arrowLeft.className = 'sentence-nav left';
-        backContainer.appendChild(arrowLeft);
+      }
+
+      if (arrowLeft.parentElement !== sentenceNavParent) {
+        sentenceNavParent.appendChild(arrowLeft);
       }
 
       if (!arrowRight) {
         arrowRight = document.createElement('div');
         arrowRight.className = 'sentence-nav right';
-        backContainer.appendChild(arrowRight);
+      }
+
+      if (arrowRight.parentElement !== sentenceNavParent) {
+        sentenceNavParent.appendChild(arrowRight);
       }
 
       newArrows = [arrowLeft, arrowRight];
