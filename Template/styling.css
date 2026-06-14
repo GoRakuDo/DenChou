@@ -1518,8 +1518,8 @@ img {
   left: 0;
   right: 0;
   height: 25px;
-  background: linear-gradient(to bottom, oklch(10% 0.02 260 / 0.55), transparent);
-  color: oklch(76% 0.18 25);
+  background: linear-gradient(to bottom, oklch(65% 0.18 25 / 0.55), transparent);
+  color: oklch(97% 0.01 260);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1539,7 +1539,7 @@ img {
 
 .toggle-image-visibility.hide-btn:hover  {
   opacity: 1;
-  color: oklch(82% 0.2 25);
+  color: oklch(97% 0.01 260);
 }
 
 .back.image-removed .picture-container {
@@ -1564,7 +1564,7 @@ img {
       left: auto !important;
       right: auto !important;
       width: 250px;
-      background: radial-gradient(ellipse at top, oklch(10% 0.02 260 / 0.4) 0%, 
+      background: radial-gradient(ellipse at top, oklch(65% 0.18 25 / 0.4) 0%, 
                   transparent 70%);
     }
   }
