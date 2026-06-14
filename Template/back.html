@@ -1640,31 +1640,19 @@
     let newArrows = [];
 
     if (backContainer) {
-      const pictureContainer = ELS.pictureContainer;
-      const hasPictureMedia = !!pictureContainer?.querySelector('img, video');
-      // Scene switching lives inside the image frame only for non-backdrop picture cards.
-      const usePictureFrameForScenes = hasPictureMedia && denchouConfig.enableBackdropLayout !== '1';
-      const sentenceNavParent = usePictureFrameForScenes ? pictureContainer : backContainer;
-
       let arrowLeft = backContainer.querySelector('.sentence-nav.left');
       let arrowRight = backContainer.querySelector('.sentence-nav.right');
 
       if (!arrowLeft) {
         arrowLeft = document.createElement('div');
         arrowLeft.className = 'sentence-nav left';
-      }
-
-      if (arrowLeft.parentElement !== sentenceNavParent) {
-        sentenceNavParent.appendChild(arrowLeft);
+        backContainer.appendChild(arrowLeft);
       }
 
       if (!arrowRight) {
         arrowRight = document.createElement('div');
         arrowRight.className = 'sentence-nav right';
-      }
-
-      if (arrowRight.parentElement !== sentenceNavParent) {
-        sentenceNavParent.appendChild(arrowRight);
+        backContainer.appendChild(arrowRight);
       }
 
       newArrows = [arrowLeft, arrowRight];
@@ -1758,13 +1746,7 @@
       totalSlides = audioParts.length;
     }
 
-    // Only runs for audioParts.length > 1 (early return at L1582); sentence-nav is never created for single-audio cards.
-    if (pictureContainer) {
-      const needsScenePush = totalSlides > 1 && usePictureFrameForScenes;
-      pictureContainer.classList.toggle('has-active-scene-nav', needsScenePush);
-    }
-    // Hide sentence-nav entirely when there's only one scene; when multiple exist,
-    // let the CSS class above handle nav-arrow offset instead.
+    // Hide sentence-nav entirely when there's only one scene.
     if (totalSlides <= 1) {
       if (arrowLeft) arrowLeft.style.display = 'none';
       if (arrowRight) arrowRight.style.display = 'none';

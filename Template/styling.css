@@ -5039,7 +5039,7 @@ li.is-new-card:not(:hover) .related-word {
   max-width: 80px;
   cursor: pointer;
   border-radius: var(--border-radius-lg);
-  z-index: 1;
+  z-index: 5;
   opacity: 0;
   transition: opacity var(--base-transition);
 }
@@ -5058,31 +5058,7 @@ li.is-new-card:not(:hover) .related-word {
   background: linear-gradient(to left, oklch(10% 0.02 260), transparent);
 }
 
-/* Scene-switching bands inside the image frame.
-   Keep the gradient background from base .sentence-nav;
-   only control visibility and interactivity via pointer-events. */
-.picture-container > .sentence-nav {
-  z-index: 3;
-  pointer-events: none;
-}
-
-.picture-container.has-active-scene-nav > .sentence-nav {
-  pointer-events: auto;
-}
-
-.picture-container.has-active-scene-nav > .sentence-nav:hover {
-  opacity: 0.08;
-}
-
-.picture-container.has-active-scene-nav > .nav-arrow.left {
-  left: min(7.2%, 80px);
-}
-
-.picture-container.has-active-scene-nav > .nav-arrow.right {
-  right: min(7.2%, 80px);
-}
-
-/* Image-switching nav-arrows are above scene bands only when not overlapping. */
+/* Image-switching nav-arrows. */
 .picture-container > .nav-arrow {
   z-index: 4;
 }
