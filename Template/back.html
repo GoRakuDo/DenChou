@@ -717,6 +717,24 @@
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
       if (containers.length > 0 && target) {
+        const expand = () => {
+          requestAnimationFrame(() => {
+            if (target.textContent.trim() !== "") {
+              target.classList.add('is-expanded');
+            }
+          });
+        };
+
+        const collapse = () => {
+          requestAnimationFrame(() => {
+            target.classList.remove('is-expanded');
+          });
+        };
+
+        // Shared hover timer across all trigger containers
+        let hoverTimer = null;
+        let activeContainers = 0;
+
         containers.forEach(container => {
           if (container.dataset.hasHoverListener) return;
           container.dataset.hasHoverListener = 'true';
@@ -725,27 +743,26 @@
             container.classList.add('tappable');
           }
 
-          const expand = () => {
-            requestAnimationFrame(() => {
-              if (target.textContent.trim() !== "") {
-                target.classList.add('is-expanded');
-              }
-            });
-          };
-
-          const collapse = () => {
-            requestAnimationFrame(() => {
-              target.classList.remove('is-expanded');
-            });
-          };
-
-          // Mouse Hover
+          // Mouse Hover (3-second delay, shared timer)
           container.addEventListener("pointerenter", (e) => {
-            if (e.pointerType === 'mouse') expand();
+            if (e.pointerType === 'mouse') {
+              activeContainers++;
+              if (!hoverTimer) {
+                hoverTimer = setTimeout(() => expand(), 2000);
+              }
+            }
           });
 
           container.addEventListener("pointerleave", (e) => {
-            if (e.pointerType === 'mouse') collapse();
+            if (e.pointerType === 'mouse') {
+              activeContainers--;
+              if (activeContainers <= 0) {
+                activeContainers = 0;
+                clearTimeout(hoverTimer);
+                hoverTimer = null;
+                collapse();
+              }
+            }
           });
 
           // Touch Interaction
