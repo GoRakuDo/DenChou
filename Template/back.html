@@ -1853,6 +1853,15 @@
           pictureParts.forEach((part, i) => {
             const shouldShow = (i === currentIndex);
             part.style.setProperty('display', shouldShow ? 'block' : 'none', 'important');
+            // Pause hidden videos so they don't keep playing off-screen
+            if (!shouldShow && part.tagName === 'VIDEO') {
+              try { part.pause(); } catch (e) { }
+            }
+            // Auto-play video when it becomes the active scene
+            if (shouldShow && part.tagName === 'VIDEO' && part.paused) {
+              part.currentTime = 0;
+              part.play().catch(() => { });
+            }
           });
         }
       }

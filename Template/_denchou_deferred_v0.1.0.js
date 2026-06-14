@@ -153,16 +153,29 @@
     if (!pictureContainer) return;
 
     pictureContainer.querySelectorAll('video').forEach(video => {
+      // Autoplay once, no loop, no controls bar
+      video.removeAttribute('controls');
       video.setAttribute('autoplay', '');
-      video.setAttribute('loop', '');
       video.setAttribute('muted', '');
       video.setAttribute('playsinline', '');
 
       video.autoplay = true;
-      video.loop = true;
+      video.loop = false;
       video.muted = true;
       video.playsInline = true;
       video.preload = 'metadata';
+
+      // Click/tap: toggle play/pause; after ended, replay from start
+      video.addEventListener('click', () => {
+        if (video.ended) {
+          video.currentTime = 0;
+          video.play().catch(() => { });
+        } else if (video.paused) {
+          video.play().catch(() => { });
+        } else {
+          video.pause();
+        }
+      });
 
       const playVideo = () => {
         const playPromise = video.play();

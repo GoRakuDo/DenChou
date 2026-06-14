@@ -1291,6 +1291,7 @@ img {
 
 .picture-container video {
   width: 100%;
+  /* Hide native controls bar — click/tap toggles play/pause instead */
 }
 
 @container (not style(--enable-backdrop-layout: 1)) {
