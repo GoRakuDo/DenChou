@@ -1668,6 +1668,7 @@ img {
 
 #sentenceEng > .sentence-eng-inner {
   overflow: hidden;
+  min-height: 0;
 }
 
 #sentenceEng:not(.is-collapsed) {
