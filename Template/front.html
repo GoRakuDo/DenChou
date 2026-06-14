@@ -241,10 +241,14 @@
       const isExpanded = wrapper.classList.contains('expanded');
 
       if (!isExpanded) {
+        const scrollHeight = innerElement.scrollHeight + 'px';
+        wrapper.style.maxHeight = scrollHeight;
         wrapper.classList.add('expanded');
       } else {
+        wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
         requestAnimationFrame(() => {
           wrapper.classList.remove('expanded');
+          wrapper.style.maxHeight = '0px';
         });
       }
     }
@@ -271,6 +275,8 @@
         innerElement.style.transition = 'none';
 
         requestAnimationFrame(() => {
+          const scrollHeight = innerElement.scrollHeight + 'px';
+          wrapper.style.maxHeight = scrollHeight;
           wrapper.classList.add('expanded');
 
           requestAnimationFrame(() => {
@@ -298,6 +304,8 @@
         innerElement.style.transition = 'none';
 
         requestAnimationFrame(() => {
+          const scrollHeight = innerElement.scrollHeight + 'px';
+          wrapper.style.maxHeight = scrollHeight;
           wrapper.classList.add('expanded');
 
           requestAnimationFrame(() => {
@@ -325,6 +333,8 @@
         innerElement.style.transition = 'none';
 
         requestAnimationFrame(() => {
+          const scrollHeight = innerElement.scrollHeight + 'px';
+          wrapper.style.maxHeight = scrollHeight;
           wrapper.classList.add('expanded');
 
           requestAnimationFrame(() => {
@@ -528,6 +538,8 @@
           parts.forEach((part, i) => {
             part.style.display = (i === currentIndex) ? 'block' : 'none';
           });
+          const wrapper = container.closest('.expanded');
+          if (wrapper) wrapper.style.maxHeight = container.scrollHeight + 'px';
         }
       });
 

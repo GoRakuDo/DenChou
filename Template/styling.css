@@ -582,32 +582,23 @@ body {
 #sentence-wrapper, 
 #sentence-wrapper-audio,
 #hint-wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
   pointer-events: none;
   margin: 0;
   padding: 0;
   box-sizing: content-box;
-  transition: grid-template-rows var(--base-transition),
+  transition: max-height var(--base-transition),
               opacity var(--base-transition),
               margin var(--base-transition),
               padding var(--base-transition);
-}
-
-#word-wrapper > *,
-#sentence-wrapper > *, 
-#sentence-wrapper-audio > *,
-#hint-wrapper > * {
-  overflow: hidden;
-  min-height: 0;
 }
 
 #word-wrapper.expanded,
 #sentence-wrapper.expanded, 
 #sentence-wrapper-audio.expanded,
 #hint-wrapper.expanded {
-  grid-template-rows: 1fr;
   opacity: 1;
   pointer-events: auto;
   margin: revert;
@@ -1658,21 +1649,13 @@ img {
 
 #sentenceEng {
   font-size: var(--sentence-eng-size);
-  display: grid;
-  grid-template-rows: 0fr;
-  max-height: none !important;
+  display: flex;
+  justify-content: center;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--base-transition);
   visibility: visible;
   text-align: center; 
-  transition: grid-template-rows var(--base-transition);
-}
-
-#sentenceEng > .sentence-eng-inner {
-  overflow: hidden;
-  min-height: 0;
-}
-
-#sentenceEng:not(.is-collapsed) {
-  grid-template-rows: 1fr;
 }
 
 @container style(--sentence-alignment: left) {
@@ -1709,22 +1692,18 @@ img {
   border-radius: var(--border-radius-ms);
   background: var(--notes-bg-light);
   margin-bottom: 5px;
-  display: grid;
-  grid-template-rows: 0fr;
+  max-height: 0;
+  overflow: hidden;
   font-size: var(--definition-size);
+  display: block;
   justify-content: center;
   direction: ltr;
   unicode-bidi: normal;
   text-align: left;
-  transition: grid-template-rows var(--base-transition), 
+  transition: max-height var(--base-transition), 
               opacity var(--base-transition), 
               margin var(--base-transition), 
               padding var(--base-transition);
-}
-
-.notes > .notes-inner {
-  overflow: hidden;
-  min-height: 0;
 }
 
 .notes.is-collapsed {
@@ -1732,10 +1711,6 @@ img {
   padding-bottom: 0;
   margin-bottom: 0;
   opacity: 0;
-}
-
-.notes:not(.is-collapsed) {
-  grid-template-rows: 1fr;
 }
 
 .card.nightMode .notes {
@@ -3594,21 +3569,17 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 
 .frequency-content {
   opacity: 0;
-  display: grid;
-  grid-template-rows: 0fr;
+  max-height: 0;
   padding: 0 var(--spacing-lg);
   color: var(--freq-text-hover-light);
   background: var(--frequency-bg-light);
   border-radius: var(--border-radius-ms);
   font-size: var(--frequency-content-size);
-  transition: opacity var(--base-transition), 
-              grid-template-rows var(--base-transition), 
-              padding var(--base-transition);
-}
-
-.frequency-content > .frequency-content-inner {
   overflow: hidden;
-  min-height: 0;
+  will-change: opacity, max-height, padding;
+  transition: opacity var(--base-transition), 
+              max-height var(--base-transition), 
+              padding var(--base-transition);
 }
 
 :is(.card.nightMode, .custom-dark-mode) 
@@ -3642,7 +3613,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 
 .frequency-box:hover .frequency-content {
   opacity: 1;
-  grid-template-rows: 1fr;
+  max-height: var(--frequency-max-height);
   padding: var(--spacing-lg);
 }
 
@@ -3842,10 +3813,12 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   font-family: var(--sans);
   font-size: var(--misc-info-size);
   width: 100%;
-  display: grid;
-  grid-template-rows: 0fr;
+  display: flex;
   justify-content: center;
+  max-height: 0;
   padding-bottom: 0;
+  overflow: hidden;
+  will-change: max-height;
   flex-wrap: wrap;
   word-break: break-all;
   overflow-wrap: anywhere;
@@ -3857,24 +3830,15 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   box-sizing: border-box;
   background: var(--misc-info-bg-light);
   z-index: var(--z-index-base);
-  transition: grid-template-rows var(--base-transition), 
+  transition: max-height var(--base-transition), 
               padding var(--base-transition), 
               opacity var(--base-transition),
               color var(--base-transition),
               margin-top var(--base-transition);
 }
 
-.misc-info > .misc-info-inner {
-  overflow: hidden;
-  min-height: 0;
-}
-
 .misc-info.has-content {
-  display: grid !important;
-}
-
-.misc-info.is-expanded {
-  grid-template-rows: 1fr;
+  display: flex !important;
 }
 
 :is(.card.nightMode, .custom-dark-mode)
