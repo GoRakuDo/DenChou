@@ -1605,26 +1605,32 @@ img {
 }
 
 .sentence-container:has(#sentence rb) {
-  margin-top: 8px;  
+  margin-top: 24px;  
 }
 
 #sentence rb {
   display: inline;
   white-space: nowrap;
   line-height: 1;
+  position: relative;
 }
 
 #sentence rt {
-  font-size: 0;
-  line-height: 0;
-  transform: translateY(var(--sentence-furigana-height)) !important; 
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) var(--sentence-furigana-height) !important;
+  font-size: 0.45em;
+  line-height: 1;
+  white-space: nowrap;
   opacity: 0;
-  transition: opacity var(--fast-transition), font-size var(--fast-transition);
+  pointer-events: none;
+  transition: opacity var(--fast-transition);
 }
 
 @container style(--sentence-furigana-display: 0) {
   #sentence rb {
-    margin-top: 0.7em;
+    margin-top: 0;
   }
 
   #sentence rt {
@@ -1633,7 +1639,6 @@ img {
 }
 
 #sentence ruby:hover rt {
-  font-size: 0.45em;
   opacity: 1;
 }
 
