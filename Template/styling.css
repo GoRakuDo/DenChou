@@ -484,10 +484,6 @@
   --base-transition:                  0.3s ease;
   --fast-transition:                  0.2s ease;
 
-  /* Expand/Collapse Animation */
-  --expand-duration:                  0.25s;
-  --expand-easing:                    cubic-bezier(0.4, 0, 0.2, 1);
-
   /* Shadows */
   --button-shadow:                    0 0 5px 2.5px oklch(10% 0.02 260 / 0.1);
   --button-shadow-dark:               0 0 5px 2.5px oklch(96% 0.018 92 / 0.1);
@@ -1657,7 +1653,7 @@ img {
   justify-content: center;
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--expand-duration) var(--expand-easing);
+  transition: max-height var(--base-transition);
   visibility: visible;
   text-align: center; 
 }

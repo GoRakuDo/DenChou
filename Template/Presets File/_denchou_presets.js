@@ -68,8 +68,6 @@
     "--external-links-icon-size": "25px",
     "--frequency-max-height": "500px",
     "--base-transition": "0.3s ease",
-    "--expand-duration": "0.25s",
-    "--expand-easing": "cubic-bezier(0.4, 0, 0.2, 1)",
     "--fast-transition": "0.2s ease",
     "--spacing-xs": "2px",
     "--spacing-sm": "3px",
