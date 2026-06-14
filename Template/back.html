@@ -1794,6 +1794,7 @@
       }
       updateDisplay(true);
       updatePictureCounter();
+      window.denchouSyncPictureFrameBackground?.();
     };
 
     const handleSceneShortcuts = (e) => {
@@ -2100,9 +2101,7 @@
       else back.classList.remove('has-multiple-images');
     }
 
-    const visibleIndex = Array.from(mediaItems).findIndex(media => {
-      return window.getComputedStyle(media).display !== 'none';
-    });
+    const visibleIndex = Array.from(mediaItems).findIndex(media => media.getClientRects().length > 0);
 
     const actualIndex = visibleIndex !== -1 ? visibleIndex : 0;
     counters.forEach(counter => {

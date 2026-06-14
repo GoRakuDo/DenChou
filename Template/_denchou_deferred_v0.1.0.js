@@ -184,6 +184,37 @@
     let currentImageIndex = 0;
     const getPictureMedia = () => Array.from(document.querySelectorAll('.picture-container :is(img, video)'));
 
+    function getMediaBackgroundUrl(media) {
+      if (!media) return '';
+      if (media.tagName === 'VIDEO') return media.poster || '';
+      return media.currentSrc || media.src || '';
+    }
+
+    function isMediaVisible(media) {
+      return media.getClientRects().length > 0;
+    }
+
+    function syncPictureFrameBackground() {
+      const pictureContainer = document.querySelector('.picture-container');
+      if (!pictureContainer) return;
+
+      if (window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true') {
+        pictureContainer.style.removeProperty('--picture-frame-bg');
+        return;
+      }
+
+      const visibleMedia = getPictureMedia().find(media => {
+        return isMediaVisible(media);
+      });
+
+      const mediaUrl = getMediaBackgroundUrl(visibleMedia);
+      if (mediaUrl) {
+        pictureContainer.style.setProperty('--picture-frame-bg', `url(${JSON.stringify(mediaUrl)})`);
+      } else {
+        pictureContainer.style.removeProperty('--picture-frame-bg');
+      }
+    }
+
     function switchImage(direction, event) {
       if (event) event.preventDefault();
       if (event) event.stopPropagation();
@@ -208,6 +239,7 @@
       }
 
       mediaItems[currentImageIndex].style.setProperty('display', 'block', 'important');
+      syncPictureFrameBackground();
       updatePictureCounter();
     }
 
@@ -238,7 +270,9 @@
     });
 
     refreshImageNavigation();
+    syncPictureFrameBackground();
     window.denchouRefreshImageNavigation = refreshImageNavigation;
+    window.denchouSyncPictureFrameBackground = syncPictureFrameBackground;
   }
 
   // Creates lightbox for image and video viewing
