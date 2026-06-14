@@ -44,7 +44,7 @@
         </label>
         {{#frequencies}}
         <div class="frequency-content">
-          {{frequencies}}
+          <div class="frequency-content-inner">{{frequencies}}</div>
         </div>
         {{/frequencies}}
       </div>
@@ -97,14 +97,14 @@
       <span id="formattedSentence" class="{{pitchCategories}} tappable"></span>
     </div>
     <div id="sentenceEng" class="is-collapsed">
-      {{sentenceTranslation}}
+      <div class="sentence-eng-inner">{{sentenceTranslation}}</div>
     </div>
     <div class="picture-counter"></div>
   </div>
 
   <!-- Notes -->
   {{#notes}}
-  <div class="notes is-collapsed">{{furigana:notes}}</div>
+  <div class="notes is-collapsed"><div class="notes-inner">{{furigana:notes}}</div></div>
   {{/notes}}
 
   <!-- Selection Text -->
@@ -187,7 +187,7 @@
   </div>
 
   <!-- Misc Info -->
-  <div class="misc-info">{{miscInfo}}</div>
+  <div class="misc-info"><div class="misc-info-inner">{{miscInfo}}</div></div>
   <!-- /FOOTER -->
 
   <div id="dictionaryPreference" style="display: none;">{{dictionaryPreference}}</div>
@@ -703,14 +703,12 @@
 
             if (isCollapsed) {
               target.classList.remove("is-collapsed");
-              target.style.maxHeight = target.scrollHeight + extraPadding + "px";
               if (extraPadding) {
                 target.style.opacity = "1";
                 target.style.paddingTop = extraPadding + "px";
               }
             } else {
               target.classList.add("is-collapsed");
-              target.style.maxHeight = "0";
               if (extraPadding) {
                 target.style.opacity = "0";
                 target.style.paddingTop = "0px";
@@ -739,7 +737,7 @@
           const expand = () => {
             requestAnimationFrame(() => {
               if (target.textContent.trim() !== "") {
-                target.style.maxHeight = target.scrollHeight + (extraPadding * 2) + "px";
+                target.classList.add('is-expanded');
                 if (extraPadding) {
                   target.style.opacity = "1";
                   target.style.paddingTop = extraPadding + "px";
@@ -752,7 +750,7 @@
 
           const collapse = () => {
             requestAnimationFrame(() => {
-              target.style.maxHeight = "0";
+              target.classList.remove('is-expanded');
               if (extraPadding) {
                 target.style.opacity = "0";
                 target.style.paddingTop = "0px";
@@ -778,7 +776,7 @@
                 return;
               }
 
-              const isCollapsed = !target.style.maxHeight || target.style.maxHeight === "0px";
+              const isCollapsed = !target.classList.contains('is-expanded');
               if (isCollapsed) {
                 expand();
               } else {
@@ -800,7 +798,6 @@
         if (notesElement.classList.contains('is-collapsed')) {
           notesElement.style.transition = 'none';
           notesElement.classList.remove('is-collapsed');
-          notesElement.style.maxHeight = notesElement.scrollHeight + 'px';
 
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -817,7 +814,6 @@
       if (expandByDefault === 'true') {
         sentenceEng.style.transition = 'none';
         sentenceEng.classList.remove('is-collapsed');
-        sentenceEng.style.maxHeight = sentenceEng.scrollHeight + 'px';
 
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
