@@ -1101,6 +1101,21 @@ a {
   gap: unset;
 }
 
+@container (not style(--enable-backdrop-layout: 1)) {
+  /* Keep this block before the mobile overrides below; they intentionally share specificity. */
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) {
+    grid-template-areas: "media";
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .picture-container,
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box {
+    grid-area: media;
+  }
+}
+
 @container style(--grid-order: 2) {
   .grid-container {
     display: grid;
@@ -1188,6 +1203,55 @@ img {
   overflow: hidden;
 }
 
+@container (not style(--enable-backdrop-layout: 1)) {
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .picture-container {
+    z-index: 1;
+    width: 100%;
+    min-height: var(--picture-height);
+    border-radius: var(--border-radius-lg);
+  }
+
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box {
+    z-index: 3;
+    align-self: end;
+    justify-self: stretch;
+    min-width: 0;
+    min-height: 92px;
+    padding: clamp(16px, 3vw, 28px) clamp(16px, 4vw, 36px) clamp(18px, 3.5vw, 32px);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+    background: transparent;
+    color: oklch(96% 0.018 92);
+  }
+
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      oklch(10% 0.02 260 / 0.92) 0%,
+      oklch(10% 0.02 260 / 0.78) 42%,
+      oklch(10% 0.02 260 / 0.38) 72%,
+      oklch(10% 0.02 260 / 0) 100%
+    );
+  }
+
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box #word {
+    color: inherit;
+    text-shadow: 0 2px 10px oklch(10% 0.02 260 / 0.45);
+  }
+
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box #word rt,
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box #position,
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box #categories {
+    color: oklch(96% 0.018 92 / 0.82);
+    text-shadow: 0 1px 8px oklch(10% 0.02 260 / 0.55);
+  }
+}
+
 :is(.card.nightMode, .custom-dark-mode) 
 .picture-container {
   background: var(--picture-bg);
@@ -1205,6 +1269,15 @@ img {
 
 .picture-container video {
   width: 100%;
+}
+
+@container (not style(--enable-backdrop-layout: 1)) {
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) .picture-container :is(img, video) {
+    width: 100%;
+    min-height: var(--picture-height);
+    max-height: var(--picture-height);
+    object-fit: cover;
+  }
 }
 
 .picture-container :is(img, video):first-child {
@@ -2259,8 +2332,8 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.9
                -2px 0 1px oklch(10% 0.02 260 / 0.1),
                0 2px 1px oklch(10% 0.02 260 / 0.1),
                0 -2px 1px oklch(10% 0.02 260 / 0.1),
-               0 0 4px rgba(0, 0, 0, var(--picture-counter-shadow-intensity));
-  background-color: rgba(0, 0, 0, var(--picture-counter-bg-opacity));
+               0 0 4px oklch(10% 0.02 260 / var(--picture-counter-shadow-intensity));
+  background-color: oklch(10% 0.02 260 / var(--picture-counter-bg-opacity));
   padding: 4px 8px;
   border-radius: var(--border-radius-ms);
   pointer-events: none;
@@ -2269,6 +2342,18 @@ span[style*="display:inline"]:has(+ span[style*="border:1.5px dotted  oklch(55.9
   opacity: 0;
   transition: opacity var(--fast-transition);
   margin-bottom: 10px;
+}
+
+@container (not style(--enable-backdrop-layout: 1)) {
+  .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) .picture-container .picture-counter {
+    top: 12px;
+    right: 14px;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 0;
+    z-index: 4;
+  }
 }
 
 .picture-container:hover .picture-counter {
@@ -5480,6 +5565,27 @@ li.is-new-card:not(:hover) .related-word {
     gap: var(--grid-gap);
   }
 
+  @container (not style(--enable-backdrop-layout: 1)) {
+    .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) {
+      gap: 0;
+    }
+
+    .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .picture-container {
+      border-radius: var(--border-radius-md);
+    }
+
+    .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box {
+      min-height: 82px;
+      padding: 14px 16px 18px;
+      border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    }
+
+    .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) .picture-container .picture-counter {
+      top: 9px;
+      right: 10px;
+    }
+  }
+
   .sentence-container {
     margin: 10px 3px;
   }
@@ -5518,6 +5624,13 @@ li.is-new-card:not(:hover) .related-word {
   .front,
   .back {
     padding: var(--base-padding);
+  }
+
+  @container (not style(--enable-backdrop-layout: 1)) {
+    .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) > .background-box {
+      min-height: 76px;
+      padding: 12px 14px 16px;
+    }
   }
 }
 
@@ -5713,13 +5826,13 @@ li.is-new-card:not(:hover) .related-word {
       font-size: var(--picture-counter-size);
       font-weight: bold;
       border-radius: var(--border-radius-ms);
-      background-color: rgba(0, 0, 0, var(--picture-counter-bg-opacity));
+      background-color: oklch(10% 0.02 260 / var(--picture-counter-bg-opacity));
       color: oklch(96% 0.018 92 / 0.9);
       text-shadow: 2px 0 1px oklch(10% 0.02 260 / 0.1),
                    -2px 0 1px oklch(10% 0.02 260 / 0.1),
                    0 2px 1px oklch(10% 0.02 260 / 0.1),
                    0 -2px 1px oklch(10% 0.02 260 / 0.1),
-                   0 0 4px rgba(0, 0, 0, var(--picture-counter-shadow-intensity));
+                   0 0 4px oklch(10% 0.02 260 / var(--picture-counter-shadow-intensity));
       transition: opacity var(--fast-transition);
       opacity: 0; 
     }
