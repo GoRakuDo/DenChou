@@ -744,6 +744,7 @@ html.custom-dark-mode .card
 
 .card-b {
   font-size: var(--definition-size);
+  overflow: hidden;
 }
 
 /* Hyperlinks */
