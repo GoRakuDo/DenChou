@@ -1,67 +1,53 @@
 # DenChou・電帳
 
-DenChou is an Anki note type for studying Japanese.
+> **Baca dalam bahasa lain:** [English](README.en.md)
 
-This fork lives at [GoRakuDo/DenChou](https://github.com/GoRakuDo/DenChou).
-It is based on [Senren](https://github.com/BrenoAqua/Senren), but its direction is different: calm, lightweight, AnkiDroid-first review cards that stay comfortable during long study sessions.
+DenChou adalah Template Kartu Anki untuk belajar Immersion bahasa Jepang.
 
-The goal is not to make Anki look busy.
-The goal is to make the next card easier to read.
+Awalnya merupakan Fork dari [Senren](https://github.com/BrenoAqua/Senren), tapi arahnya kami buat berbeda menjadi lebih tenang, ringan, dan mememprioritaskan kompatibilitas AnkiDroid, supaya tetap nyaman dipakai dalam sesi belajar yang lama. Tujuannya bukan membuat Anki terlihat ramai dan banyak fitur, tapi untuk membantu supaya kartu Anki lebih mudah dibaca.
 
-## What DenChou focuses on
+## Fokus DenChou
 
-- A soft mobile-first layout for AnkiDroid
-- Clear reading order for word, sentence, image, audio, and definitions
-- Gentle dark and light themes with no pure black or pure white surfaces
-- OKLCH-authored colors for more predictable contrast and tuning
-- Gen Interface JP as the default UI/body font, with natural Japanese fallbacks
-- Inline Lucide SVG icons instead of loading a full icon font
-- A built-in preferences panel for changing card behavior inside review
-- Lightweight defaults, including AnkiDroid auto-optimization for narrow screens
+- Tata letak yang lebih halus dan mengutamakan ponsel untuk AnkiDroid
+- Urutan baca yang jelas antara kata, kalimat, gambar, audio, dan definisi
+- Tema terang dan gelap yang tidak mencolok, tanpa permukaan hitam pekat atau putih murni dengan warna berbasis OKLCH
+- Gen Interface JP sebagai tanpilan antarmuka bawaan, dengan fallback font Jepang yang umum
+- Ikon Lucide SVG, tanpa memuat font ikon secara utuh
+- Panel preferensi bawaan untuk mengubah pengaturan kartu
+- Penimpilan UI Bawaan yang ringan, termasuk optimalisasi otomatis AnkiDroid untuk layar kecil
 
-## Design direction
+## Arah desain
 
-DenChou should feel like a quiet study desk, not a dashboard.
+DenChou seharusnya terasa seperti meja belajar yang tenang, bukan dasbor yang penuh sesak. Senren memberi fondasi yang kuat: kartu responsif, pengaturan lengkap, tampilan kamus, dukungan aksen nada, penanganan gambar, kontrol audio, dan kustomisasi saat belajar ulang. Dan kami membuat DenChou dengan mempertahankan fondasi-nya, lalu melembutkan permukaannya.
 
-Senren gives this project a strong engine: responsive cards, rich settings, dictionary display, pitch accent support, image handling, audio controls, and review-time customization.
-DenChou keeps that foundation, then softens the surface.
+Kartu Anki seharusnya memandu fokus mata, bukan berebut perhatian.
 
-The card should guide your eyes instead of competing for them.
+### Warna dan tipografi
 
-## Color and typography
+Gaya buatan DenChou menggunakan warna OKLCH. Desain baru kami sebaiknya menghindari hex mentah, RGB, nama warna CSS, dan nilai `black` / `white` yang menyilaukan.
 
-DenChou-authored styles use OKLCH colors.
-New design work should avoid raw hex, RGB, named CSS colors, and harsh `black` / `white` values.
+Font antarmuka bawaan adalah Gen Interface JP. Kalau font ini belum tersedia secara lokal atau lewat CDN, DenChou akan fallback ke font Jepang umum dari sistem.
 
-The default UI font is Gen Interface JP.
-If the font is not available locally or through the CDN, DenChou falls back to common Japanese system fonts.
+### Perilaku mobile-first
 
-## Mobile-first behavior
+DenChou secara bawaan disetel untuk mengutamakan AnkiDroid. Layar kecil mendapat efek yang lebih ringan, kontrol yang lebih tenang, dan pekerjaan runtime (script) yang lebih sedikit.
 
-DenChou is tuned for AnkiDroid.
+## Cara memulai
 
-Small screens get lighter effects, quieter controls, and reduced runtime work where possible.
-The desktop layout can be wider, but it should not become a different product.
+DenChou masih dalam proses pembentukan ulang, jadi cara menginstall paling aman untuk sekarang adalah manual.
 
-## Getting started
+Pakai catatan yang ada di [`Template/`](Template/) dan ikuti alur pembaruan template di [`Template/README.md`](Template/README.md): ganti bagian Front Template, Back Template, dan Styling di Anki kalian.
 
-DenChou is still being reshaped, so the safest setup path is manual for now.
+Dokumen cara menginstall lama dari Senren ada di [`docs/setup_overview.md`](docs/setup_overview.md) diwariskan dari Senren dan mungkin masih tertulis sebagai Senren nama sebelumnya selagi fork ini masih dibersihkan.
 
-Use the files in [`Template/`](Template/) and follow the template update flow in [`Template/README.md`](Template/README.md): replace the Front Template, Back Template, and Styling sections in Anki.
+---
 
-The older setup docs in [`docs/setup_overview.md`](docs/setup_overview.md) are inherited from Senren and may still contain upstream names while this fork is cleaned up.
+## Status proyek
 
-## Project status
+DenChou sedang aktif dalam pembentukan ulang dari Senren. Beberapa dokumentasi dan peengaturan masih diwariskan dari Senren mungkin masih tertulis sebagai Senren selagi fork ini dibersihkan. Kalau ragu, berkas template DenChou dan [`Template/DESIGN.md`](Template/DESIGN.md) adalah sumber dari Design untuk fork ini.
 
-DenChou is actively being reshaped from Senren.
+## Kredit dan lisensi
 
-Some inherited documentation and behavior may still refer to Senren while the fork is cleaned up.
-When in doubt, the DenChou template files and [`Template/DESIGN.md`](Template/DESIGN.md) are the source of truth for this fork.
+DenChou bisa ada karena Senren sudah banyak melakukan kerja keras.
 
-## Credits and license
-
-DenChou exists because Senren already did a lot of hard work.
-
-Original project: [Senren・洗練](https://github.com/BrenoAqua/Senren)
-
-License: GPLv3. See [`LICENSE`](LICENSE).
+Proyek asli: [Senren・洗練](https://github.com/BrenoAqua/Senren) | Lisensi: GPLv3. Lihat [`LICENSE`](LICENSE).
