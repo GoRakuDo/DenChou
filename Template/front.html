@@ -254,6 +254,18 @@
     }
   }
 
+  function saveActiveSceneIndex(index) {
+    try {
+      sessionStorage.setItem('denchou_active_scene_index', String(index));
+    } catch (e) { }
+  }
+
+  function clearActiveSceneIndex() {
+    try {
+      sessionStorage.removeItem('denchou_active_scene_index');
+    } catch (e) { }
+  }
+
   // Shows or hides the audio card sentence based on CSS variables
   function initializeAudioSentenceState() {
     const isAudioCard = "{{#audioCard}}true{{/audioCard}}{{^audioCard}}false{{/audioCard}}" === "true";
@@ -399,6 +411,7 @@
     let totalSlides = Math.max(textSlideCount, audioParts.length);
 
     if (totalSlides <= 1) {
+      clearActiveSceneIndex();
       return;
     }
 
@@ -423,11 +436,13 @@
     }
 
     let currentIndex = 0;
+    saveActiveSceneIndex(currentIndex);
 
     function changeScene(direction) {
       currentIndex += direction;
       if (currentIndex >= totalSlides) currentIndex = 0;
       else if (currentIndex < 0) currentIndex = totalSlides - 1;
+      saveActiveSceneIndex(currentIndex);
       updateDisplay(true);
     }
 

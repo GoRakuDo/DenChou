@@ -258,6 +258,19 @@
     return { match: false };
   }
 
+  function consumeActiveSceneIndex() {
+    try {
+      const raw = sessionStorage.getItem('denchou_active_scene_index');
+      sessionStorage.removeItem('denchou_active_scene_index');
+      if (raw === null) return null;
+
+      const parsed = Number.parseInt(raw, 10);
+      return Number.isNaN(parsed) ? null : parsed;
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Custom dark mode
   function darkMode() {
     const button = document.querySelector(".toggle-custom-dark-mode");
@@ -1564,6 +1577,7 @@
       : [];
 
     if (audioParts.length <= 1) {
+      consumeActiveSceneIndex();
       return;
     }
 
@@ -1746,6 +1760,10 @@
     }
 
     let currentIndex = 0;
+    const restoredSceneIndex = consumeActiveSceneIndex();
+    if (restoredSceneIndex !== null) {
+      currentIndex = Math.max(0, Math.min(restoredSceneIndex, totalSlides - 1));
+    }
 
     const isPartEmptyGroup = (part) => {
       if (!part || part.tagName !== 'SPAN') return false;
