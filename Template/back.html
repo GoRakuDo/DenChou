@@ -97,7 +97,7 @@
       <span id="formattedSentence" class="{{pitchCategories}} tappable"></span>
     </div>
     <div id="sentenceEng" class="is-collapsed">
-      <div class="sentence-eng-inner">{{sentenceTranslation}}</div>
+      <div class="sentence-eng-inner">{{#SentenceL1Note}}{{SentenceL1Note}}{{/SentenceL1Note}}{{^SentenceL1Note}}{{sentenceTranslation}}{{/SentenceL1Note}}</div>
     </div>
     <div class="picture-counter"></div>
   </div>

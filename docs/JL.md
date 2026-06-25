@@ -12,7 +12,7 @@ In JL Preferencces -> Anki:
 | **reading** | Readings |
 | **sentence** | Sentence |
 | **sentenceFurigana** | Nothing |
-| **sentenceTranslation** | Nothing |
+| **SentenceL1Note** | Nothing |
 | **sentenceCard** | Nothing |
 | **audioCard** | Nothing |
 | **notes** | Nothing |

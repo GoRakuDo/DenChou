@@ -38,7 +38,7 @@
       { label: "Expand Hint", var: "--hint-default-expanded", type: "switch-bool", desc: "Show hint on cards immediately." },
 
       { type: "header", label: "Back" },
-      { label: "Expand Translation", var: "--translation-default-expanded", type: "switch-bool", desc: "Show translation immediately." },
+      { label: "Expand Sentence L1 Note", var: "--translation-default-expanded", type: "switch-bool", desc: "Show the sentence L1 note immediately." },
       { label: "Expand Notes", var: "--notes-default-expanded", type: "switch-bool", desc: "Show notes immediately." },
       { label: "No Duplicate Kana", var: "--no-duplicate-kana", type: "switch-bool", desc: "Hide the reading for words written entirely in kana." },
       { label: "Mute Sentence Audio", var: "--mute-sentence-audio", type: "switch-bool", desc: "Disable automatic sentence audio playback." },
@@ -91,7 +91,7 @@
 
       { type: "sub-header", label: "Font Sizes" },
       { label: "Sentence", var: "--sentence-size", type: "text" },
-      { label: "Sentence Translation", var: "--sentence-eng-size", type: "text" },
+      { label: "Sentence L1 Note", var: "--sentence-eng-size", type: "text" },
       { label: "Definition / Glossary", var: "--definition-size", type: "text" },
       { label: "Misc Info", var: "--misc-info-size", type: "text" },
       { label: "Tags", var: "--tag-font-size", type: "text" },

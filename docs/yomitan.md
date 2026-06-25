@@ -12,7 +12,7 @@ In Yomitan Settings -> Anki -> Configure Anki Flashcards:
 |  reading              | `{reading}`                                                                 |              |
 |  sentence             | `<span class="group">{cloze-prefix}<span class="highlight">{cloze-body}</span>{cloze-suffix}</span>`   |  `{cloze-prefix}<b>{cloze-body}</b>{cloze-suffix}` or `{cloze-prefix}<span class="highlight">{cloze-body}</span>{cloze-suffix}` will also work if you don’t intend to use the scene switching feature. Both the `<b>` tag and the `<span class="highlight">` are supported for marking the target word. ||
 |  sentenceFurigana     | `<span class="group">{sentence-furigana}</span>`                           | Alternatively, use `<span class="group">{sentence-furigana-plain}</span>`. As with `sentence`, you can remove the outer `<span>` if you don’t intend to use the scene switching feature. |
-|  sentenceTranslation  |                                                                             | Leave empty. |
+|  SentenceL1Note  |                                                                             | Leave empty. |
 |  sentenceCard         |                                                                             | Leave empty. |
 |  audioCard            |                                                                             | Leave empty. |
 |  notes                |                                                                             | Leave empty. | 
