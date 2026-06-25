@@ -1,6 +1,6 @@
 # DenChou・電帳
 
-> **Baca dalam bahasa lain:** [English](README.en.md)
+> **Read me in →** [English](README.en.md)
 
 DenChou adalah Template Kartu Anki untuk belajar Immersion bahasa Jepang.
 
@@ -15,6 +15,8 @@ Awalnya merupakan Fork dari [Senren](https://github.com/BrenoAqua/Senren), tapi 
 - Ikon Lucide SVG, tanpa memuat font ikon secara utuh
 - Panel preferensi bawaan untuk mengubah pengaturan kartu
 - Penimpilan UI Bawaan yang ringan, termasuk optimalisasi otomatis AnkiDroid untuk layar kecil
+
+---
 
 ## Arah desain
 
@@ -34,9 +36,9 @@ DenChou secara bawaan disetel untuk mengutamakan AnkiDroid. Layar kecil mendapat
 
 ## Cara memulai
 
-DenChou masih dalam proses pembentukan ulang, jadi cara menginstall paling aman untuk sekarang adalah manual.
+DenChou masih dalam proses pembentukan ulang, jadi cara menginstall paling aman untuk sekarang adalah manual. Pakai catatan yang ada di [`Template/`](Template/) dan ikuti alur pembaruan template di [`Template/README.md`](Template/README.md): ganti bagian Front Template, Back Template, dan Styling di Anki kalian.
 
-Pakai catatan yang ada di [`Template/`](Template/) dan ikuti alur pembaruan template di [`Template/README.md`](Template/README.md): ganti bagian Front Template, Back Template, dan Styling di Anki kalian.
+Jika kalian pindah dari Senren, field `sentenceTranslation` sudah tidak dipakai lagi di DenChou. Ganti nama field itu secara manual menjadi `SentenceL1Note` di note type Anki kalian.
 
 Dokumen cara menginstall lama dari Senren ada di [`docs/setup_overview.md`](docs/setup_overview.md) diwariskan dari Senren dan mungkin masih tertulis sebagai Senren nama sebelumnya selagi fork ini masih dibersihkan.
 

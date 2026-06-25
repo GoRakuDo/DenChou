@@ -49,6 +49,8 @@ DenChou is still being reshaped, so the safest setup path is manual for now.
 
 Use the files in [`Template/`](Template/) and follow the template update flow in [`Template/README.md`](Template/README.md): replace the Front Template, Back Template, and Styling sections in Anki.
 
+If you are moving from Senren, the `sentenceTranslation` field is no longer used in DenChou. Rename that field manually to `SentenceL1Note` in your Anki note type.
+
 The older setup docs in [`docs/setup_overview.md`](docs/setup_overview.md) are inherited from Senren and may still contain upstream names while this fork is cleaned up.
 
 ## Project status
