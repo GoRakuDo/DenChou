@@ -3566,8 +3566,10 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   top: var(--spacing-md);
   right: var(--spacing-xxml);
   font-size: var(--frequency-size);
-  padding: var(--spacing-ms);
+  padding: var(--spacing-xs) var(--spacing-sm);
   color: var(--freq-text-light);
+  background: var(--frequency-bg-light);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: color var(--base-transition), 
               text-shadow var(--base-transition);
@@ -3576,6 +3578,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
 :is(.card.nightMode, .custom-dark-mode) 
 .freqbt {
   color: var(--freq-text);
+  background: var(--frequency-bg);
 }
 
 .frequency-box:hover .freqbt {
@@ -5467,13 +5470,6 @@ li.is-new-card:not(:hover) .related-word {
     top: 16px;
     right: 20px;
     z-index: var(--z-index-toggle);
-    background: var(--frequency-bg-light);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-  }
-
-  :is(.card.nightMode, .custom-dark-mode) .freqbt {
-    background: var(--frequency-bg);
   }
 
   .frequency-content {
