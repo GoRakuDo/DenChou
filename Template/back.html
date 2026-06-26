@@ -688,6 +688,24 @@
     window.denchouToggleDictionary = handleToggle;
   }
 
+  // Uses explicit tap toggling for the frequency panel on touch devices.
+  // CSS :hover can stay latched on AnkiDroid, so mobile needs a real state.
+  function enableFrequencyToggle() {
+    const frequencyBox = ELS.frequencyBox;
+    if (!frequencyBox || frequencyBox.dataset.hasFrequencyToggle) return;
+
+    frequencyBox.dataset.hasFrequencyToggle = 'true';
+
+    frequencyBox.addEventListener('click', (event) => {
+      event.stopPropagation();
+      frequencyBox.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', () => {
+      frequencyBox.classList.remove('is-open');
+    }, { passive: true });
+  }
+
   // Enables interaction effects
   function enableInteractions() {
 
@@ -2209,6 +2227,7 @@
         definition: document.getElementById('definition'),
         selectionText: document.getElementById('selectionText'),
         miscInfo: document.querySelector('.misc-info'),
+        frequencyBox: document.querySelector('.frequency-box'),
         pictureContainer: document.querySelector('.picture-container'),
         tagsContainer: document.querySelector('.tags-container'),
         audioContainer: document.querySelector('.sentenceaudio'),
@@ -2409,6 +2428,7 @@
       collectGlossaryImages();
       consolidateYomitanGlossaryEntries();
       toggleDefinition();
+      enableFrequencyToggle();
       enableInteractions();
       enableSceneSwitching();
       enableImageToggle();

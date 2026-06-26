@@ -3558,7 +3558,7 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   right: var(--spacing-xxml);
   top: 55px;
   font-family: var(--sans);
-  z-index: var(--z-index-base);
+  z-index: var(--z-index-toggle);
 }
 
 .freqbt {
@@ -3639,10 +3639,27 @@ div[style="flex-shrink: 0; width: 24px; font-weight: bold;"] {
   border-bottom: none;
 }
 
-.frequency-box:hover .frequency-content {
+.frequency-box:hover .frequency-content,
+.frequency-box:focus-within .frequency-content,
+.frequency-box.is-open .frequency-content {
   opacity: 1;
   grid-template-rows: 1fr;
   padding: var(--spacing-lg);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .frequency-box:hover .frequency-content,
+  .frequency-box:focus-within .frequency-content {
+    opacity: 0;
+    grid-template-rows: 0fr;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .frequency-box.is-open .frequency-content {
+    opacity: 1;
+    grid-template-rows: 1fr;
+    padding: var(--spacing-lg);
+  }
 }
 
 /* Hides Freq when it's 9999999 or empty */
