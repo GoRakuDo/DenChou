@@ -1,5 +1,7 @@
 # DenChou・電帳
 
+> **Baca dalam →** [Bahasa Indonesia](README.md)
+
 DenChou is an Anki note type for studying Japanese.
 
 This fork lives at [GoRakuDo/DenChou](https://github.com/GoRakuDo/DenChou).
@@ -45,13 +47,18 @@ The desktop layout can be wider, but it should not become a different product.
 
 ## Getting started
 
-DenChou is still being reshaped, so the safest setup path is manual for now.
+The first packaged release is now available as **`DenChou v0.1.0.apkg`**.
 
-Use the files in [`Template/`](Template/) and follow the template update flow in [`Template/README.md`](Template/README.md): replace the Front Template, Back Template, and Styling sections in Anki.
+If you want the fastest path, import that `.apkg` file into Anki.
+
+If you want to install or update the template manually, use the files in [`Template/`](Template/) and follow the template update flow in [`Template/README.md`](Template/README.md): replace the Front Template, Back Template, and Styling sections in Anki.
 
 If you are moving from Senren, the `sentenceTranslation` field is no longer used in DenChou. Rename that field manually to `SentenceL1Note` in your Anki note type.
 
 The older setup docs in [`docs/setup_overview.md`](docs/setup_overview.md) are inherited from Senren and may still contain upstream names while this fork is cleaned up.
+
+The Indonesian documentation now lives on the official site:
+[gorakudo.org/project/denchou](https://gorakudo.org/project/denchou)
 
 ## Project status
 

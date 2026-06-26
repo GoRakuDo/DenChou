@@ -36,17 +36,24 @@ DenChou secara bawaan disetel untuk mengutamakan AnkiDroid. Layar kecil mendapat
 
 ## Cara memulai
 
-DenChou masih dalam proses pembentukan ulang, jadi cara menginstall paling aman untuk sekarang adalah manual. Pakai catatan yang ada di [`Template/`](Template/) dan ikuti alur pembaruan template di [`Template/README.md`](Template/README.md): ganti bagian Front Template, Back Template, dan Styling di Anki kalian.
+Rilis paket pertama sekarang tersedia sebagai **`DenChou v0.1.0.apkg`**.
+
+Kalau kalian ingin cara paling cepat, impor file `.apkg` itu ke Anki.
+
+Kalau kalian ingin memasang atau memperbarui template secara manual, pakai catatan yang ada di [`Template/`](Template/) dan ikuti alur pembaruan template di [`Template/README.md`](Template/README.md): ganti bagian Front Template, Back Template, dan Styling di Anki kalian.
 
 Jika kalian pindah dari Senren, field `sentenceTranslation` sudah tidak dipakai lagi di DenChou. Ganti nama field itu secara manual menjadi `SentenceL1Note` di note type Anki kalian.
 
-Dokumen cara menginstall lama dari Senren ada di [`docs/setup_overview.md`](docs/setup_overview.md) diwariskan dari Senren dan mungkin masih tertulis sebagai Senren nama sebelumnya selagi fork ini masih dibersihkan.
+Dokumentasi cara menginstall lama dari Senren ada di [`docs/setup_overview.md`](docs/setup_overview.md) diwariskan dari Senren dan mungkin masih tertulis sebagai Senren nama sebelumnya selagi fork ini masih dibersihkan.
+
+Dokumentasi berbahasa Indonesia sekarang dipindahkan ke situs resmi:
+[gorakudo.org/project/denchou](https://gorakudo.org/project/denchou)
 
 ---
 
 ## Status proyek
 
-DenChou sedang aktif dalam pembentukan ulang dari Senren. Beberapa dokumentasi dan peengaturan masih diwariskan dari Senren mungkin masih tertulis sebagai Senren selagi fork ini dibersihkan. Kalau ragu, berkas template DenChou dan [`Template/DESIGN.md`](Template/DESIGN.md) adalah sumber dari Design untuk fork ini.
+DenChou sedang aktif dalam pembentukan ulang dari Senren. Beberapa dokumentasi dan pengaturan masih diwariskan dari Senren mungkin masih tertulis sebagai Senren selagi fork ini dibersihkan. Kalau ragu, berkas template DenChou dan [`Template/DESIGN.md`](Template/DESIGN.md) adalah sumber dari Design untuk fork ini.
 
 ## Kredit dan lisensi
 
