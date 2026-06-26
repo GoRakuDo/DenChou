@@ -491,7 +491,7 @@
 
   /* Z-Index Layers */
   --z-index-base:                     3;
-  --z-index-toggle:                   2;
+  --z-index-toggle:                   6;
   --z-index-lightbox:                 1000;
 }
 
