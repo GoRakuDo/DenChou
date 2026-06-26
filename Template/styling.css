@@ -5467,6 +5467,13 @@ li.is-new-card:not(:hover) .related-word {
     top: 16px;
     right: 20px;
     z-index: var(--z-index-toggle);
+    background: var(--frequency-bg-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+  }
+
+  :is(.card.nightMode, .custom-dark-mode) .freqbt {
+    background: var(--frequency-bg);
   }
 
   .frequency-content {
