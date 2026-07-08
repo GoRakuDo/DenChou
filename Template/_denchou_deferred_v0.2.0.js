@@ -1,4 +1,4 @@
-/* _denchou_deferred_v0.1.0.js */
+/* _denchou_deferred_v0.2.0.js */
 (function () {
   // Adds hover effects to Jitendex dictionary content
   function jitendexHover() {

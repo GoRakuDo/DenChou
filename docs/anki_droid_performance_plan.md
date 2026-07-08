@@ -19,11 +19,11 @@ The current template has several heavy pieces that run or load during normal car
 | Area | Evidence | Why it matters on AnkiDroid |
 |---|---|---|
 | Main stylesheet | `Template/styling.css` is about 188 KB | CSS parsing happens on every card render. Large CSS also increases style recalculation cost. |
-| Settings script | `_denchou_settings_v0.1.0.js` is about 97 KB | Preferences are rarely opened during review, but the script is currently prepared from the card side. |
+| Settings script | `_denchou_settings_v0.2.0.js` is about 97 KB | Preferences are rarely opened during review, but the script is currently prepared from the card side. |
 | Back template | `back.html` is about 82 KB | Large inline logic makes the answer side heavier before deferred scripts even run. |
-| Settings stylesheet | `_denchou_settings_v0.1.0.css` is about 42 KB | Modal-only CSS should not matter during normal reviewing. |
-| Deferred features | `_denchou_deferred_v0.1.0.js` is about 23 KB | Image/lightbox/Jitendex hover behavior adds listeners and DOM work. |
-| Kanji hover | `_denchou_kanji_hover_v0.1.0.js` is about 18 KB | Desktop-oriented hover features have limited value on touch-first Android. |
+| Settings stylesheet | `_denchou_settings_v0.2.0.css` is about 42 KB | Modal-only CSS should not matter during normal reviewing. |
+| Deferred features | `_denchou_deferred_v0.2.0.js` is about 23 KB | Image/lightbox/Jitendex hover behavior adds listeners and DOM work. |
+| Kanji hover | `_denchou_kanji_hover_v0.2.0.js` is about 18 KB | Desktop-oriented hover features have limited value on touch-first Android. |
 | Font loading | `styling.css` imports six Gen Interface JP CDN weight files | Multiple network CSS/font requests can slow first render on mobile. |
 | Font Awesome | `front.html` and `back.html` load Font Awesome from CDN | A full icon library is loaded for a small number of icons. |
 
@@ -33,7 +33,7 @@ The current template has several heavy pieces that run or load during normal car
 
 **Current state:**
 
-Both `front.html` and `back.html` dynamically load `_denchou_settings_v0.1.0.js` with a `<script>` tag in their deferred setup. If the script is already present on `window` for the current card, they call `denchouBuildMenu()` instead.
+Both `front.html` and `back.html` dynamically load `_denchou_settings_v0.2.0.js` with a `<script>` tag in their deferred setup. If the script is already present on `window` for the current card, they call `denchouBuildMenu()` instead.
 
 **Problem:**
 
@@ -42,10 +42,10 @@ The settings panel is a tool. Normal review does not need it. Loading a 97 KB se
 **Plan:**
 
 - Keep the gear button visible.
-- Do not load `_denchou_settings_v0.1.0.js` during card initialization.
+- Do not load `_denchou_settings_v0.2.0.js` during card initialization.
 - On first gear tap:
-  - inject `_denchou_settings_v0.1.0.css` if needed
-  - inject `_denchou_settings_v0.1.0.js`
+  - inject `_denchou_settings_v0.2.0.css` if needed
+  - inject `_denchou_settings_v0.2.0.js`
   - open the menu after the script is ready
 - Cache the loaded state in `window` so the second open within the same card is instant.
 
@@ -158,7 +158,7 @@ Lower first-load cost and fewer font fallback delays.
 
 **Current state:**
 
-`_denchou_deferred_v0.1.0.js` prepares image switching, lightbox controls, keyboard shortcuts, wheel zoom, mouse pan, touch pan, and pinch zoom during setup.
+`_denchou_deferred_v0.2.0.js` prepares image switching, lightbox controls, keyboard shortcuts, wheel zoom, mouse pan, touch pan, and pinch zoom during setup.
 
 **Problem:**
 
@@ -206,7 +206,7 @@ Less repeated media fetching during review.
 
 **Current state:**
 
-`_denchou_deferred_v0.1.0.js` is loaded on mobile and desktop. Inside it, `jitendexHover()` scans glossary elements and attaches hover/click behavior. This is separate from `_denchou_kanji_hover_v0.1.0.js`, which is already gated off on mobile.
+`_denchou_deferred_v0.2.0.js` is loaded on mobile and desktop. Inside it, `jitendexHover()` scans glossary elements and attaches hover/click behavior. This is separate from `_denchou_kanji_hover_v0.2.0.js`, which is already gated off on mobile.
 
 **Problem:**
 
@@ -214,7 +214,7 @@ Hover-first interactions are less natural on Android. Some of this work can be d
 
 **Plan:**
 
-- Add a mobile gate around the `jitendexHover()` call inside `_denchou_deferred_v0.1.0.js`.
+- Add a mobile gate around the `jitendexHover()` call inside `_denchou_deferred_v0.2.0.js`.
 - Keep essential tap-to-expand behavior.
 - Skip purely hover-based opacity transitions on AnkiDroid.
 
@@ -269,7 +269,7 @@ Users can choose speed without losing the DenChou feel.
 
 **Current state:**
 
-`_denchou_settings_v0.1.0.css` is only useful when Preferences is open.
+`_denchou_settings_v0.2.0.css` is only useful when Preferences is open.
 
 **Problem:**
 

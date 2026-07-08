@@ -1,4 +1,4 @@
-/* _denchou_kanji_hover_v0.1.0.js */
+/* _denchou_kanji_hover_v0.2.0.js */
 (function () {
   if (window.denchouConfig && window.denchouConfig.enableKanjiHover === 'false') {
     return;

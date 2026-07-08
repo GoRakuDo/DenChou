@@ -1,4 +1,4 @@
-/* _denchou_settings_v0.1.0.js */
+/* _denchou_settings_v0.2.0.js */
 (function () {
   const ANKI_CONNECT_URL = "http://127.0.0.1:8765";
   const PRESET_FILENAME = "_denchou_presets.js";
@@ -536,7 +536,7 @@
     link.id = 'denchou-styles-injected';
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = '_denchou_settings_v0.1.0.css?t=' + Date.now();
+    link.href = '_denchou_settings_v0.2.0.css;
 
     link.onload = function () {
       const temp = document.getElementById('denchou-anti-flash');
@@ -1909,8 +1909,8 @@
     statusBtn.disabled = true;
 
     try {
-      const response = await fetch('_denchou_defaults_v0.1.0.css?t=' + Date.now());
-      if (!response.ok) throw new Error("File '_denchou_defaults_v0.1.0.css' not found in media folder.");
+      const response = await fetch('_denchou_defaults_v0.2.0.css);
+      if (!response.ok) throw new Error("File '_denchou_defaults_v0.2.0.css' not found in media folder.");
       const defaultsCss = await response.text();
 
       const modelName = await getModelName();
