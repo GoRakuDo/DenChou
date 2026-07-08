@@ -536,7 +536,7 @@
     link.id = 'denchou-styles-injected';
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = '_denchou_settings_v0.1.0.css?v0.2.0';
+    link.href = '_denchou_settings_v0.1.0.css?t=' + Date.now();
 
     link.onload = function () {
       const temp = document.getElementById('denchou-anti-flash');
@@ -1909,7 +1909,7 @@
     statusBtn.disabled = true;
 
     try {
-      const response = await fetch('_denchou_defaults_v0.1.0.css?v0.2.0');
+      const response = await fetch('_denchou_defaults_v0.1.0.css?t=' + Date.now());
       if (!response.ok) throw new Error("File '_denchou_defaults_v0.1.0.css' not found in media folder.");
       const defaultsCss = await response.text();
 

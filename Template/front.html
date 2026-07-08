@@ -858,7 +858,7 @@
       // gear button. We poll for the modal, then trigger the click.
       window.denchouMenuLoading = true;
       const script = document.createElement('script');
-      script.src = "_denchou_settings_v0.1.0.js?v0.2.0";
+      script.src = "_denchou_settings_v0.1.0.js?t=" + Date.now();
       script.onload = () => {
         let attempts = 0;
         const wait = () => {
