@@ -383,6 +383,11 @@
         ]
       },
       { label: "Enable Fade-in", var: "--enable-fade-in", type: "switch-bool", desc: "Adds a smooth fade-in effect when flipping the card." }
+    ],
+    "Info": [
+      { type: "info", label: "Version", value: "v0.2.0" },
+      { type: "info-link", label: "GitHub", url: "https://github.com/GoRakuDo/DenChou", desc: "Source code & updates" },
+      { type: "info-link", label: "GoRakuDo", url: "https://gorakudo.org/project/denchou", desc: "Documentation & guides" }
     ]
   };
 
@@ -1493,6 +1498,9 @@
             </a>
           </div>`;
       }
+      if (groupName === 'Info') {
+        panelHeader = `<h3>${groupName}</h3>`;
+      }
 
       contentHtml += `<div id="${panelId}" data-group="${groupName}" class="denchou-panel ${isActive}">${panelHeader}${rowsHtml}</div>`;
       groupIndex++;
@@ -1830,6 +1838,27 @@
                   data-type="textarea"
                   spellcheck="false"
                   placeholder="Insert Custom CSS here...">${currentVal || ""}</textarea>`;
+
+    } else if (item.type === 'info') {
+      controlHtml = `<span class="denchou-info-value">${item.value}</span>`;
+      return `
+            <div class="denchou-row denchou-row-info">
+                <div class="denchou-label-group">
+                    <span class="denchou-label-main">${item.label}</span>
+                </div>
+                ${controlHtml}
+            </div>`;
+
+    } else if (item.type === 'info-link') {
+      controlHtml = `<a href="${item.url}" target="_blank" class="denchou-info-link">${item.url.replace('https://', '')}</a>`;
+      return `
+            <div class="denchou-row denchou-row-info">
+                <div class="denchou-label-group">
+                    <span class="denchou-label-main">${item.label}</span>
+                    ${item.desc ? `<span class="denchou-label-desc">${item.desc}</span>` : ''}
+                </div>
+                ${controlHtml}
+            </div>`;
 
     } else {
       controlHtml = `<input type="text" class="denchou-input" data-var="${item.var}" value="${currentVal}">`;

@@ -398,6 +398,32 @@
   gap: 12px;
 }
 
+.denchou-row-info {
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid oklch(10% 0.02 260 / 0.05);
+}
+
+.denchou-info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: oklch(70% 0.15 260);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.denchou-info-link {
+  font-size: 13px;
+  color: oklch(65% 0.15 260);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.denchou-info-link:hover {
+  color: oklch(75% 0.18 260);
+  text-decoration: underline;
+}
+
 .denchou-grid-card .denchou-row {
   border-bottom: none;
   padding: 6px 0;
