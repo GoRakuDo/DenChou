@@ -156,12 +156,12 @@
     const shouldMute = denchouConfig.muteVideo !== 'false';
 
     pictureContainer.querySelectorAll('video').forEach(video => {
-      // No loop, no controls bar
+      // No controls bar, infinite loop
       video.removeAttribute('controls');
       video.setAttribute('playsinline', '');
 
       video.autoplay = shouldAutoplay;
-      video.loop = false;
+      video.loop = true;
       video.muted = shouldMute;
       video.playsInline = true;
       video.preload = 'metadata';
@@ -170,12 +170,9 @@
         video.removeAttribute('autoplay');
       }
 
-      // Click/tap: toggle play/pause; after ended, replay from start
+      // Click/tap: toggle play/pause
       video.addEventListener('click', () => {
-        if (video.ended) {
-          video.currentTime = 0;
-          video.play().catch(() => { });
-        } else if (video.paused) {
+        if (video.paused) {
           video.play().catch(() => { });
         } else {
           video.pause();
@@ -481,6 +478,7 @@
     getPictureMedia().forEach((media) => {
       if (!media.dataset.hasLightboxListener) {
         const isNSFW = window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true';
+        const isVideo = media.tagName.toLowerCase() === 'video';
         const openMedia = () => {
           const mediaItems = getPictureMedia();
           const mediaIndex = mediaItems.indexOf(media);
@@ -492,13 +490,31 @@
         if (isNSFW) {
           media.addEventListener("click", (e) => {
             if (media.classList.contains('clicked')) {
-              openMedia();
+              // After NSFW unblur: double-click opens lightbox for videos, single-click for images
+              if (isVideo) {
+                // dblclick handled separately
+              } else {
+                openMedia();
+              }
             } else {
               media.classList.add('clicked');
             }
           });
+          if (isVideo) {
+            media.addEventListener("dblclick", (e) => {
+              if (media.classList.contains('clicked')) {
+                openMedia();
+              }
+            });
+          }
         } else {
-          media.addEventListener("click", openMedia);
+          if (isVideo) {
+            // Videos: double-click opens lightbox (single-click is play/pause)
+            media.addEventListener("dblclick", openMedia);
+          } else {
+            // Images: single-click opens lightbox
+            media.addEventListener("click", openMedia);
+          }
         }
         media.dataset.hasLightboxListener = 'true';
       }
