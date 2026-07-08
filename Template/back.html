@@ -1119,10 +1119,58 @@
       return;
     }
 
+    // Determine which word to highlight from reading/word/sentenceFurigana
     const highlightedWords = [];
-    let match;
-    while ((match = REGEX.HIGHLIGHT.exec(sentence)) !== null) {
-      highlightedWords.push(match[1]);
+
+    // Priority 1: reading field
+    const reading = `{{reading}}`.trim();
+    if (reading && sentence.includes(reading)) {
+      highlightedWords.push(reading);
+    }
+
+    // Priority 2: word field (if reading didn't match or is empty)
+    if (highlightedWords.length === 0) {
+      const word = `{{word}}`.trim();
+      if (word && sentence.includes(word)) {
+        highlightedWords.push(word);
+      }
+    }
+
+    // Priority 3: sentenceFurigana <span class="term"> markers
+    if (highlightedWords.length === 0 && cleanedFurigana.includes('<span class="term">')) {
+      let termMatch;
+      const termRegex = /<span class="term">(.*?)<\/span>/g;
+      while ((termMatch = termRegex.exec(cleanedFurigana)) !== null) {
+        highlightedWords.push(termMatch[1]);
+      }
+    }
+
+    // Priority 4: extract from sentence (existing fallback)
+    if (highlightedWords.length === 0) {
+      for (const match of sentence.matchAll(REGEX.HIGHLIGHT)) {
+        highlightedWords.push(match[1]);
+      }
+    }
+
+    if (highlightedWords.length === 0) {
+      ELS.formattedSentence.innerHTML = cleanedFurigana;
+      return;
+    }
+
+    // If cleanedFurigana is just the target word (not the full sentence), use sentence as base
+    const cleanedText = cleanedFurigana.replace(/<[^>]*>/g, '').trim();
+    const sentencePlain = sentence.replace(/<br>/g, ' ').trim();
+    const isPartialFurigana = cleanedText.length < sentencePlain.length * 0.5;
+
+    if (isPartialFurigana) {
+      let result = sentence;
+      highlightedWords.forEach(word => {
+        const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(escaped, 'g');
+        result = result.replace(regex, `<span class="highlight">${word}</span>`);
+      });
+      ELS.formattedSentence.innerHTML = result;
+      return;
     }
 
     const tempDiv = document.createElement('div');
@@ -2207,7 +2255,7 @@
         NARROW_VOWELS: /[いきしちにひみりぎじぢびぴイキシチニヒミリギジヂビピうくすつぬふむるぐずづぶぷウクスツヌフムルグズヅブプ]/g,
         DIGITS: /\d+/g,
         RUBY_RT: /<ruby>([^<]+?)<rt>(.*?)<\/rt><\/ruby>/g,
-        HIGHLIGHT: /<(?:span class="highlight"|b)>(.*?)<\/(?:span|b)>/g,
+        HIGHLIGHT: /<(?:span class="highlight"|span class="term"|b)>(.*?)<\/(?:span|b)>/g,
         KANA_ONLY: /^[ぁ-ゖァ-ヺ゙゚ー\s]+$/,
         COMBINING_MARK: /([ぁ-ゖァ-ヺ])[\u3099\u309A]/g,
         SMALL_KANA: /[ぁぃぅぇぉゃゅょゎァィゥェォャゅョヮ]/g
