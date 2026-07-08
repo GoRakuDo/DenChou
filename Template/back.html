@@ -2435,7 +2435,7 @@
       // gear button. We poll for the modal, then trigger the click.
       window.denchouMenuLoading = true;
       const script = document.createElement('script');
-      script.src = "_denchou_settings_v0.2.0.js";
+      script.src = "_denchou_settings_v0.2.1.js";
       script.onload = () => {
         let attempts = 0;
         const wait = () => {
@@ -2453,7 +2453,7 @@
       };
       script.onerror = () => {
         window.denchouMenuLoading = false;
-        console.error('Failed to load _denchou_settings_v0.2.0.js');
+        console.error('Failed to load _denchou_settings_v0.2.1.js');
       };
       document.body.appendChild(script);
     }
@@ -2504,7 +2504,7 @@
                 window.denchouInitDeferred();
               } else {
                 const script = document.createElement('script');
-                script.src = "_denchou_deferred_v0.2.0.js";
+                script.src = "_denchou_deferred_v0.2.1.js";
                 document.body.appendChild(script);
               }
 
@@ -2514,7 +2514,7 @@
                   window.denchouInitKanjiHover();
                 } else {
                   const script = document.createElement('script');
-                  script.src = "_denchou_kanji_hover_v0.2.0.js";
+                  script.src = "_denchou_kanji_hover_v0.2.1.js";
                   document.body.appendChild(script);
                 }
               }

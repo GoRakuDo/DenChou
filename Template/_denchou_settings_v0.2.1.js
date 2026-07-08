@@ -1,4 +1,4 @@
-/* _denchou_settings_v0.2.0.js */
+/* _denchou_settings_v0.2.1.js */
 (function () {
   const ANKI_CONNECT_URL = "http://127.0.0.1:8765";
   const PRESET_FILENAME = "_denchou_presets.js";
@@ -385,7 +385,7 @@
       { label: "Enable Fade-in", var: "--enable-fade-in", type: "switch-bool", desc: "Adds a smooth fade-in effect when flipping the card." }
     ],
     "Info": [
-      { type: "info", label: "Version", value: "v0.2.0" },
+      { type: "info", label: "Version", value: "v0.2.1" },
       { type: "info-link", label: "GitHub", url: "https://github.com/GoRakuDo/DenChou", desc: "Source code & updates" },
       { type: "info-link", label: "GoRakuDo", url: "https://gorakudo.org/project/denchou", desc: "Documentation & guides" }
     ]
@@ -536,7 +536,7 @@
     link.id = 'denchou-styles-injected';
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = '_denchou_settings_v0.2.0.css';
+    link.href = '_denchou_settings_v0.2.1.css';
 
     link.onload = function () {
       const temp = document.getElementById('denchou-anti-flash');
@@ -1909,8 +1909,8 @@
     statusBtn.disabled = true;
 
     try {
-      const response = await fetch('_denchou_defaults_v0.2.0.css');
-      if (!response.ok) throw new Error("File '_denchou_defaults_v0.2.0.css' not found in media folder.");
+      const response = await fetch('_denchou_defaults_v0.2.1.css');
+      if (!response.ok) throw new Error("File '_denchou_defaults_v0.2.1.css' not found in media folder.");
       const defaultsCss = await response.text();
 
       const modelName = await getModelName();
