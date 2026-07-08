@@ -170,6 +170,12 @@
         video.removeAttribute('autoplay');
       }
 
+      // Fallback: restart on ended in case loop property is ignored (AnkiDroid WebView)
+      video.addEventListener('ended', () => {
+        video.currentTime = 0;
+        video.play().catch(() => { });
+      });
+
       // Click/tap: toggle play/pause (debounced to prevent flicker on double-click)
       let lastClickTime = 0;
       video.addEventListener('click', () => {
