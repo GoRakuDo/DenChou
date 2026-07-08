@@ -145,8 +145,8 @@
       if (currentDeck === lastDeck) return;
 
       try {
-        const linksRes = await fetch(`_denchou_deck_presets.js?v=0.1.0`);
-        const presetsRes = await fetch(`_denchou_presets.js?v=0.1.0`);
+        const linksRes = await fetch(`_denchou_deck_presets.js?v=0.2.0`);
+        const presetsRes = await fetch(`_denchou_presets.js?v=0.2.0`);
 
         if (linksRes.ok && presetsRes.ok) {
           const links = await linksRes.json();
@@ -858,7 +858,7 @@
       // gear button. We poll for the modal, then trigger the click.
       window.denchouMenuLoading = true;
       const script = document.createElement('script');
-      script.src = "_denchou_settings_v0.2.0.js;
+      script.src = "_denchou_settings_v0.2.0.js";
       script.onload = () => {
         let attempts = 0;
         const wait = () => {
