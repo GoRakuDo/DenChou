@@ -1160,7 +1160,7 @@
     // If cleanedFurigana is just the target word (not the full sentence), use sentence as base
     const cleanedText = cleanedFurigana.replace(/<[^>]*>/g, '').trim();
     const sentencePlain = sentence.replace(/<br>/g, ' ').trim();
-    const isPartialFurigana = cleanedText.length < sentencePlain.length * 0.5;
+    const isPartialFurigana = cleanedText.length < sentencePlain.length * 0.5 && cleanedText.length < 15;
 
     if (isPartialFurigana) {
       let result = sentence;

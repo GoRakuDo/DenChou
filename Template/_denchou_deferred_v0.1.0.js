@@ -170,8 +170,12 @@
         video.removeAttribute('autoplay');
       }
 
-      // Click/tap: toggle play/pause
+      // Click/tap: toggle play/pause (debounced to prevent flicker on double-click)
+      let lastClickTime = 0;
       video.addEventListener('click', () => {
+        const now = Date.now();
+        if (now - lastClickTime < 300) return; // suppress if dblclick pending
+        lastClickTime = now;
         if (video.paused) {
           video.play().catch(() => { });
         } else {
