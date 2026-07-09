@@ -1482,6 +1482,13 @@
             const w = hlMatch[1].trim();
             if (w) rawHighlights.push(w);
         }
+        console.log("DenChou highlightFurigana:", {
+            rawSentence: rawSentence.slice(0, 200),
+            rawHighlights,
+            reading: `{{reading}}`,
+            word: `{{word}}`,
+            highlightedWords,
+        });
 
         // Determine which word to highlight from reading/word/sentenceFurigana
         const highlightedWords = [];
@@ -1540,7 +1547,7 @@
             }
         }
 
-        if (highlightedWords.length === 0) {
+        if (highlightedWords.length === 0 && rawHighlights.length === 0) {
             ELS.formattedSentence.innerHTML = cleanedFurigana;
             return;
         }
