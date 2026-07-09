@@ -1439,9 +1439,7 @@
 
     // Highlight the target word in the furigana sentence
     function highlightFurigana() {
-        const rawSentence = `{{sentence}}`;
-        // Strip span tags for merge (prevents .group/.highlight leak into prefix)
-        const sentence = rawSentence.replace(/<span[^>]*>/g, "").replace(/<\/span>/g, "");
+        const sentence = `{{sentence}}`;
         let sentenceFurigana = `{{furigana:sentenceFurigana}}`;
 
         if (!sentenceFurigana.trim()) {
@@ -1470,24 +1468,18 @@
             cleanedFurigana.includes('<span class="highlight">') ||
             cleanedFurigana.includes("<b>")
         ) {
+            console.log(
+                "DenChou highlightFurigana: early return (has highlight/b tags)",
+                {
+                    hasHighlight: cleanedFurigana.includes(
+                        '<span class="highlight">',
+                    ),
+                    hasB: cleanedFurigana.includes("<b>"),
+                },
+            );
             ELS.formattedSentence.innerHTML = cleanedFurigana;
             return;
         }
-
-        // Gather highlighted words from the raw sentence (per-scene highlights from Yomitan)
-        const rawHighlights = [];
-        const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
-        let hlMatch;
-        while ((hlMatch = hlRegex.exec(rawSentence)) !== null) {
-            const w = hlMatch[1].trim();
-            if (w) rawHighlights.push(w);
-        }
-        console.log("DenChou highlightFurigana:", {
-            rawSentence: rawSentence.slice(0, 200),
-            rawHighlights,
-            reading: `{{reading}}`,
-            word: `{{word}}`,
-        });
 
         // Determine which word to highlight from reading/word/sentenceFurigana
         const highlightedWords = [];
@@ -1546,7 +1538,7 @@
             }
         }
 
-        if (highlightedWords.length === 0 && rawHighlights.length === 0) {
+        if (highlightedWords.length === 0) {
             ELS.formattedSentence.innerHTML = cleanedFurigana;
             return;
         }
@@ -1622,25 +1614,15 @@
                 cleanedFurigana +
                 sentence.substring(endSentIdx);
 
-            // Single-pass term matching: check each .term against all targets
-            const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
-            if (allTargets.length > 0 && result.includes('<span class="term">')) {
-                const tempDiv = document.createElement("div");
-                tempDiv.innerHTML = result;
-                tempDiv.querySelectorAll(".term").forEach((termEl) => {
-                    const clean = termEl.textContent.trim();
-                    const match = allTargets.some((t) => clean.includes(t));
-                    if (match && !termEl.querySelector(".highlight")) {
-                        const wrapper = document.createElement("span");
-                        wrapper.className = "highlight";
-                        while (termEl.firstChild) {
-                            wrapper.appendChild(termEl.firstChild);
-                        }
-                        termEl.appendChild(wrapper);
-                    }
-                });
-                result = tempDiv.innerHTML;
-            }
+            // Apply highlights
+            highlightedWords.forEach((word) => {
+                const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+                const regex = new RegExp(escaped, "g");
+                result = result.replace(
+                    regex,
+                    `<span class="highlight">$&</span>`,
+                );
+            });
             ELS.formattedSentence.innerHTML = result;
             return;
         }
@@ -2315,7 +2297,11 @@
         ) {
             const groupWrappers = Array.from(
                 sentenceContainer.querySelectorAll(".group"),
-            ).filter((el) => el.textContent.trim().length > 0);
+            ).filter(
+                (el) =>
+                    el.textContent.trim().length > 0 &&
+                    !el.querySelector(".group"),
+            );
 
             if (groupWrappers.length > 0) {
                 const parts = groupWrappers.map((el) => el.outerHTML);
