@@ -1547,35 +1547,37 @@
         // Skip the merge (it breaks scene structure). Output cleanedFurigana directly
         // with .highlight added to matching .term elements via DOM.
         if (cleanedFurigana.includes('<span class="group">')) {
-            // Extract raw highlights from the sentence field
+            const rawSentence = `{{sentence}}`;
             const rawHighlights = [];
             const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
             let hlMatch;
-            const rawSentence = `{{sentence}}`;
             while ((hlMatch = hlRegex.exec(rawSentence)) !== null) {
                 const w = hlMatch[1].trim();
                 if (w) rawHighlights.push(w);
             }
             const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
-            console.log("DenChou multi: allTargets=%o", allTargets);
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = cleanedFurigana;
-            console.log("DenChou multi: terms=%d", tempDiv.querySelectorAll(".term").length);
-            tempDiv.querySelectorAll(".term").forEach((termEl) => {
-                const clean = termEl.textContent.trim();
-                const match = allTargets.some((t) => clean.includes(t));
-                console.log("DenChou multi: term=%s match=%s", clean, match);
-                    if (!termEl.querySelector(".highlight")) {
-                        const wrapper = document.createElement("span");
-                        wrapper.className = "highlight";
-                        while (termEl.firstChild) {
-                            wrapper.appendChild(termEl.firstChild);
+            if (allTargets.length > 0) {
+                var tempDiv = document.createElement("div");
+                tempDiv.innerHTML = cleanedFurigana;
+                var termEls = tempDiv.querySelectorAll(".term");
+                for (var i = 0; i < termEls.length; i++) {
+                    var clean = termEls[i].textContent.trim();
+                    for (var t = 0; t < allTargets.length; t++) {
+                        if (clean.indexOf(allTargets[t]) !== -1) {
+                            if (!termEls[i].querySelector(".highlight")) {
+                                var wrapper = document.createElement("span");
+                                wrapper.className = "highlight";
+                                while (termEls[i].firstChild) {
+                                    wrapper.appendChild(termEls[i].firstChild);
+                                }
+                                termEls[i].appendChild(wrapper);
+                            }
+                            break;
                         }
-                        termEl.appendChild(wrapper);
                     }
                 }
-            });
-            ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
+                ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
+            }
             return;
         }
 
