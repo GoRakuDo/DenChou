@@ -1193,15 +1193,39 @@
       .trim();
 
     if (cleanedText && sentencePlain.includes(cleanedText)) {
-      // Merge: replace the matching text in sentence with furigana HTML
-      // Use a flexible regex that allows HTML tags between any characters
-      // (sentence may contain <span>, <b>, etc. that break plain text matching)
-      const escapedChars = cleanedText.split('').map(c => {
-        if (/[.*+?^${}()|[\]\\]/.test(c)) return '\\' + c;
-        return c;
-      }).join('(?:<[^>]*>|\\s)*');
-      const flexibleRegex = new RegExp(escapedChars);
-      let result = sentence.replace(flexibleRegex, () => cleanedFurigana);
+      // Merge: find cleanedText position in sentencePlain, map to raw sentence HTML
+      const plainIndex = sentencePlain.indexOf(cleanedText);
+      
+      // Walk through sentence to find matching start/end positions
+      // Skip HTML tags and whitespace (same normalization as sentencePlain)
+      let sentPlainIdx = 0;
+      let startSentIdx = -1;
+      let endSentIdx = sentence.length;
+      let inTag = false;
+      
+      for (let i = 0; i < sentence.length; i++) {
+        const ch = sentence[i];
+        if (ch === '<') { inTag = true; continue; }
+        if (inTag) { if (ch === '>') inTag = false; continue; }
+        if (ch.match(/\s/)) continue;
+        
+        if (sentPlainIdx === plainIndex) {
+          startSentIdx = i;
+        }
+        if (sentPlainIdx === plainIndex + cleanedText.length) {
+          endSentIdx = i;
+          break;
+        }
+        sentPlainIdx++;
+      }
+      
+      if (startSentIdx === -1) {
+        // Fallback: shouldn't happen if includes() was true
+        ELS.formattedSentence.innerHTML = cleanedFurigana;
+        return;
+      }
+      
+      let result = sentence.substring(0, startSentIdx) + cleanedFurigana + sentence.substring(endSentIdx);
 
       // Apply highlights
       highlightedWords.forEach(word => {
