@@ -1439,7 +1439,9 @@
 
     // Highlight the target word in the furigana sentence
     function highlightFurigana() {
-        const sentence = `{{sentence}}`.replace(/<span[^>]*>/g, "").replace(/<\/span>/g, "");
+        const rawSentence = `{{sentence}}`;
+        // Strip span tags for merge (prevents .group/.highlight leak into prefix)
+        const sentence = rawSentence.replace(/<span[^>]*>/g, "").replace(/<\/span>/g, "");
         let sentenceFurigana = `{{furigana:sentenceFurigana}}`;
 
         if (!sentenceFurigana.trim()) {
@@ -1468,17 +1470,17 @@
             cleanedFurigana.includes('<span class="highlight">') ||
             cleanedFurigana.includes("<b>")
         ) {
-            console.log(
-                "DenChou highlightFurigana: early return (has highlight/b tags)",
-                {
-                    hasHighlight: cleanedFurigana.includes(
-                        '<span class="highlight">',
-                    ),
-                    hasB: cleanedFurigana.includes("<b>"),
-                },
-            );
             ELS.formattedSentence.innerHTML = cleanedFurigana;
             return;
+        }
+
+        // Gather highlighted words from the raw sentence (per-scene highlights from Yomitan)
+        const rawHighlights = [];
+        const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
+        let hlMatch;
+        while ((hlMatch = hlRegex.exec(rawSentence)) !== null) {
+            const w = hlMatch[1].trim();
+            if (w) rawHighlights.push(w);
         }
 
         // Determine which word to highlight from reading/word/sentenceFurigana
@@ -1614,15 +1616,20 @@
                 cleanedFurigana +
                 sentence.substring(endSentIdx);
 
-            // Apply highlights
-            highlightedWords.forEach((word) => {
-                const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-                const regex = new RegExp(escaped, "g");
-                result = result.replace(
-                    regex,
-                    `<span class="highlight">$&</span>`,
-                );
-            });
+            // Apply highlights via term matching (finds matching .term by plain text)
+            const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
+            if (allTargets.length > 0) {
+                allTargets.forEach((target) => {
+                    const termRegex = /<span class="term">(.*?)<\/span>/g;
+                    result = result.replace(termRegex, (match, inner) => {
+                        const clean = inner.replace(/<[^>]*>/g, "").trim();
+                        if (clean.includes(target)) {
+                            return `<span class="term"><span class="highlight">${inner}</span></span>`;
+                        }
+                        return match;
+                    });
+                });
+            }
             ELS.formattedSentence.innerHTML = result;
             return;
         }
