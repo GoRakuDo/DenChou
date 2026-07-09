@@ -1624,7 +1624,12 @@
 
             // Single-pass term matching: check each .term against all targets
             const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
-            if (allTargets.length > 0) {
+            console.log("DenChou term match:", {
+                allTargets,
+                resultSample: result.slice(0, 300),
+                hasTerms: result.includes('<span class="term">'),
+            });
+            if (allTargets.length > 0 && result.includes('<span class="term">')) {
                 const termRegex = /<span class="term">(.*?)<\/span>/g;
                 result = result.replace(termRegex, (match, inner) => {
                     const clean = inner.replace(/<[^>]*>/g, "").trim();
