@@ -1547,37 +1547,32 @@
         // Skip the merge (it breaks scene structure). Output cleanedFurigana directly
         // with .highlight added to matching .term elements via DOM.
         if (cleanedFurigana.includes('<span class="group">')) {
-            const rawSentence = `{{sentence}}`;
+            // Extract raw highlights from the sentence field
             const rawHighlights = [];
             const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
             let hlMatch;
+            const rawSentence = `{{sentence}}`;
             while ((hlMatch = hlRegex.exec(rawSentence)) !== null) {
                 const w = hlMatch[1].trim();
                 if (w) rawHighlights.push(w);
             }
             const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
-            if (allTargets.length > 0) {
-                var tempDiv = document.createElement("div");
-                tempDiv.innerHTML = cleanedFurigana;
-                var termEls = tempDiv.querySelectorAll(".term");
-                for (var i = 0; i < termEls.length; i++) {
-                    var clean = termEls[i].textContent.trim();
-                    for (var t = 0; t < allTargets.length; t++) {
-                        if (clean.indexOf(allTargets[t]) !== -1) {
-                            if (!termEls[i].querySelector(".highlight")) {
-                                var wrapper = document.createElement("span");
-                                wrapper.className = "highlight";
-                                while (termEls[i].firstChild) {
-                                    wrapper.appendChild(termEls[i].firstChild);
-                                }
-                                termEls[i].appendChild(wrapper);
-                            }
-                            break;
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = cleanedFurigana;
+            tempDiv.querySelectorAll(".term").forEach((termEl) => {
+                const clean = termEl.textContent.trim();
+                if (allTargets.some((t) => clean.includes(t))) {
+                    if (!termEl.querySelector(".highlight")) {
+                        const wrapper = document.createElement("span");
+                        wrapper.className = "highlight";
+                        while (termEl.firstChild) {
+                            wrapper.appendChild(termEl.firstChild);
                         }
+                        termEl.appendChild(wrapper);
                     }
                 }
-                ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
-            }
+            });
+            ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
             return;
         }
 
@@ -2352,6 +2347,38 @@
                     sentenceContainer.appendChild(div);
                 });
                 sentenceContainer.setAttribute("data-split-done", "true");
+
+                // Apply highlights to each scene from the sentence field's .highlight
+                var rawSentence = `{{sentence}}`;
+                var hlWords = [];
+                var hlR = /<span class="highlight">(.*?)<\/span>/g;
+                var m;
+                while ((m = hlR.exec(rawSentence)) !== null) {
+                    var w = m[1].trim();
+                    if (w) hlWords.push(w);
+                }
+                if (hlWords.length > 0) {
+                    var scenes = sentenceContainer.querySelectorAll(".split-sentence");
+                    for (var si = 0; si < scenes.length; si++) {
+                        var terms = scenes[si].querySelectorAll(".term");
+                        for (var ti = 0; ti < terms.length; ti++) {
+                            var ct = terms[ti].textContent.trim();
+                            for (var hi = 0; hi < hlWords.length; hi++) {
+                                if (ct.indexOf(hlWords[hi]) !== -1) {
+                                    if (!terms[ti].querySelector(".highlight")) {
+                                        var wrap = document.createElement("span");
+                                        wrap.className = "highlight";
+                                        while (terms[ti].firstChild) {
+                                            wrap.appendChild(terms[ti].firstChild);
+                                        }
+                                        terms[ti].appendChild(wrap);
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
