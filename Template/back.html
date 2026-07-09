@@ -1543,6 +1543,39 @@
             return;
         }
 
+        // Multi-scene path: cleanedFurigana has .group elements (full sentence coverage).
+        // Skip the merge (it breaks scene structure). Output cleanedFurigana directly
+        // with .highlight added to matching .term elements via DOM.
+        if (cleanedFurigana.includes('<span class="group">')) {
+            // Extract raw highlights from the sentence field
+            const rawHighlights = [];
+            const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
+            let hlMatch;
+            const rawSentence = `{{sentence}}`;
+            while ((hlMatch = hlRegex.exec(rawSentence)) !== null) {
+                const w = hlMatch[1].trim();
+                if (w) rawHighlights.push(w);
+            }
+            const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = cleanedFurigana;
+            tempDiv.querySelectorAll(".term").forEach((termEl) => {
+                const clean = termEl.textContent.trim();
+                if (allTargets.some((t) => clean.includes(t))) {
+                    if (!termEl.querySelector(".highlight")) {
+                        const wrapper = document.createElement("span");
+                        wrapper.className = "highlight";
+                        while (termEl.firstChild) {
+                            wrapper.appendChild(termEl.firstChild);
+                        }
+                        termEl.appendChild(wrapper);
+                    }
+                }
+            });
+            ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
+            return;
+        }
+
         // Merge cleanedFurigana into sentence at the matching position
         const cleanedText = cleanedFurigana
             .replace(/<rt>.*?<\/rt>/g, "") // remove <rt> readings first
