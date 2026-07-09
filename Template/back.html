@@ -950,6 +950,14 @@
       });
       tagsContainer.replaceChildren(...elements);
     }
+
+    // Furigana hover: show rt on ruby:hover for sentence furigana
+    document.querySelectorAll('#sentence ruby').forEach(ruby => {
+      const rt = ruby.querySelector('rt');
+      if (!rt) return;
+      ruby.addEventListener('mouseenter', () => { rt.style.opacity = '1'; });
+      ruby.addEventListener('mouseleave', () => { rt.style.opacity = ''; });
+    });
   }
 
   // Helper function to determine pitch type
