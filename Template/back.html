@@ -1173,7 +1173,8 @@
       .trim();
     const sentencePlain = sentence
       .replace(/<br>/g, ' ')
-      .replace(/\s+/g, '')              // normalize whitespace for matching
+      .replace(/<[^>]*>/g, '')             // strip HTML tags
+      .replace(/\s+/g, '')                 // normalize whitespace for matching
       .trim();
 
     if (cleanedText && sentencePlain.includes(cleanedText)) {
