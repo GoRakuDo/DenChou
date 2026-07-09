@@ -1242,6 +1242,13 @@
         return;
       }
       
+      // Preserve <br> tags at the boundaries of the matched region
+      const matchedPart = sentence.substring(startSentIdx, endSentIdx);
+      const brEndMatch = matchedPart.match(/(<br\s*\/?>)+$/);
+      if (brEndMatch) {
+        endSentIdx -= brEndMatch[0].length;
+      }
+      
       let result = sentence.substring(0, startSentIdx) + cleanedFurigana + sentence.substring(endSentIdx);
 
       // Apply highlights
