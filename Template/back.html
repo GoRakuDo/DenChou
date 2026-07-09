@@ -1166,7 +1166,10 @@
     }
 
     // Merge cleanedFurigana into sentence at the matching position
-    const cleanedText = cleanedFurigana.replace(/<[^>]*>/g, '').trim();
+    const cleanedText = cleanedFurigana
+      .replace(/<rt>.*?<\/rt>/g, '')   // remove <rt> readings first
+      .replace(/<[^>]*>/g, '')          // strip remaining HTML tags
+      .trim();
     const sentencePlain = sentence.replace(/<br>/g, ' ').trim();
 
     if (cleanedText && sentencePlain.includes(cleanedText)) {
