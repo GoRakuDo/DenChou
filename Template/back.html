@@ -1157,11 +1157,27 @@
       return;
     }
 
-    // If cleanedFurigana is just the target word (not the full sentence), use sentence as base
+    // Merge cleanedFurigana into sentence at the matching position
     const cleanedText = cleanedFurigana.replace(/<[^>]*>/g, '').trim();
     const sentencePlain = sentence.replace(/<br>/g, ' ').trim();
-    const isPartialFurigana = cleanedText.length < sentencePlain.length * 0.5 && cleanedText.length < 15;
 
+    if (cleanedText && sentencePlain.includes(cleanedText)) {
+      // Merge: replace the matching text in sentence with furigana HTML
+      const escapedClean = cleanedText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      let result = sentence.replace(new RegExp(escapedClean), () => cleanedFurigana);
+
+      // Apply highlights
+      highlightedWords.forEach(word => {
+        const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(escaped, 'g');
+        result = result.replace(regex, `<span class="highlight">$&</span>`);
+      });
+      ELS.formattedSentence.innerHTML = result;
+      return;
+    }
+
+    // Fallback: if text doesn't match, use original behavior
+    const isPartialFurigana = cleanedText.length < sentencePlain.length * 0.5;
     if (isPartialFurigana) {
       let result = sentence;
       highlightedWords.forEach(word => {
