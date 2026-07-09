@@ -1624,23 +1624,22 @@
 
             // Single-pass term matching: check each .term against all targets
             const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
-            console.log("DenChou term match:", {
-                allTargets,
-                resultSample: result.slice(0, 300),
-                hasTerms: result.includes('<span class="term">'),
-            });
             if (allTargets.length > 0 && result.includes('<span class="term">')) {
-                const termRegex = /<span class="term">(.*?)<\/span>/g;
-                result = result.replace(termRegex, (match, inner) => {
-                    const clean = inner.replace(/<[^>]*>/g, "").trim();
-                    const shouldHighlight = allTargets.some((t) =>
-                        clean.includes(t),
-                    );
-                    if (shouldHighlight) {
-                        return `<span class="term"><span class="highlight">${inner}</span></span>`;
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = result;
+                tempDiv.querySelectorAll(".term").forEach((termEl) => {
+                    const clean = termEl.textContent.trim();
+                    const match = allTargets.some((t) => clean.includes(t));
+                    if (match && !termEl.querySelector(".highlight")) {
+                        const wrapper = document.createElement("span");
+                        wrapper.className = "highlight";
+                        while (termEl.firstChild) {
+                            wrapper.appendChild(termEl.firstChild);
+                        }
+                        termEl.appendChild(wrapper);
                     }
-                    return match;
                 });
+                result = tempDiv.innerHTML;
             }
             ELS.formattedSentence.innerHTML = result;
             return;
