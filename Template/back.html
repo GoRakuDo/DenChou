@@ -1149,7 +1149,8 @@
       let termMatch;
       const termRegex = /<span class="term">(.*?)<\/span>/g;
       while ((termMatch = termRegex.exec(cleanedFurigana)) !== null) {
-        highlightedWords.push(termMatch[1]);
+        const term = termMatch[1].trim();
+        if (term) highlightedWords.push(termMatch[1]);
       }
     }
 
