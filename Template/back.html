@@ -2362,7 +2362,8 @@
                     for (var si = 0; si < scenes.length; si++) {
                         var terms = scenes[si].querySelectorAll(".term");
                         for (var ti = 0; ti < terms.length; ti++) {
-                            var ct = terms[ti].textContent.trim();
+                            // Strip <rt> content from textContent (furigana leaks into textContent)
+                            var ct = terms[ti].innerHTML.replace(/<rt>.*?<\/rt>/g, "").replace(/<[^>]*>/g, "").trim();
                             for (var hi = 0; hi < hlWords.length; hi++) {
                                 if (ct.indexOf(hlWords[hi]) !== -1) {
                                     if (!terms[ti].querySelector(".highlight")) {
