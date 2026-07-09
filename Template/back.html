@@ -1557,11 +1557,14 @@
                 if (w) rawHighlights.push(w);
             }
             const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
+            console.log("DenChou multi: allTargets=%o", allTargets);
             const tempDiv = document.createElement("div");
             tempDiv.innerHTML = cleanedFurigana;
+            console.log("DenChou multi: terms=%d", tempDiv.querySelectorAll(".term").length);
             tempDiv.querySelectorAll(".term").forEach((termEl) => {
                 const clean = termEl.textContent.trim();
-                if (allTargets.some((t) => clean.includes(t))) {
+                const match = allTargets.some((t) => clean.includes(t));
+                console.log("DenChou multi: term=%s match=%s", clean, match);
                     if (!termEl.querySelector(".highlight")) {
                         const wrapper = document.createElement("span");
                         wrapper.className = "highlight";
