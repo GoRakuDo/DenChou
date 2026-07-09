@@ -1439,7 +1439,7 @@
 
     // Highlight the target word in the furigana sentence
     function highlightFurigana() {
-        const sentence = `{{sentence}}`;
+        const sentence = `{{sentence}}`.replace(/<span[^>]*>/g, "").replace(/<\/span>/g, "");
         let sentenceFurigana = `{{furigana:sentenceFurigana}}`;
 
         if (!sentenceFurigana.trim()) {
