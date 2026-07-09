@@ -1169,13 +1169,23 @@
     const cleanedText = cleanedFurigana
       .replace(/<rt>.*?<\/rt>/g, '')   // remove <rt> readings first
       .replace(/<[^>]*>/g, '')          // strip remaining HTML tags
+      .replace(/\s+/g, '')              // normalize whitespace for matching
       .trim();
-    const sentencePlain = sentence.replace(/<br>/g, ' ').trim();
+    const sentencePlain = sentence
+      .replace(/<br>/g, ' ')
+      .replace(/\s+/g, '')              // normalize whitespace for matching
+      .trim();
 
     if (cleanedText && sentencePlain.includes(cleanedText)) {
       // Merge: replace the matching text in sentence with furigana HTML
-      const escapedClean = cleanedText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      let result = sentence.replace(new RegExp(escapedClean), () => cleanedFurigana);
+      // Use a flexible regex that allows HTML tags between any characters
+      // (sentence may contain <span>, <b>, etc. that break plain text matching)
+      const escapedChars = cleanedText.split('').map(c => {
+        if (/[.*+?^${}()|[\]\\]/.test(c)) return '\\' + c;
+        return c;
+      }).join('(?:<[^>]*>)*');
+      const flexibleRegex = new RegExp(escapedChars);
+      let result = sentence.replace(flexibleRegex, () => cleanedFurigana);
 
       // Apply highlights
       highlightedWords.forEach(word => {
