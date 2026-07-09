@@ -1120,9 +1120,13 @@
       .replace(/<ruby>([。、！？！？])<rt>.*?<\/rt><\/ruby>/g, '$1');
 
     if (
-    cleanedFurigana.includes('<span class="highlight">') ||
-    cleanedFurigana.includes('<b>')
+      cleanedFurigana.includes('<span class="highlight">') ||
+      cleanedFurigana.includes('<b>')
     ) {
+      console.log('DenChou highlightFurigana: early return (has highlight/b tags)', {
+        hasHighlight: cleanedFurigana.includes('<span class="highlight">'),
+        hasB: cleanedFurigana.includes('<b>'),
+      });
       ELS.formattedSentence.innerHTML = cleanedFurigana;
       return;
     }
@@ -1158,10 +1162,15 @@
         const raw = termMatch[1];
         const clean = raw.replace(/<[^>]*>/g, '').trim();
         if (!clean) continue;
-        if (
+        // Exact/substring match against reading or word
+        const exactMatch = (
           (reading && clean.includes(reading)) ||
-          (word && (clean.includes(word) || clean.includes(wordStem)))
-        ) {
+          (word && clean.includes(word)) ||
+          (wordStem && clean.includes(wordStem))
+        );
+        // Partial match for conjugated forms (はかない→はかなげ)
+        const partialMatch = reading && clean.startsWith(reading.slice(0, 3));
+        if (exactMatch || partialMatch) {
             highlightedWords.push(raw);
           break;
         }
@@ -1220,7 +1229,15 @@
       }
       
       if (startSentIdx === -1) {
-        // Fallback: shouldn't happen if includes() was true
+        // Debug: log actual values when position scan fails
+        console.log('DenChou merge fallback:', {
+          sentence,
+          cleanedText,
+          sentencePlain,
+          plainIndex,
+          sentenceLen: sentence.length,
+          sentencePlainLen: sentencePlain.length,
+        });
         ELS.formattedSentence.innerHTML = cleanedFurigana;
         return;
       }
