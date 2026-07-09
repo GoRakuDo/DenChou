@@ -36,7 +36,7 @@ DenChou secara bawaan disetel untuk mengutamakan AnkiDroid. Layar kecil mendapat
 
 ## Cara memulai
 
-Rilis paket pertama sekarang tersedia sebagai **`DenChou v0.2.1.apkg`**.
+Rilis paket pertama sekarang tersedia sebagai **`DenChou v0.2.2.apkg`**.
 
 Kalau kalian ingin cara paling cepat, impor file `.apkg` itu ke Anki.
 

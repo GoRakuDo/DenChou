@@ -1,189 +1,208 @@
-/* _denchou_deferred_v0.2.1.js */
+/* _denchou_deferred_v0.2.2.js */
 (function () {
   // Adds hover effects to Jitendex dictionary content
   function jitendexHover() {
-    const sentencePairs = document.querySelectorAll('[data-sc-content="example-sentence-a"]');
+    const sentencePairs = document.querySelectorAll(
+      '[data-sc-content="example-sentence-a"]',
+    );
     const xrefPairs = document.querySelectorAll('[data-sc-content="xref"]');
-    const antonymPairs = document.querySelectorAll('[data-sc-content="antonym"]');
-    const notePairs = document.querySelectorAll('[data-sc-content="sense-note"]');
-    const explanationPairs = document.querySelectorAll('[data-sc-content="info-gloss"]');
-    const langPairs = document.querySelectorAll('[data-sc-content="lang-source"]');
+    const antonymPairs = document.querySelectorAll(
+      '[data-sc-content="antonym"]',
+    );
+    const notePairs = document.querySelectorAll(
+      '[data-sc-content="sense-note"]',
+    );
+    const explanationPairs = document.querySelectorAll(
+      '[data-sc-content="info-gloss"]',
+    );
+    const langPairs = document.querySelectorAll(
+      '[data-sc-content="lang-source"]',
+    );
 
     const handleHover = (parentElement, elementB) => {
-      if (parentElement && elementB && !parentElement.dataset.hasHoverListener) {
-        parentElement.classList.add('tappable');
-        parentElement.style.opacity = '0.5';
-        parentElement.style.transition = 'opacity 0.3s ease';
-        elementB.style.maxHeight = '0';
-        elementB.style.overflow = 'hidden';
-        elementB.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
-        elementB.style.display = 'block';
+      if (
+        parentElement &&
+        elementB &&
+        !parentElement.dataset.hasHoverListener
+      ) {
+        parentElement.classList.add("tappable");
+        parentElement.style.opacity = "0.5";
+        parentElement.style.transition = "opacity 0.3s ease";
+        elementB.style.maxHeight = "0";
+        elementB.style.overflow = "hidden";
+        elementB.style.transition = "max-height 0.3s ease, opacity 0.3s ease";
+        elementB.style.display = "block";
 
         const showContent = () => {
           requestAnimationFrame(() => {
-            parentElement.style.opacity = '1';
-            elementB.style.maxHeight = elementB.scrollHeight + 'px';
-            elementB.style.opacity = '1';
+            parentElement.style.opacity = "1";
+            elementB.style.maxHeight = elementB.scrollHeight + "px";
+            elementB.style.opacity = "1";
           });
         };
 
         const hideContent = () => {
           requestAnimationFrame(() => {
-            parentElement.style.opacity = '0.5';
-            elementB.style.maxHeight = '0';
-            elementB.style.opacity = '0';
+            parentElement.style.opacity = "0.5";
+            elementB.style.maxHeight = "0";
+            elementB.style.opacity = "0";
           });
         };
 
-        elementB.addEventListener('mouseover', showContent);
-        parentElement.addEventListener('mouseover', showContent);
+        elementB.addEventListener("mouseover", showContent);
+        parentElement.addEventListener("mouseover", showContent);
 
-        elementB.addEventListener('mouseout', hideContent);
-        parentElement.addEventListener('mouseout', hideContent);
+        elementB.addEventListener("mouseout", hideContent);
+        parentElement.addEventListener("mouseout", hideContent);
 
         const preventFlipAndLinks = (e) => {
           e.stopPropagation();
-          if (e.target.tagName === 'A' || e.target.closest('a')) {
+          if (e.target.tagName === "A" || e.target.closest("a")) {
             e.preventDefault();
           }
         };
 
-        parentElement.addEventListener('click', preventFlipAndLinks);
-        elementB.addEventListener('click', preventFlipAndLinks);
+        parentElement.addEventListener("click", preventFlipAndLinks);
+        elementB.addEventListener("click", preventFlipAndLinks);
 
-        parentElement.dataset.hasHoverListener = 'true';
+        parentElement.dataset.hasHoverListener = "true";
       }
     };
 
-    sentencePairs.forEach(sentenceA => {
+    sentencePairs.forEach((sentenceA) => {
       const sentenceB = sentenceA.nextElementSibling;
       if (sentenceA && sentenceB && !sentenceA.dataset.hasClickListener) {
-        sentenceA.classList.add('tappable');
-        sentenceA.style.opacity = '0.5';
-        sentenceA.style.transition = 'opacity 0.3s ease';
-        sentenceA.style.cursor = 'pointer';
-        sentenceB.style.maxHeight = '0';
-        sentenceB.style.overflow = 'hidden';
-        sentenceB.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
-        sentenceB.style.display = 'block';
-        sentenceB.style.opacity = '0';
+        sentenceA.classList.add("tappable");
+        sentenceA.style.opacity = "0.5";
+        sentenceA.style.transition = "opacity 0.3s ease";
+        sentenceA.style.cursor = "pointer";
+        sentenceB.style.maxHeight = "0";
+        sentenceB.style.overflow = "hidden";
+        sentenceB.style.transition = "max-height 0.3s ease, opacity 0.3s ease";
+        sentenceB.style.display = "block";
+        sentenceB.style.opacity = "0";
 
         let isSentenceBVisible = false;
 
-        sentenceA.addEventListener('click', (event) => {
+        sentenceA.addEventListener("click", (event) => {
           event.stopPropagation();
           isSentenceBVisible = !isSentenceBVisible;
 
-          const sentenceContainer = sentenceA.closest('[data-sc-content="example-sentence"]');
+          const sentenceContainer = sentenceA.closest(
+            '[data-sc-content="example-sentence"]',
+          );
 
           requestAnimationFrame(() => {
             if (isSentenceBVisible) {
-              sentenceA.style.opacity = '1';
-              sentenceB.style.maxHeight = sentenceB.scrollHeight + 'px';
-              sentenceB.style.opacity = '1';
+              sentenceA.style.opacity = "1";
+              sentenceB.style.maxHeight = sentenceB.scrollHeight + "px";
+              sentenceB.style.opacity = "1";
 
               if (sentenceContainer) {
-                sentenceContainer.classList.add('sentence-active');
+                sentenceContainer.classList.add("sentence-active");
               }
-
             } else {
-              if (!sentenceA.matches(':hover')) {
-                sentenceA.style.opacity = '0.5';
+              if (!sentenceA.matches(":hover")) {
+                sentenceA.style.opacity = "0.5";
               }
-              sentenceB.style.maxHeight = '0';
-              sentenceB.style.opacity = '0';
+              sentenceB.style.maxHeight = "0";
+              sentenceB.style.opacity = "0";
 
               if (sentenceContainer) {
-                sentenceContainer.classList.remove('sentence-active');
+                sentenceContainer.classList.remove("sentence-active");
               }
             }
           });
         });
 
-        sentenceA.addEventListener('mouseenter', () => {
-          sentenceA.style.opacity = '1';
+        sentenceA.addEventListener("mouseenter", () => {
+          sentenceA.style.opacity = "1";
         });
 
-        sentenceA.addEventListener('mouseleave', () => {
+        sentenceA.addEventListener("mouseleave", () => {
           if (!isSentenceBVisible) {
-            sentenceA.style.opacity = '0.5';
+            sentenceA.style.opacity = "0.5";
           }
         });
 
-        sentenceB.addEventListener('click', (e) => {
+        sentenceB.addEventListener("click", (e) => {
           e.stopPropagation();
-          if (e.target.tagName === 'A' || e.target.closest('a')) {
+          if (e.target.tagName === "A" || e.target.closest("a")) {
             e.preventDefault();
           }
         });
 
-        sentenceA.dataset.hasClickListener = 'true';
+        sentenceA.dataset.hasClickListener = "true";
       }
     });
 
-    xrefPairs.forEach(xref => {
-      const xrefGlossary = xref.querySelector('[data-sc-content="xref-glossary"]');
+    xrefPairs.forEach((xref) => {
+      const xrefGlossary = xref.querySelector(
+        '[data-sc-content="xref-glossary"]',
+      );
       handleHover(xref, xrefGlossary);
     });
 
-    antonymPairs.forEach(antonym => {
-      const antonymGlossary = antonym.querySelector('[data-sc-content="antonym-glossary"]');
+    antonymPairs.forEach((antonym) => {
+      const antonymGlossary = antonym.querySelector(
+        '[data-sc-content="antonym-glossary"]',
+      );
       handleHover(antonym, antonymGlossary);
     });
 
-    notePairs.forEach(note => {
-      const noteGlossary = note.querySelector('div:last-child');
+    notePairs.forEach((note) => {
+      const noteGlossary = note.querySelector("div:last-child");
       handleHover(note, noteGlossary);
     });
 
-    explanationPairs.forEach(explanation => {
-      const infoGloss = explanation.querySelector('div:last-child');
+    explanationPairs.forEach((explanation) => {
+      const infoGloss = explanation.querySelector("div:last-child");
       handleHover(explanation, infoGloss);
     });
 
-    langPairs.forEach(lang => {
-      const langSource = lang.querySelector('div:last-child');
+    langPairs.forEach((lang) => {
+      const langSource = lang.querySelector("div:last-child");
       handleHover(lang, langSource);
     });
   }
 
   // Ensures picture field videos behave like images in the picture container
   function initializePictureVideos() {
-    const pictureContainer = document.querySelector('.picture-container');
+    const pictureContainer = document.querySelector(".picture-container");
     if (!pictureContainer) return;
 
-    const shouldAutoplay = denchouConfig.autoPlayVideo !== 'false';
-    const shouldMute = denchouConfig.muteVideo !== 'false';
+    const shouldAutoplay = denchouConfig.autoPlayVideo !== "false";
+    const shouldMute = denchouConfig.muteVideo !== "false";
 
-    pictureContainer.querySelectorAll('video').forEach(video => {
+    pictureContainer.querySelectorAll("video").forEach((video) => {
       // No controls bar, infinite loop
-      video.removeAttribute('controls');
-      video.setAttribute('playsinline', '');
+      video.removeAttribute("controls");
+      video.setAttribute("playsinline", "");
 
       video.autoplay = shouldAutoplay;
       video.loop = true;
       video.muted = shouldMute;
       video.playsInline = true;
-      video.preload = 'metadata';
+      video.preload = "metadata";
 
       if (!shouldAutoplay) {
-        video.removeAttribute('autoplay');
+        video.removeAttribute("autoplay");
       }
 
       // Fallback: restart on ended in case loop property is ignored (AnkiDroid WebView)
-      video.addEventListener('ended', () => {
+      video.addEventListener("ended", () => {
         video.currentTime = 0;
-        video.play().catch(() => { });
+        video.play().catch(() => {});
       });
 
       // Click/tap: toggle play/pause (debounced to prevent flicker on double-click)
       let lastClickTime = 0;
-      video.addEventListener('click', () => {
+      video.addEventListener("click", () => {
         const now = Date.now();
         if (now - lastClickTime < 300) return; // suppress if dblclick pending
         lastClickTime = now;
         if (video.paused) {
-          video.play().catch(() => { });
+          video.play().catch(() => {});
         } else {
           video.pause();
         }
@@ -192,15 +211,15 @@
       if (shouldAutoplay) {
         const playVideo = () => {
           const playPromise = video.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(() => { });
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
           }
         };
 
         if (video.readyState >= 2) {
           playVideo();
         } else {
-          video.addEventListener('loadedmetadata', playVideo, { once: true });
+          video.addEventListener("loadedmetadata", playVideo, { once: true });
         }
       }
     });
@@ -209,12 +228,15 @@
   // Allows cycling through images and videos
   function enableImageSwitching() {
     let currentImageIndex = 0;
-    const getPictureMedia = () => Array.from(document.querySelectorAll('.picture-container :is(img, video)'));
+    const getPictureMedia = () =>
+      Array.from(
+        document.querySelectorAll(".picture-container :is(img, video)"),
+      );
 
     function getMediaBackgroundUrl(media) {
-      if (!media) return '';
-      if (media.tagName === 'VIDEO') return media.poster || '';
-      return media.currentSrc || media.src || '';
+      if (!media) return "";
+      if (media.tagName === "VIDEO") return media.poster || "";
+      return media.currentSrc || media.src || "";
     }
 
     function isMediaVisible(media) {
@@ -222,23 +244,26 @@
     }
 
     function syncPictureFrameBackground() {
-      const pictureContainer = document.querySelector('.picture-container');
+      const pictureContainer = document.querySelector(".picture-container");
       if (!pictureContainer) return;
 
-      if (window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true') {
-        pictureContainer.style.removeProperty('--picture-frame-bg');
+      if (window.IS_NSFW && denchouConfig.blurNsfwPicture === "true") {
+        pictureContainer.style.removeProperty("--picture-frame-bg");
         return;
       }
 
-      const visibleMedia = getPictureMedia().find(media => {
+      const visibleMedia = getPictureMedia().find((media) => {
         return isMediaVisible(media);
       });
 
       const mediaUrl = getMediaBackgroundUrl(visibleMedia);
       if (mediaUrl) {
-        pictureContainer.style.setProperty('--picture-frame-bg', `url(${JSON.stringify(mediaUrl)})`);
+        pictureContainer.style.setProperty(
+          "--picture-frame-bg",
+          `url(${JSON.stringify(mediaUrl)})`,
+        );
       } else {
-        pictureContainer.style.removeProperty('--picture-frame-bg');
+        pictureContainer.style.removeProperty("--picture-frame-bg");
       }
     }
 
@@ -249,13 +274,15 @@
       const mediaItems = getPictureMedia();
       if (mediaItems.length === 0) return;
 
-      const visibleIndex = mediaItems.findIndex(media => {
-        return window.getComputedStyle(media).display !== 'none';
+      const visibleIndex = mediaItems.findIndex((media) => {
+        return window.getComputedStyle(media).display !== "none";
       });
 
       if (visibleIndex !== -1) currentImageIndex = visibleIndex;
 
-      mediaItems.forEach(media => media.style.setProperty('display', 'none', 'important'));
+      mediaItems.forEach((media) =>
+        media.style.setProperty("display", "none", "important"),
+      );
 
       currentImageIndex += direction;
 
@@ -265,7 +292,11 @@
         currentImageIndex = mediaItems.length - 1;
       }
 
-      mediaItems[currentImageIndex].style.setProperty('display', 'block', 'important');
+      mediaItems[currentImageIndex].style.setProperty(
+        "display",
+        "block",
+        "important",
+      );
       syncPictureFrameBackground();
       updatePictureCounter();
     }
@@ -275,24 +306,24 @@
     };
 
     function refreshImageNavigation() {
-      const arrows = document.querySelectorAll('.nav-arrow');
+      const arrows = document.querySelectorAll(".nav-arrow");
       const mediaItems = getPictureMedia();
 
       if (mediaItems.length <= 1) {
-        arrows.forEach(arrow => arrow.classList.add('hidden'));
+        arrows.forEach((arrow) => arrow.classList.add("hidden"));
       } else {
-        arrows.forEach(arrow => arrow.classList.remove('hidden'));
+        arrows.forEach((arrow) => arrow.classList.remove("hidden"));
       }
     }
 
-    const arrows = document.querySelectorAll('.nav-arrow');
-    arrows.forEach(arrow => {
+    const arrows = document.querySelectorAll(".nav-arrow");
+    arrows.forEach((arrow) => {
       if (!arrow.dataset.hasClickListener) {
-        arrow.addEventListener('click', (event) => {
-          const direction = arrow.classList.contains('left') ? -1 : 1;
+        arrow.addEventListener("click", (event) => {
+          const direction = arrow.classList.contains("left") ? -1 : 1;
           switchImage(direction, event);
         });
-        arrow.dataset.hasClickListener = 'true';
+        arrow.dataset.hasClickListener = "true";
       }
     });
 
@@ -304,12 +335,19 @@
 
   // Creates lightbox for image and video viewing
   function enableLightbox() {
-    const getPictureMedia = () => Array.from(document.querySelectorAll('.picture-container :is(img, video)'));
+    const getPictureMedia = () =>
+      Array.from(
+        document.querySelectorAll(".picture-container :is(img, video)"),
+      );
     if (!getPictureMedia().length) return;
 
     let currentIndex = 0;
-    let scale = 1, translateX = 0, translateY = 0;
-    let isPanning = false, startX = 0, startY = 0;
+    let scale = 1,
+      translateX = 0,
+      translateY = 0;
+    let isPanning = false,
+      startX = 0,
+      startY = 0;
     let isGridView = false;
     let heavyListenersSetup = false;
 
@@ -320,7 +358,15 @@
     const rightButton = document.querySelector(".lightbox-nav.right");
     const showAll = document.getElementById("show-all");
 
-    if (!lightbox || !lightboxImg || !lightboxVideo || !leftButton || !rightButton || !showAll) return;
+    if (
+      !lightbox ||
+      !lightboxImg ||
+      !lightboxVideo ||
+      !leftButton ||
+      !rightButton ||
+      !showAll
+    )
+      return;
 
     function syncNavigationVisibility() {
       const mediaItems = getPictureMedia();
@@ -385,7 +431,7 @@
           gridMedia.alt = media.alt || `Image ${index + 1}`;
         }
 
-        gridMedia.classList.add('tappable');
+        gridMedia.classList.add("tappable");
         gridMedia.addEventListener("click", () => {
           showImage(index);
           hideGridView();
@@ -435,13 +481,13 @@
       hideLightboxMedia();
 
       // NSFW: sync blur state from picture container to lightbox
-      const isNSFW = window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true';
+      const isNSFW = window.IS_NSFW && denchouConfig.blurNsfwPicture === "true";
       if (isNSFW) {
         lightbox.classList.add("nsfw");
         // Transfer .clicked state from picture media to lightbox media
-        if (media.classList.contains('clicked')) {
+        if (media.classList.contains("clicked")) {
           const target = isVideo ? lightboxVideo : lightboxImg;
-          target.classList.add('clicked');
+          target.classList.add("clicked");
         }
       } else {
         lightbox.classList.remove("nsfw");
@@ -487,8 +533,9 @@
 
     getPictureMedia().forEach((media) => {
       if (!media.dataset.hasLightboxListener) {
-        const isNSFW = window.IS_NSFW && denchouConfig.blurNsfwPicture === 'true';
-        const isVideo = media.tagName.toLowerCase() === 'video';
+        const isNSFW =
+          window.IS_NSFW && denchouConfig.blurNsfwPicture === "true";
+        const isVideo = media.tagName.toLowerCase() === "video";
         const openMedia = () => {
           const mediaItems = getPictureMedia();
           const mediaIndex = mediaItems.indexOf(media);
@@ -499,7 +546,7 @@
 
         if (isNSFW) {
           media.addEventListener("click", (e) => {
-            if (media.classList.contains('clicked')) {
+            if (media.classList.contains("clicked")) {
               // After NSFW unblur: double-click opens lightbox for videos, single-click for images
               if (isVideo) {
                 // dblclick handled separately
@@ -507,12 +554,12 @@
                 openMedia();
               }
             } else {
-              media.classList.add('clicked');
+              media.classList.add("clicked");
             }
           });
           if (isVideo) {
             media.addEventListener("dblclick", (e) => {
-              if (media.classList.contains('clicked')) {
+              if (media.classList.contains("clicked")) {
                 openMedia();
               }
             });
@@ -526,7 +573,7 @@
             media.addEventListener("click", openMedia);
           }
         }
-        media.dataset.hasLightboxListener = 'true';
+        media.dataset.hasLightboxListener = "true";
       }
     });
 
@@ -539,7 +586,7 @@
           showGridView();
         }
       });
-      showAll.dataset.hasClickListener = 'true';
+      showAll.dataset.hasClickListener = "true";
     }
 
     if (!lightbox.dataset.hasShortcutsListener) {
@@ -556,14 +603,20 @@
           const mediaItems = getPictureMedia();
           if (!mediaItems.length) return;
           if (e.key === "ArrowLeft") {
-            showImage(currentIndex = (currentIndex > 0) ? currentIndex - 1 : mediaItems.length - 1);
+            showImage(
+              (currentIndex =
+                currentIndex > 0 ? currentIndex - 1 : mediaItems.length - 1),
+            );
           }
           if (e.key === "ArrowRight") {
-            showImage(currentIndex = (currentIndex < mediaItems.length - 1) ? currentIndex + 1 : 0);
+            showImage(
+              (currentIndex =
+                currentIndex < mediaItems.length - 1 ? currentIndex + 1 : 0),
+            );
           }
         }
       });
-      lightbox.dataset.hasShortcutsListener = 'true';
+      lightbox.dataset.hasShortcutsListener = "true";
     }
 
     function setupHeavyListeners() {
@@ -586,7 +639,7 @@
             showAll.style.display = "none";
           }
         });
-        lightboxImg.dataset.hasWheelListener = 'true';
+        lightboxImg.dataset.hasWheelListener = "true";
       }
 
       if (!lightboxImg.dataset.hasMousedownListener) {
@@ -598,17 +651,17 @@
           startY = e.clientY - translateY;
           lightboxImg.style.cursor = "grabbing";
         });
-        lightboxImg.dataset.hasMousedownListener = 'true';
+        lightboxImg.dataset.hasMousedownListener = "true";
       }
 
       let initialDistance = null;
 
       if (!lightboxImg.dataset.hasTouchListeners) {
-        lightboxImg.addEventListener('touchstart', (e) => {
+        lightboxImg.addEventListener("touchstart", (e) => {
           if (e.touches.length === 2) {
             initialDistance = Math.hypot(
               e.touches[0].pageX - e.touches[1].pageX,
-              e.touches[0].pageY - e.touches[1].pageY
+              e.touches[0].pageY - e.touches[1].pageY,
             );
             isPanning = false;
           } else if (e.touches.length === 1 && scale > 1) {
@@ -622,12 +675,12 @@
           }
         });
 
-        lightboxImg.addEventListener('touchmove', (e) => {
+        lightboxImg.addEventListener("touchmove", (e) => {
           if (e.touches.length === 2 && initialDistance !== null) {
             e.preventDefault();
             const newDistance = Math.hypot(
               e.touches[0].pageX - e.touches[1].pageX,
-              e.touches[0].pageY - e.touches[1].pageY
+              e.touches[0].pageY - e.touches[1].pageY,
             );
             const newScale = scale * (newDistance / initialDistance);
             const prevScale = scale;
@@ -636,8 +689,10 @@
 
             if (scale > 1) {
               const rect = lightboxImg.getBoundingClientRect();
-              const touchCenterX = (e.touches[0].pageX + e.touches[1].pageX) / 2;
-              const touchCenterY = (e.touches[0].pageY + e.touches[1].pageY) / 2;
+              const touchCenterX =
+                (e.touches[0].pageX + e.touches[1].pageX) / 2;
+              const touchCenterY =
+                (e.touches[0].pageY + e.touches[1].pageY) / 2;
 
               const offsetX = (touchCenterX - rect.left) / rect.width;
               const offsetY = (touchCenterY - rect.top) / rect.height;
@@ -652,7 +707,6 @@
               if (getPictureMedia().length > 1) showAll.style.display = "block";
             }
             initialDistance = newDistance;
-
           } else if (e.touches.length === 1 && isPanning) {
             e.preventDefault();
             translateX = e.touches[0].pageX - startX;
@@ -661,7 +715,7 @@
           }
         });
 
-        lightboxImg.addEventListener('touchend', (e) => {
+        lightboxImg.addEventListener("touchend", (e) => {
           if (e.touches.length < 2) {
             initialDistance = null;
           }
@@ -669,7 +723,7 @@
             isPanning = false;
           }
         });
-        lightboxImg.dataset.hasTouchListeners = 'true';
+        lightboxImg.dataset.hasTouchListeners = "true";
       }
 
       const moveImage = (e) => {
@@ -688,14 +742,18 @@
           isPanning = false;
           lightboxImg.style.cursor = "grab";
         });
-        lightbox.dataset.hasMouseMoveListeners = 'true';
+        lightbox.dataset.hasMouseMoveListeners = "true";
       }
     }
 
     if (!lightbox.dataset.hasClickListeners) {
       lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox ||
-          (isGridView && !e.target.closest('.lightbox-grid :is(img, video)') && e.target !== showAll)) {
+        if (
+          e.target === lightbox ||
+          (isGridView &&
+            !e.target.closest(".lightbox-grid :is(img, video)") &&
+            e.target !== showAll)
+        ) {
           if (isGridView) {
             lightbox.classList.remove("active");
           } else {
@@ -705,7 +763,7 @@
       });
 
       // NSFW: click on lightbox media to unblur
-      [lightboxVideo, lightboxImg].forEach(el => {
+      [lightboxVideo, lightboxImg].forEach((el) => {
         el.addEventListener("click", () => {
           if (lightbox.classList.contains("nsfw")) {
             el.classList.add("clicked");
@@ -714,8 +772,12 @@
       });
 
       lightbox.addEventListener("touchend", (e) => {
-        if (e.target === lightbox ||
-          (isGridView && !e.target.closest('.lightbox-grid :is(img, video)') && e.target !== showAll)) {
+        if (
+          e.target === lightbox ||
+          (isGridView &&
+            !e.target.closest(".lightbox-grid :is(img, video)") &&
+            e.target !== showAll)
+        ) {
           if (isGridView) {
             lightbox.classList.remove("active");
           } else {
@@ -723,59 +785,65 @@
           }
         }
       });
-      lightbox.dataset.hasClickListeners = 'true';
+      lightbox.dataset.hasClickListeners = "true";
     }
 
     if (!leftButton.dataset.hasClickListener) {
       leftButton.addEventListener("click", () => {
         const mediaItems = getPictureMedia();
-        showImage(currentIndex = (currentIndex > 0) ? currentIndex - 1 : mediaItems.length - 1);
+        showImage(
+          (currentIndex =
+            currentIndex > 0 ? currentIndex - 1 : mediaItems.length - 1),
+        );
       });
-      leftButton.dataset.hasClickListener = 'true';
+      leftButton.dataset.hasClickListener = "true";
     }
 
     if (!rightButton.dataset.hasClickListener) {
       rightButton.addEventListener("click", () => {
         const mediaItems = getPictureMedia();
-        showImage(currentIndex = (currentIndex < mediaItems.length - 1) ? currentIndex + 1 : 0);
+        showImage(
+          (currentIndex =
+            currentIndex < mediaItems.length - 1 ? currentIndex + 1 : 0),
+        );
       });
-      rightButton.dataset.hasClickListener = 'true';
+      rightButton.dataset.hasClickListener = "true";
     }
   }
 
   // Custom Shortcuts
   function enableCustomShortcuts() {
-    ['denchouFrontSettingsHandler', 'denchouBackKeyHandler'].forEach(h => {
-      if (window[h]) document.removeEventListener('keydown', window[h]);
+    ["denchouFrontSettingsHandler", "denchouBackKeyHandler"].forEach((h) => {
+      if (window[h]) document.removeEventListener("keydown", window[h]);
       window[h] = null;
     });
 
     const utils = {
       isTyping: () => {
         const active = document.activeElement;
-        return active && ['INPUT', 'TEXTAREA'].includes(active.tagName);
+        return active && ["INPUT", "TEXTAREA"].includes(active.tagName);
       },
 
       getVar: (name) => {
         const map = {
-          '--toggle-settings-key': 'toggleSettingsKey',
-          '--toggle-picture-lightbox-grid-key': 'togglePictureLightboxGridKey',
-          '--toggle-picture-lightbox-key': 'togglePictureLightboxKey',
-          '--toggle-custom-dark-mode-key': 'toggleCustomDarkModeKey',
-          '--toggle-image-key': 'toggleImageKey'
+          "--toggle-settings-key": "toggleSettingsKey",
+          "--toggle-picture-lightbox-grid-key": "togglePictureLightboxGridKey",
+          "--toggle-picture-lightbox-key": "togglePictureLightboxKey",
+          "--toggle-custom-dark-mode-key": "toggleCustomDarkModeKey",
+          "--toggle-image-key": "toggleImageKey",
         };
         const key = map[name];
-        return key ? denchouConfig[key] : '';
-      }
+        return key ? denchouConfig[key] : "";
+      },
     };
 
     const actions = {
       settings: () => {
-        const modal = document.getElementById('denchou-settings-modal');
-        const btn = document.querySelector('.toggle-settings-btn');
+        const modal = document.getElementById("denchou-settings-modal");
+        const btn = document.querySelector(".toggle-settings-btn");
 
         if (modal) {
-          modal.classList.toggle('active');
+          modal.classList.toggle("active");
         } else if (btn) {
           btn.click();
         }
@@ -787,7 +855,9 @@
 
         if (lb && !lb.classList.contains("active")) {
           const mediaItems = getPictureMedia();
-          const visible = mediaItems.find(m => getComputedStyle(m).display !== 'none') || mediaItems[0];
+          const visible =
+            mediaItems.find((m) => getComputedStyle(m).display !== "none") ||
+            mediaItems[0];
 
           visible?.click();
           setTimeout(() => btn?.click(), 10);
@@ -811,10 +881,12 @@
           if (showAllBtn) showAllBtn.textContent = "Show All";
 
           const navs = document.querySelectorAll(".lightbox-nav");
-          navs.forEach(n => n.style.display = "");
+          navs.forEach((n) => (n.style.display = ""));
         } else {
           const mediaItems = getPictureMedia();
-          const visible = mediaItems.find(m => getComputedStyle(m).display !== 'none') || mediaItems[0];
+          const visible =
+            mediaItems.find((m) => getComputedStyle(m).display !== "none") ||
+            mediaItems[0];
 
           visible?.click();
         }
@@ -827,22 +899,26 @@
       },
 
       imageToggle: () => {
-        const wrap = document.querySelector('.back');
-        const btn = document.querySelector('.header .show-btn');
+        const wrap = document.querySelector(".back");
+        const btn = document.querySelector(".header .show-btn");
 
         if (wrap && btn) {
-          const isHidden = wrap.classList.toggle('image-removed');
+          const isHidden = wrap.classList.toggle("image-removed");
 
           localStorage.setItem("denchouImageHidden", isHidden);
-          btn.style.setProperty('display', isHidden ? 'flex' : 'none', 'important');
+          btn.style.setProperty(
+            "display",
+            isHidden ? "flex" : "none",
+            "important",
+          );
 
-          if (typeof dynamicCardHeight === 'function') dynamicCardHeight();
+          if (typeof dynamicCardHeight === "function") dynamicCardHeight();
         }
-      }
+      },
     };
 
     if (window.denchouBackKeyHandler) {
-      document.removeEventListener('keydown', window.denchouBackKeyHandler);
+      document.removeEventListener("keydown", window.denchouBackKeyHandler);
       window.denchouBackKeyHandler = null;
     }
 
@@ -850,9 +926,23 @@
       if (utils.isTyping()) return;
 
       const pairShortcuts = [
-        { key: denchouConfig.toggleDictionarySwitchKey, action: (dir) => window.denchouToggleDictionary && window.denchouToggleDictionary(dir) },
-        { key: denchouConfig.toggleSceneSwitchKey, action: (dir) => window.denchouToggleScene && window.denchouToggleScene(dir) },
-        { key: denchouConfig.toggleImageSwitchKey, action: (dir) => window.denchouToggleImage && window.denchouToggleImage(dir === 'left' ? -1 : 1, e) }
+        {
+          key: denchouConfig.toggleDictionarySwitchKey,
+          action: (dir) =>
+            window.denchouToggleDictionary &&
+            window.denchouToggleDictionary(dir),
+        },
+        {
+          key: denchouConfig.toggleSceneSwitchKey,
+          action: (dir) =>
+            window.denchouToggleScene && window.denchouToggleScene(dir),
+        },
+        {
+          key: denchouConfig.toggleImageSwitchKey,
+          action: (dir) =>
+            window.denchouToggleImage &&
+            window.denchouToggleImage(dir === "left" ? -1 : 1, e),
+        },
       ];
 
       for (const item of pairShortcuts) {
@@ -868,10 +958,19 @@
 
       const shortcuts = [
         { key: denchouConfig.toggleSettingsKey, action: actions.settings },
-        { key: denchouConfig.togglePictureLightboxGridKey, action: actions.lightboxGrid },
-        { key: denchouConfig.togglePictureLightboxKey, action: actions.lightbox },
-        { key: denchouConfig.toggleCustomDarkModeKey, action: actions.customDarkMode },
-        { key: denchouConfig.toggleImageKey, action: actions.imageToggle }
+        {
+          key: denchouConfig.togglePictureLightboxGridKey,
+          action: actions.lightboxGrid,
+        },
+        {
+          key: denchouConfig.togglePictureLightboxKey,
+          action: actions.lightbox,
+        },
+        {
+          key: denchouConfig.toggleCustomDarkModeKey,
+          action: actions.customDarkMode,
+        },
+        { key: denchouConfig.toggleImageKey, action: actions.imageToggle },
       ];
 
       for (const item of shortcuts) {
@@ -891,7 +990,7 @@
       }
     };
 
-    document.addEventListener('keydown', window.denchouBackKeyHandler);
+    document.addEventListener("keydown", window.denchouBackKeyHandler);
   }
 
   // Init

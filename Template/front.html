@@ -1,917 +1,1183 @@
 <!-- FRONT -->
 <div id="denchou-metadata" data-deck="{{Deck}}"></div>
 <div class="front">
+    <!-- HEADER -->
+    <div class="header">
+        <!-- Custom Dark Mode Toggle -->
+        <span class="toggle-custom-dark-mode tappable">
+            <svg
+                class="lucide-icon sun-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="m17.66 17.66 1.41 1.41" />
+                <path d="M2 12h2" />
+                <path d="M20 12h2" />
+                <path d="m6.34 17.66-1.41 1.41" />
+                <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+            <svg
+                class="lucide-icon moon-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path
+                    d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+                />
+            </svg>
+        </span>
 
-  <!-- HEADER -->
-  <div class="header">
+        {{#audioCard}}
+        <span
+            class="audio-hint toggle-trigger tappable"
+            onclick="
+                toggleVisibility('sentence-wrapper-audio', 'sentence-audio')
+            "
+        >
+            <svg
+                class="lucide-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path
+                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+                />
+                <path d="M9 18h6" />
+                <path d="M10 22h4" />
+            </svg>
+        </span>
+        {{/audioCard}}
 
-    <!-- Custom Dark Mode Toggle -->
-    <span class="toggle-custom-dark-mode tappable">
-      <svg class="lucide-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      <svg class="lucide-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
-    </span>
+        <!-- Settings Toggle -->
+        <span
+            class="toggle-settings-btn tappable"
+            onclick="window.denchouInitMenu && window.denchouInitMenu()"
+        >
+            <svg
+                class="lucide-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M11 10.27 7 3.34" />
+                <path d="m11 13.73-4 6.93" />
+                <path d="M12 22v-2" />
+                <path d="M12 2v2" />
+                <path d="M14 12h8" />
+                <path d="m17 20.66-1-1.73" />
+                <path d="m17 3.34-1 1.73" />
+                <path d="M2 12h2" />
+                <path d="m20.66 17-1.73-1" />
+                <path d="m20.66 7-1.73 1" />
+                <path d="m3.34 17 1.73-1" />
+                <path d="m3.34 7 1.73 1" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="12" cy="12" r="8" />
+            </svg>
+        </span>
 
-    {{#audioCard}}
-    <span class="audio-hint toggle-trigger tappable" onclick="toggleVisibility('sentence-wrapper-audio', 'sentence-audio')">
-      <svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-    </span>
-    {{/audioCard}}
+        {{#hint}}
+        <span
+            class="hint-btn toggle-trigger tappable"
+            onclick="toggleVisibility('hint-wrapper', 'hint-content')"
+        >
+            <svg
+                class="lucide-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <path d="M12 17h.01" />
+            </svg>
+        </span>
+        {{/hint}}
+        <!-- /HEADER -->
+    </div>
 
-    <!-- Settings Toggle -->
-    <span class="toggle-settings-btn tappable" onclick="window.denchouInitMenu && window.denchouInitMenu()">
-      <svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 10.27 7 3.34"/><path d="m11 13.73-4 6.93"/><path d="M12 22v-2"/><path d="M12 2v2"/><path d="M14 12h8"/><path d="m17 20.66-1-1.73"/><path d="m17 3.34-1 1.73"/><path d="M2 12h2"/><path d="m20.66 17-1.73-1"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m3.34 7 1.73 1"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="8"/></svg>
-    </span>
+    <!-- Audio Card -->
+    {{#audioCard}}{{#wordAudio}}
+    <div id="wordAudio">{{wordAudio}}</div>
+    {{/wordAudio}}{{#sentenceAudio}}
 
-    {{#hint}}
-    <span class="hint-btn toggle-trigger tappable" onclick="toggleVisibility('hint-wrapper', 'hint-content')">
-      <svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-    </span>
+    <div id="sentenceAudio">{{sentenceAudio}}</div>
+    {{/sentenceAudio}}{{/audioCard}}
+
+    <div id="sentence-wrapper-audio">
+        <div id="sentence-audio">{{sentence}}</div>
+    </div>
+
+    <!-- Sentence Card -->
+    {{^audioCard}}{{#sentenceCard}}
+    <div id="word-wrapper">
+        <div id="word">{{word}}</div>
+    </div>
+
+    <div
+        id="sentence"
+        class="toggle-trigger tappable"
+        onclick="toggleVisibility('word-wrapper', 'word')"
+    >
+        {{sentence}}
+    </div>
+    {{/sentenceCard}}{{^sentenceCard}}
+
+    <!-- Word Card (Default) -->
+    <div class="desktop-word-layout">
+        <div
+            id="word"
+            class="toggle-trigger tappable"
+            onclick="toggleVisibility('sentence-wrapper', 'sentence')"
+        >
+            {{word}}
+        </div>
+    </div>
+
+    <div class="mobile-word-layout">
+        <div class="background-box">
+            <div
+                id="word"
+                class="toggle-trigger tappable"
+                onclick="toggleVisibility('sentence-wrapper', 'sentence')"
+            >
+                {{word}}
+            </div>
+        </div>
+    </div>
+
+    <div id="sentence-wrapper">
+        <div id="sentence" class="sentence-front">{{sentence}}</div>
+    </div>
+    {{/sentenceCard}}{{/audioCard}} {{#hint}}
+    <div id="hint-wrapper">
+        <div id="hint-content">{{hint}}</div>
+    </div>
     {{/hint}}
-    <!-- /HEADER -->
-  </div>
-
-  <!-- Audio Card -->
-  {{#audioCard}}{{#wordAudio}}
-  <div id="wordAudio">
-    {{wordAudio}}
-  </div>
-  {{/wordAudio}}{{#sentenceAudio}}
-
-  <div id="sentenceAudio">
-    {{sentenceAudio}}
-  </div>
-  {{/sentenceAudio}}{{/audioCard}}
-
-  <div id="sentence-wrapper-audio">
-    <div id="sentence-audio">
-      {{sentence}}
-    </div>
-  </div>
-
-  <!-- Sentence Card -->
-  {{^audioCard}}{{#sentenceCard}}
-  <div id="word-wrapper">
-    <div id="word">
-      {{word}}
-    </div>
-  </div>
-
-  <div id="sentence" class="toggle-trigger tappable" onclick="toggleVisibility('word-wrapper', 'word')">
-    {{sentence}}
-  </div>
-  {{/sentenceCard}}{{^sentenceCard}}
-
-  <!-- Word Card (Default) -->
-  <div class="desktop-word-layout">
-    <div id="word" class="toggle-trigger tappable" onclick="toggleVisibility('sentence-wrapper', 'sentence')">
-      {{word}}
-    </div>
-  </div>
-
-  <div class="mobile-word-layout">
-    <div class="background-box">
-      <div id="word" class="toggle-trigger tappable" onclick="toggleVisibility('sentence-wrapper', 'sentence')">
-        {{word}}
-      </div>
-    </div>
-  </div>
-
-  <div id="sentence-wrapper">
-    <div id="sentence" class="sentence-front">
-      {{sentence}}
-    </div>
-  </div>
-  {{/sentenceCard}}{{/audioCard}}
-
-  {{#hint}}
-  <div id="hint-wrapper">
-    <div id="hint-content">
-      {{hint}}
-    </div>
-  </div>
-  {{/hint}}
 </div>
 <!-- /FRONT -->
 
 <!-- Hidden field to let JS calculate audio delay based on reading length -->
-<div id="hiddenReading" style="display: none;">{{#pitchAccents}}{{pitchAccents}}{{/pitchAccents}}{{^pitchAccents}}{{reading}}{{/pitchAccents}}</div>
+<div id="hiddenReading" style="display: none">
+    {{#pitchAccents}}{{pitchAccents}}{{/pitchAccents}}{{^pitchAccents}}{{reading}}{{/pitchAccents}}
+</div>
 
 <script>
-  var denchouConfig = {};
+    var denchouConfig = {};
 
-  // Deck Presets
-  (function () {
-    // Apply cached settings
-    const meta = document.getElementById('denchou-metadata');
-    const currentDeck = meta ? meta.getAttribute('data-deck') : null;
+    // Deck Presets
+    (function () {
+        // Apply cached settings
+        const meta = document.getElementById("denchou-metadata");
+        const currentDeck = meta ? meta.getAttribute("data-deck") : null;
 
-    if (!currentDeck) return;
+        if (!currentDeck) return;
 
-    try {
-      const linksJson = localStorage.getItem('denchou_deck_presets_cache');
-      const presetsJson = localStorage.getItem('denchou_presets_cache');
+        try {
+            const linksJson = localStorage.getItem(
+                "denchou_deck_presets_cache",
+            );
+            const presetsJson = localStorage.getItem("denchou_presets_cache");
 
-      if (linksJson && presetsJson) {
-        const links = JSON.parse(linksJson);
-        const presets = JSON.parse(presetsJson);
-        const targetPresetName = links[currentDeck];
+            if (linksJson && presetsJson) {
+                const links = JSON.parse(linksJson);
+                const presets = JSON.parse(presetsJson);
+                const targetPresetName = links[currentDeck];
 
-        if (targetPresetName && presets[targetPresetName]) {
-          const settings = presets[targetPresetName];
-          for (const [key, val] of Object.entries(settings)) {
-            if (key.startsWith('--')) {
-              document.documentElement.style.setProperty(key, val);
-              localStorage.setItem("denchou_" + key, val);
+                if (targetPresetName && presets[targetPresetName]) {
+                    const settings = presets[targetPresetName];
+                    for (const [key, val] of Object.entries(settings)) {
+                        if (key.startsWith("--")) {
+                            document.documentElement.style.setProperty(
+                                key,
+                                val,
+                            );
+                            localStorage.setItem("denchou_" + key, val);
+                        }
+                    }
+                } else if (
+                    sessionStorage.getItem("denchou_deck_preset_applied") ===
+                    "true"
+                ) {
+                    const activeName = presets["_active"] || "Default";
+                    if (presets[activeName]) {
+                        const settings = presets[activeName];
+                        for (const [key, val] of Object.entries(settings)) {
+                            if (key.startsWith("--")) {
+                                document.documentElement.style.setProperty(
+                                    key,
+                                    val,
+                                );
+                                localStorage.setItem("denchou_" + key, val);
+                            }
+                        }
+                    }
+                }
             }
-          }
-        } else if (sessionStorage.getItem('denchou_deck_preset_applied') === 'true') {
-          const activeName = presets["_active"] || "Default";
-          if (presets[activeName]) {
-            const settings = presets[activeName];
-            for (const [key, val] of Object.entries(settings)) {
-              if (key.startsWith('--')) {
-                document.documentElement.style.setProperty(key, val);
-                localStorage.setItem("denchou_" + key, val);
-              }
+        } catch (e) {
+            console.error("Sync deck style error:", e);
+        }
+
+        // Update cache if deck changed
+        (async function () {
+            const lastDeck = sessionStorage.getItem("denchou_last_deck");
+            if (currentDeck === lastDeck) return;
+
+            try {
+                const linksRes = await fetch(
+                    `_denchou_deck_presets.js?v=0.2.1`,
+                );
+                const presetsRes = await fetch(`_denchou_presets.js?v=0.2.1`);
+
+                if (linksRes.ok && presetsRes.ok) {
+                    const links = await linksRes.json();
+                    const presets = await presetsRes.json();
+
+                    localStorage.setItem(
+                        "denchou_deck_presets_cache",
+                        JSON.stringify(links),
+                    );
+                    localStorage.setItem(
+                        "denchou_presets_cache",
+                        JSON.stringify(presets),
+                    );
+
+                    const targetPresetName = links[currentDeck];
+                    if (targetPresetName && presets[targetPresetName]) {
+                        sessionStorage.setItem(
+                            "denchou_deck_preset_applied",
+                            "true",
+                        );
+                    } else {
+                        sessionStorage.removeItem(
+                            "denchou_deck_preset_applied",
+                        );
+                    }
+                }
+            } catch (e) {
+                console.error("Async deck sync error:", e);
             }
-          }
-        }
-      }
-    } catch (e) { console.error("Sync deck style error:", e); }
-
-    // Update cache if deck changed
-    (async function () {
-      const lastDeck = sessionStorage.getItem('denchou_last_deck');
-      if (currentDeck === lastDeck) return;
-
-      try {
-        const linksRes = await fetch(`_denchou_deck_presets.js?v=0.2.1`);
-        const presetsRes = await fetch(`_denchou_presets.js?v=0.2.1`);
-
-        if (linksRes.ok && presetsRes.ok) {
-          const links = await linksRes.json();
-          const presets = await presetsRes.json();
-
-          localStorage.setItem('denchou_deck_presets_cache', JSON.stringify(links));
-          localStorage.setItem('denchou_presets_cache', JSON.stringify(presets));
-
-          const targetPresetName = links[currentDeck];
-          if (targetPresetName && presets[targetPresetName]) {
-            sessionStorage.setItem('denchou_deck_preset_applied', 'true');
-          } else {
-            sessionStorage.removeItem('denchou_deck_preset_applied');
-          }
-        }
-      } catch (e) { console.error("Async deck sync error:", e); }
-      sessionStorage.setItem('denchou_last_deck', currentDeck);
+            sessionStorage.setItem("denchou_last_deck", currentDeck);
+        })();
     })();
-  })();
 
-  // Remove duplicate listeners
-  if (window.denchouFrontSettingsHandler) {
-    document.removeEventListener('keydown', window.denchouFrontSettingsHandler);
-    window.denchouFrontSettingsHandler = null;
-  }
-  if (window.denchouBackKeyHandler) {
-    document.removeEventListener('keydown', window.denchouBackKeyHandler);
-    window.denchouBackKeyHandler = null;
-  }
+    // Remove duplicate listeners
+    if (window.denchouFrontSettingsHandler) {
+        document.removeEventListener(
+            "keydown",
+            window.denchouFrontSettingsHandler,
+        );
+        window.denchouFrontSettingsHandler = null;
+    }
+    if (window.denchouBackKeyHandler) {
+        document.removeEventListener("keydown", window.denchouBackKeyHandler);
+        window.denchouBackKeyHandler = null;
+    }
 
-  // Helper functions for shortcuts
-  function parseKeyConfig(configStr) {
-    if (!configStr) return null;
-    const parts = configStr.toLowerCase().split(/[\s+]+/).filter(p => p);
-    if (parts.length === 0) return null;
+    // Helper functions for shortcuts
+    function parseKeyConfig(configStr) {
+        if (!configStr) return null;
+        const parts = configStr
+            .toLowerCase()
+            .split(/[\s+]+/)
+            .filter((p) => p);
+        if (parts.length === 0) return null;
 
-    const key = parts.pop();
-    return {
-      key: key,
-      ctrl: parts.includes('ctrl') || parts.includes('control'),
-      alt: parts.includes('alt'),
-      shift: parts.includes('shift'),
-      meta: parts.includes('meta') || parts.includes('cmd')
-    };
-  }
+        const key = parts.pop();
+        return {
+            key: key,
+            ctrl: parts.includes("ctrl") || parts.includes("control"),
+            alt: parts.includes("alt"),
+            shift: parts.includes("shift"),
+            meta: parts.includes("meta") || parts.includes("cmd"),
+        };
+    }
 
-  function isKeyMatch(event, config) {
-    if (!config) return false;
-    return (
-      event.key.toLowerCase() === config.key &&
-      event.ctrlKey === config.ctrl &&
-      event.altKey === config.alt &&
-      event.shiftKey === config.shift &&
-      event.metaKey === config.meta
-    );
-  }
+    function isKeyMatch(event, config) {
+        if (!config) return false;
+        return (
+            event.key.toLowerCase() === config.key &&
+            event.ctrlKey === config.ctrl &&
+            event.altKey === config.alt &&
+            event.shiftKey === config.shift &&
+            event.metaKey === config.meta
+        );
+    }
 
-  // Custom dark mode
-  function darkMode() {
-    const button = document.querySelector(".toggle-custom-dark-mode");
-    const body = document.querySelector("html");
-    const sunIcon = document.querySelector(".sun-icon");
-    const moonIcon = document.querySelector(".moon-icon");
+    // Custom dark mode
+    function darkMode() {
+        const button = document.querySelector(".toggle-custom-dark-mode");
+        const body = document.querySelector("html");
+        const sunIcon = document.querySelector(".sun-icon");
+        const moonIcon = document.querySelector(".moon-icon");
 
-    const applyDarkMode = () => {
-      const isDarkMode = localStorage.getItem("darkMode") === "enabled";
-      body.classList.toggle("custom-dark-mode", isDarkMode);
-      button.classList.toggle("dark-mode", isDarkMode);
+        const applyDarkMode = () => {
+            const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+            body.classList.toggle("custom-dark-mode", isDarkMode);
+            button.classList.toggle("dark-mode", isDarkMode);
 
-      sunIcon.style.display = isDarkMode ? "inline" : "none";
-      moonIcon.style.display = isDarkMode ? "none" : "inline";
-    };
+            sunIcon.style.display = isDarkMode ? "inline" : "none";
+            moonIcon.style.display = isDarkMode ? "none" : "inline";
+        };
 
-    requestAnimationFrame(applyDarkMode);
-
-    if (button && !button.dataset.hasClickListener) {
-      button.addEventListener("click", () => {
-        const isCurrentlyDark = body.classList.contains("custom-dark-mode");
-        localStorage.setItem("darkMode", isCurrentlyDark ? "disabled" : "enabled");
         requestAnimationFrame(applyDarkMode);
-      });
-      button.dataset.hasClickListener = 'true';
-    }
-  }
 
-  // Toggles visibility of word/sentence
-  function toggleVisibility(wrapperId, innerElementId) {
-    const wrapper = document.getElementById(wrapperId);
-    const innerElement = document.getElementById(innerElementId);
-
-    if (wrapper && innerElement) {
-      const isExpanded = wrapper.classList.contains('expanded');
-
-      if (!isExpanded) {
-        const scrollHeight = innerElement.scrollHeight + 'px';
-        wrapper.style.maxHeight = scrollHeight;
-        wrapper.classList.add('expanded');
-      } else {
-        wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
-        requestAnimationFrame(() => {
-          wrapper.classList.remove('expanded');
-          wrapper.style.maxHeight = '0px';
-        });
-      }
-    }
-  }
-
-  function saveActiveSceneIndex(index) {
-    try {
-      sessionStorage.setItem('denchou_active_scene_index', String(index));
-    } catch (e) { }
-  }
-
-  function clearActiveSceneIndex() {
-    try {
-      sessionStorage.removeItem('denchou_active_scene_index');
-    } catch (e) { }
-  }
-
-  // Shows or hides the audio card sentence based on CSS variables
-  function initializeAudioSentenceState() {
-    const isAudioCard = "{{#audioCard}}true{{/audioCard}}{{^audioCard}}false{{/audioCard}}" === "true";
-    if (!isAudioCard) {
-      return;
-    }
-
-    const wrapper = ELS.sentenceWrapperAudio;
-    const innerElement = ELS.sentenceAudio;
-
-    if (wrapper && innerElement) {
-      const expandByDefault = denchouConfig.audioSentenceDefaultExpanded;
-
-      if (expandByDefault === 'true') {
-        const originalWrapperTransition = wrapper.style.transition;
-        const originalInnerElementTransition = innerElement.style.transition;
-
-        wrapper.style.transition = 'none';
-        innerElement.style.transition = 'none';
-
-        requestAnimationFrame(() => {
-          const scrollHeight = innerElement.scrollHeight + 'px';
-          wrapper.style.maxHeight = scrollHeight;
-          wrapper.classList.add('expanded');
-
-          requestAnimationFrame(() => {
-            wrapper.style.transition = originalWrapperTransition;
-            innerElement.style.transition = originalInnerElementTransition;
-          });
-        });
-      }
-    }
-  }
-
-  // Shows or hides the word card sentence based on CSS variables
-  function initializeSentenceState() {
-    const wrapper = ELS.sentenceWrapper;
-    const innerElement = ELS.sentence;
-
-    if (wrapper && innerElement) {
-      const expandByDefault = denchouConfig.wordSentenceDefaultExpanded;
-
-      if (expandByDefault === 'true') {
-        const originalWrapperTransition = wrapper.style.transition;
-        const originalInnerElementTransition = innerElement.style.transition;
-
-        wrapper.style.transition = 'none';
-        innerElement.style.transition = 'none';
-
-        requestAnimationFrame(() => {
-          const scrollHeight = innerElement.scrollHeight + 'px';
-          wrapper.style.maxHeight = scrollHeight;
-          wrapper.classList.add('expanded');
-
-          requestAnimationFrame(() => {
-            wrapper.style.transition = originalWrapperTransition;
-            innerElement.style.transition = originalInnerElementTransition;
-          });
-        });
-      }
-    }
-  }
-
-  // Shows or hides the hint based on CSS variables
-  function initializeHintState() {
-    const wrapper = ELS.hintWrapper;
-    const innerElement = ELS.hintContent;
-
-    if (wrapper && innerElement) {
-      const expandByDefault = denchouConfig.hintDefaultExpanded;
-
-      if (expandByDefault === 'true') {
-        const originalWrapperTransition = wrapper.style.transition;
-        const originalInnerElementTransition = innerElement.style.transition;
-
-        wrapper.style.transition = 'none';
-        innerElement.style.transition = 'none';
-
-        requestAnimationFrame(() => {
-          const scrollHeight = innerElement.scrollHeight + 'px';
-          wrapper.style.maxHeight = scrollHeight;
-          wrapper.classList.add('expanded');
-
-          requestAnimationFrame(() => {
-            wrapper.style.transition = originalWrapperTransition;
-            innerElement.style.transition = originalInnerElementTransition;
-          });
-        });
-      }
-    }
-  }
-
-  // Groups text and audio into navigable scenes
-  function enableFrontSceneSwitching() {
-    let initialPlayTimeout;
-    let replayTimeout;
-
-    const isPartEmptyGroup = (part) => {
-      if (!part || part.tagName !== 'SPAN') return false;
-      const isGroup = part.className.split(/\s+/).some(c => /^group\d*$/.test(c));
-      return isGroup && part.textContent.trim().length === 0;
-    };
-
-    const textContainers = [ELS.sentence, ELS.sentenceAudio].filter(Boolean);
-
-    const audioWrapper = ELS.sentenceAudioContainer;
-    let audioParts = audioWrapper
-      ? Array.from(audioWrapper.children).filter(el => el.tagName !== 'BR')
-      : [];
-
-    let hasSplitText = false;
-    let textSlideCount = 0;
-
-    textContainers.forEach(container => {
-      if (container.getAttribute('data-split-done')) {
-        const existingParts = container.querySelectorAll('.split-sentence-part');
-        if (existingParts.length > 0) {
-          hasSplitText = true;
-          textSlideCount = Math.max(textSlideCount, existingParts.length);
+        if (button && !button.dataset.hasClickListener) {
+            button.addEventListener("click", () => {
+                const isCurrentlyDark =
+                    body.classList.contains("custom-dark-mode");
+                localStorage.setItem(
+                    "darkMode",
+                    isCurrentlyDark ? "disabled" : "enabled",
+                );
+                requestAnimationFrame(applyDarkMode);
+            });
+            button.dataset.hasClickListener = "true";
         }
-        return;
-      }
+    }
 
-      const groupWrappers = Array.from(container.querySelectorAll('.group'))
-        .filter(el => el.textContent.trim().length > 0);
+    // Toggles visibility of word/sentence
+    function toggleVisibility(wrapperId, innerElementId) {
+        const wrapper = document.getElementById(wrapperId);
+        const innerElement = document.getElementById(innerElementId);
 
-      if (groupWrappers.length > 0) {
-        const parts = groupWrappers.map(el => el.outerHTML);
-        container.innerHTML = '';
-        parts.forEach((partHTML, index) => {
-          const div = document.createElement('div');
-          div.classList.add('split-sentence-part');
-          div.innerHTML = partHTML;
-          div.style.display = (index === 0) ? 'block' : 'none';
-          container.appendChild(div);
+        if (wrapper && innerElement) {
+            const isExpanded = wrapper.classList.contains("expanded");
+
+            if (!isExpanded) {
+                const scrollHeight = innerElement.scrollHeight + "px";
+                wrapper.style.maxHeight = scrollHeight;
+                wrapper.classList.add("expanded");
+            } else {
+                wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                requestAnimationFrame(() => {
+                    wrapper.classList.remove("expanded");
+                    wrapper.style.maxHeight = "0px";
+                });
+            }
+        }
+    }
+
+    function saveActiveSceneIndex(index) {
+        try {
+            sessionStorage.setItem("denchou_active_scene_index", String(index));
+        } catch (e) {}
+    }
+
+    function clearActiveSceneIndex() {
+        try {
+            sessionStorage.removeItem("denchou_active_scene_index");
+        } catch (e) {}
+    }
+
+    // Shows or hides the audio card sentence based on CSS variables
+    function initializeAudioSentenceState() {
+        const isAudioCard =
+            "{{#audioCard}}true{{/audioCard}}{{^audioCard}}false{{/audioCard}}" ===
+            "true";
+        if (!isAudioCard) {
+            return;
+        }
+
+        const wrapper = ELS.sentenceWrapperAudio;
+        const innerElement = ELS.sentenceAudio;
+
+        if (wrapper && innerElement) {
+            const expandByDefault = denchouConfig.audioSentenceDefaultExpanded;
+
+            if (expandByDefault === "true") {
+                const originalWrapperTransition = wrapper.style.transition;
+                const originalInnerElementTransition =
+                    innerElement.style.transition;
+
+                wrapper.style.transition = "none";
+                innerElement.style.transition = "none";
+
+                requestAnimationFrame(() => {
+                    const scrollHeight = innerElement.scrollHeight + "px";
+                    wrapper.style.maxHeight = scrollHeight;
+                    wrapper.classList.add("expanded");
+
+                    requestAnimationFrame(() => {
+                        wrapper.style.transition = originalWrapperTransition;
+                        innerElement.style.transition =
+                            originalInnerElementTransition;
+                    });
+                });
+            }
+        }
+    }
+
+    // Shows or hides the word card sentence based on CSS variables
+    function initializeSentenceState() {
+        const wrapper = ELS.sentenceWrapper;
+        const innerElement = ELS.sentence;
+
+        if (wrapper && innerElement) {
+            const expandByDefault = denchouConfig.wordSentenceDefaultExpanded;
+
+            if (expandByDefault === "true") {
+                const originalWrapperTransition = wrapper.style.transition;
+                const originalInnerElementTransition =
+                    innerElement.style.transition;
+
+                wrapper.style.transition = "none";
+                innerElement.style.transition = "none";
+
+                requestAnimationFrame(() => {
+                    const scrollHeight = innerElement.scrollHeight + "px";
+                    wrapper.style.maxHeight = scrollHeight;
+                    wrapper.classList.add("expanded");
+
+                    requestAnimationFrame(() => {
+                        wrapper.style.transition = originalWrapperTransition;
+                        innerElement.style.transition =
+                            originalInnerElementTransition;
+                    });
+                });
+            }
+        }
+    }
+
+    // Shows or hides the hint based on CSS variables
+    function initializeHintState() {
+        const wrapper = ELS.hintWrapper;
+        const innerElement = ELS.hintContent;
+
+        if (wrapper && innerElement) {
+            const expandByDefault = denchouConfig.hintDefaultExpanded;
+
+            if (expandByDefault === "true") {
+                const originalWrapperTransition = wrapper.style.transition;
+                const originalInnerElementTransition =
+                    innerElement.style.transition;
+
+                wrapper.style.transition = "none";
+                innerElement.style.transition = "none";
+
+                requestAnimationFrame(() => {
+                    const scrollHeight = innerElement.scrollHeight + "px";
+                    wrapper.style.maxHeight = scrollHeight;
+                    wrapper.classList.add("expanded");
+
+                    requestAnimationFrame(() => {
+                        wrapper.style.transition = originalWrapperTransition;
+                        innerElement.style.transition =
+                            originalInnerElementTransition;
+                    });
+                });
+            }
+        }
+    }
+
+    // Groups text and audio into navigable scenes
+    function enableFrontSceneSwitching() {
+        let initialPlayTimeout;
+        let replayTimeout;
+
+        const isPartEmptyGroup = (part) => {
+            if (!part || part.tagName !== "SPAN") return false;
+            const isGroup = part.className
+                .split(/\s+/)
+                .some((c) => /^group\d*$/.test(c));
+            return isGroup && part.textContent.trim().length === 0;
+        };
+
+        const textContainers = [ELS.sentence, ELS.sentenceAudio].filter(
+            Boolean,
+        );
+
+        const audioWrapper = ELS.sentenceAudioContainer;
+        let audioParts = audioWrapper
+            ? Array.from(audioWrapper.children).filter(
+                  (el) => el.tagName !== "BR",
+              )
+            : [];
+
+        let hasSplitText = false;
+        let textSlideCount = 0;
+
+        textContainers.forEach((container) => {
+            if (container.getAttribute("data-split-done")) {
+                const existingParts = container.querySelectorAll(
+                    ".split-sentence-part",
+                );
+                if (existingParts.length > 0) {
+                    hasSplitText = true;
+                    textSlideCount = Math.max(
+                        textSlideCount,
+                        existingParts.length,
+                    );
+                }
+                return;
+            }
+
+            const groupWrappers = Array.from(
+                container.querySelectorAll(".group"),
+            ).filter((el) => el.textContent.trim().length > 0);
+
+            if (groupWrappers.length > 0) {
+                const parts = groupWrappers.map((el) => el.outerHTML);
+                container.innerHTML = "";
+                parts.forEach((partHTML, index) => {
+                    const div = document.createElement("div");
+                    div.classList.add("split-sentence-part");
+                    div.innerHTML = partHTML;
+                    div.style.display = index === 0 ? "block" : "none";
+                    container.appendChild(div);
+                });
+                container.setAttribute("data-split-done", "true");
+                hasSplitText = true;
+                textSlideCount = Math.max(textSlideCount, parts.length);
+            }
         });
-        container.setAttribute('data-split-done', 'true');
-        hasSplitText = true;
-        textSlideCount = Math.max(textSlideCount, parts.length);
-      }
-    });
 
-    let totalSlides = Math.max(textSlideCount, audioParts.length);
+        let totalSlides = Math.max(textSlideCount, audioParts.length);
 
-    if (totalSlides <= 1) {
-      clearActiveSceneIndex();
-      return;
+        if (totalSlides <= 1) {
+            clearActiveSceneIndex();
+            return;
+        }
+
+        const frontContainer = ELS.front;
+        if (frontContainer && !frontContainer.querySelector(".sentence-nav")) {
+            const arrowLeft = document.createElement("div");
+            arrowLeft.className = "sentence-nav left";
+            frontContainer.appendChild(arrowLeft);
+            const arrowRight = document.createElement("div");
+            arrowRight.className = "sentence-nav right";
+            frontContainer.appendChild(arrowRight);
+
+            [arrowLeft, arrowRight].forEach((arrow) => {
+                arrow.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
+                    const direction = arrow.classList.contains("left") ? -1 : 1;
+                    changeScene(direction);
+                });
+            });
+        }
+
+        let currentIndex = 0;
+        saveActiveSceneIndex(currentIndex);
+
+        function changeScene(direction) {
+            currentIndex += direction;
+            if (currentIndex >= totalSlides) currentIndex = 0;
+            else if (currentIndex < 0) currentIndex = totalSlides - 1;
+            saveActiveSceneIndex(currentIndex);
+            updateDisplay(true);
+        }
+
+        const baseWaitTime = 100;
+        const timePerChar = 150;
+
+        const readingEl = ELS.hiddenReading;
+        let charCount = 5;
+
+        if (readingEl) {
+            const targetEl = readingEl.querySelector("li") || readingEl;
+            let rawText = targetEl.textContent || "";
+
+            const kanaModifiers =
+                window.REGEX?.KANA_MODIFIERS || /[\s\u3099\u309A\u309B\u309C]/g;
+            const narrowVowels =
+                window.REGEX?.NARROW_VOWELS ||
+                /[いきしちにひみりぎじぢびぴイキシチニヒミリギジヂビピうくすつぬふむるぐずづぶぷウクスツヌフムルグズヅブプ]/g;
+
+            let cleanedText = rawText.replace(kanaModifiers, "");
+            cleanedText = cleanedText.replace(
+                /[ぁぃぅぇぉゃゅょゎァィゥェォャュョヮ]/g,
+                "",
+            );
+
+            let effectiveCount = cleanedText.length;
+            const narrowMatches = cleanedText.match(narrowVowels);
+
+            if (narrowMatches) {
+                effectiveCount -= narrowMatches.length * 0.3;
+            }
+
+            charCount = Math.round(effectiveCount);
+            if (charCount < 1) charCount = 1;
+        }
+
+        let SENTENCE_DELAY;
+
+        const hasWordAudio = !!ELS.wordAudio?.querySelector(
+            ".soundLink, .replaybutton, audio",
+        );
+
+        if (!hasWordAudio) {
+            SENTENCE_DELAY = 0;
+        } else {
+            if (charCount === 2) SENTENCE_DELAY = 550;
+            else if (charCount === 3) SENTENCE_DELAY = 650;
+            else if (charCount === 4) SENTENCE_DELAY = 700;
+            else if (charCount === 5) SENTENCE_DELAY = 850;
+            else if (charCount === 6) SENTENCE_DELAY = 1000;
+            else if (charCount === 7) SENTENCE_DELAY = 1080;
+            else if (charCount === 8) SENTENCE_DELAY = 1150;
+            else SENTENCE_DELAY = baseWaitTime + charCount * timePerChar;
+        }
+
+        const handleFrontShortcuts = (e) => {
+            if (
+                document.activeElement &&
+                ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)
+            )
+                return;
+
+            const cssVal = denchouConfig.sceneReplayShortcutKey;
+            const replayConfig = parseKeyConfig(cssVal) || {
+                key: "w",
+                ctrl: false,
+                alt: false,
+                shift: false,
+                meta: false,
+            };
+
+            if (isKeyMatch(e, replayConfig)) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
+                if (replayTimeout) clearTimeout(replayTimeout);
+
+                document.querySelectorAll("audio").forEach((a) => {
+                    try {
+                        a.pause();
+                        a.currentTime = 0;
+                    } catch (e) {}
+                });
+
+                const wordAudioContainer = ELS.wordAudio;
+                const wordAudioBtn = wordAudioContainer
+                    ? wordAudioContainer.querySelector(
+                          ".soundLink, .replaybutton",
+                      )
+                    : null;
+
+                if (wordAudioBtn) {
+                    wordAudioBtn.click();
+                }
+
+                const currentPart =
+                    audioParts.length === 1
+                        ? audioParts[0]
+                        : audioParts[currentIndex];
+                const isEmpty = isPartEmptyGroup(currentPart);
+
+                const replayLoadOffset = 200;
+                const delay =
+                    wordAudioBtn && !isEmpty
+                        ? SENTENCE_DELAY + replayLoadOffset
+                        : 0;
+
+                replayTimeout = setTimeout(() => {
+                    updateDisplay(true);
+                }, delay);
+
+                return;
+            }
+
+            if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                e.stopPropagation();
+                if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
+                if (replayTimeout) clearTimeout(replayTimeout);
+                changeScene(-1);
+            } else if (e.key === "ArrowRight") {
+                e.preventDefault();
+                e.stopPropagation();
+                if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
+                if (replayTimeout) clearTimeout(replayTimeout);
+                changeScene(1);
+            }
+        };
+
+        if (window.currentSceneKeyHandler) {
+            document.removeEventListener(
+                "keydown",
+                window.currentSceneKeyHandler,
+            );
+            window.currentSceneKeyHandler = null;
+        }
+        window.currentSceneKeyHandler = handleFrontShortcuts;
+        document.addEventListener("keydown", handleFrontShortcuts);
+
+        function updateDisplay(playAudio) {
+            textContainers.forEach((container) => {
+                const parts = container.querySelectorAll(
+                    ".split-sentence-part",
+                );
+                if (parts.length > 0) {
+                    parts.forEach((part, i) => {
+                        part.style.display =
+                            i === currentIndex ? "block" : "none";
+                    });
+                    const wrapper = container.closest(".expanded");
+                    if (wrapper)
+                        wrapper.style.maxHeight = container.scrollHeight + "px";
+                }
+            });
+
+            if (audioParts.length > 0) {
+                audioParts.forEach((btn, i) => {
+                    const shouldShow =
+                        i === currentIndex || audioParts.length === 1;
+                    if (shouldShow) {
+                        btn.style.setProperty(
+                            "display",
+                            "inline-flex",
+                            "important",
+                        );
+                    } else {
+                        btn.style.setProperty("display", "none", "important");
+                    }
+                });
+            }
+
+            if (playAudio && audioParts.length > 0) {
+                if (denchouConfig.muteSentenceAudio === "true") return;
+
+                let target = audioParts[currentIndex];
+                if (!target && audioParts.length === 1) target = audioParts[0];
+
+                if (target) {
+                    if (typeof target.click === "function") target.click();
+                    else {
+                        const trigger = target.querySelector(
+                            ".soundLink, .replaybutton",
+                        );
+                        if (trigger) trigger.click();
+                    }
+                }
+            }
+        }
+
+        updateDisplay(false);
+
+        const muteNsfw = denchouConfig.muteNsfwAudio;
+
+        if (muteNsfw !== "true" || !window.IS_NSFW) {
+            if (isPartEmptyGroup(audioParts[0])) {
+                if (
+                    denchouConfig.muteSentenceAudio !== "true" &&
+                    ELS.wordAudioBtn
+                ) {
+                    ELS.wordAudioBtn.click();
+                }
+                updateDisplay(true);
+            } else {
+                initialPlayTimeout = setTimeout(() => {
+                    updateDisplay(true);
+                }, SENTENCE_DELAY);
+            }
+        }
     }
 
-    const frontContainer = ELS.front;
-    if (frontContainer && !frontContainer.querySelector('.sentence-nav')) {
-      const arrowLeft = document.createElement('div');
-      arrowLeft.className = 'sentence-nav left';
-      frontContainer.appendChild(arrowLeft);
-      const arrowRight = document.createElement('div');
-      arrowRight.className = 'sentence-nav right';
-      frontContainer.appendChild(arrowRight);
+    // Enables custom shortcuts
+    function enableCustomShortcuts() {
+        ["denchouFrontSettingsHandler", "denchouBackKeyHandler"].forEach(
+            (h) => {
+                if (window[h])
+                    document.removeEventListener("keydown", window[h]);
+                window[h] = null;
+            },
+        );
 
-      [arrowLeft, arrowRight].forEach(arrow => {
-        arrow.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
-          const direction = arrow.classList.contains('left') ? -1 : 1;
-          changeScene(direction);
-        });
-      });
+        const utils = {
+            isTyping: () => {
+                const active = document.activeElement;
+                return active && ["INPUT", "TEXTAREA"].includes(active.tagName);
+            },
+
+            getVar: (name) => {
+                const map = {
+                    "--toggle-settings-key": "toggleSettingsKey",
+                    "--toggle-custom-dark-mode-key": "toggleCustomDarkModeKey",
+                };
+                const key = map[name];
+                return key ? denchouConfig[key] : "";
+            },
+        };
+
+        const actions = {
+            settings: () => {
+                // Lazy-load on first press, toggle thereafter.
+                // The modal is created by buildMenu() inside the settings script;
+                // once it exists we can toggle directly. Before that, denchouInitMenu
+                // loads the script and opens the panel.
+                const modal = document.getElementById("denchou-settings-modal");
+                if (modal) {
+                    modal.classList.toggle("active");
+                    return;
+                }
+                if (window.denchouInitMenu) {
+                    window.denchouInitMenu();
+                    return;
+                }
+                // Legacy fallback if denchouInitMenu is somehow unavailable.
+                const btn = document.querySelector(".toggle-settings-btn");
+                if (btn) btn.click();
+            },
+
+            customDarkMode: () => {
+                const dmBtn = document.querySelector(
+                    ".toggle-custom-dark-mode",
+                );
+
+                if (dmBtn) dmBtn.click();
+            },
+        };
+
+        window.denchouFrontSettingsHandler = (e) => {
+            if (utils.isTyping()) return;
+
+            const shortcuts = [
+                {
+                    key: denchouConfig.toggleSettingsKey,
+                    action: actions.settings,
+                },
+                {
+                    key: denchouConfig.toggleCustomDarkModeKey,
+                    action: actions.customDarkMode,
+                },
+            ];
+
+            for (const item of shortcuts) {
+                const keyStr = item.key;
+
+                if (!keyStr) continue;
+
+                const config = parseKeyConfig(keyStr);
+
+                if (isKeyMatch(e, config)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    item.action();
+                    break;
+                }
+            }
+        };
+
+        document.addEventListener(
+            "keydown",
+            window.denchouFrontSettingsHandler,
+        );
     }
 
-    let currentIndex = 0;
-    saveActiveSceneIndex(currentIndex);
-
-    function changeScene(direction) {
-      currentIndex += direction;
-      if (currentIndex >= totalSlides) currentIndex = 0;
-      else if (currentIndex < 0) currentIndex = totalSlides - 1;
-      saveActiveSceneIndex(currentIndex);
-      updateDisplay(true);
-    }
-
-    const baseWaitTime = 100;
-    const timePerChar = 150;
-
-    const readingEl = ELS.hiddenReading;
-    let charCount = 5;
-
-    if (readingEl) {
-      const targetEl = readingEl.querySelector('li') || readingEl;
-      let rawText = targetEl.textContent || "";
-
-      const kanaModifiers = window.REGEX?.KANA_MODIFIERS || /[\s\u3099\u309A\u309B\u309C]/g;
-      const narrowVowels = window.REGEX?.NARROW_VOWELS || /[いきしちにひみりぎじぢびぴイキシチニヒミリギジヂビピうくすつぬふむるぐずづぶぷウクスツヌフムルグズヅブプ]/g;
-
-      let cleanedText = rawText.replace(kanaModifiers, '');
-      cleanedText = cleanedText.replace(/[ぁぃぅぇぉゃゅょゎァィゥェォャュョヮ]/g, '');
-
-      let effectiveCount = cleanedText.length;
-      const narrowMatches = cleanedText.match(narrowVowels);
-
-      if (narrowMatches) {
-        effectiveCount -= (narrowMatches.length * 0.3);
-      }
-
-      charCount = Math.round(effectiveCount);
-      if (charCount < 1) charCount = 1;
-    }
-
-    let SENTENCE_DELAY;
-
-    const hasWordAudio = !!ELS.wordAudio?.querySelector('.soundLink, .replaybutton, audio');
-
-    if (!hasWordAudio) {
-      SENTENCE_DELAY = 0;
-    } else {
-      if (charCount === 2) SENTENCE_DELAY = 550;
-      else if (charCount === 3) SENTENCE_DELAY = 650;
-      else if (charCount === 4) SENTENCE_DELAY = 700;
-      else if (charCount === 5) SENTENCE_DELAY = 850;
-      else if (charCount === 6) SENTENCE_DELAY = 1000;
-      else if (charCount === 7) SENTENCE_DELAY = 1080;
-      else if (charCount === 8) SENTENCE_DELAY = 1150;
-      else SENTENCE_DELAY = baseWaitTime + (charCount * timePerChar);
-    }
-
-    const handleFrontShortcuts = (e) => {
-      if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-
-      const cssVal = denchouConfig.sceneReplayShortcutKey;
-      const replayConfig = parseKeyConfig(cssVal) || { key: 'w', ctrl: false, alt: false, shift: false, meta: false };
-
-      if (isKeyMatch(e, replayConfig)) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
-        if (replayTimeout) clearTimeout(replayTimeout);
-
-        document.querySelectorAll('audio').forEach(a => {
-          try { a.pause(); a.currentTime = 0; } catch (e) { }
-        });
+    // Mutes the sentence audio playback based on CSS variables
+    function muteSentence() {
+        if (denchouConfig.muteSentenceAudio !== "true") return;
 
         const wordAudioContainer = ELS.wordAudio;
-        const wordAudioBtn = wordAudioContainer ? wordAudioContainer.querySelector('.soundLink, .replaybutton') : null;
+        const wordAudioBtn = wordAudioContainer
+            ? wordAudioContainer.querySelector(".soundLink, .replaybutton")
+            : null;
 
         if (wordAudioBtn) {
-          wordAudioBtn.click();
+            wordAudioBtn.click();
         }
-
-        const currentPart = (audioParts.length === 1) ? audioParts[0] : audioParts[currentIndex];
-        const isEmpty = isPartEmptyGroup(currentPart);
-
-        const replayLoadOffset = 200;
-        const delay = (wordAudioBtn && !isEmpty) ? (SENTENCE_DELAY + replayLoadOffset) : 0;
-
-        replayTimeout = setTimeout(() => {
-          updateDisplay(true);
-        }, delay);
-
-        return;
-      }
-
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault(); e.stopPropagation();
-        if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
-        if (replayTimeout) clearTimeout(replayTimeout);
-        changeScene(-1);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault(); e.stopPropagation();
-        if (initialPlayTimeout) clearTimeout(initialPlayTimeout);
-        if (replayTimeout) clearTimeout(replayTimeout);
-        changeScene(1);
-      }
-    };
-
-    if (window.currentSceneKeyHandler) {
-      document.removeEventListener('keydown', window.currentSceneKeyHandler);
-      window.currentSceneKeyHandler = null;
     }
-    window.currentSceneKeyHandler = handleFrontShortcuts;
-    document.addEventListener('keydown', handleFrontShortcuts);
 
-    function updateDisplay(playAudio) {
-      textContainers.forEach(container => {
-        const parts = container.querySelectorAll('.split-sentence-part');
-        if (parts.length > 0) {
-          parts.forEach((part, i) => {
-            part.style.display = (i === currentIndex) ? 'block' : 'none';
-          });
-          const wrapper = container.closest('.expanded');
-          if (wrapper) wrapper.style.maxHeight = container.scrollHeight + 'px';
-        }
-      });
+    // Adjusts word size based on character length
+    function dynamicWordSize() {
+        const wordElements = ELS.words;
 
-      if (audioParts.length > 0) {
-        audioParts.forEach((btn, i) => {
-          const shouldShow = (i === currentIndex) || (audioParts.length === 1);
-          if (shouldShow) {
-            btn.style.setProperty('display', 'inline-flex', 'important');
-          } else {
-            btn.style.setProperty('display', 'none', 'important');
-          }
+        wordElements.forEach((wordElement) => {
+            if (wordElement) {
+                const rubyElement = wordElement.querySelector("ruby");
+                let content = "";
+
+                if (rubyElement) {
+                    content = rubyElement.childNodes[0].textContent.trim();
+                } else {
+                    content = wordElement.textContent.trim();
+                }
+
+                const contentLength = content.length;
+                const classNumber = Math.min(contentLength, 9);
+
+                wordElement.classList.add(`length-${classNumber}`);
+            }
         });
-      }
-
-      if (playAudio && audioParts.length > 0) {
-        if (denchouConfig.muteSentenceAudio === 'true') return;
-
-        let target = audioParts[currentIndex];
-        if (!target && audioParts.length === 1) target = audioParts[0];
-
-        if (target) {
-          if (typeof target.click === 'function') target.click();
-          else {
-            const trigger = target.querySelector('.soundLink, .replaybutton');
-            if (trigger) trigger.click();
-          }
-        }
-      }
     }
 
-    updateDisplay(false);
-
-    const muteNsfw = denchouConfig.muteNsfwAudio;
-
-    if (muteNsfw !== 'true' || !window.IS_NSFW) {
-      if (isPartEmptyGroup(audioParts[0])) {
-        if (denchouConfig.muteSentenceAudio !== 'true' && ELS.wordAudioBtn) {
-          ELS.wordAudioBtn.click();
-        }
-        updateDisplay(true);
-      } else {
-        initialPlayTimeout = setTimeout(() => {
-          updateDisplay(true);
-        }, SENTENCE_DELAY);
-      }
-    }
-  }
-
-  // Enables custom shortcuts
-  function enableCustomShortcuts() {
-    ['denchouFrontSettingsHandler', 'denchouBackKeyHandler'].forEach(h => {
-      if (window[h]) document.removeEventListener('keydown', window[h]);
-      window[h] = null;
-    });
-
-    const utils = {
-      isTyping: () => {
-        const active = document.activeElement;
-        return active && ['INPUT', 'TEXTAREA'].includes(active.tagName);
-      },
-
-      getVar: (name) => {
-        const map = {
-          '--toggle-settings-key': 'toggleSettingsKey',
-          '--toggle-custom-dark-mode-key': 'toggleCustomDarkModeKey'
+    (function () {
+        // Auto Show Answer Logic
+        window.denchouAutoShowAnswer = function () {
+            if (window.autoShowAnswerTimer)
+                clearTimeout(window.autoShowAnswerTimer);
+            if (
+                denchouConfig.autoShowAnswer === "true" &&
+                typeof pycmd !== "undefined"
+            ) {
+                const delay = (denchouConfig.showAnswerDelay || 0) * 1000;
+                window.autoShowAnswerTimer = setTimeout(() => {
+                    pycmd("ans");
+                }, delay);
+            }
         };
-        const key = map[name];
-        return key ? denchouConfig[key] : '';
-      }
-    };
 
-    const actions = {
-      settings: () => {
-        // Lazy-load on first press, toggle thereafter.
-        // The modal is created by buildMenu() inside the settings script;
-        // once it exists we can toggle directly. Before that, denchouInitMenu
-        // loads the script and opens the panel.
-        const modal = document.getElementById('denchou-settings-modal');
-        if (modal) {
-          modal.classList.toggle('active');
-          return;
-        }
-        if (window.denchouInitMenu) {
-          window.denchouInitMenu();
-          return;
-        }
-        // Legacy fallback if denchouInitMenu is somehow unavailable.
-        const btn = document.querySelector('.toggle-settings-btn');
-        if (btn) btn.click();
-      },
+        window.denchouUpdateConfig = function (runLogic = false) {
+            // Regex Cache
+            window.REGEX = {
+                KANA_MODIFIERS: /[\s\u3099\u309A\u309B\u309C]/g,
+                NARROW_VOWELS:
+                    /[いきしちにひみりぎじぢびぴイキシチニヒミリギジヂビピうくすつぬふむるぐずづぶぷウクスツヌフムルグズヅブプ]/g,
+            };
 
-      customDarkMode: () => {
-        const dmBtn = document.querySelector(".toggle-custom-dark-mode");
+            // NSFW Cache
+            window.IS_NSFW = `{{Tags}}`.toLowerCase().includes("nsfw");
 
-        if (dmBtn) dmBtn.click();
-      }
-    };
+            // DOM Cache
+            window.ELS = {
+                word: document.getElementById("word"),
+                sentence: document.getElementById("sentence"),
+                sentenceAudio: document.getElementById("sentence-audio"),
+                sentenceWrapper: document.getElementById("sentence-wrapper"),
+                sentenceWrapperAudio: document.getElementById(
+                    "sentence-wrapper-audio",
+                ),
+                hiddenReading: document.getElementById("hiddenReading"),
+                sentenceAudioContainer:
+                    document.getElementById("sentenceAudio"),
+                wordAudio: document.getElementById("wordAudio"),
+                words: document.querySelectorAll("#word"),
+                front: document.querySelector(".front"),
+                hintWrapper: document.getElementById("hint-wrapper"),
+                hintContent: document.getElementById("hint-content"),
+                wordAudioBtn: document.querySelector(
+                    ".audio .soundLink, .audio .replaybutton",
+                ),
+            };
 
-    window.denchouFrontSettingsHandler = (e) => {
-      if (utils.isTyping()) return;
+            const style = getComputedStyle(document.documentElement);
+            const getVar = (prop) =>
+                style.getPropertyValue(prop).trim().toLowerCase();
 
-      const shortcuts = [
-        { key: denchouConfig.toggleSettingsKey, action: actions.settings },
-        { key: denchouConfig.toggleCustomDarkModeKey, action: actions.customDarkMode }
-      ];
+            // Sentence
+            denchouConfig.audioSentenceDefaultExpanded = getVar(
+                "--audio-sentence-default-expanded",
+            );
+            denchouConfig.wordSentenceDefaultExpanded = getVar(
+                "--word-sentence-default-expanded",
+            );
 
-      for (const item of shortcuts) {
-        const keyStr = item.key;
+            // Hint
+            denchouConfig.hintDefaultExpanded = getVar(
+                "--hint-default-expanded",
+            );
 
-        if (!keyStr) continue;
+            // Audio
+            denchouConfig.muteNsfwAudio = getVar("--mute-nsfw-audio");
+            denchouConfig.muteSentenceAudio = getVar("--mute-sentence-audio");
 
-        const config = parseKeyConfig(keyStr);
+            // Keys
+            denchouConfig.sceneReplayShortcutKey = getVar(
+                "--scene-replay-shortcut-key",
+            );
+            denchouConfig.toggleSettingsKey = getVar("--toggle-settings-key");
+            denchouConfig.toggleCustomDarkModeKey = getVar(
+                "--toggle-custom-dark-mode-key",
+            );
 
-        if (isKeyMatch(e, config)) {
-          e.preventDefault();
-          e.stopPropagation();
+            // Auto Advance
+            denchouConfig.autoShowAnswer = getVar("--auto-show-answer");
+            denchouConfig.showAnswerDelay =
+                parseFloat(getVar("--show-answer-delay")) || 0;
+            denchouConfig.enableFadeIn = getVar("--enable-fade-in");
 
-          item.action();
-          break;
-        }
-      }
-    };
+            // Apply Fade-in class
+            if (ELS.front) {
+                if (denchouConfig.enableFadeIn === "true") {
+                    ELS.front.classList.add("fade-in");
+                } else {
+                    ELS.front.classList.remove("fade-in");
+                }
+            }
 
-    document.addEventListener('keydown', window.denchouFrontSettingsHandler);
-  }
+            if (!runLogic) return;
 
-  // Mutes the sentence audio playback based on CSS variables
-  function muteSentence() {
-    if (denchouConfig.muteSentenceAudio !== 'true') return;
-
-    const wordAudioContainer = ELS.wordAudio;
-    const wordAudioBtn = wordAudioContainer ? wordAudioContainer.querySelector('.soundLink, .replaybutton') : null;
-
-    if (wordAudioBtn) {
-      wordAudioBtn.click();
-    }
-  }
-
-  // Adjusts word size based on character length
-  function dynamicWordSize() {
-    const wordElements = ELS.words;
-
-    wordElements.forEach(wordElement => {
-      if (wordElement) {
-        const rubyElement = wordElement.querySelector('ruby');
-        let content = "";
-
-        if (rubyElement) {
-          content = rubyElement.childNodes[0].textContent.trim();
-        } else {
-          content = wordElement.textContent.trim();
-        }
-
-        const contentLength = content.length;
-        const classNumber = Math.min(contentLength, 9);
-
-        wordElement.classList.add(`length-${classNumber}`);
-      }
-    });
-  }
-
-  (function () {
-    // Auto Show Answer Logic
-    window.denchouAutoShowAnswer = function() {
-      if (window.autoShowAnswerTimer) clearTimeout(window.autoShowAnswerTimer);
-      if (denchouConfig.autoShowAnswer === 'true' && typeof pycmd !== 'undefined') {
-        const delay = (denchouConfig.showAnswerDelay || 0) * 1000;
-        window.autoShowAnswerTimer = setTimeout(() => {
-          pycmd('ans');
-        }, delay);
-      }
-    };
-
-    window.denchouUpdateConfig = function (runLogic = false) {
-      // Regex Cache
-      window.REGEX = {
-        KANA_MODIFIERS: /[\s\u3099\u309A\u309B\u309C]/g,
-        NARROW_VOWELS: /[いきしちにひみりぎじぢびぴイキシチニヒミリギジヂビピうくすつぬふむるぐずづぶぷウクスツヌフムルグズヅブプ]/g
-      };
-
-      // NSFW Cache
-      window.IS_NSFW = `{{Tags}}`.toLowerCase().includes('nsfw');
-
-      // DOM Cache
-      window.ELS = {
-        word: document.getElementById('word'),
-        sentence: document.getElementById('sentence'),
-        sentenceAudio: document.getElementById('sentence-audio'),
-        sentenceWrapper: document.getElementById('sentence-wrapper'),
-        sentenceWrapperAudio: document.getElementById('sentence-wrapper-audio'),
-        hiddenReading: document.getElementById('hiddenReading'),
-        sentenceAudioContainer: document.getElementById('sentenceAudio'),
-        wordAudio: document.getElementById('wordAudio'),
-        words: document.querySelectorAll("#word"),
-        front: document.querySelector('.front'),
-        hintWrapper: document.getElementById('hint-wrapper'),
-        hintContent: document.getElementById('hint-content'),
-        wordAudioBtn: document.querySelector('.audio .soundLink, .audio .replaybutton')
-      };
-
-      const style = getComputedStyle(document.documentElement);
-      const getVar = (prop) => style.getPropertyValue(prop).trim().toLowerCase();
-
-      // Sentence
-      denchouConfig.audioSentenceDefaultExpanded = getVar('--audio-sentence-default-expanded');
-      denchouConfig.wordSentenceDefaultExpanded = getVar('--word-sentence-default-expanded');
-
-      // Hint
-      denchouConfig.hintDefaultExpanded = getVar('--hint-default-expanded');
-
-      // Audio
-      denchouConfig.muteNsfwAudio = getVar('--mute-nsfw-audio');
-      denchouConfig.muteSentenceAudio = getVar('--mute-sentence-audio');
-
-      // Keys
-      denchouConfig.sceneReplayShortcutKey = getVar('--scene-replay-shortcut-key');
-      denchouConfig.toggleSettingsKey = getVar('--toggle-settings-key');
-      denchouConfig.toggleCustomDarkModeKey = getVar('--toggle-custom-dark-mode-key');
-
-      // Auto Advance
-      denchouConfig.autoShowAnswer = getVar('--auto-show-answer');
-      denchouConfig.showAnswerDelay = parseFloat(getVar('--show-answer-delay')) || 0;
-      denchouConfig.enableFadeIn = getVar('--enable-fade-in');
-
-      // Apply Fade-in class
-      if (ELS.front) {
-        if (denchouConfig.enableFadeIn === 'true') {
-          ELS.front.classList.add('fade-in');
-        } else {
-          ELS.front.classList.remove('fade-in');
-        }
-      }
-
-      if (!runLogic) return;
-
-      denchouAutoShowAnswer();
-    };
-
-    // Initial load
-    window.denchouUpdateConfig();
-
-    window.IS_MOBILE = document.documentElement.classList.contains('mobile') ||
-      document.body.classList.contains('mobile');
-
-    // Auto-optimize: apply lite mode immediately on small screens
-    // (settings JS is lazy-loaded, so applyAutoOptimize() runs too late)
-    try {
-      if (localStorage.getItem("denchou_--ankidroid-auto-optimize") !== "false" && window.innerWidth <= 600) {
-        document.documentElement.style.setProperty("--ankidroid-lite", "true");
-      }
-    } catch (e) {}
-
-    const delayedFunctions = window.requestIdleCallback ||
-      function (cb) { return setTimeout(cb, 1); };
-
-    // Initializes immediate functions
-    // Lazily loads the settings script on the first gear-icon tap and
-    // opens the menu. After the script is loaded, the gear's own onclick
-    // (attached by buildMenu) takes over, so subsequent taps are instant.
-    // The function caches itself on window.denchouInitMenu and is idempotent:
-    // safe to call multiple times, even before the script finishes loading.
-    function denchouInitMenu() {
-      const btn = document.querySelector('.toggle-settings-btn');
-      if (!btn) return;
-
-      // Already loaded: the modal exists and the gear's onclick is attached.
-      // Trigger the existing onclick so renderPresetUI() also runs.
-      if (document.getElementById('denchou-settings-modal')) {
-        window.denchouOpenSettings && window.denchouOpenSettings();
-        return;
-      }
-
-      // Script load is in flight (user double-tapped). Wait for the modal
-      // with a timeout to avoid battery drain if init() hangs.
-      if (window.denchouMenuLoading) {
-        let attempts = 0;
-        const wait = () => {
-          if (document.getElementById('denchou-settings-modal')) {
-            window.denchouMenuLoading = false;
-            window.denchouOpenSettings && window.denchouOpenSettings();
-          } else if (++attempts >= 200) {
-            window.denchouMenuLoading = false;
-            console.error('Settings script loaded but menu did not appear');
-          } else {
-            setTimeout(wait, 30);
-          }
+            denchouAutoShowAnswer();
         };
-        wait();
-        return;
-      }
 
-      // Edge case: buildMenu is exported but the async init() hasn't run yet.
-      if (window.denchouBuildMenu) {
-        window.denchouBuildMenu();
-        window.denchouOpenSettings && window.denchouOpenSettings();
-        return;
-      }
+        // Initial load
+        window.denchouUpdateConfig();
 
-      // First tap: load the script. The script's own async init() calls
-      // buildMenu(), which creates the modal and attaches onclick to the
-      // gear button. We poll for the modal, then trigger the click.
-      window.denchouMenuLoading = true;
-      const script = document.createElement('script');
-      script.src = "_denchou_settings_v0.2.1.js";
-      script.onload = () => {
-        let attempts = 0;
-        const wait = () => {
-          if (document.getElementById('denchou-settings-modal')) {
-            window.denchouMenuLoading = false;
-            window.denchouOpenSettings && window.denchouOpenSettings();
-          } else if (++attempts >= 200) {
-            window.denchouMenuLoading = false;
-            console.error('Settings script loaded but buildMenu did not run');
-          } else {
-            setTimeout(wait, 30);
-          }
-        };
-        wait();
-      };
-      script.onerror = () => {
-        window.denchouMenuLoading = false;
-        console.error('Failed to load _denchou_settings_v0.2.1.js');
-      };
-      document.body.appendChild(script);
-    }
-    if (!window.denchouInitMenu) {
-      window.denchouInitMenu = denchouInitMenu;
-    }
+        window.IS_MOBILE =
+            document.documentElement.classList.contains("mobile") ||
+            document.body.classList.contains("mobile");
 
-    function init() {
-      darkMode();
-      muteSentence();
-      dynamicWordSize();
-      initializeAudioSentenceState();
-      initializeSentenceState();
-      initializeHintState();
-      enableFrontSceneSwitching();
-      denchouAutoShowAnswer();
-    }
+        // Auto-optimize: apply lite mode immediately on small screens
+        // (settings JS is lazy-loaded, so applyAutoOptimize() runs too late)
+        try {
+            if (
+                localStorage.getItem("denchou_--ankidroid-auto-optimize") !==
+                    "false" &&
+                window.innerWidth <= 600
+            ) {
+                document.documentElement.style.setProperty(
+                    "--ankidroid-lite",
+                    "true",
+                );
+            }
+        } catch (e) {}
 
-    // initializes deferred functions
-    // The settings script is no longer loaded here; it is lazy-loaded by
-    // denchouInitMenu() the first time the gear icon is tapped.
-    function initDeferred() {
-      delayedFunctions(() => {
-        if (!window.IS_MOBILE) {
-          enableCustomShortcuts();
+        const delayedFunctions =
+            window.requestIdleCallback ||
+            function (cb) {
+                return setTimeout(cb, 1);
+            };
+
+        // Initializes immediate functions
+        // Lazily loads the settings script on the first gear-icon tap and
+        // opens the menu. After the script is loaded, the gear's own onclick
+        // (attached by buildMenu) takes over, so subsequent taps are instant.
+        // The function caches itself on window.denchouInitMenu and is idempotent:
+        // safe to call multiple times, even before the script finishes loading.
+        function denchouInitMenu() {
+            const btn = document.querySelector(".toggle-settings-btn");
+            if (!btn) return;
+
+            // Already loaded: the modal exists and the gear's onclick is attached.
+            // Trigger the existing onclick so renderPresetUI() also runs.
+            if (document.getElementById("denchou-settings-modal")) {
+                window.denchouOpenSettings && window.denchouOpenSettings();
+                return;
+            }
+
+            // Script load is in flight (user double-tapped). Wait for the modal
+            // with a timeout to avoid battery drain if init() hangs.
+            if (window.denchouMenuLoading) {
+                let attempts = 0;
+                const wait = () => {
+                    if (document.getElementById("denchou-settings-modal")) {
+                        window.denchouMenuLoading = false;
+                        window.denchouOpenSettings &&
+                            window.denchouOpenSettings();
+                    } else if (++attempts >= 200) {
+                        window.denchouMenuLoading = false;
+                        console.error(
+                            "Settings script loaded but menu did not appear",
+                        );
+                    } else {
+                        setTimeout(wait, 30);
+                    }
+                };
+                wait();
+                return;
+            }
+
+            // Edge case: buildMenu is exported but the async init() hasn't run yet.
+            if (window.denchouBuildMenu) {
+                window.denchouBuildMenu();
+                window.denchouOpenSettings && window.denchouOpenSettings();
+                return;
+            }
+
+            // First tap: load the script. The script's own async init() calls
+            // buildMenu(), which creates the modal and attaches onclick to the
+            // gear button. We poll for the modal, then trigger the click.
+            window.denchouMenuLoading = true;
+            const script = document.createElement("script");
+            script.src = "_denchou_settings_v0.2.2.js";
+            script.onload = () => {
+                let attempts = 0;
+                const wait = () => {
+                    if (document.getElementById("denchou-settings-modal")) {
+                        window.denchouMenuLoading = false;
+                        window.denchouOpenSettings &&
+                            window.denchouOpenSettings();
+                    } else if (++attempts >= 200) {
+                        window.denchouMenuLoading = false;
+                        console.error(
+                            "Settings script loaded but buildMenu did not run",
+                        );
+                    } else {
+                        setTimeout(wait, 30);
+                    }
+                };
+                wait();
+            };
+            script.onerror = () => {
+                window.denchouMenuLoading = false;
+                console.error("Failed to load _denchou_settings_v0.2.2.js");
+            };
+            document.body.appendChild(script);
         }
-      });
-    }
+        if (!window.denchouInitMenu) {
+            window.denchouInitMenu = denchouInitMenu;
+        }
 
-    init();
-    initDeferred();
-  })();
+        function init() {
+            darkMode();
+            muteSentence();
+            dynamicWordSize();
+            initializeAudioSentenceState();
+            initializeSentenceState();
+            initializeHintState();
+            enableFrontSceneSwitching();
+            denchouAutoShowAnswer();
+        }
 
-  void "_denchou_settings_v0.2.1.css";
-  void "_denchou_defaults_v0.2.1.css";
-  void "_denchou_deck_presets.js";
-  void "_denchou_presets.js";
+        // initializes deferred functions
+        // The settings script is no longer loaded here; it is lazy-loaded by
+        // denchouInitMenu() the first time the gear icon is tapped.
+        function initDeferred() {
+            delayedFunctions(() => {
+                if (!window.IS_MOBILE) {
+                    enableCustomShortcuts();
+                }
+            });
+        }
+
+        init();
+        initDeferred();
+    })();
+
+    void "_denchou_settings_v0.2.2.css";
+    void "_denchou_defaults_v0.2.2.css";
+    void "_denchou_deck_presets.js";
+    void "_denchou_presets.js";
 </script>
