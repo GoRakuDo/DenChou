@@ -1144,13 +1144,27 @@
       }
     }
 
-    // Priority 3: sentenceFurigana <span class="term"> markers
+    // Priority 3: find the term that best matches reading or word
     if (highlightedWords.length === 0 && cleanedFurigana.includes('<span class="term">')) {
+      const reading = `{{reading}}`.trim();
+      const word = `{{word}}`.trim();
+      // For conjugated words (e.g. 気取る→気取った), extract kanji stem
+      const wordStem = word && /[\u3005\u4e00-\u9faf]/.test(word)
+        ? word.replace(/[ぁ-んー]+$/, '')
+        : '';
       let termMatch;
       const termRegex = /<span class="term">(.*?)<\/span>/g;
       while ((termMatch = termRegex.exec(cleanedFurigana)) !== null) {
-        const term = termMatch[1].trim();
-        if (term) highlightedWords.push(termMatch[1]);
+        const raw = termMatch[1];
+        const clean = raw.replace(/<[^>]*>/g, '').trim();
+        if (!clean) continue;
+        if (
+          (reading && clean.includes(reading)) ||
+          (word && (clean.includes(word) || clean.includes(wordStem)))
+        ) {
+            highlightedWords.push(raw);
+          break;
+        }
       }
     }
 
