@@ -1616,18 +1616,19 @@
                 cleanedFurigana +
                 sentence.substring(endSentIdx);
 
-            // Apply highlights via term matching (finds matching .term by plain text)
+            // Single-pass term matching: check each .term against all targets
             const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
             if (allTargets.length > 0) {
-                allTargets.forEach((target) => {
-                    const termRegex = /<span class="term">(.*?)<\/span>/g;
-                    result = result.replace(termRegex, (match, inner) => {
-                        const clean = inner.replace(/<[^>]*>/g, "").trim();
-                        if (clean.includes(target)) {
-                            return `<span class="term"><span class="highlight">${inner}</span></span>`;
-                        }
-                        return match;
-                    });
+                const termRegex = /<span class="term">(.*?)<\/span>/g;
+                result = result.replace(termRegex, (match, inner) => {
+                    const clean = inner.replace(/<[^>]*>/g, "").trim();
+                    const shouldHighlight = allTargets.some((t) =>
+                        clean.includes(t),
+                    );
+                    if (shouldHighlight) {
+                        return `<span class="term"><span class="highlight">${inner}</span></span>`;
+                    }
+                    return match;
                 });
             }
             ELS.formattedSentence.innerHTML = result;
