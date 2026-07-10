@@ -1107,6 +1107,10 @@ a {
   gap: unset;
 }
 
+.grid-container:not(:has(> .picture-container > :is(img, video))) > .picture-container {
+  display: none;
+}
+
 @container (not style(--enable-backdrop-layout: 1)) {
   /* Keep this block before the mobile overrides below; they intentionally share specificity. */
   .back:not(.image-removed) .grid-container:has(> .picture-container > :is(img, video)) {
