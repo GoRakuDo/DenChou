@@ -64,7 +64,7 @@
         "Noto Serif CJK JP", notoserifjp, "Klee One", klee,
         "Hiragino Mincho ProN", "Yu Mincho", serif;
     --sans:
-        "Gen Interface JP", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP",
+        "Gen Interface JP Display", "Gen Interface JP", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP",
         notosansjp, "Segoe UI", sans-serif;
 
     /* Word Sizes (Dynamic Scaling) */
