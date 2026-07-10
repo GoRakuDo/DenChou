@@ -43,7 +43,7 @@
 
 @font-face {
   font-family: "Gen Interface JP Display";
-  src: url("_GenInterfaceJPDisplay-SemiBold.woff2") format("woff2");
+  src: url("_GenInterfaceJPDisplay-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: block;
@@ -51,7 +51,7 @@
 
 @font-face {
   font-family: "Gen Interface JP Display";
-  src: url("_GenInterfaceJPDisplay-Bold.woff2") format("woff2");
+  src: url("_GenInterfaceJPDisplay-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: block;
@@ -59,7 +59,7 @@
 
 @font-face {
   font-family: "Gen Interface JP Display";
-  src: url("_GenInterfaceJPDisplay-ExtraBold.woff2") format("woff2");
+  src: url("_GenInterfaceJPDisplay-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
   font-display: block;
