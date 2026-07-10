@@ -27,7 +27,7 @@
     "--mute-video": "false",
     "--base-size": "clamp(19px, 3vw, 24px)",
     "--base-line-height": "1.5",
-    "--bold-highlight": "0",
+    "--sentence-weight": "500",
     "--serif": "\"Noto Serif CJK JP\", notoserifjp, \"Klee One\", klee, \"Hiragino Mincho ProN\", \"Yu Mincho\", serif",
     "--sans": "\"Hiragino Kaku Gothic ProN\", \"Noto Sans CJK JP\", notosansjp, \"Segoe UI\", sans-serif",
     "--sentence-alignment": "center",

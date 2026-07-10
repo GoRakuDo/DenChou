@@ -196,10 +196,13 @@
         desc: "Line spacing within definition and glossary entries.",
       },
       {
-        label: "Bold Highlights",
-        var: "--bold-highlight",
-        type: "switch-int",
-        desc: "Make highlighted text bold.",
+        label: "Font Weight",
+        var: "--sentence-weight",
+        type: "slider",
+        min: "100",
+        max: "900",
+        step: "100",
+        desc: "Sentence text thickness (100=thin, 500=normal, 700=bold, 900=black).",
       },
       {
         label: "Custom Font",

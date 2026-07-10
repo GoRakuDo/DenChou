@@ -55,7 +55,7 @@
     /* Global Settings */
     --base-size: clamp(19px, 3vw, 24px);
     --base-line-height: 1.5;
-    --bold-highlight: 0; /* "1" to bold highlights */
+    --sentence-weight: 500;
     --bold-misc-info: 0; /* "1" to bold misc info text */
 
     /* Font Families */

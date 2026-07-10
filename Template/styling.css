@@ -133,7 +133,7 @@
   /* Global Settings */
   --base-size:                        clamp(19px, 3vw, 24px);
   --base-line-height:                 1.5;
-  --bold-highlight:                   0; /* "1" to bold highlights */
+  --sentence-weight:                  500;
   --bold-misc-info:                   0; /* "1" to bold misc info text */
   
   /* Font Families */
@@ -768,15 +768,13 @@ a {
   color: var(--light-highlight);
 }
 
+#sentence :is(b, strong) {
+  font-weight: inherit;
+}
+
 :is(.card.nightMode, .custom-dark-mode) 
 .highlight {
   color: var(--dark-highlight);
-}
-
-@container style(--bold-highlight: 1) {
-  b, .highlight {
-    font-weight: bold;
-  }
 }
 
 /* Custom Dark Mode */
@@ -1584,7 +1582,7 @@ img {
 #sentence-audio {
   font-family: var(--serif);
   font-size: var(--sentence-size);
-  font-weight: 700;
+  font-weight: var(--sentence-weight);
   display: inline-block; 
   text-align: center;
 }
