@@ -1,4 +1,4 @@
-/* _denchou_settings_v0.2.2.css */
+/* _denchou_settings_v0.3.0.css */
 #denchou-settings-modal * {
     box-sizing: border-box;
 }
@@ -19,8 +19,8 @@
     justify-content: center;
     align-items: center;
     font-family:
-        "Gen Interface JP Display", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-        sans-serif;
+        "Gen Interface JP Display", "Segoe UI", "Roboto", "Helvetica Neue",
+        Arial, sans-serif;
     font-size: 14px;
     opacity: 0;
     pointer-events: none;

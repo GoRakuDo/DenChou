@@ -1546,7 +1546,8 @@
         // Multi-scene path: cleanedFurigana has MULTIPLE .group elements.
         // Skip the merge (it breaks scene structure). Output cleanedFurigana directly
         // with .highlight added to matching .term elements via DOM.
-        var groupCount = (cleanedFurigana.match(/<span class="group">/g) || []).length;
+        var groupCount = (cleanedFurigana.match(/<span class="group">/g) || [])
+            .length;
         if (groupCount >= 2) {
             // Extract raw highlights from the sentence field
             const rawHighlights = [];
@@ -1557,7 +1558,9 @@
                 const w = hlMatch[1].trim();
                 if (w) rawHighlights.push(w);
             }
-            const allTargets = [...new Set([...highlightedWords, ...rawHighlights])];
+            const allTargets = [
+                ...new Set([...highlightedWords, ...rawHighlights]),
+            ];
             const tempDiv = document.createElement("div");
             tempDiv.innerHTML = cleanedFurigana;
             tempDiv.querySelectorAll(".term").forEach((termEl) => {
@@ -2359,19 +2362,28 @@
                     if (w) hlWords.push(w);
                 }
                 if (hlWords.length > 0) {
-                    var scenes = sentenceContainer.querySelectorAll(".split-sentence");
+                    var scenes =
+                        sentenceContainer.querySelectorAll(".split-sentence");
                     for (var si = 0; si < scenes.length; si++) {
                         var terms = scenes[si].querySelectorAll(".term");
                         for (var ti = 0; ti < terms.length; ti++) {
                             // Strip <rt> content from textContent (furigana leaks into textContent)
-                            var ct = terms[ti].innerHTML.replace(/<rt>.*?<\/rt>/g, "").replace(/<[^>]*>/g, "").trim();
+                            var ct = terms[ti].innerHTML
+                                .replace(/<rt>.*?<\/rt>/g, "")
+                                .replace(/<[^>]*>/g, "")
+                                .trim();
                             for (var hi = 0; hi < hlWords.length; hi++) {
                                 if (ct.indexOf(hlWords[hi]) !== -1) {
-                                    if (!terms[ti].querySelector(".highlight")) {
-                                        var wrap = document.createElement("span");
+                                    if (
+                                        !terms[ti].querySelector(".highlight")
+                                    ) {
+                                        var wrap =
+                                            document.createElement("span");
                                         wrap.className = "highlight";
                                         while (terms[ti].firstChild) {
-                                            wrap.appendChild(terms[ti].firstChild);
+                                            wrap.appendChild(
+                                                terms[ti].firstChild,
+                                            );
                                         }
                                         terms[ti].appendChild(wrap);
                                     }
@@ -3231,7 +3243,7 @@
             // gear button. We poll for the modal, then trigger the click.
             window.denchouMenuLoading = true;
             const script = document.createElement("script");
-            script.src = "_denchou_settings_v0.2.2.js";
+            script.src = "_denchou_settings_v0.3.0.js";
             script.onload = () => {
                 let attempts = 0;
                 const wait = () => {
@@ -3252,7 +3264,7 @@
             };
             script.onerror = () => {
                 window.denchouMenuLoading = false;
-                console.error("Failed to load _denchou_settings_v0.2.2.js");
+                console.error("Failed to load _denchou_settings_v0.3.0.js");
             };
             document.body.appendChild(script);
         }
@@ -3303,7 +3315,7 @@
                                 window.denchouInitDeferred();
                             } else {
                                 const script = document.createElement("script");
-                                script.src = "_denchou_deferred_v0.2.2.js";
+                                script.src = "_denchou_deferred_v0.3.0.js";
                                 document.body.appendChild(script);
                             }
 
@@ -3315,7 +3327,7 @@
                                     const script =
                                         document.createElement("script");
                                     script.src =
-                                        "_denchou_kanji_hover_v0.2.2.js";
+                                        "_denchou_kanji_hover_v0.3.0.js";
                                     document.body.appendChild(script);
                                 }
                             }
