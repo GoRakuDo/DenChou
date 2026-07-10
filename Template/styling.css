@@ -1549,7 +1549,7 @@ img {
 }
 
 .back.image-removed .picture-container {
-  pointer-events: none;
+  display: none !important;
 }
 
 @container (not style(--enable-backdrop-layout: 1)) and (not style(--backdrop-style: 0)) {
