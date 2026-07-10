@@ -243,7 +243,7 @@
         options: [
           {
             label: "Gen",
-            val: '"Gen Interface JP Display", "Gen Interface JP", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", notosansjp, "Segoe UI", sans-serif',
+            val: '"Gen Interface JP Display", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", notosansjp, "Segoe UI", sans-serif',
           },
           {
             label: "Hiragino",

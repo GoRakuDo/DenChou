@@ -15,28 +15,44 @@
   src: url("_NotoSerifJP.ttf");
 }
 
-/* Gen Interface JP local faces — loads from collection.media first;
+/* Gen Interface JP Display local faces — loads from collection.media first;
    on 404 the font-family chain falls through to Hiragino / Noto / Segoe. */
 @font-face {
-  font-family: "Gen Interface JP";
-  src: url("_GenInterfaceJP-Regular.woff2") format("woff2");
+  font-family: "Gen Interface JP Display";
+  src: url("_GenInterfaceJPDisplay-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Gen Interface JP Display";
+  src: url("_GenInterfaceJPDisplay-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Gen Interface JP Display";
+  src: url("_GenInterfaceJPDisplay-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Gen Interface JP Display";
+  src: url("_GenInterfaceJPDisplay-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 
 @font-face {
-  font-family: "Gen Interface JP";
-  src: url("_GenInterfaceJP-Medium.woff2") format("woff2");
+  font-family: "Gen Interface JP Display";
+  src: url("_GenInterfaceJPDisplay-Medium.ttf") format("truetype");
   font-weight: 500;
-  font-style: normal;
-  font-display: block;
-}
-
-@font-face {
-  font-family: "Gen Interface JP";
-  src: url("_GenInterfaceJP-SemiBold.woff2") format("woff2");
-  font-weight: 600;
   font-style: normal;
   font-display: block;
 }
@@ -130,7 +146,7 @@
   /* Font Families */
   --custom-font:                      ;  /* Type your custom font name here */
   --serif:                            "Noto Serif CJK JP", notoserifjp, "Klee One", klee, "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --sans:                             "Gen Interface JP Display", "Gen Interface JP", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", notosansjp, "Segoe UI", sans-serif;
+  --sans:                             "Gen Interface JP Display", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", notosansjp, "Segoe UI", sans-serif;
 
 
   /* Word Sizes (Dynamic Scaling) */

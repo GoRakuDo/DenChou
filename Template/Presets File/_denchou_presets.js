@@ -29,7 +29,7 @@
     "--base-line-height": "1.5",
     "--sentence-weight": "500",
     "--serif": "\"Noto Serif CJK JP\", notoserifjp, \"Klee One\", klee, \"Hiragino Mincho ProN\", \"Yu Mincho\", serif",
-    "--sans": "\"Gen Interface JP Display\", \"Gen Interface JP\", \"Hiragino Kaku Gothic ProN\", \"Noto Sans CJK JP\", notosansjp, \"Segoe UI\", sans-serif",
+    "--sans": "\"Gen Interface JP Display\", \"Hiragino Kaku Gothic ProN\", \"Noto Sans CJK JP\", notosansjp, \"Segoe UI\", sans-serif",
     "--sentence-alignment": "center",
     "--word-size-base": "2.5rem",
     "--word-size-4": "2.1rem",
