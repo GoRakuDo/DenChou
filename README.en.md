@@ -47,7 +47,7 @@ The desktop layout can be wider, but it should not become a different product.
 
 ## Getting started
 
-The first packaged release is now available as **`DenChou v0.3.1.apkg`**.
+The first packaged release is now available as **`DenChou v0.3.2.apkg`**.
 
 If you want the fastest path, import that `.apkg` file into Anki.
 

@@ -1,4 +1,4 @@
-/* _denchou_kanji_hover_v0.3.1.js */
+/* _denchou_kanji_hover_v0.3.2.js */
 (function () {
   if (
     window.denchouConfig &&

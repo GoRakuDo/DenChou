@@ -1121,7 +1121,7 @@
             // gear button. We poll for the modal, then trigger the click.
             window.denchouMenuLoading = true;
             const script = document.createElement("script");
-            script.src = "_denchou_settings_v0.3.1.js";
+            script.src = "_denchou_settings_v0.3.2.js";
             script.onload = () => {
                 let attempts = 0;
                 const wait = () => {
@@ -1142,7 +1142,7 @@
             };
             script.onerror = () => {
                 window.denchouMenuLoading = false;
-                console.error("Failed to load _denchou_settings_v0.3.1.js");
+                console.error("Failed to load _denchou_settings_v0.3.2.js");
             };
             document.body.appendChild(script);
         }
@@ -1176,8 +1176,8 @@
         initDeferred();
     })();
 
-    void "_denchou_settings_v0.3.1.css";
-    void "_denchou_defaults_v0.3.1.css";
+    void "_denchou_settings_v0.3.2.css";
+    void "_denchou_defaults_v0.3.2.css";
     void "_denchou_deck_presets.js";
     void "_denchou_presets.js";
 </script>
