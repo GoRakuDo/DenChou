@@ -1543,10 +1543,11 @@
             return;
         }
 
-        // Multi-scene path: cleanedFurigana has .group elements (full sentence coverage).
+        // Multi-scene path: cleanedFurigana has MULTIPLE .group elements.
         // Skip the merge (it breaks scene structure). Output cleanedFurigana directly
         // with .highlight added to matching .term elements via DOM.
-        if (cleanedFurigana.includes('<span class="group">')) {
+        var groupCount = (cleanedFurigana.match(/<span class="group">/g) || []).length;
+        if (groupCount >= 2) {
             // Extract raw highlights from the sentence field
             const rawHighlights = [];
             const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
