@@ -1266,18 +1266,8 @@
             });
             tagsContainer.replaceChildren(...elements);
         }
-
-        // Furigana hover: show rt on ruby:hover for sentence furigana
-        document.querySelectorAll("#sentence ruby").forEach((ruby) => {
-            const rt = ruby.querySelector("rt");
-            if (!rt) return;
-            ruby.addEventListener("mouseenter", () => {
-                rt.style.opacity = "1";
-            });
-            ruby.addEventListener("mouseleave", () => {
-                rt.style.opacity = "";
-            });
-        });
+        // Furigana hover is attached inside highlightFurigana() after
+        // innerHTML is set, so no hover setup belongs here.
     }
 
     // Helper function to determine pitch type
@@ -1437,429 +1427,704 @@
         }
     }
 
-    // Highlight the target word in the furigana sentence
+    // Render the sentence as the canonical display DOM, with optional ruby
+    // annotations transferred from sentenceFurigana where validated.
+    // ponytail: sentence is the source of truth; furigana is annotation-only.
     function highlightFurigana() {
-        const sentence = `{{sentence}}`;
-        let sentenceFurigana = `{{furigana:sentenceFurigana}}`;
+        var sentence = `{{sentence}}`;
+        var sentenceFurigana = `{{furigana:sentenceFurigana}}`;
 
         if (!sentenceFurigana.trim()) {
             ELS.formattedSentence.innerHTML = sentence;
             return;
         }
 
+        // --- Normalize furigana format (two supported input forms) ---
         sentenceFurigana = sentenceFurigana.replace(
             /([\u3005\u4e00-\u9faf]+)\[([^\]]+)\]/g,
             "<ruby><rb>$1</rb><rt>$2</rt></ruby>",
         );
-
         sentenceFurigana = sentenceFurigana.replace(
             REGEX.RUBY_RT,
             "<ruby><rb>$1</rb><rt>$2</rt></ruby>",
         );
-
-        let cleanedFurigana = sentenceFurigana
+        // Strip punctuation readings (do not change punctuation in the sentence)
+        sentenceFurigana = sentenceFurigana
             .replace(
                 /<ruby><rb>([。、！？！？])<\/rb><rt>.*?<\/rt><\/ruby>/g,
                 "$1",
             )
-            .replace(/<ruby>([。、！？！？])<rt>.*?<\/rt><\/ruby>/g, "$1");
-
-        if (
-            cleanedFurigana.includes('<span class="highlight">') ||
-            cleanedFurigana.includes("<b>")
-        ) {
-            console.log(
-                "DenChou highlightFurigana: early return (has highlight/b tags)",
-                {
-                    hasHighlight: cleanedFurigana.includes(
-                        '<span class="highlight">',
-                    ),
-                    hasB: cleanedFurigana.includes("<b>"),
-                },
+            .replace(
+                /<ruby>([。、！？！？])<rt>.*?<\/rt><\/ruby>/g,
+                "$1",
             );
-            ELS.formattedSentence.innerHTML = cleanedFurigana;
-            return;
-        }
 
-        // Determine which word to highlight from reading/word/sentenceFurigana
-        const highlightedWords = [];
+        // --- Local helpers (function-scoped to avoid redeclaration across renders) ---
 
-        // Priority 1: reading field
-        const reading = `{{reading}}`.trim();
-        if (reading && sentence.includes(reading)) {
-            highlightedWords.push(reading);
-        }
-
-        // Priority 2: word field (if reading didn't match or is empty)
-        if (highlightedWords.length === 0) {
-            const word = `{{word}}`.trim();
-            if (word && sentence.includes(word)) {
-                highlightedWords.push(word);
+        // Parse sentenceFurigana into flat annotation list.
+        // Handles: <span class="term"><ruby>...<rt>...</rt></ruby></span>,
+        //          <ruby><rb>...</rb><rt>...</rt></ruby>,
+        //          plain text nodes.
+        function parseFuriganaAnnotations(furiganaHtml) {
+            var doc = document.createElement("div");
+            doc.innerHTML = furiganaHtml;
+            var annotations = [];
+            function walkTerms(node) {
+                if (node.nodeType !== 1) return;
+                if (node.tagName === "RUBY") {
+                    var rb = node.querySelector("rb");
+                    var rt = node.querySelector("rt");
+                    var base = rb ? rb.textContent : "";
+                    var reading = rt ? rt.textContent : "";
+                    if (base && reading) {
+                        annotations.push({ surface: base, reading: reading });
+                    }
+                    return;
+                }
+                for (var ci = 0; ci < node.childNodes.length; ci++) {
+                    walkTerms(node.childNodes[ci]);
+                }
             }
+            for (var i = 0; i < doc.childNodes.length; i++) {
+                walkTerms(doc.childNodes[i]);
+            }
+            return annotations;
         }
 
-        // Priority 3: find the term that best matches reading or word
-        if (
-            highlightedWords.length === 0 &&
-            cleanedFurigana.includes('<span class="term">')
+        // Build visible-text index from the canonical sentence DOM.
+        // Skips <rt>, <rp>, <script>, <style>, <noscript>.
+        function buildVisibleTextIndex(root) {
+            var nodes = [];
+            var offset = 0;
+            function walk(node) {
+                if (node.nodeType === 3) {
+                    var t = node.textContent;
+                    if (t.length > 0) {
+                        nodes.push({
+                            node: node,
+                            start: offset,
+                            end: offset + t.length,
+                        });
+                        offset += t.length;
+                    }
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                var tag = node.tagName;
+                if (
+                    tag === "RT" ||
+                    tag === "RP" ||
+                    tag === "SCRIPT" ||
+                    tag === "STYLE" ||
+                    tag === "NOSCRIPT"
+                )
+                    return;
+                for (var ci = 0; ci < node.childNodes.length; ci++) {
+                    walk(node.childNodes[ci]);
+                }
+            }
+            walk(root);
+            return nodes;
+        }
+
+        // Get visible text from an element (skipping rt).
+        function getVisibleText(el) {
+            var parts = [];
+            function walk(node) {
+                if (node.nodeType === 3) {
+                    parts.push(node.textContent);
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                if (node.tagName === "RT" || node.tagName === "RP") return;
+                for (var ci = 0; ci < node.childNodes.length; ci++) {
+                    walk(node.childNodes[ci]);
+                }
+            }
+            for (var ci = 0; ci < el.childNodes.length; ci++) {
+                walk(el.childNodes[ci]);
+            }
+            return parts.join("");
+        }
+
+        // Like getVisibleText, but also traverses into <rb> elements.
+        // Used after ruby insertion to read base text from <ruby><rb>...</rb>.
+        function getVisibleTextRb(el) {
+            var parts = [];
+            function walk(node) {
+                if (node.nodeType === 3) {
+                    parts.push(node.textContent);
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                if (node.tagName === "RT" || node.tagName === "RP") return;
+                for (var ci = 0; ci < node.childNodes.length; ci++) {
+                    walk(node.childNodes[ci]);
+                }
+            }
+            for (var ci = 0; ci < el.childNodes.length; ci++) {
+                walk(el.childNodes[ci]);
+            }
+            return parts.join("");
+        }
+
+        // Left-to-right greedy monotonic alignment.
+        // Returns [{start, end, reading, surface}] mapped to sentence offsets.
+        // Safety: advances cursor after each confirmed range; skips unmatched
+        // prefixes/suffixes; never inserts text absent from sentence.
+        function alignAnnotations(annotations, sentenceText, groups) {
+            var result = [];
+            var cursor = 0;
+            for (var ai = 0; ai < annotations.length; ai++) {
+                var ann = annotations[ai];
+                var surface = ann.surface;
+                var searchFrom = cursor;
+                var found = -1;
+                var foundEnd = -1;
+                while (searchFrom <= sentenceText.length - surface.length) {
+                    var idx = sentenceText.indexOf(surface, searchFrom);
+                    if (idx === -1) break;
+                    var end = idx + surface.length;
+                    // Validate: must not cross a group boundary
+                    var dominated = true;
+                    for (var gi = 0; gi < groups.length; gi++) {
+                        var g = groups[gi];
+                        if (
+                            idx < g.end &&
+                            end > g.start &&
+                            (idx < g.start || end > g.end)
+                        ) {
+                            dominated = false;
+                            break;
+                        }
+                    }
+                    if (dominated) {
+                        found = idx;
+                        foundEnd = end;
+                        break;
+                    }
+                    searchFrom = idx + 1;
+                }
+                if (found !== -1) {
+                    result.push({
+                        start: found,
+                        end: foundEnd,
+                        reading: ann.reading,
+                        surface: surface,
+                    });
+                    cursor = foundEnd;
+                }
+                // Unmatched annotations are silently skipped.
+            }
+            return result;
+        }
+
+        // --- Build canonical sentence DOM ---
+        var sentenceDiv = document.createElement("div");
+        sentenceDiv.innerHTML = sentence;
+
+        // --- Visible-text index and group boundaries ---
+        // INVARIANT: textIndex is a snapshot of text nodes and their offsets
+        // at this point. After splitText() or replaceChild() mutations, any
+        // node that was split or replaced becomes stale. This is safe because
+        // we process ranges right-to-left: earlier (lower-offset) nodes are
+        // never invalidated by later (higher-offset) mutations. Do not
+        // traverse textIndex after the first mutation without rebuilding.
+        var textIndex = buildVisibleTextIndex(sentenceDiv);
+        var fullVisibleText = textIndex.map(function (n) {
+            return n.node.textContent;
+        }).join("");
+
+        // Detect <span class="group"> elements in the sentence.
+        var sentenceGroups = Array.from(
+            sentenceDiv.querySelectorAll(":scope > span"),
+        ).filter(function (el) {
+            return (
+                el.className.split(/\s+/).some(function (c) {
+                    return /^group\d*$/.test(c);
+                }) && el.textContent.trim().length > 0
+            );
+        });
+        // If no groups found, treat the entire sentence as one group.
+        if (sentenceGroups.length === 0) {
+            sentenceGroups = [sentenceDiv];
+        }
+
+        // Map group elements to their visible-text ranges.
+        // Monotonic searchOffset ensures repeated identical group text
+        // (e.g. two scenes with the same dialogue) maps to distinct ranges.
+        var searchOffset = 0;
+        var groups = sentenceGroups.map(function (el) {
+            var groupText = getVisibleText(el);
+            var gStart = fullVisibleText.indexOf(groupText, searchOffset);
+            if (gStart === -1) gStart = fullVisibleText.length;
+            searchOffset = gStart + groupText.length;
+            return {
+                el: el,
+                text: groupText,
+                start: gStart,
+                end: gStart + groupText.length,
+            };
+        });
+
+        // --- Parse furigana and flatten across groups ---
+        var furiganaDoc = document.createElement("div");
+        furiganaDoc.innerHTML = sentenceFurigana;
+        var furiganaGroups = Array.from(furiganaDoc.children).filter(function (
+            el,
         ) {
-            const reading = `{{reading}}`.trim();
-            const word = `{{word}}`.trim();
-            // For conjugated words (e.g. 気取る→気取った), extract kanji stem
-            const wordStem =
+            return el.className.split(/\s+/).some(function (c) {
+                return /^group\d*$/.test(c);
+            });
+        });
+        if (furiganaGroups.length === 0) furiganaGroups = [furiganaDoc];
+
+        var allAnnotations = [];
+        for (var fi = 0; fi < furiganaGroups.length; fi++) {
+            var anns = parseFuriganaAnnotations(
+                furiganaGroups[fi].innerHTML,
+            );
+            for (var ai = 0; ai < anns.length; ai++) {
+                allAnnotations.push(anns[ai]);
+            }
+        }
+
+        // --- Align annotations against canonical sentence text ---
+        var ranges = alignAnnotations(allAnnotations, fullVisibleText, groups);
+
+        // --- Apply ruby from right to left ---
+        // Sort descending by start offset so earlier indices remain valid.
+        ranges.sort(function (a, b) {
+            return b.start - a.start;
+        });
+
+        for (var ri = 0; ri < ranges.length; ri++) {
+            var range = ranges[ri];
+            var rStart = range.start;
+            var rEnd = range.end;
+            var reading = range.reading;
+
+            // Find the start text node.
+            var startNodeInfo = null;
+            for (var ti = 0; ti < textIndex.length; ti++) {
+                if (textIndex[ti].end > rStart) {
+                    startNodeInfo = textIndex[ti];
+                    break;
+                }
+            }
+            if (!startNodeInfo) continue;
+
+            // Find the end text node.
+            var endNodeInfo = null;
+            for (var ti = textIndex.length - 1; ti >= 0; ti--) {
+                if (textIndex[ti].start < rEnd) {
+                    endNodeInfo = textIndex[ti];
+                    break;
+                }
+            }
+            if (!endNodeInfo) continue;
+
+            // Skip if range crosses element boundaries (highlight, b, br).
+            if (startNodeInfo.node !== endNodeInfo.node) continue;
+
+            var textNode = startNodeInfo.node;
+            var nodeText = textNode.textContent;
+            var localStart = rStart - startNodeInfo.start;
+            var localEnd = rEnd - startNodeInfo.start;
+
+            // Guard against out-of-bounds.
+            if (localStart < 0 || localEnd > nodeText.length) continue;
+
+            // Split end first (at localEnd), then start (at localStart).
+            // Splitting end first keeps start indices stable.
+            if (localEnd < nodeText.length) {
+                textNode.splitText(localEnd);
+            }
+            var surfaceNode = textNode;
+            if (localStart > 0) {
+                surfaceNode = textNode.splitText(localStart);
+            }
+
+            // Build <ruby><rb>surface</rb><rt>reading</rt></ruby>.
+            var ruby = document.createElement("ruby");
+            var rb = document.createElement("rb");
+            rb.textContent = surfaceNode.textContent;
+            var rt = document.createElement("rt");
+            rt.textContent = reading;
+            ruby.appendChild(rb);
+            ruby.appendChild(rt);
+            surfaceNode.parentNode.replaceChild(ruby, surfaceNode);
+        }
+
+        // --- Highlight selection: one coherent path ---
+        // Priority: source highlight/b wins → then select best mapped term.
+        // ponytail: conservative — better to miss a highlight than over-highlight.
+        var hasSourceHighlight =
+            sentenceDiv.querySelector(".highlight, b") !== null;
+
+        // --- Term data model: surface + phonetic ---
+        // Each furigana .term yields both visible surface text and a full
+        // phonetic reading (rt readings + trailing kana). This enables
+        // matching target readings that differ in kanji but share pronunciation.
+        function extractFuriganaTerms(groupEl) {
+            var terms = [];
+            var offset = 0;
+            function walkTerms(node) {
+                if (
+                    node.nodeType === 1 &&
+                    node.className &&
+                    node.className
+                        .split(/\s+/)
+                        .some(function (c) {
+                            return c === "term";
+                        })
+                ) {
+                    var surfaceParts = [];
+                    var phoneticParts = [];
+                    var hr = false;
+                    for (var ci = 0; ci < node.childNodes.length; ci++) {
+                        var ch = node.childNodes[ci];
+                        if (ch.nodeType === 1 && ch.tagName === "RUBY") {
+                            var rb = ch.querySelector("rb");
+                            var rt = ch.querySelector("rt");
+                            surfaceParts.push(
+                                rb ? rb.textContent : ch.textContent,
+                            );
+                            phoneticParts.push(rt ? rt.textContent : "");
+                            hr = true;
+                        } else if (ch.nodeType === 3) {
+                            surfaceParts.push(ch.textContent);
+                            phoneticParts.push(ch.textContent);
+                        }
+                    }
+                    var surface = surfaceParts.join("");
+                    terms.push({
+                        surface: surface,
+                        phonetic: phoneticParts.join(""),
+                        offset: offset,
+                        hasRuby: hr,
+                    });
+                    offset += surface.length;
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                for (var ci = 0; ci < node.childNodes.length; ci++) {
+                    walkTerms(node.childNodes[ci]);
+                }
+            }
+            for (var ci = 0; ci < groupEl.childNodes.length; ci++) {
+                walkTerms(groupEl.childNodes[ci]);
+            }
+            return terms;
+        }
+
+        // --- Scoring: rank a mapped term against the target word/reading ---
+        // Returns a positive priority (lower = better) or -1 to reject.
+        function scoreTerm(surface, phonetic, reading, word) {
+            if (
+                surface.length === 0 ||
+                /^[\s\u3000。、！？\uFF0C\uFF0E\uFF01\uFF1F]+$/.test(surface)
+            )
+                return -1;
+            // Reject single-kana (particles: な, が, は, も, を...).
+            if (/^[\u3041-\u3096\u30A1-\u30F6ー]$/.test(surface)) return -1;
+            // 1: exact surface = word
+            if (word && surface === word) return 1;
+            // 2: exact phonetic = reading
+            if (reading && phonetic === reading) return 2;
+            // 3: surface contains word / word contains surface (meaningful)
+            if (
+                word &&
+                word.length >= 2 &&
+                surface.length >= 2 &&
+                (surface.indexOf(word) !== -1 ||
+                    word.indexOf(surface) !== -1)
+            )
+                return 3;
+            // 4: surface contains kanji stem from word
+            var stem =
                 word && /[\u3005\u4e00-\u9faf]/.test(word)
-                    ? word.replace(/[ぁ-んー]+$/, "")
+                    ? word.replace(
+                          /[ぁ-んー\u3041-\u3096\u30A1-\u30F6]+$/,
+                          "",
+                      )
                     : "";
-            let termMatch;
-            const termRegex = /<span class="term">(.*?)<\/span>/g;
-            while ((termMatch = termRegex.exec(cleanedFurigana)) !== null) {
-                const raw = termMatch[1];
-                const clean = raw.replace(/<[^>]*>/g, "").trim();
-                if (!clean) continue;
-                // Exact/substring match against reading or word
-                const exactMatch =
-                    (reading && clean.includes(reading)) ||
-                    (word && clean.includes(word)) ||
-                    (wordStem && clean.includes(wordStem));
-                // Partial match for conjugated forms (はかない→はかなげ)
-                const partialMatch =
-                    reading && clean.startsWith(reading.slice(0, 3));
-                if (exactMatch || partialMatch) {
-                    highlightedWords.push(raw);
-                    break;
-                }
-            }
-        }
-
-        // Priority 4: extract from sentence (existing fallback)
-        if (highlightedWords.length === 0) {
-            for (const match of sentence.matchAll(REGEX.HIGHLIGHT)) {
-                highlightedWords.push(match[1]);
-            }
-        }
-
-        if (highlightedWords.length === 0) {
-            ELS.formattedSentence.innerHTML = cleanedFurigana;
-            return;
-        }
-
-        // Multi-scene path: cleanedFurigana has MULTIPLE .group elements.
-        // Skip the merge (it breaks scene structure). Output cleanedFurigana directly
-        // with .highlight added to matching .term elements via DOM.
-        var groupCount = (cleanedFurigana.match(/<span class="group">/g) || [])
-            .length;
-        if (groupCount >= 2) {
-            // Extract raw highlights from the sentence field
-            const rawHighlights = [];
-            const hlRegex = /<span class="highlight">(.*?)<\/span>/g;
-            let hlMatch;
-            const rawSentence = `{{sentence}}`;
-            while ((hlMatch = hlRegex.exec(rawSentence)) !== null) {
-                const w = hlMatch[1].trim();
-                if (w) rawHighlights.push(w);
-            }
-            const allTargets = [
-                ...new Set([...highlightedWords, ...rawHighlights]),
-            ];
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = cleanedFurigana;
-            tempDiv.querySelectorAll(".term").forEach((termEl) => {
-                const clean = termEl.textContent.trim();
-                if (allTargets.some((t) => clean.includes(t))) {
-                    if (!termEl.querySelector(".highlight")) {
-                        const wrapper = document.createElement("span");
-                        wrapper.className = "highlight";
-                        while (termEl.firstChild) {
-                            wrapper.appendChild(termEl.firstChild);
-                        }
-                        termEl.appendChild(wrapper);
-                    }
-                }
-            });
-            ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
-            return;
-        }
-
-        // Merge cleanedFurigana into sentence at the matching position
-        const cleanedText = cleanedFurigana
-            .replace(/<rt>.*?<\/rt>/g, "") // remove <rt> readings first
-            .replace(/<[^>]*>/g, "") // strip remaining HTML tags
-            .replace(/\s+/g, "") // normalize whitespace for matching
-            .trim();
-        const sentencePlain = sentence
-            .replace(/<br>/g, " ")
-            .replace(/<[^>]*>/g, "") // strip HTML tags
-            .replace(/\s+/g, "") // normalize whitespace for matching
-            .trim();
-
-        if (cleanedText && sentencePlain.includes(cleanedText)) {
-            // Merge: find cleanedText position in sentencePlain, map to raw sentence HTML
-            const plainIndex = sentencePlain.indexOf(cleanedText);
-
-            // Walk through sentence to find matching start/end positions
-            // Skip HTML tags and whitespace (same normalization as sentencePlain)
-            let sentPlainIdx = 0;
-            let startSentIdx = -1;
-            let endSentIdx = sentence.length;
-            let inTag = false;
-
-            for (let i = 0; i < sentence.length; i++) {
-                const ch = sentence[i];
-                if (ch === "<") {
-                    inTag = true;
-                    continue;
-                }
-                if (inTag) {
-                    if (ch === ">") inTag = false;
-                    continue;
-                }
-                if (ch.match(/\s/)) continue;
-
-                if (sentPlainIdx === plainIndex) {
-                    startSentIdx = i;
-                }
-                if (sentPlainIdx === plainIndex + cleanedText.length) {
-                    endSentIdx = i;
-                    break;
-                }
-                sentPlainIdx++;
-            }
-
-            if (startSentIdx === -1) {
-                // Debug: log actual values when position scan fails
-                console.log("DenChou merge fallback:", {
-                    sentence,
-                    cleanedText,
-                    sentencePlain,
-                    plainIndex,
-                    sentenceLen: sentence.length,
-                    sentencePlainLen: sentencePlain.length,
-                });
-                ELS.formattedSentence.innerHTML = cleanedFurigana;
-                return;
-            }
-
-            // Preserve <br> tags at the boundaries of the matched region
-            const matchedPart = sentence.substring(startSentIdx, endSentIdx);
-            const brEndMatch = matchedPart.match(/(<br\s*\/?>)+$/);
-            if (brEndMatch) {
-                endSentIdx -= brEndMatch[0].length;
-            }
-
-            let result =
-                sentence.substring(0, startSentIdx) +
-                cleanedFurigana +
-                sentence.substring(endSentIdx);
-
-            // Apply highlights
-            highlightedWords.forEach((word) => {
-                const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-                const regex = new RegExp(escaped, "g");
-                result = result.replace(
-                    regex,
-                    `<span class="highlight">$&</span>`,
-                );
-            });
-            ELS.formattedSentence.innerHTML = result;
-            return;
-        }
-
-        // Fallback: if text doesn't match, use original behavior
-        const isPartialFurigana =
-            cleanedText.length < sentencePlain.length * 0.5;
-        if (isPartialFurigana) {
-            let result = sentence;
-            highlightedWords.forEach((word) => {
-                const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-                const regex = new RegExp(escaped, "g");
-                result = result.replace(
-                    regex,
-                    `<span class="highlight">${word}</span>`,
-                );
-            });
-            ELS.formattedSentence.innerHTML = result;
-            return;
-        }
-
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = cleanedFurigana;
-
-        const allNodes = [];
-
-        function collectTextAndRubyNodes(node) {
-            if (node.nodeType === Node.TEXT_NODE) {
-                if (node.textContent.length > 0) {
-                    allNodes.push({ type: "text", node: node });
-                }
-            } else if (node.tagName === "RUBY") {
-                allNodes.push({ type: "ruby", node: node });
-            } else {
-                for (let i = 0; i < node.childNodes.length; i++) {
-                    collectTextAndRubyNodes(node.childNodes[i]);
-                }
-            }
-        }
-
-        collectTextAndRubyNodes(tempDiv);
-
-        let plainText = "";
-        const nodePositions = [];
-
-        allNodes.forEach((item) => {
-            let text;
-            if (item.type === "text") {
-                text = item.node.textContent;
-            } else {
-                const rb =
-                    item.node.querySelector("rb") || item.node.firstChild;
-                text = rb.textContent;
-            }
-
-            nodePositions.push({
-                node: item.node,
-                type: item.type,
-                start: plainText.length,
-                end: plainText.length + text.length,
-            });
-
-            plainText += text;
-        });
-
-        highlightedWords.forEach((word) => {
-            let searchStartIndex = 0;
-            let wordStart;
-
-            while (
-                (wordStart = plainText.indexOf(word, searchStartIndex)) !== -1
+            if (stem && stem.length >= 2 && surface.indexOf(stem) !== -1)
+                return 4;
+            // 5: phonetic kana prefix >= 3 with reading
+            if (
+                reading &&
+                /^[\u3041-\u3096\u30A1-\u30F6ー]+$/.test(phonetic) &&
+                /^[\u3041-\u3096\u30A1-\u30F6ー]+$/.test(reading)
             ) {
-                const wordEnd = wordStart + word.length;
-
-                const affectedNodes = nodePositions.filter(
-                    (pos) => pos.start < wordEnd && pos.end > wordStart,
-                );
-
-                affectedNodes.forEach((pos) => {
-                    const node = pos.node;
-                    if (!node.parentNode) return;
-
-                    const relativeStart = Math.max(0, wordStart - pos.start);
-                    let relativeEnd = Math.min(
-                        pos.end - pos.start,
-                        wordEnd - pos.start,
-                    );
-
-                    if (pos.type === "ruby") {
-                        const rb = node.querySelector("rb") || node.firstChild;
-                        relativeEnd = Math.min(
-                            relativeEnd,
-                            rb.textContent.length,
-                        );
-                    } else {
-                        relativeEnd = Math.min(
-                            relativeEnd,
-                            node.textContent.length,
-                        );
-                    }
-
-                    if (pos.start >= wordStart && pos.end <= wordEnd) {
-                        const wrapper = document.createElement("span");
-                        wrapper.className = "highlight";
-
-                        if (pos.type === "ruby") {
-                            const clone = node.cloneNode(true);
-                            wrapper.appendChild(clone);
-                            node.parentNode.replaceChild(wrapper, node);
-                        } else {
-                            wrapper.textContent = node.textContent;
-                            node.parentNode.replaceChild(wrapper, node);
-                        }
-                    } else {
-                        if (pos.type === "ruby") {
-                            const ruby = node;
-                            const rb =
-                                ruby.querySelector("rb") || ruby.firstChild;
-                            const rt = ruby.querySelector("rt");
-                            if (!rb || !rt) return;
-
-                            const baseText = rb.textContent;
-                            const rtText = rt.textContent;
-
-                            let newHTML = "";
-
-                            if (relativeStart > 0) {
-                                const subRb = baseText.substring(
-                                    0,
-                                    relativeStart,
-                                );
-                                const subRtLen = Math.round(
-                                    (rtText.length * relativeStart) /
-                                        baseText.length,
-                                );
-                                const subRt = rtText.substring(0, subRtLen);
-                                newHTML += `<ruby><rb>${subRb}</rb><rt>${subRt}</rt></ruby>`;
-                            }
-
-                            const midRb = baseText.substring(
-                                relativeStart,
-                                relativeEnd,
-                            );
-                            const startRtIdx = Math.round(
-                                (rtText.length * relativeStart) /
-                                    baseText.length,
-                            );
-                            const endRtIdx = Math.round(
-                                (rtText.length * relativeEnd) / baseText.length,
-                            );
-                            const midRt = rtText.substring(
-                                startRtIdx,
-                                endRtIdx,
-                            );
-
-                            newHTML += `<span class="highlight"><ruby><rb>${midRb}</rb><rt>${midRt}</rt></ruby></span>`;
-
-                            if (relativeEnd < baseText.length) {
-                                const subRb = baseText.substring(relativeEnd);
-                                const subRt = rtText.substring(endRtIdx);
-                                newHTML += `<ruby><rb>${subRb}</rb><rt>${subRt}</rt></ruby>`;
-                            }
-
-                            const span = document.createElement("span");
-                            span.innerHTML = newHTML;
-                            ruby.parentNode.replaceChild(span, ruby);
-                        } else {
-                            const text = node.textContent;
-                            const beforeText = text.substring(0, relativeStart);
-                            const highlightedText = text.substring(
-                                relativeStart,
-                                relativeEnd,
-                            );
-                            const afterText = text.substring(relativeEnd);
-
-                            const fragment = document.createDocumentFragment();
-                            if (beforeText)
-                                fragment.appendChild(
-                                    document.createTextNode(beforeText),
-                                );
-
-                            const hlSpan = document.createElement("span");
-                            hlSpan.className = "highlight";
-                            hlSpan.textContent = highlightedText;
-                            fragment.appendChild(hlSpan);
-
-                            if (afterText)
-                                fragment.appendChild(
-                                    document.createTextNode(afterText),
-                                );
-
-                            node.parentNode.replaceChild(fragment, node);
-                        }
-                    }
-                });
-                searchStartIndex = wordEnd;
+                var maxLen = Math.min(phonetic.length, reading.length);
+                var shared = 0;
+                while (
+                    shared < maxLen &&
+                    phonetic[shared] === reading[shared]
+                )
+                    shared++;
+                if (shared >= 3) return 5;
             }
-        });
+            return -1;
+        }
 
-        ELS.formattedSentence.innerHTML = tempDiv.innerHTML;
+        // --- Atom-based highlight wrapping ---
+        // Builds a post-ruby visible-node index treating <ruby> as atomic
+        // units (using <rb> base text) and ordinary text nodes as units.
+        // For a mapped term range [absStart, absEnd):
+        //   1. locates start/end boundary atoms
+        //   2. splits ordinary text-node boundaries when needed
+        //   3. wraps the contiguous sibling DOM nodes in one <span class="highlight">
+        //   4. includes full ruby elements and adjacent text, preserving <rb>/<rt>
+        //   5. requires a safe common parent and no group/br crossing
+        //   6. if unsafe, skips without corrupting DOM
+        function wrapHighlightRange(absStart, absEnd) {
+            // Build atom index: {node, start, end, type}
+            // type "ruby" = ruby element (rb text is the visible unit)
+            // type "text" = ordinary text node
+            var atoms = [];
+            var aOffset = 0;
+            function buildIndex(node) {
+                if (node.nodeType === 3) {
+                    var t = node.textContent;
+                    if (t.length > 0) {
+                        atoms.push({
+                            node: node,
+                            start: aOffset,
+                            end: aOffset + t.length,
+                            type: "text",
+                        });
+                        aOffset += t.length;
+                    }
+                    return;
+                }
+                if (node.nodeType !== 1) return;
+                if (node.tagName === "RUBY") {
+                    var rb = node.querySelector("rb");
+                    var rText = rb ? rb.textContent : "";
+                    if (rText.length > 0) {
+                        atoms.push({
+                            node: node,
+                            start: aOffset,
+                            end: aOffset + rText.length,
+                            type: "ruby",
+                        });
+                        aOffset += rText.length;
+                    }
+                    return;
+                }
+                if (
+                    node.tagName === "RT" ||
+                    node.tagName === "RP" ||
+                    node.tagName === "SCRIPT" ||
+                    node.tagName === "STYLE" ||
+                    node.tagName === "NOSCRIPT"
+                )
+                    return;
+                for (var ci = 0; ci < node.childNodes.length; ci++) {
+                    buildIndex(node.childNodes[ci]);
+                }
+            }
+            for (var ci = 0; ci < sentenceDiv.childNodes.length; ci++) {
+                buildIndex(sentenceDiv.childNodes[ci]);
+            }
+            if (atoms.length === 0) return false;
+
+            // start atom = first atom containing/overlapping absStart
+            var startAtom = null;
+            for (var ai = 0; ai < atoms.length; ai++) {
+                if (atoms[ai].end > absStart) {
+                    startAtom = atoms[ai];
+                    break;
+                }
+            }
+            // end atom = last atom containing/overlapping absEnd
+            var endAtom = null;
+            for (var ai = atoms.length - 1; ai >= 0; ai--) {
+                if (atoms[ai].start < absEnd) {
+                    endAtom = atoms[ai];
+                    break;
+                }
+            }
+            if (!startAtom || !endAtom) return false;
+
+            // Split text nodes at boundaries (end first to keep indices stable).
+            if (endAtom.type === "text" && absEnd < endAtom.end) {
+                endAtom.node.splitText(absEnd - endAtom.start);
+                endAtom.end = absEnd;
+            }
+            if (startAtom.type === "text" && absStart > startAtom.start) {
+                var original = startAtom.node;
+                original.splitText(absStart - startAtom.start);
+                startAtom.node = original.nextSibling;
+                startAtom.start = absStart;
+            }
+
+            // Collect atoms from startAtom to endAtom (inclusive).
+            // Reject if any intermediate node is not an atom (e.g. <br>).
+            var collected = [];
+            var current = startAtom.node;
+            var endNode = endAtom.node;
+            while (current) {
+                collected.push(current);
+                if (current === endNode) break;
+                current = current.nextSibling;
+            }
+            if (collected[collected.length - 1] !== endNode) return false;
+
+            // Verify all collected nodes are in the atom index (no <br> etc).
+            for (var ci = 0; ci < collected.length; ci++) {
+                var isAtom = false;
+                for (var ai = 0; ai < atoms.length; ai++) {
+                    if (atoms[ai].node === collected[ci]) {
+                        isAtom = true;
+                        break;
+                    }
+                }
+                if (!isAtom) return false;
+            }
+
+            // All collected nodes must be direct children of one common parent.
+            var parent = collected[0].parentNode;
+            for (var ci = 1; ci < collected.length; ci++) {
+                if (collected[ci].parentNode !== parent) return false;
+            }
+
+            // Wrap in <span class="highlight">.
+            var span = document.createElement("span");
+            span.className = "highlight";
+            parent.insertBefore(span, collected[0]);
+            for (var ci = 0; ci < collected.length; ci++) {
+                span.appendChild(collected[ci]);
+            }
+            return true;
+        }
+
+        // ====== Phase A: reading / word (global uniqueness) ======
+        var hlApplied = false;
+        if (!hasSourceHighlight) {
+            var visibleAfterRuby = getVisibleTextRb(sentenceDiv);
+            var readingVal = `{{reading}}`.trim();
+            var wordVal = `{{word}}`.trim();
+            var hlCandidates = [];
+            if (readingVal) hlCandidates.push(readingVal);
+            if (wordVal && hlCandidates.indexOf(wordVal) === -1) {
+                hlCandidates.push(wordVal);
+            }
+            for (var hc = 0; hc < hlCandidates.length; hc++) {
+                var cand = hlCandidates[hc];
+                var cnt = 0;
+                var sf = 0;
+                while (true) {
+                    var ix = visibleAfterRuby.indexOf(cand, sf);
+                    if (ix === -1) break;
+                    cnt++;
+                    sf = ix + cand.length;
+                }
+                if (cnt !== 1) continue;
+                hlApplied = wrapHighlightRange(
+                    visibleAfterRuby.indexOf(cand),
+                    visibleAfterRuby.indexOf(cand) + cand.length,
+                );
+                if (hlApplied) break;
+            }
+
+            // ====== Phase B: furigana terms (contextual, scored) ======
+            // Each furigana group maps to a contiguous sentence range.
+            // A term's offset within its group is definitive — even if the
+            // same text appears elsewhere, the furigana context pins it.
+            // Terms carry both surface and phonetic for orthographic matching.
+            // Scoring selects the single best term per group.
+            if (!hlApplied) {
+                var furiganaSearchOffset = 0;
+                for (var fi2 = 0; fi2 < furiganaGroups.length; fi2++) {
+                    var ft = extractFuriganaTerms(furiganaGroups[fi2]);
+                    var groupText = ft
+                        .map(function (t) {
+                            return t.surface;
+                        })
+                        .join("");
+                    if (groupText.length === 0) continue;
+                    var groupStart = fullVisibleText.indexOf(
+                        groupText,
+                        furiganaSearchOffset,
+                    );
+                    if (groupStart === -1) continue;
+                    furiganaSearchOffset = groupStart + groupText.length;
+
+                    // Score each term, pick the best.
+                    var bestScore = -1;
+                    var bestAbsStart = -1;
+                    var bestAbsEnd = -1;
+                    for (var ti2 = 0; ti2 < ft.length; ti2++) {
+                        var term = ft[ti2];
+                        var sc = scoreTerm(
+                            term.surface,
+                            term.phonetic,
+                            readingVal,
+                            wordVal,
+                        );
+                        if (sc === -1 || (bestScore !== -1 && sc >= bestScore)) continue;
+                        var absStart = groupStart + term.offset;
+                        var absEnd = absStart + term.surface.length;
+                        // Validate: range must stay within one sentence group.
+                        var inBoundary = true;
+                        for (var gi = 0; gi < groups.length; gi++) {
+                            var g = groups[gi];
+                            if (
+                                absStart < g.end &&
+                                absEnd > g.start &&
+                                (absStart < g.start || absEnd > g.end)
+                            ) {
+                                inBoundary = false;
+                                break;
+                            }
+                        }
+                        if (!inBoundary) continue;
+                        bestScore = sc;
+                        bestAbsStart = absStart;
+                        bestAbsEnd = absEnd;
+                    }
+                    if (bestScore !== -1) {
+                        hlApplied = wrapHighlightRange(
+                            bestAbsStart,
+                            bestAbsEnd,
+                        );
+                        if (hlApplied) break;
+                    }
+                }
+            }
+        }
+
+        // Clean up empty text nodes left by splitting.
+        function cleanEmptyTextNodes(el) {
+            for (var ci = el.childNodes.length - 1; ci >= 0; ci--) {
+                var child = el.childNodes[ci];
+                if (child.nodeType === 3 && child.textContent === "") {
+                    el.removeChild(child);
+                } else if (child.nodeType === 1) {
+                    cleanEmptyTextNodes(child);
+                }
+            }
+        }
+        cleanEmptyTextNodes(sentenceDiv);
+
+        ELS.formattedSentence.innerHTML = sentenceDiv.innerHTML;
+
+        // Attach furigana hover events (must run after innerHTML is set,
+        // since splitTags() runs before highlightFurigana() and its
+        // listeners are lost when innerHTML is replaced).
+        ELS.formattedSentence.querySelectorAll("ruby").forEach(function (ruby) {
+            var rt = ruby.querySelector("rt");
+            if (!rt) return;
+            ruby.addEventListener("mouseenter", function () {
+                rt.style.opacity = "1";
+            });
+            ruby.addEventListener("mouseleave", function () {
+                rt.style.opacity = "";
+            });
+        });
     }
 
     // Alternative pitch styling based on CSS variables
@@ -2351,48 +2616,6 @@
                     sentenceContainer.appendChild(div);
                 });
                 sentenceContainer.setAttribute("data-split-done", "true");
-
-                // Apply highlights to each scene from the sentence field's .highlight
-                var rawSentence = `{{sentence}}`;
-                var hlWords = [];
-                var hlR = /<span class="highlight">(.*?)<\/span>/g;
-                var m;
-                while ((m = hlR.exec(rawSentence)) !== null) {
-                    var w = m[1].trim();
-                    if (w) hlWords.push(w);
-                }
-                if (hlWords.length > 0) {
-                    var scenes =
-                        sentenceContainer.querySelectorAll(".split-sentence");
-                    for (var si = 0; si < scenes.length; si++) {
-                        var terms = scenes[si].querySelectorAll(".term");
-                        for (var ti = 0; ti < terms.length; ti++) {
-                            // Strip <rt> content from textContent (furigana leaks into textContent)
-                            var ct = terms[ti].innerHTML
-                                .replace(/<rt>.*?<\/rt>/g, "")
-                                .replace(/<[^>]*>/g, "")
-                                .trim();
-                            for (var hi = 0; hi < hlWords.length; hi++) {
-                                if (ct.indexOf(hlWords[hi]) !== -1) {
-                                    if (
-                                        !terms[ti].querySelector(".highlight")
-                                    ) {
-                                        var wrap =
-                                            document.createElement("span");
-                                        wrap.className = "highlight";
-                                        while (terms[ti].firstChild) {
-                                            wrap.appendChild(
-                                                terms[ti].firstChild,
-                                            );
-                                        }
-                                        terms[ti].appendChild(wrap);
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -3010,8 +3233,6 @@
                     /[いきしちにひみりぎじぢびぴイキシチニヒミリギジヂビピうくすつぬふむるぐずづぶぷウクスツヌフムルグズヅブプ]/g,
                 DIGITS: /\d+/g,
                 RUBY_RT: /<ruby>([^<]+?)<rt>(.*?)<\/rt><\/ruby>/g,
-                HIGHLIGHT:
-                    /<(?:span class="highlight"|span class="term"|b)>(.*?)<\/(?:span|b)>/g,
                 KANA_ONLY: /^[ぁ-ゖァ-ヺ゙゚ー\s]+$/,
                 COMBINING_MARK: /([ぁ-ゖァ-ヺ])[\u3099\u309A]/g,
                 SMALL_KANA: /[ぁぃぅぇぉゃゅょゎァィゥェォャゅョヮ]/g,
