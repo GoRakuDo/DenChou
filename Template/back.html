@@ -1454,10 +1454,7 @@
                 /<ruby><rb>([。、！？！？])<\/rb><rt>.*?<\/rt><\/ruby>/g,
                 "$1",
             )
-            .replace(
-                /<ruby>([。、！？！？])<rt>.*?<\/rt><\/ruby>/g,
-                "$1",
-            );
+            .replace(/<ruby>([。、！？！？])<rt>.*?<\/rt><\/ruby>/g, "$1");
 
         // --- Local helpers (function-scoped to avoid redeclaration across renders) ---
 
@@ -1631,9 +1628,11 @@
         // never invalidated by later (higher-offset) mutations. Do not
         // traverse textIndex after the first mutation without rebuilding.
         var textIndex = buildVisibleTextIndex(sentenceDiv);
-        var fullVisibleText = textIndex.map(function (n) {
-            return n.node.textContent;
-        }).join("");
+        var fullVisibleText = textIndex
+            .map(function (n) {
+                return n.node.textContent;
+            })
+            .join("");
 
         // Detect <span class="group"> elements in the sentence.
         var sentenceGroups = Array.from(
@@ -1670,20 +1669,18 @@
         // --- Parse furigana and flatten across groups ---
         var furiganaDoc = document.createElement("div");
         furiganaDoc.innerHTML = sentenceFurigana;
-        var furiganaGroups = Array.from(furiganaDoc.children).filter(function (
-            el,
-        ) {
-            return el.className.split(/\s+/).some(function (c) {
-                return /^group\d*$/.test(c);
-            });
-        });
+        var furiganaGroups = Array.from(furiganaDoc.children).filter(
+            function (el) {
+                return el.className.split(/\s+/).some(function (c) {
+                    return /^group\d*$/.test(c);
+                });
+            },
+        );
         if (furiganaGroups.length === 0) furiganaGroups = [furiganaDoc];
 
         var allAnnotations = [];
         for (var fi = 0; fi < furiganaGroups.length; fi++) {
-            var anns = parseFuriganaAnnotations(
-                furiganaGroups[fi].innerHTML,
-            );
+            var anns = parseFuriganaAnnotations(furiganaGroups[fi].innerHTML);
             for (var ai = 0; ai < anns.length; ai++) {
                 allAnnotations.push(anns[ai]);
             }
@@ -1773,11 +1770,9 @@
                 if (
                     node.nodeType === 1 &&
                     node.className &&
-                    node.className
-                        .split(/\s+/)
-                        .some(function (c) {
-                            return c === "term";
-                        })
+                    node.className.split(/\s+/).some(function (c) {
+                        return c === "term";
+                    })
                 ) {
                     var surfaceParts = [];
                     var phoneticParts = [];
@@ -1837,17 +1832,13 @@
                 word &&
                 word.length >= 2 &&
                 surface.length >= 2 &&
-                (surface.indexOf(word) !== -1 ||
-                    word.indexOf(surface) !== -1)
+                (surface.indexOf(word) !== -1 || word.indexOf(surface) !== -1)
             )
                 return 3;
             // 4: surface contains kanji stem from word
             var stem =
                 word && /[\u3005\u4e00-\u9faf]/.test(word)
-                    ? word.replace(
-                          /[ぁ-んー\u3041-\u3096\u30A1-\u30F6]+$/,
-                          "",
-                      )
+                    ? word.replace(/[ぁ-んー\u3041-\u3096\u30A1-\u30F6]+$/, "")
                     : "";
             if (stem && stem.length >= 2 && surface.indexOf(stem) !== -1)
                 return 4;
@@ -1859,10 +1850,7 @@
             ) {
                 var maxLen = Math.min(phonetic.length, reading.length);
                 var shared = 0;
-                while (
-                    shared < maxLen &&
-                    phonetic[shared] === reading[shared]
-                )
+                while (shared < maxLen && phonetic[shared] === reading[shared])
                     shared++;
                 if (shared >= 3) return 5;
             }
@@ -2065,7 +2053,8 @@
                             readingVal,
                             wordVal,
                         );
-                        if (sc === -1 || (bestScore !== -1 && sc >= bestScore)) continue;
+                        if (sc === -1 || (bestScore !== -1 && sc >= bestScore))
+                            continue;
                         var absStart = groupStart + term.offset;
                         var absEnd = absStart + term.surface.length;
                         // Validate: range must stay within one sentence group.
@@ -3464,7 +3453,7 @@
             // gear button. We poll for the modal, then trigger the click.
             window.denchouMenuLoading = true;
             const script = document.createElement("script");
-            script.src = "_denchou_settings_v0.3.2.js";
+            script.src = "_denchou_settings_v0.4.0.js";
             script.onload = () => {
                 let attempts = 0;
                 const wait = () => {
@@ -3485,7 +3474,7 @@
             };
             script.onerror = () => {
                 window.denchouMenuLoading = false;
-                console.error("Failed to load _denchou_settings_v0.3.2.js");
+                console.error("Failed to load _denchou_settings_v0.4.0.js");
             };
             document.body.appendChild(script);
         }
@@ -3536,7 +3525,7 @@
                                 window.denchouInitDeferred();
                             } else {
                                 const script = document.createElement("script");
-                                script.src = "_denchou_deferred_v0.3.2.js";
+                                script.src = "_denchou_deferred_v0.4.0.js";
                                 document.body.appendChild(script);
                             }
 
@@ -3548,7 +3537,7 @@
                                     const script =
                                         document.createElement("script");
                                     script.src =
-                                        "_denchou_kanji_hover_v0.3.2.js";
+                                        "_denchou_kanji_hover_v0.4.0.js";
                                     document.body.appendChild(script);
                                 }
                             }
